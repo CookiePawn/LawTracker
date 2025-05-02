@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   selectedDate: {
-    backgroundColor: '#6E41E2',
+    backgroundColor: '#5046E6',
   },
   date: {
     fontSize: 18,
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     color: '#999',
   },
   todayText: {
-    color: '#6E41E2',
+    color: '#5046E6',
     fontWeight: '600',
   },
   selectedText: {
