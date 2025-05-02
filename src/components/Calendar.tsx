@@ -1,17 +1,30 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import bills from './bills.json';
 
 interface CalendarProps {
   onDateSelect?: (date: Date) => void;
+  selectedDate?: Date;
 }
 
-const Calendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSelectedDate }) => {
+  const [selectedDate, setSelectedDate] = useState(propSelectedDate || new Date());
   const scrollViewRef = useRef<ScrollView>(null);
   const screenWidth = Dimensions.get('window').width;
   const itemWidth = 60;
   const itemMargin = 5;
   const totalItemWidth = itemWidth + (itemMargin * 2);
+
+  const datesWithBills = useMemo(() => {
+    const billDates = new Set<string>();
+    bills.forEach(bill => {
+      const date = bill.RGS_RSLN_DT || bill.LAW_PROC_DT || bill.JRCMIT_PROC_DT || bill.PPSL_DT;
+      if (date) {
+        billDates.add(date);
+      }
+    });
+    return billDates;
+  }, []);
 
   const generateDates = () => {
     const dates = [];
@@ -35,7 +48,9 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const dayOfWeek = days[date.getDay()];
-    return { month, day, dayOfWeek };
+    const dateStr = date.toISOString().split('T')[0];
+    const hasBill = datesWithBills.has(dateStr);
+    return { month, day, dayOfWeek, hasBill };
   };
 
   const scrollToDate = (date: Date) => {
@@ -72,7 +87,7 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
         decelerationRate="normal"
       >
         {dates.map((date, index) => {
-          const { month, day, dayOfWeek } = formatDate(date);
+          const { month, day, dayOfWeek, hasBill } = formatDate(date);
           const isSelected = selectedDate.toDateString() === date.toDateString();
           const isToday = new Date().toDateString() === date.toDateString();
 
@@ -96,6 +111,10 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
               ]}>
                 {month}월
               </Text>
+              {hasBill && <View style={[
+                styles.dot,
+                isSelected && styles.selectedDot
+              ]} />}
             </TouchableOpacity>
           );
         })}
@@ -140,6 +159,16 @@ const styles = StyleSheet.create({
   },
   selectedText: {
     color: '#fff',
+  },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#5046E6',
+    marginTop: 4,
+  },
+  selectedDot: {
+    backgroundColor: '#fff',
   },
 });
 

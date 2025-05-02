@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
 import { BillScheduleList, Calendar } from '@/components';
 import { BellIcon } from '@/assets';
 
-const App = () => {
+const LawCalendar = () => {
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>오늘의 법안 현황</Text>
         <BellIcon width={20} height={20} />
       </View>
-      <Calendar />
-      <BillScheduleList />
+      <Calendar 
+        selectedDate={selectedDate}
+        onDateSelect={setSelectedDate}
+      />
+      <BillScheduleList selectedDate={selectedDate} />
     </SafeAreaView>
   );
 };
@@ -35,5 +40,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default LawCalendar;
 

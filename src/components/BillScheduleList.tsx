@@ -4,12 +4,17 @@ import bills from './bills.json';
 import { Bill } from '@/types';
 import { LawIcon } from '@/assets';
 
+
 interface ScheduleItemProps {
   time: string;
   ppsr: string;
   title: string;
   description: string;
   result: string;
+}
+
+interface BillScheduleListProps {
+  selectedDate?: Date;
 }
 
 const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, description, result }) => (
@@ -28,11 +33,13 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
       <View style={styles.contentContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={[
-            styles.result, 
-            { backgroundColor: result === '수정가결' ? '#D8FBE5' : '#EFF6FF' },
-            { color: result === '수정가결' ? '#6CC58B' : '#6A97F6' }
+          {result && (
+            <Text style={[
+              styles.result, 
+              { backgroundColor: result === '수정가결' ? '#D8FBE5' : '#EFF6FF' },
+              { color: result === '수정가결' ? '#6CC58B' : '#6A97F6' }
             ]}>{result}</Text>
+          )}
         </View>
         <Text style={styles.description} numberOfLines={2}>
           {description}
@@ -42,14 +49,25 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
   </TouchableOpacity>
 );
 
-const BillScheduleList: React.FC = () => {
-  const billList = useMemo(() => bills as unknown as Bill[], []);
+const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => {
+  const billList = useMemo(() => {
+    const allBills = bills as unknown as Bill[];
+    
+    if (!selectedDate) return allBills;
+    
+    const selectedDateStr = selectedDate.toISOString().split('T')[0];
+    
+    return allBills.filter(bill => {
+      const billDate = bill.RGS_RSLN_DT || bill.LAW_PROC_DT || bill.JRCMIT_PROC_DT || bill.PPSL_DT;
+      return billDate === selectedDateStr;
+    });
+  }, [selectedDate]);
 
   const renderItem = ({ item: bill }: { item: Bill }) => (
     <ScheduleItem
       time={bill.RGS_RSLN_DT || bill.LAW_PROC_DT || bill.JRCMIT_PROC_DT || bill.PPSL_DT}
       ppsr={bill.PPSR}
-      title={bill.BILL_NM.replace(/^\d+\.\s*/, '').split('(')[0].trim()}
+      title={bill.BILL_NM.replace(/^\d+\.\s*/, '').trim()}
       description={bill.JRCMIT_NM}
       result={bill.RGS_CONF_RSLT}
     />
@@ -64,6 +82,11 @@ const BillScheduleList: React.FC = () => {
       initialNumToRender={10}
       maxToRenderPerBatch={10}
       windowSize={5}
+      ListEmptyComponent={
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>해당 날짜의 법안이 없습니다.</Text>
+        </View>
+      }
     />
   );
 };
@@ -72,6 +95,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: '#666',
   },
   itemContainer: {
     padding: 16,
@@ -97,7 +130,7 @@ const styles = StyleSheet.create({
   },
   horizontalLine: {
     flex: 1,
-    width: 2,
+    width: 1,
     backgroundColor: '#111111',
     marginHorizontal: 10,
   },
