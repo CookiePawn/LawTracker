@@ -1,43 +1,159 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { ArrowLeftIcon, CalendarIcon } from '@/assets';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { RootStackParamList } from '@/types';
+
+type NavigationProp = BottomTabNavigationProp<RootStackParamList>;
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
+
+  const openNationalAssembly = () => {
+    Linking.openURL('https://www.assembly.go.kr');
+  };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>홈 화면</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>법안 트래커</Text>
+        <Text style={styles.headerSubtitle}>국회 법안 현황을 한눈에</Text>
+      </View>
+
+      <View style={styles.cardContainer}>
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <CalendarIcon />
+            <Text style={styles.cardTitle}>오늘의 법안</Text>
+          </View>
+          <Text style={styles.cardContent}>오늘 심의되는 법안을 확인해보세요</Text>
+          <TouchableOpacity 
+            style={styles.cardButton}
+            onPress={() => navigation.navigate('Tab', { screen: 'LawCalendar' })}
+          >
+            <Text style={styles.cardButtonText}>캘린더 보기</Text>
+            <View style={styles.arrowContainer}>
+              <ArrowLeftIcon />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <TouchableOpacity 
-        style={styles.button}
+        style={styles.naButton}
+        onPress={openNationalAssembly}
       >
-        <Text style={styles.buttonText}>상세 페이지로 이동</Text>
+        <Text style={styles.naButtonText}>국회 홈페이지 바로가기</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#f8f9ff',
+  },
+  header: {
+    padding: 24,
     backgroundColor: '#fff',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-  title: {
-    fontSize: 24,
+  headerTitle: {
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 20,
+    color: '#000',
+    marginBottom: 8,
   },
-  button: {
-    backgroundColor: '#007AFF',
-    padding: 15,
+  headerSubtitle: {
+    fontSize: 16,
+    color: '#666',
+  },
+  cardContainer: {
+    padding: 20,
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 12,
+    color: '#000',
+  },
+  cardContent: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 16,
+  },
+  cardButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 12,
+    backgroundColor: '#f0f4ff',
     borderRadius: 8,
   },
-  buttonText: {
-    color: '#fff',
+  cardButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#0064FF',
+  },
+  naButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0064FF',
+    margin: 20,
+    padding: 16,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  naButtonText: {
     fontSize: 16,
     fontWeight: '600',
+    color: '#fff',
+    marginLeft: 8,
+  },
+  arrowContainer: {
+    width: 20,
+    height: 20,
+    backgroundColor: '#0064FF',
+    borderRadius: 10,
+    transform: [{ rotate: '180deg' }],
   },
 });
 
