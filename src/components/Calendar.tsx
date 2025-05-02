@@ -82,10 +82,18 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
               style={[styles.dateItem, isSelected && styles.selectedDate]}
               onPress={() => handleDateSelect(date)}
             >
-              <Text style={[styles.date, isToday && styles.todayText]}>
+              <Text style={[
+                styles.date,
+                isToday && !isSelected && styles.todayText,
+                isSelected && styles.selectedText
+              ]}>
                 {day}
               </Text>
-              <Text style={[styles.month, isToday && styles.todayText]}>
+              <Text style={[
+                styles.month,
+                isToday && !isSelected && styles.todayText,
+                isSelected && styles.selectedText
+              ]}>
                 {month}월
               </Text>
             </TouchableOpacity>
@@ -129,6 +137,9 @@ const styles = StyleSheet.create({
   todayText: {
     color: '#6E41E2',
     fontWeight: '600',
+  },
+  selectedText: {
+    color: '#fff',
   },
 });
 
