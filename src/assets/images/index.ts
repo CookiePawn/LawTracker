@@ -1,0 +1,1 @@
+export { default as LawIcon } from './lawIcon.png';

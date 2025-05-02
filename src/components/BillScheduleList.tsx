@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import bills from './bills.json';
 import { Bill } from '@/types';
+import { LawIcon } from '@/assets';
 
 interface ScheduleItemProps {
   time: string;
@@ -13,18 +14,30 @@ interface ScheduleItemProps {
 
 const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, description, result }) => (
   <TouchableOpacity style={styles.itemContainer}>
-    <View style={styles.timeContainer}>
-      <Text style={styles.time}>{time}</Text>
-      <Text style={styles.ppsr}>발의자: {ppsr.length > 15 ? ppsr.slice(0, 15) + '...' : ppsr}</Text>
-    </View>
-    <View style={styles.contentContainer}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.result}>{result}</Text>
+    <View style={styles.profileContainer}>
+      <View style={styles.profileImageContainer}>
+        <Image source={LawIcon} style={styles.profileImage} />
       </View>
-      <Text style={styles.description} numberOfLines={2}>
-        {description}
-      </Text>
+      <View style={styles.horizontalLine} />
+    </View>
+    <View style={styles.billContainer}>
+      <View style={styles.timeContainer}>
+        <Text style={styles.time}>{time}</Text>
+        <Text style={styles.ppsr}>발의자: {ppsr.length > 15 ? ppsr.slice(0, 15) + '...' : ppsr}</Text>
+      </View>
+      <View style={styles.contentContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={[
+            styles.result, 
+            { backgroundColor: result === '수정가결' ? '#D8FBE5' : '#EFF6FF' },
+            { color: result === '수정가결' ? '#6CC58B' : '#6A97F6' }
+            ]}>{result}</Text>
+        </View>
+        <Text style={styles.description} numberOfLines={2}>
+          {description}
+        </Text>
+      </View>
     </View>
   </TouchableOpacity>
 );
@@ -62,8 +75,35 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
+    flexDirection: 'row',
+  },
+  profileContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  profileImageContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: '#f0f0f0',
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profileImage: {
+    width: 30,
+    height: 30,
+  },
+  horizontalLine: {
+    flex: 1,
+    width: 2,
+    backgroundColor: '#111111',
+    marginHorizontal: 10,
+  },
+  billContainer: {
+    flex: 1,
+    paddingLeft: 10,
   },
   timeContainer: {
     width: '100%',
@@ -74,8 +114,8 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 10,
-    color: '#000',
-    fontWeight: '600',
+    color: '#666',
+    fontWeight: '400',
   },
   ppsr: {
     fontSize: 10,
@@ -84,30 +124,30 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    paddingRight: 16,
   },
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   title: {
-    maxWidth: '80%',
-    fontSize: 16,
+    maxWidth: '75%',
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#000',
     marginBottom: 4,
   },
   result: {
+    height: 20,
     fontSize: 10,
-    color: '#666',
+    color: '#ffffff',
     fontWeight: '400',
-    backgroundColor: '#0064F',
-    paddingHorizontal: 4,
+    backgroundColor: '#0064FF',
+    paddingHorizontal: 8,
     paddingVertical: 2,
-    borderRadius: 4,
+    borderRadius: 20,
   },
   description: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#666',
     marginBottom: 8,
   },
@@ -133,7 +173,7 @@ const styles = StyleSheet.create({
     color: '#666',
     fontWeight: '300',
   },
-}); 
+});
 
 
 export default BillScheduleList;
