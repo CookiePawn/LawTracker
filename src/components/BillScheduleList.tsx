@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
 import bills from './bills.json';
 import { Bill } from '@/types';
 import { LawIcon } from '@/assets';
@@ -21,6 +21,8 @@ interface ScheduleItemProps {
 interface BillScheduleListProps {
   selectedDate?: Date;
 }
+
+const windowHeight = Dimensions.get('window').height;
 
 const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, description, result }) => (
   <TouchableOpacity style={styles.itemContainer}>
@@ -55,6 +57,8 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
 );
 
 const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => {
+  const isToday = selectedDate && selectedDate.toDateString() === new Date().toDateString();
+
   const filteredBills = (bills as Bill[]).flatMap(bill => {
     if (!selectedDate) {
       const items: BillScheduleItem[] = [];
@@ -139,20 +143,30 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
   );
 
   return (
-    <FlatList<BillScheduleItem>
-      style={styles.container}
-      data={filteredBills}
-      renderItem={renderItem}
-      keyExtractor={(_, index) => index.toString()}
-      initialNumToRender={10}
-      maxToRenderPerBatch={10}
-      windowSize={5}
-      ListEmptyComponent={
-        <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>해당 날짜의 법안이 없습니다.</Text>
+    <>
+      {isToday && (
+        <View style={styles.warningContainer}>
+          <Text style={styles.warningText}>
+            ⚠️ 데이터는 매일 00시에 업데이트됩니다.{'\n'}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;국회 데이터 업로드에 따라 차이가 발생할 수 있습니다.
+          </Text>
         </View>
-      }
-    />
+      )}
+      <FlatList<BillScheduleItem>
+        style={styles.container}
+        data={filteredBills}
+        renderItem={renderItem}
+        keyExtractor={(_, index) => index.toString()}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={5}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>해당 날짜의 법안이 없습니다.</Text>
+          </View>
+        }
+      />
+    </>
   );
 };
 
@@ -163,13 +177,14 @@ const styles = StyleSheet.create({
   },
   emptyContainer: {
     flex: 1,
+    height: windowHeight - 300,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
   emptyText: {
     fontSize: 16,
-    color: '#666',
+    color: '#bdbdbd',
   },
   itemContainer: {
     padding: 16,
@@ -270,6 +285,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#666',
     fontWeight: '300',
+  },
+  warningContainer: {
+    backgroundColor: '#FFF3E0',
+    padding: 12,
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 8,
+  },
+  warningText: {
+    fontSize: 12,
+    color: '#E65100',
+    lineHeight: 18,
   },
 });
 
