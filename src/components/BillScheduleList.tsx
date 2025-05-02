@@ -4,6 +4,11 @@ import bills from './bills.json';
 import { Bill } from '@/types';
 import { LawIcon } from '@/assets';
 
+interface BillScheduleItem extends Bill {
+  type: 'JRCMIT' | 'LAW' | 'RGS';
+  time: string;
+  result: string | null;
+}
 
 interface ScheduleItemProps {
   time: string;
@@ -36,8 +41,8 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
           {result && (
             <Text style={[
               styles.result, 
-              { backgroundColor: result === '수정가결' ? '#D8FBE5' : '#EFF6FF' },
-              { color: result === '수정가결' ? '#6CC58B' : '#6A97F6' }
+              { backgroundColor: result === '수정가결' ? '#D8FBE5' : result === '원안가결' ? '#EFF6FF' : '#FDF9D1' },
+              { color: result === '수정가결' ? '#6CC58B' : result === '원안가결' ? '#6A97F6' : '#DCAE46' }
             ]}>{result}</Text>
           )}
         </View>
@@ -50,33 +55,93 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
 );
 
 const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => {
-  const billList = useMemo(() => {
-    const allBills = bills as unknown as Bill[];
+  const filteredBills = (bills as Bill[]).flatMap(bill => {
+    if (!selectedDate) {
+      const items: BillScheduleItem[] = [];
+      
+      // 소관 위원회
+      if (bill.JRCMIT_PROC_DT) {
+        items.push({
+          ...bill,
+          type: 'JRCMIT',
+          time: bill.JRCMIT_PROC_DT,
+          result: bill.JRCMIT_PROC_RSLT
+        });
+      }
+      
+      // 법사위 체계자구심사
+      if (bill.LAW_PROC_DT) {
+        items.push({
+          ...bill,
+          type: 'LAW',
+          time: bill.LAW_PROC_DT,
+          result: bill.LAW_PROC_RSLT
+        });
+      }
+      
+      // 본회의 심의
+      if (bill.RGS_RSLN_DT) {
+        items.push({
+          ...bill,
+          type: 'RGS',
+          time: bill.RGS_RSLN_DT,
+          result: bill.RGS_CONF_RSLT
+        });
+      }
+      
+      return items;
+    }
     
-    if (!selectedDate) return allBills;
+    const dateStr = selectedDate.toISOString().split('T')[0];
+    const items: BillScheduleItem[] = [];
     
-    const selectedDateStr = selectedDate.toISOString().split('T')[0];
+    // JRCMIT 심의
+    if (bill.JRCMIT_PROC_DT === dateStr) {
+      items.push({
+        ...bill,
+        type: 'JRCMIT',
+        time: bill.JRCMIT_PROC_DT || '',
+        result: bill.JRCMIT_PROC_RSLT
+      });
+    }
     
-    return allBills.filter(bill => {
-      const billDate = bill.RGS_RSLN_DT || bill.LAW_PROC_DT || bill.JRCMIT_PROC_DT || bill.PPSL_DT;
-      return billDate === selectedDateStr;
-    });
-  }, [selectedDate]);
+    // LAW 심의
+    if (bill.LAW_PROC_DT === dateStr) {
+      items.push({
+        ...bill,
+        type: 'LAW',
+        time: bill.LAW_PROC_DT || '',
+        result: bill.LAW_PROC_RSLT
+      });
+    }
+    
+    // RGS 심의
+    if (bill.RGS_RSLN_DT === dateStr) {
+      items.push({
+        ...bill,
+        type: 'RGS',
+        time: bill.RGS_RSLN_DT || '',
+        result: bill.RGS_CONF_RSLT
+      });
+    }
+    
+    return items;
+  });
 
-  const renderItem = ({ item: bill }: { item: Bill }) => (
+  const renderItem = ({ item: bill }: { item: BillScheduleItem }) => (
     <ScheduleItem
-      time={bill.RGS_RSLN_DT || bill.LAW_PROC_DT || bill.JRCMIT_PROC_DT || bill.PPSL_DT}
+      time={bill.time}
       ppsr={bill.PPSR}
-      title={bill.BILL_NM.replace(/^\d+\.\s*/, '').trim()}
-      description={bill.JRCMIT_NM}
-      result={bill.RGS_CONF_RSLT}
+      title={`${bill.BILL_NM.replace(/^\d+\.\s*/, '').trim()} (${bill.type === 'JRCMIT' ? '소관위' : bill.type === 'LAW' ? '법사위' : '본회의'})`}
+      description={bill.JRCMIT_NM || ''}
+      result={bill.result || ''}
     />
   );
 
   return (
-    <FlatList
+    <FlatList<BillScheduleItem>
       style={styles.container}
-      data={billList}
+      data={filteredBills}
       renderItem={renderItem}
       keyExtractor={(_, index) => index.toString()}
       initialNumToRender={10}
@@ -207,6 +272,5 @@ const styles = StyleSheet.create({
     fontWeight: '300',
   },
 });
-
 
 export default BillScheduleList;

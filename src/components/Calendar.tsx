@@ -18,9 +18,19 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
   const datesWithBills = useMemo(() => {
     const billDates = new Set<string>();
     bills.forEach(bill => {
-      const date = bill.RGS_RSLN_DT || bill.LAW_PROC_DT || bill.JRCMIT_PROC_DT || bill.PPSL_DT;
-      if (date) {
-        billDates.add(date);
+      // 소관 위원회
+      if (bill.JRCMIT_PROC_DT) {
+        billDates.add(bill.JRCMIT_PROC_DT);
+      }
+      
+      // 법사위 체계자구심사
+      if (bill.LAW_PROC_DT) {
+        billDates.add(bill.LAW_PROC_DT);
+      }
+      
+      // 본회의 심의
+      if (bill.RGS_RSLN_DT) {
+        billDates.add(bill.RGS_RSLN_DT);
       }
     });
     return billDates;
@@ -139,6 +149,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 15,
     backgroundColor: '#F5F5F5',
+    position: 'relative',
   },
   selectedDate: {
     backgroundColor: '#5046E6',
@@ -165,7 +176,8 @@ const styles = StyleSheet.create({
     height: 6,
     borderRadius: 3,
     backgroundColor: '#5046E6',
-    marginTop: 4,
+    position: 'absolute',
+    bottom: 5,
   },
   selectedDot: {
     backgroundColor: '#fff',
