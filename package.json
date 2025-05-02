@@ -17,7 +17,8 @@
     "ios:prod": "react-native run-ios --scheme PROD --mode ProductionDebug --port=8083",
     "ios:prod:release": "react-native run-ios --scheme PROD --mode ProductionRelease --port=8083",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "load-law": "node scripts/loadLaw.js"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.3.10",
