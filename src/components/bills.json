@@ -2598,5 +2598,31 @@
     "PROM_LAW_NM": null,
     "PROM_DT": null,
     "PROM_NO": null
+  },
+  {
+    "BILL_ID": "PRC_T2S5S0B5Z0Z2X0Z7X4X7F1E6E8C1D0",
+    "BILL_NO": "2210333",
+    "BILL_NM": "형사소송법 일부개정법률안",
+    "PPSR_KIND": "의원",
+    "PPSR": "김용민의원 등 25인",
+    "PPSL_DT": "2025-05-02",
+    "PPSL_SESS": "424",
+    "JRCMIT_NM": "법제사법위원회",
+    "JRCMIT_CMMT_DT": "2025-05-02",
+    "JRCMIT_PRSNT_DT": "2025-05-02",
+    "JRCMIT_PROC_DT": null,
+    "JRCMIT_PROC_RSLT": null,
+    "LAW_CMMT_DT": null,
+    "LAW_PRSNT_DT": null,
+    "LAW_PROC_DT": null,
+    "LAW_PROC_RSLT": null,
+    "RGS_PRSNT_DT": null,
+    "RGS_RSLN_DT": null,
+    "RGS_CONF_NM": " ",
+    "RGS_CONF_RSLT": null,
+    "GVRN_TRSF_DT": null,
+    "PROM_LAW_NM": null,
+    "PROM_DT": null,
+    "PROM_NO": null
   }
 ]
