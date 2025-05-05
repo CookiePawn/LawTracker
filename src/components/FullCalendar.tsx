@@ -164,15 +164,20 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
                   style={styles.picker}
                   itemStyle={styles.pickerItem}
                 >
-                  {years.map((year) => (
-                    <Picker.Item 
-                      key={year} 
-                      label={`${year}년`} 
-                      value={year}
-                      enabled={isDateSelectable(year, selectedMonth)}
-                      color={isDateSelectable(year, selectedMonth) ? '#000' : '#999'}
-                    />
-                  ))}
+                  {years.map((year) => {
+                    // 해당 년도에 선택 가능한 월이 있는지 확인
+                    const hasSelectableMonth = months.some(month => isDateSelectable(year, month));
+                    if (!hasSelectableMonth) return null;
+                    
+                    return (
+                      <Picker.Item 
+                        key={year} 
+                        label={`${year}년`} 
+                        value={year}
+                        color="#000"
+                      />
+                    );
+                  })}
                 </Picker>
               </View>
               <View style={styles.pickerWrapper}>
@@ -182,15 +187,18 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
                   style={styles.picker}
                   itemStyle={styles.pickerItem}
                 >
-                  {months.map((month) => (
-                    <Picker.Item 
-                      key={month} 
-                      label={`${month}월`} 
-                      value={month}
-                      enabled={isDateSelectable(selectedYear, month)}
-                      color={isDateSelectable(selectedYear, month) ? '#000' : '#999'}
-                    />
-                  ))}
+                  {months.map((month) => {
+                    if (!isDateSelectable(selectedYear, month)) return null;
+                    
+                    return (
+                      <Picker.Item 
+                        key={month} 
+                        label={`${month}월`} 
+                        value={month}
+                        color="#000"
+                      />
+                    );
+                  })}
                 </Picker>
               </View>
             </View>
