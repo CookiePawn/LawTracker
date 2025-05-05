@@ -47,7 +47,7 @@ export enum BillStatus {
     APPROVAL = '상정',
     PROCESSING = '처리',
     GOVERNMENT_TRANSFER = '정부이송',
-    COMMITTEE_MEETING = '본희의 부의',
+    COMMITTEE_MEETING = '본회의 부의',
     VOTE = '의결',
     COMMITTEE_REVIEW = '회부',
     PROMULGATION = '공포',

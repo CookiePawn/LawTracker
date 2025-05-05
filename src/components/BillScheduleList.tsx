@@ -43,19 +43,27 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
             <Text style={[
               styles.result, 
               { backgroundColor: 
-                result === BillStatus.APPROVAL ? '#D8FBE5' : 
-                result === BillStatus.COMMITTEE_MEETING ? '#EFF6FF' : 
-                result === BillStatus.PROCESSING ? '#FDF9D1' : 
-                result === BillStatus.GOVERNMENT_TRANSFER ? '#FDF9D1' : 
-                result === BillStatus.COMMITTEE_REVIEW ? '#FDF9D1' : 
-                result === BillStatus.PROMULGATION ? '#FDF9D1' : '#FDF9D1' },
+                result === BillStatus.MEETING ? '#EFF6FF' : 
+                result === BillStatus.APPROVAL ? '#CAFFE0' : 
+                result === BillStatus.PROCESSING ? '#FFDAB1' : 
+                result === BillStatus.GOVERNMENT_TRANSFER ? '#E7BEFF' :
+                result === BillStatus.COMMITTEE_MEETING ? '#92A3F8' :
+                result === BillStatus.VOTE ? '#FFC8C8' : 
+                result === BillStatus.COMMITTEE_REVIEW ? '#EEC979' : 
+                result === BillStatus.PROMULGATION ? '#A1C3A9' : 
+                result === BillStatus.INTRODUCTION ? '#FDF9D1' : 
+                result === BillStatus.SUBMISSION ? '#FF7DFD' : '#DFDFDF' },
               { color: 
-                result === BillStatus.APPROVAL ? '#6CC58B' : 
-                result === BillStatus.COMMITTEE_MEETING ? '#6A97F6' : 
-                result === BillStatus.PROCESSING ? '#DCAE46' : 
-                result === BillStatus.GOVERNMENT_TRANSFER ? '#DCAE46' : 
-                result === BillStatus.COMMITTEE_REVIEW ? '#DCAE46' : 
-                result === BillStatus.PROMULGATION ? '#DCAE46' : '#DCAE46' }
+                result === BillStatus.MEETING ? '#519AFA' : 
+                result === BillStatus.APPROVAL ? '#6CC58B' :
+                result === BillStatus.PROCESSING ? '#DE9440' : 
+                result === BillStatus.GOVERNMENT_TRANSFER ? '#B04DEA' : 
+                result === BillStatus.COMMITTEE_MEETING ? '#3756F0' : 
+                result === BillStatus.VOTE ? '#DE3939' : 
+                result === BillStatus.COMMITTEE_REVIEW ? '#BD8E29' : 
+                result === BillStatus.PROMULGATION ? '#088B24' : 
+                result === BillStatus.INTRODUCTION ? '#DCAE46' : 
+                result === BillStatus.SUBMISSION ? '#CD16CA' : '#B1B1B1' }
             ]}>{result}</Text>
           )}
         </View>
