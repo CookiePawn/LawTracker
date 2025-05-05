@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { CalendarIcon, HomeIcon } from '@/assets';
+import { CalendarIcon, HomeIcon, UserIcon } from '@/assets';
 
 const TabBar = ({ state, descriptors, navigation }: any) => {
     return (
@@ -38,6 +38,13 @@ const TabBar = ({ state, descriptors, navigation }: any) => {
                                 <HomeIcon width={20} height={20} fill='white' color={isFocused ? '#007AFF' : '#666'} />
                                 <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
                                     홈
+                                </Text>
+                            </View>
+                        ) : route.name === 'Profile' ? (
+                            <View style={styles.iconContainer}>
+                                <UserIcon width={20} height={20} fill='white' color={isFocused ? '#007AFF' : '#666'} />
+                                <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
+                                    프로필
                                 </Text>
                             </View>
                         ) : (

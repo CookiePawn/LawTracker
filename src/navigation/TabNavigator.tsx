@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, LawCalendar } from '@/screens';
+import { Home, LawCalendar, Profile } from '@/screens';
 import { TabBar } from '@/components';
 
 const Tab = createBottomTabNavigator();
@@ -15,6 +15,7 @@ const TabNavigator = () => {
         >
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="LawCalendar" component={LawCalendar} />
+            <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>
     );
 };
