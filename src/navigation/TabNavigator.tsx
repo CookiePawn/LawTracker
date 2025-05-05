@@ -13,7 +13,7 @@ const TabNavigator = () => {
             }}
             tabBar={(props) => <TabBar {...props} />}
         >
-            <Tab.Screen name="Home" component={Home} />
+            {/* <Tab.Screen name="Home" component={Home} /> */}
             <Tab.Screen name="LawCalendar" component={LawCalendar} />
             <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>

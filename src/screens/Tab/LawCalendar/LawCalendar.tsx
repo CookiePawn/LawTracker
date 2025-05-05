@@ -27,7 +27,7 @@ const LawCalendar = () => {
           <CalendarIcon width={20} height={20} />
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.content}>
         {isFullCalendar ? (
           <FullCalendar
             selectedDate={selectedDate}
@@ -42,7 +42,6 @@ const LawCalendar = () => {
 
         <BillScheduleList
           selectedDate={selectedDate}
-          bills={bills as Nqfvrbsdafrmuzixe[]}
         />
       </ScrollView>
     </SafeAreaView>
@@ -54,30 +53,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  scrollView: {
-    flex: 1,
-  },
   header: {
-    padding: 16,
-    marginTop: 16,
-    borderRadius: 10,
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    flexDirection: 'row',
     alignItems: 'center',
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
   },
   headerText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
+    color: '#333',
   },
-  calendarButton: {
-    fontSize: 16,
-    color: '#5046E6',
-    fontWeight: '500',
+  content: {
+    flex: 1,
   },
 });
 
