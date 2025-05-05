@@ -36,8 +36,21 @@ export interface Nqfvrbsdafrmuzixe {
     STAGE: string; // 단계
     DTL_STAGE: string; // 세부단계
     COMMITTEE: string; // 소관위원회
-    ACT_STATUS: '회의' | '상정' | '처리' | '정부이송' | '본희의 부의' | '의결' | '회부' | '공포'; // 활동상태
+    ACT_STATUS: BillStatus; // 활동상태
     BILL_ID: string; // 의안ID
     LINK_URL: string; // 링크URL
     COMMITTEE_ID: string | null; // 소관위원회ID
+}
+
+export enum BillStatus {
+    MEETING = '회의',
+    APPROVAL = '상정',
+    PROCESSING = '처리',
+    GOVERNMENT_TRANSFER = '정부이송',
+    COMMITTEE_MEETING = '본희의 부의',
+    VOTE = '의결',
+    COMMITTEE_REVIEW = '회부',
+    PROMULGATION = '공포',
+    INTRODUCTION = '발의',
+    SUBMISSION = '제출'
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
 import bills from './nqfvrbsdafrmuzixe.json';
-import { Nqfvrbsdafrmuzixe } from '@/types/bills';
+import { BillStatus, Nqfvrbsdafrmuzixe } from '@/types/bills';
 import { LawIcon } from '@/assets';
 
 interface BillScheduleItem extends Nqfvrbsdafrmuzixe {
@@ -42,8 +42,20 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
           {result && (
             <Text style={[
               styles.result, 
-              { backgroundColor: result === '수정가결' ? '#D8FBE5' : result === '원안가결' ? '#EFF6FF' : '#FDF9D1' },
-              { color: result === '수정가결' ? '#6CC58B' : result === '원안가결' ? '#6A97F6' : '#DCAE46' }
+              { backgroundColor: 
+                result === BillStatus.APPROVAL ? '#D8FBE5' : 
+                result === BillStatus.COMMITTEE_MEETING ? '#EFF6FF' : 
+                result === BillStatus.PROCESSING ? '#FDF9D1' : 
+                result === BillStatus.GOVERNMENT_TRANSFER ? '#FDF9D1' : 
+                result === BillStatus.COMMITTEE_REVIEW ? '#FDF9D1' : 
+                result === BillStatus.PROMULGATION ? '#FDF9D1' : '#FDF9D1' },
+              { color: 
+                result === BillStatus.APPROVAL ? '#6CC58B' : 
+                result === BillStatus.COMMITTEE_MEETING ? '#6A97F6' : 
+                result === BillStatus.PROCESSING ? '#DCAE46' : 
+                result === BillStatus.GOVERNMENT_TRANSFER ? '#DCAE46' : 
+                result === BillStatus.COMMITTEE_REVIEW ? '#DCAE46' : 
+                result === BillStatus.PROMULGATION ? '#DCAE46' : '#DCAE46' }
             ]}>{result}</Text>
           )}
         </View>
