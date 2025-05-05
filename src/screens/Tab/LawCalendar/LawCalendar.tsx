@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { BillScheduleList, Calendar, FullCalendar } from '@/components';
 import { BellIcon, CalendarIcon } from '@/assets';
 import { useNavigation } from '@react-navigation/native';
@@ -19,6 +19,22 @@ const LawCalendar = () => {
     setSelectedDate(utcDate);
   };
 
+  const renderHeader = () => (
+    <>
+      {isFullCalendar ? (
+        <FullCalendar
+          selectedDate={selectedDate}
+          onDateSelect={handleDateSelect}
+        />
+      ) : (
+        <Calendar
+          selectedDate={selectedDate}
+          onDateSelect={handleDateSelect}
+        />
+      )}
+    </>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -27,23 +43,17 @@ const LawCalendar = () => {
           <CalendarIcon width={20} height={20} />
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.content}>
-        {isFullCalendar ? (
-          <FullCalendar
+      <FlatList
+        style={styles.content}
+        data={[]}
+        renderItem={() => null}
+        ListHeaderComponent={renderHeader}
+        ListFooterComponent={
+          <BillScheduleList
             selectedDate={selectedDate}
-            onDateSelect={handleDateSelect}
           />
-        ) : (
-          <Calendar
-            selectedDate={selectedDate}
-            onDateSelect={handleDateSelect}
-          />
-        )}
-
-        <BillScheduleList
-          selectedDate={selectedDate}
-        />
-      </ScrollView>
+        }
+      />
     </SafeAreaView>
   );
 };
