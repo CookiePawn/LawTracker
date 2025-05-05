@@ -115,6 +115,14 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
     setIsModalVisible(true);
   };
 
+  const handleDateSelect = (date: Date) => {
+    // 이전 달의 날짜를 클릭한 경우
+    if (date.getMonth() !== currentMonth.getMonth()) {
+      setCurrentMonth(date);
+    }
+    onDateSelect(date);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -248,7 +256,7 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
                     isSelected && styles.selectedDay,
                     isToday && !isSelected && styles.today
                   ]}
-                  onPress={() => onDateSelect(date)}
+                  onPress={() => handleDateSelect(date)}
                 >
                   <Text
                     style={[
