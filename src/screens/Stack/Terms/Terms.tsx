@@ -22,21 +22,19 @@ const Terms = () => {
       <ScrollView style={styles.content}>
         <Text style={styles.title}>제1조 (목적)</Text>
         <Text style={styles.text}>
-          이 약관은 법률 트래커(이하 "회사")가 제공하는 서비스의 이용조건 및 절차, 회사와 회원 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.
+          이 약관은 국회 추적기(이하 "서비스")가 제공하는 서비스의 이용조건 및 절차, 회사와 회원 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.{'\n'}
         </Text>
 
         <Text style={styles.title}>제2조 (정의)</Text>
         <Text style={styles.text}>
-          1. "서비스"란 회사가 제공하는 모든 서비스를 의미합니다.{'\n'}
-          2. "회원"이란 회사와 서비스 이용계약을 체결한 자를 말합니다.
+          1. "서비스"란 본 서비스가 제공하는 모든 서비스를 의미합니다.{'\n'}
+          2. "회원"이란 본 서비스 이용계약을 체결한 자를 말합니다.{'\n'}
         </Text>
 
         <Text style={styles.title}>제3조 (서비스의 제공)</Text>
         <Text style={styles.text}>
-          회사는 다음과 같은 서비스를 제공합니다:{'\n'}
+          본 서비스는 다음과 같은 서비스를 제공합니다:{'\n'}
           1. 법률 정보 제공 서비스{'\n'}
-          2. 법률 문서 관리 서비스{'\n'}
-          3. 기타 회사가 정하는 서비스
         </Text>
       </ScrollView>
     </SafeAreaView>
