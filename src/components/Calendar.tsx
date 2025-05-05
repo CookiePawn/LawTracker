@@ -1,6 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import bills from './bills.json';
+import bills from './nqfvrbsdafrmuzixe.json';
+import { Nqfvrbsdafrmuzixe } from '@/types/bills';
 
 interface CalendarProps {
   onDateSelect?: (date: Date) => void;
@@ -17,20 +18,9 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
 
   const datesWithBills = useMemo(() => {
     const billDates = new Set<string>();
-    bills.forEach(bill => {
-      // 소관 위원회
-      if (bill.JRCMIT_PROC_DT) {
-        billDates.add(bill.JRCMIT_PROC_DT);
-      }
-      
-      // 법사위 체계자구심사
-      if (bill.LAW_PROC_DT) {
-        billDates.add(bill.LAW_PROC_DT);
-      }
-      
-      // 본회의 심의
-      if (bill.RGS_RSLN_DT) {
-        billDates.add(bill.RGS_RSLN_DT);
+    (bills as Nqfvrbsdafrmuzixe[]).forEach(bill => {
+      if (bill.DT) {
+        billDates.add(bill.DT);
       }
     });
     return billDates;

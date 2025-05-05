@@ -24,3 +24,20 @@ export interface Bill {
     PROM_DT: string | null; // 공포일
     PROM_NO: string | null; // 공포 번호
 }
+
+
+export interface Nqfvrbsdafrmuzixe {
+    SEQ: number; // 순번
+    DT: string; //일자
+    BILL_KIND: string; // 의안구분
+    AGE: string; //대수
+    BILL_NO: string; // 의안번호
+    BILL_NM: string; // 의안명
+    STAGE: string; // 단계
+    DTL_STAGE: string; // 세부단계
+    COMMITTEE: string; // 소관위원회
+    ACT_STATUS: '회의' | '상정' | '처리' | '정부이송' | '본희의 부의' | '의결' | '회부' | '공포'; // 활동상태
+    BILL_ID: string; // 의안ID
+    LINK_URL: string; // 링크URL
+    COMMITTEE_ID: string | null; // 소관위원회ID
+}

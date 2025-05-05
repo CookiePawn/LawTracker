@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
-import bills from './nqfvrbsdafrmuzixe.json';
-import { Nqfvrbsdafrmuzixe } from '@/types/bills';
+import bills from './bills.json';
+import { Bill } from '@/types';
 import { LawIcon } from '@/assets';
 
-interface BillScheduleItem extends Nqfvrbsdafrmuzixe {
+interface BillScheduleItem extends Bill {
+  type: 'JRCMIT' | 'LAW' | 'RGS';
   time: string;
   result: string | null;
 }
@@ -58,31 +59,88 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
 const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => {
   const isToday = selectedDate && selectedDate.toDateString() === new Date().toDateString();
 
-  const filteredBills = (bills as Nqfvrbsdafrmuzixe[]).map(bill => ({
-    ...bill,
-    time: bill.DT,
-    result: bill.ACT_STATUS
-  })).filter(bill => {
-    if (!selectedDate) return true;
-    return bill.DT === selectedDate.toISOString().split('T')[0];
+  const filteredBills = (bills as Bill[]).flatMap(bill => {
+    if (!selectedDate) {
+      const items: BillScheduleItem[] = [];
+      
+      // 소관 위원회
+      if (bill.JRCMIT_PROC_DT) {
+        items.push({
+          ...bill,
+          type: 'JRCMIT',
+          time: bill.JRCMIT_PROC_DT,
+          result: bill.JRCMIT_PROC_RSLT
+        });
+      }
+      
+      // 법사위 체계자구심사
+      if (bill.LAW_PROC_DT) {
+        items.push({
+          ...bill,
+          type: 'LAW',
+          time: bill.LAW_PROC_DT,
+          result: bill.LAW_PROC_RSLT
+        });
+      }
+      
+      // 본회의 심의
+      if (bill.RGS_RSLN_DT) {
+        items.push({
+          ...bill,
+          type: 'RGS',
+          time: bill.RGS_RSLN_DT,
+          result: bill.RGS_CONF_RSLT
+        });
+      }
+      
+      return items;
+    }
+    
+    const dateStr = selectedDate.toISOString().split('T')[0];
+    const items: BillScheduleItem[] = [];
+    
+    // JRCMIT 심의
+    if (bill.JRCMIT_PROC_DT === dateStr) {
+      items.push({
+        ...bill,
+        type: 'JRCMIT',
+        time: bill.JRCMIT_PROC_DT || '',
+        result: bill.JRCMIT_PROC_RSLT
+      });
+    }
+    
+    // LAW 심의
+    if (bill.LAW_PROC_DT === dateStr) {
+      items.push({
+        ...bill,
+        type: 'LAW',
+        time: bill.LAW_PROC_DT || '',
+        result: bill.LAW_PROC_RSLT
+      });
+    }
+    
+    // RGS 심의
+    if (bill.RGS_RSLN_DT === dateStr) {
+      items.push({
+        ...bill,
+        type: 'RGS',
+        time: bill.RGS_RSLN_DT || '',
+        result: bill.RGS_CONF_RSLT
+      });
+    }
+    
+    return items;
   });
 
-  const renderItem = ({ item: bill }: { item: BillScheduleItem }) => {
-    // 법안명에서 괄호 부분을 분리
-    const titleMatch = bill.BILL_NM.match(/(.*?)\s*\((.*?)\)/);
-    const title = titleMatch ? titleMatch[1].replace(/^\d+\.\s*/, '').trim() : bill.BILL_NM.replace(/^\d+\.\s*/, '').trim();
-    const ppsr = titleMatch ? titleMatch[2] : bill.BILL_KIND;
-
-    return (
-      <ScheduleItem
-        time={bill.time}
-        ppsr={ppsr}
-        title={title}
-        description={bill.COMMITTEE || ''}
-        result={bill.result || ''}
-      />
-    );
-  };
+  const renderItem = ({ item: bill }: { item: BillScheduleItem }) => (
+    <ScheduleItem
+      time={bill.time}
+      ppsr={bill.PPSR}
+      title={`${bill.BILL_NM.replace(/^\d+\.\s*/, '').trim()} (${bill.type === 'JRCMIT' ? '소관위' : bill.type === 'LAW' ? '법사위' : '본회의'})`}
+      description={bill.JRCMIT_NM || ''}
+      result={bill.result || ''}
+    />
+  );
 
   return (
     <>
@@ -98,7 +156,7 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
         style={styles.container}
         data={filteredBills}
         renderItem={renderItem}
-        keyExtractor={(item) => item.SEQ.toString()}
+        keyExtractor={(_, index) => index.toString()}
         initialNumToRender={10}
         maxToRenderPerBatch={10}
         windowSize={5}
@@ -187,7 +245,7 @@ const styles = StyleSheet.create({
   title: {
     maxWidth: '75%',
     fontSize: 14,
-    fontWeight: 500,
+    fontWeight: 'bold',
     color: '#000',
     marginBottom: 4,
   },
