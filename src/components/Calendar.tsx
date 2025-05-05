@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import bills from './nqfvrbsdafrmuzixe.json';
 import { Nqfvrbsdafrmuzixe } from '@/types/bills';
@@ -68,13 +68,23 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
-    scrollToDate(date);
     onDateSelect?.(date);
+    requestAnimationFrame(() => {
+      scrollToDate(date);
+    });
   };
 
   const scrollToToday = () => {
     scrollToDate(new Date());
   };
+
+  useEffect(() => {
+    if (propSelectedDate) {
+      scrollToDate(propSelectedDate);
+    } else {
+      scrollToToday();
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -83,7 +93,6 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
-        onLayout={scrollToToday}
         decelerationRate="normal"
       >
         {dates.map((date, index) => {
