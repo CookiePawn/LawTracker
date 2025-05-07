@@ -3,3 +3,4 @@ export { default as BillScheduleList } from './BillScheduleList';
 export { default as Calendar } from './Calendar';
 export { default as FullCalendar } from './FullCalendar';
 export { default as NewsCard } from './NewsCard';
+export { default as AdBanner } from './AdBanner';
