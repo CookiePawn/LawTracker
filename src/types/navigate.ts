@@ -5,6 +5,8 @@ export type RootStackParamList = {
     Notification: undefined;
     Terms: undefined;
     PrivacyPolicy: undefined;
+    ApiPolicy: undefined;
+    Tutorial: undefined;
 };
 
 
@@ -12,4 +14,5 @@ export type RootStackParamList = {
 export type RootTabParamList = {
     Home: undefined;
     LawCalendar: undefined;
+    Profile: undefined;
 };

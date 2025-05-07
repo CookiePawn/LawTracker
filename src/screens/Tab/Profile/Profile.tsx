@@ -32,6 +32,14 @@ const Profile = () => {
             >
               <Text style={styles.termsText}>개인정보 처리방침</Text>
               <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333'/>
+            </TouchableOpacity>   
+            <View style={styles.divider} />
+            <TouchableOpacity 
+              style={styles.termsItem}
+              onPress={() => navigation.navigate('ApiPolicy')}
+            >
+              <Text style={styles.termsText}>API 이용 정책</Text>
+              <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333'/>
             </TouchableOpacity>
           </View>
         </View>
