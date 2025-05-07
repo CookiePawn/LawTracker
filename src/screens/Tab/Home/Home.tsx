@@ -1,14 +1,40 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Linking, ScrollView, BackHandler, ToastAndroid } from 'react-native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { ArrowLeftIcon, CalendarIcon } from '@/assets';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { RootStackParamList } from '@/types';
+import RNExitApp from 'react-native-exit-app';
 
 type NavigationProp = BottomTabNavigationProp<RootStackParamList>;
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp>();
+  const backPressedTime = useRef(0);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const backAction = () => {
+        const currentTime = new Date().getTime();
+        const timeDiff = currentTime - backPressedTime.current;
+        
+        if (timeDiff < 2000) { // 2초 이내에 두 번 누른 경우
+          RNExitApp.exitApp();
+          return true;
+        }
+        
+        backPressedTime.current = currentTime;
+        ToastAndroid.show('한번 더 누르면 종료됩니다', ToastAndroid.SHORT);
+        return true;
+      };
+
+      const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+      return () => {
+        backHandler.remove();
+      };
+    }, [])
+  );
 
   const openNationalAssembly = () => {
     Linking.openURL('https://www.assembly.go.kr');
