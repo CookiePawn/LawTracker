@@ -1,28 +1,32 @@
-import React, { useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking, ScrollView, BackHandler, ToastAndroid } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, StyleSheet, BackHandler, ToastAndroid, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { ArrowLeftIcon, CalendarIcon } from '@/assets';
+import { LogoHeader, BellIcon, ChevronLeftIcon } from '@/assets';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { RootStackParamList } from '@/types';
 import RNExitApp from 'react-native-exit-app';
+import { colors } from '@/constants/colors';
+import { noticeData } from './data';
+import { NewsCard } from '@/components';
 
 type NavigationProp = BottomTabNavigationProp<RootStackParamList>;
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp>();
   const backPressedTime = useRef(0);
+  const [noticeIndex, setNoticeIndex] = useState(0);
 
   useFocusEffect(
     React.useCallback(() => {
       const backAction = () => {
         const currentTime = new Date().getTime();
         const timeDiff = currentTime - backPressedTime.current;
-        
+
         if (timeDiff < 2000) { // 2초 이내에 두 번 누른 경우
           RNExitApp.exitApp();
           return true;
         }
-        
+
         backPressedTime.current = currentTime;
         ToastAndroid.show('한번 더 누르면 종료됩니다', ToastAndroid.SHORT);
         return true;
@@ -36,150 +40,118 @@ const HomeScreen = () => {
     }, [])
   );
 
-  const openNationalAssembly = () => {
-    Linking.openURL('https://www.assembly.go.kr');
-  };
-
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>법안 트래커</Text>
-        <Text style={styles.headerSubtitle}>국회 법안 현황을 한눈에</Text>
-      </View>
-
-      <View style={styles.cardContainer}>
-        <View style={styles.card}>
-          <View style={styles.cardHeader}>
-            <CalendarIcon />
-            <Text style={styles.cardTitle}>오늘의 법안</Text>
-          </View>
-          <Text style={styles.cardContent}>오늘 심의되는 법안을 확인해보세요</Text>
-          <TouchableOpacity 
-            style={styles.cardButton}
-            onPress={() => navigation.navigate('Tab', { screen: 'LawCalendar' })}
-          >
-            <Text style={styles.cardButtonText}>캘린더 보기</Text>
-            <View style={styles.arrowContainer}>
-              <ArrowLeftIcon />
-            </View>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.header}>
+          <Image source={LogoHeader} style={styles.logo} />
+          <TouchableOpacity style={styles.bellIcon} onPress={() => navigation.navigate('Notification')}>
+            <BellIcon width={17} height={17} color={colors.gray600} fill={colors.gray600} />
           </TouchableOpacity>
         </View>
-      </View>
-
-      <TouchableOpacity 
-        style={styles.naButton}
-        onPress={openNationalAssembly}
-      >
-        <Text style={styles.naButtonText}>국회 홈페이지 바로가기</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <View style={styles.noticeSection}>
+          <TouchableOpacity style={styles.noticeTitle}>
+            <Text style={styles.noticeTitleText}>공지사항</Text>
+            <ChevronLeftIcon style={styles.noticeTitleIcon} width={17} height={17} color={colors.white} />
+          </TouchableOpacity>
+          <View style={styles.noticeContent}>
+            <Text style={styles.noticeContentText}>{noticeData[noticeIndex].title}</Text>
+            <View style={styles.noticeContentIcon}>
+              <TouchableOpacity disabled={noticeIndex === 0} onPress={() => setNoticeIndex(noticeIndex - 1)}>
+                <ChevronLeftIcon style={styles.noticeContentIconUp} color={noticeIndex === 0 ? colors.gray300 : colors.gray500} />
+              </TouchableOpacity>
+              <TouchableOpacity disabled={noticeIndex === noticeData.length - 1} onPress={() => setNoticeIndex(noticeIndex + 1)}>
+                <ChevronLeftIcon style={styles.noticeContentIconDown} color={noticeIndex === noticeData.length - 1 ? colors.gray300 : colors.gray500} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <NewsCard />  
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9ff',
+    backgroundColor: colors.white,
+    padding: 20,
   },
   header: {
-    padding: 24,
-    backgroundColor: '#fff',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#000',
-    marginBottom: 8,
-  },
-  headerSubtitle: {
-    fontSize: 16,
-    color: '#666',
-  },
-  cardContainer: {
-    padding: 20,
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 12,
-    color: '#000',
-  },
-  cardContent: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 16,
-  },
-  cardButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 12,
-    backgroundColor: '#f0f4ff',
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: colors.primary,
+  },
+  logo: {
+    width: 125,
+    height: 30
+  },
+  bellIcon: {
+    width: 35,
+    height: 35,
+    backgroundColor: colors.gray100,
+    borderRadius: 100,
+    padding: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  noticeSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  noticeTitle: {
+    backgroundColor: colors.primary,
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 13,
     borderRadius: 8,
-  },
-  cardButtonText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#0064FF',
-  },
-  naButton: {
+    paddingLeft: 10,
+    paddingRight: 5,
+    paddingVertical: 8,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0064FF',
-    margin: 20,
-    padding: 16,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    marginTop: 8,
   },
-  naButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#fff',
-    marginLeft: 8,
+  noticeTitleText: {
+    color: colors.white,
+    fontSize: 14,
+    marginBottom: 3,
   },
-  arrowContainer: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#0064FF',
-    borderRadius: 10,
+  noticeTitleIcon: {
     transform: [{ rotate: '180deg' }],
+  },
+  noticeContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: colors.gray500,
+    paddingVertical: 10,
+  },
+  noticeContentText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: colors.gray600,
+  },
+  noticeContentIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  noticeContentIconUp: {
+    transform: [{ rotate: '90deg' }],
+  },
+  noticeContentIconDown: {
+    transform: [{ rotate: '270deg' }],
   },
 });
 
