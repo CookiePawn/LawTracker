@@ -41,8 +41,15 @@ async function fetchBillsByMeeting() {
             console.log('기존 JSON 파일이 없거나 읽을 수 없습니다. 새로 생성합니다.');
         }
 
-        const startDate = '2024-05-30';
-        const endDate = '2025-05-07';
+        // 마지막 날짜 찾기
+        let lastDate = '2024-05-30'; // 기본값
+        if (existingBills.length > 0) {
+            const sortedBills = existingBills.sort((a, b) => new Date(b.DT) - new Date(a.DT));
+            lastDate = sortedBills[0].DT;
+        }
+        
+        const startDate = lastDate;
+        const endDate = new Date().toISOString().split('T')[0];
         const dates = getDatesInRange(startDate, endDate);
         
         let newBills = [];
