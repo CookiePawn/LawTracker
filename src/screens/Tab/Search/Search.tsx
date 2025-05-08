@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList, Dimensions } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon, EyeIcon, SearchIcon } from '@/assets';
 import bills from '../../../components/nqfvrbsdafrmuzixe.json';
@@ -11,6 +11,8 @@ import SortBottomSheet from '@/components/SortBottomSheet';
 import { getViewCount, incrementViewCount } from '@/utils/viewCount';
 import { RouteProp } from '@react-navigation/native';
 import { RootTabParamList } from '@/types';
+
+const windowWidth = Dimensions.get('window').width;
 
 interface SearchProps {
     route: RouteProp<RootTabParamList, 'Search'>;
@@ -65,7 +67,7 @@ const Search = ({ route }: SearchProps) => {
                 const titleMatch = bill.BILL_NM.toLowerCase().includes(searchLower);
                 const proposerMatch = bill.BILL_NM.toLowerCase().includes(searchLower);
                 const committeeMatch = bill.COMMITTEE?.toLowerCase().includes(searchLower);
-                
+
                 // 날짜 필터링
                 if (dateRange.start && dateRange.end) {
                     const billDate = new Date(bill.DT);
@@ -87,7 +89,7 @@ const Search = ({ route }: SearchProps) => {
                 if (selectedStatus !== '전체' && bill.ACT_STATUS !== selectedStatus) {
                     return false;
                 }
-                
+
                 return titleMatch || proposerMatch || committeeMatch;
             });
 
@@ -138,7 +140,7 @@ const Search = ({ route }: SearchProps) => {
         const cleanProposer = proposer?.replace(')', '');
 
         return (
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={styles.lawItem}
                 onPress={() => handleBillPress(item.BILL_ID)}
                 activeOpacity={0.7}
@@ -214,67 +216,70 @@ const Search = ({ route }: SearchProps) => {
             </View>
 
             {/* 필터 섹션 */}
-            <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                style={styles.filterContainer}
-            >
-                <TouchableOpacity
-                    style={[styles.filterChip, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilter]}
-                    onPress={() => {
-                        setDateRange({ start: '', end: '' });
-                        setSelectedPeriod('전체');
-                        setSelectedBillType('전체');
-                        setSelectedStatus('전체');
-                    }}
+            <View style={styles.filterContainer}>
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.filterChipContainer}
                 >
-                    <Text style={[styles.filterText, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilterText]}>전체</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.filterChip, styles.selectedFilter]}
-                    onPress={() => {
-                        setIsSortFilterVisible(true);
-                    }}
-                >
-                    <Text style={[styles.filterText, styles.selectedFilterText]}>
-                        {getFilterText()}
-                    </Text>
-                    <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.filterChip, selectedPeriod !== '전체' && styles.selectedFilter]}
-                    onPress={() => {
-                        setIsDateFilterVisible(true);
-                    }}
-                >
-                    <Text style={[styles.filterText, selectedPeriod !== '전체' && styles.selectedFilterText]}>
-                        {getPeriodText()}
-                    </Text>
-                    <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.filterChip, selectedBillType !== '전체' && styles.selectedFilter]}
-                    onPress={() => {
-                        setIsBillTypeFilterVisible(true);
-                    }}
-                >
-                    <Text style={[styles.filterText, selectedBillType !== '전체' && styles.selectedFilterText]}>
-                        {getBillTypeText()}
-                    </Text>
-                    <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.filterChip, selectedStatus !== '전체' && styles.selectedFilter]}
-                    onPress={() => {
-                        setIsStatusFilterVisible(true);
-                    }}
-                >
-                    <Text style={[styles.filterText, selectedStatus !== '전체' && styles.selectedFilterText]}>
-                        {getStatusText()}
-                    </Text>
-                    <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
-                </TouchableOpacity>
-            </ScrollView>
+                    <TouchableOpacity
+                        style={[styles.filterChip, styles.selectedFilter]}
+                        onPress={() => {
+                            setIsSortFilterVisible(true);
+                        }}
+                    >
+                        <Text style={[styles.filterText, styles.selectedFilterText]}>
+                            {getFilterText()}
+                        </Text>
+                        <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
+                    </TouchableOpacity>
+                    <View style={styles.filterChipSeparator} />
+                    <TouchableOpacity
+                        style={[styles.filterChip, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilter]}
+                        onPress={() => {
+                            setDateRange({ start: '', end: '' });
+                            setSelectedPeriod('전체');
+                            setSelectedBillType('전체');
+                            setSelectedStatus('전체');
+                        }}
+                    >
+                        <Text style={[styles.filterText, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilterText]}>전체</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.filterChip, selectedPeriod !== '전체' && styles.selectedFilter]}
+                        onPress={() => {
+                            setIsDateFilterVisible(true);
+                        }}
+                    >
+                        <Text style={[styles.filterText, selectedPeriod !== '전체' && styles.selectedFilterText]}>
+                            {getPeriodText()}
+                        </Text>
+                        <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.filterChip, selectedBillType !== '전체' && styles.selectedFilter]}
+                        onPress={() => {
+                            setIsBillTypeFilterVisible(true);
+                        }}
+                    >
+                        <Text style={[styles.filterText, selectedBillType !== '전체' && styles.selectedFilterText]}>
+                            {getBillTypeText()}
+                        </Text>
+                        <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.filterChip, selectedStatus !== '전체' && styles.selectedFilter]}
+                        onPress={() => {
+                            setIsStatusFilterVisible(true);
+                        }}
+                    >
+                        <Text style={[styles.filterText, selectedStatus !== '전체' && styles.selectedFilterText]}>
+                            {getStatusText()}
+                        </Text>
+                        <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
+                    </TouchableOpacity>
+                </ScrollView>
+            </View>
 
             {/* 법안 리스트 */}
             <FlatList
@@ -360,16 +365,25 @@ const styles = StyleSheet.create({
         color: colors.black,
     },
     filterContainer: {
-        maxHeight: 40,
-        paddingHorizontal: 16,
+        paddingBottom: 10,
         borderBottomWidth: 1,
         borderBottomColor: colors.gray200,
+    },
+    filterChipContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 16,
+        gap: 8,
+    },
+    filterChipSeparator: {
+        width: 1,
+        height: 30,
+        backgroundColor: colors.gray200,
     },
     filterChip: {
         height: 30,
         backgroundColor: colors.gray100,
         borderRadius: 100,
-        marginRight: 8,
         alignItems: 'center',
         justifyContent: 'center',
         paddingLeft: 12,
