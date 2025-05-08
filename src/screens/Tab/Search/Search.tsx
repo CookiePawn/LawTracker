@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon, SearchIcon } from '@/assets';
@@ -7,6 +7,20 @@ import { Nqfvrbsdafrmuzixe, BillStatus } from '@/types';
 
 const Search = () => {
     const [selectedFilter, setSelectedFilter] = useState<string>('전체');
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredBills = useMemo(() => {
+        return bills
+            .filter((bill) => {
+                const searchLower = searchQuery.toLowerCase();
+                const titleMatch = bill.BILL_NM.toLowerCase().includes(searchLower);
+                const proposerMatch = bill.BILL_NM.toLowerCase().includes(searchLower);
+                const committeeMatch = bill.COMMITTEE?.toLowerCase().includes(searchLower);
+                
+                return titleMatch || proposerMatch || committeeMatch;
+            })
+            .sort((a, b) => new Date(b.DT).getTime() - new Date(a.DT).getTime()) as Nqfvrbsdafrmuzixe[];
+    }, [searchQuery]);
 
     const renderBillItem = ({ item }: { item: Nqfvrbsdafrmuzixe }) => {
         const [title, proposer] = item.BILL_NM.split('(');
@@ -16,7 +30,7 @@ const Search = () => {
             <View style={styles.lawItem}>
                 <View style={styles.lawItemHeader}>
                     <Text style={styles.lawItemDate}>{item.DT}</Text>
-                    <Text style={styles.lawItemProposer}>발의자: {cleanProposer}</Text>
+                    <Text style={styles.lawItemProposer}>발의자: {cleanProposer.length > 15 ? cleanProposer.slice(0, 15) + '...' : cleanProposer}</Text>
                 </View>
                 <Text
                     style={styles.lawTitle}
@@ -70,8 +84,10 @@ const Search = () => {
                     <SearchIcon width={18} height={18} color={colors.gray500} />
                     <TextInput
                         style={styles.searchInput}
-                        placeholder="법안 검색"
+                        placeholder="법안명, 발의자, 위원회 검색"
                         placeholderTextColor={colors.gray500}
+                        value={searchQuery}
+                        onChangeText={setSearchQuery}
                     />
                 </View>
             </View>
@@ -102,9 +118,15 @@ const Search = () => {
             {/* 법안 리스트 */}
             <FlatList
                 style={styles.billList}
-                data={bills.sort((a, b) => new Date(b.DT).getTime() - new Date(a.DT).getTime()) as Nqfvrbsdafrmuzixe[]}
+                data={filteredBills}
                 ItemSeparatorComponent={() => <View style={styles.billItemSeparator} />}
                 renderItem={renderBillItem}
+                keyExtractor={(_, index) => index.toString()}
+                ListEmptyComponent={
+                    <View style={styles.emptyContainer}>
+                        <Text style={styles.emptyText}>검색 결과가 없습니다</Text>
+                    </View>
+                }
             />
         </SafeAreaView>
     );
@@ -172,10 +194,6 @@ const styles = StyleSheet.create({
     filterIcon: { 
         transform: [{ rotate: '270deg' }],
     },
-
-
-
-
     selectedFilter: {
         backgroundColor: colors.primary,
     },
@@ -240,6 +258,16 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: colors.gray500,
         marginTop: 5,
+    },
+    emptyContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 20,
+    },
+    emptyText: {
+        fontSize: 14,
+        color: colors.gray500,
     },
 });
 

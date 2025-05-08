@@ -40,7 +40,7 @@ const LawList = ({ type = 'random' }: LawListProps) => {
                         <View key={index} style={styles.lawItem}>
                             <View style={styles.lawItemHeader}>
                                 <Text style={styles.lawItemDate}>{bill.DT}</Text>
-                                <Text style={styles.lawItemProposer}>발의자: {cleanProposer}</Text>
+                                <Text style={styles.lawItemProposer}>발의자: {cleanProposer.length > 15 ? cleanProposer.slice(0, 15) + '...' : cleanProposer}</Text>
                             </View>
                             <Text 
                                 style={styles.lawTitle}
