@@ -173,42 +173,44 @@ const Search = () => {
                         setSelectedFilter('전체');
                         setDateRange({ start: '', end: '' });
                         setSelectedPeriod('전체');
+                        setSelectedBillType('전체');
+                        setSelectedStatus('전체');
                     }}
                 >
                     <Text style={[styles.filterText, selectedFilter === '전체' && styles.selectedFilterText]}>전체</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    style={[styles.filterChip, selectedFilter === '기간' && styles.selectedFilter]} 
+                    style={[styles.filterChip, selectedPeriod !== '전체' && styles.selectedFilter]} 
                     onPress={() => {
                         setSelectedFilter('기간');
                         setIsDateFilterVisible(true);
                     }}
                 >
-                    <Text style={[styles.filterText, selectedFilter === '기간' && styles.selectedFilterText]}>
+                    <Text style={[styles.filterText, selectedPeriod !== '전체' && styles.selectedFilterText]}>
                         {getPeriodText()}
                     </Text>
                     <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    style={[styles.filterChip, selectedFilter === '의안구분' && styles.selectedFilter]} 
+                    style={[styles.filterChip, selectedBillType !== '전체' && styles.selectedFilter]} 
                     onPress={() => {
                         setSelectedFilter('의안구분');
                         setIsBillTypeFilterVisible(true);
                     }}
                 >
-                    <Text style={[styles.filterText, selectedFilter === '의안구분' && styles.selectedFilterText]}>
+                    <Text style={[styles.filterText, selectedBillType !== '전체' && styles.selectedFilterText]}>
                         {getBillTypeText()}
                     </Text>
                     <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    style={[styles.filterChip, selectedFilter === '상태' && styles.selectedFilter]} 
+                    style={[styles.filterChip, selectedStatus !== '전체' && styles.selectedFilter]} 
                     onPress={() => {
                         setSelectedFilter('상태');
                         setIsStatusFilterVisible(true);
                     }}
                 >
-                    <Text style={[styles.filterText, selectedFilter === '상태' && styles.selectedFilterText]}>
+                    <Text style={[styles.filterText, selectedStatus !== '전체' && styles.selectedFilterText]}>
                         {getStatusText()}
                     </Text>
                     <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
