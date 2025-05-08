@@ -1,6 +1,6 @@
 import { ArrowLeftIcon } from '@/assets';
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -10,6 +10,10 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Terms = () => {
   const navigation = useNavigation<NavigationProp>();
+
+  const handleApiLink = () => {
+    Linking.openURL('https://open.assembly.go.kr/portal/openapi/openApiNaListPage.do');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,6 +40,23 @@ const Terms = () => {
           본 서비스는 다음과 같은 서비스를 제공합니다:{'\n'}
           1. 법률 정보 제공 서비스{'\n'}
         </Text>
+
+        <Text style={styles.title}>제4조 (데이터 출처)</Text>
+        <Text style={styles.text}>
+          본 서비스는 대한민국 국회에서 제공하는 열린국회정보 Open API를 활용하여 제작되었습니다. 모든 법률 정보는 국회에서 공식적으로 제공하는 데이터를 기반으로 합니다.{'\n'}
+        </Text>
+
+        <Text style={styles.title}>제5조 (면책 조항)</Text>
+        <Text style={styles.text}>
+          본 서비스는 대한민국 국회의 공식 서비스가 아니며, 국회를 대표하지 않습니다. 제공되는 정보는 열린국회정보 Open API를 통해 수집된 데이터를 기반으로 하며, 최신 정보와 차이가 있을 수 있습니다.{'\n\n'}
+          정확한 법률 정보는 국회 홈페이지 또는 관련 공식 채널을 통해 확인하시기 바랍니다.{'\n'}
+        </Text>
+
+        <TouchableOpacity onPress={handleApiLink}>
+          <Text style={styles.apiLinkText}>
+            열린국회정보 Open API 바로가기
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -72,6 +93,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
     lineHeight: 24,
+  },
+  apiLinkText: {
+    color: '#5046E6',
+    fontSize: 16,
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 40,
   },
 });
 
