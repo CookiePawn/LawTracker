@@ -9,7 +9,6 @@ import BillTypeBottomSheet from '@/components/BillTypeBottomSheet';
 import BillStatusBottomSheet from '@/components/BillStatusBottomSheet';
 
 const Search = () => {
-    const [selectedFilter, setSelectedFilter] = useState<string>('전체');
     const [searchQuery, setSearchQuery] = useState('');
     const [isDateFilterVisible, setIsDateFilterVisible] = useState(false);
     const [isBillTypeFilterVisible, setIsBillTypeFilterVisible] = useState(false);
@@ -72,23 +71,14 @@ const Search = () => {
     const handleDateFilterApply = (startDate: string, endDate: string, period: string) => {
         setDateRange({ start: startDate, end: endDate });
         setSelectedPeriod(period);
-        if (period === '전체') {
-            setSelectedFilter('전체');
-        }
     };
 
     const handleBillTypeApply = (billType: string) => {
         setSelectedBillType(billType);
-        if (billType === '전체') {
-            setSelectedFilter('전체');
-        }
     };
 
     const handleStatusApply = (status: string) => {
         setSelectedStatus(status);
-        if (status === '전체') {
-            setSelectedFilter('전체');
-        }
     };
 
     const renderBillItem = ({ item }: { item: Nqfvrbsdafrmuzixe }) => {
@@ -168,21 +158,19 @@ const Search = () => {
                 style={styles.filterContainer}
             >
                 <TouchableOpacity 
-                    style={[styles.filterChip, selectedFilter === '전체' && styles.selectedFilter]} 
+                    style={[styles.filterChip, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilter]} 
                     onPress={() => {
-                        setSelectedFilter('전체');
                         setDateRange({ start: '', end: '' });
                         setSelectedPeriod('전체');
                         setSelectedBillType('전체');
                         setSelectedStatus('전체');
                     }}
                 >
-                    <Text style={[styles.filterText, selectedFilter === '전체' && styles.selectedFilterText]}>전체</Text>
+                    <Text style={[styles.filterText, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilterText]}>전체</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={[styles.filterChip, selectedPeriod !== '전체' && styles.selectedFilter]} 
                     onPress={() => {
-                        setSelectedFilter('기간');
                         setIsDateFilterVisible(true);
                     }}
                 >
@@ -194,7 +182,6 @@ const Search = () => {
                 <TouchableOpacity 
                     style={[styles.filterChip, selectedBillType !== '전체' && styles.selectedFilter]} 
                     onPress={() => {
-                        setSelectedFilter('의안구분');
                         setIsBillTypeFilterVisible(true);
                     }}
                 >
@@ -206,7 +193,6 @@ const Search = () => {
                 <TouchableOpacity 
                     style={[styles.filterChip, selectedStatus !== '전체' && styles.selectedFilter]} 
                     onPress={() => {
-                        setSelectedFilter('상태');
                         setIsStatusFilterVisible(true);
                     }}
                 >
