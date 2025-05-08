@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '@/constants/colors';
+import { colors } from '@/constants';
 import { ChevronLeftIcon } from '@/assets/icons';
 import bills from './nqfvrbsdafrmuzixe.json';
 import { BillStatus } from '@/types';

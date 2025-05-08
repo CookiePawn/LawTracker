@@ -1,5 +1,5 @@
 import { ChevronLeftIcon } from '@/assets';
-import { colors } from '@/constants/colors';
+import { colors } from '@/constants';
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import bills from './nqfvrbsdafrmuzixe.json';

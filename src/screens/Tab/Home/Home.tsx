@@ -5,7 +5,7 @@ import { LogoHeader, BellIcon, ChevronLeftIcon } from '@/assets';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { RootStackParamList } from '@/types';
 import RNExitApp from 'react-native-exit-app';
-import { colors } from '@/constants/colors';
+import { colors } from '@/constants';
 import { noticeData } from './data';
 import { NewsCard, LawList, MyLawCard } from '@/components';
 

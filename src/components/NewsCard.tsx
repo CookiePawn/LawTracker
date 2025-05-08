@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { NewsImage } from "@/assets";
 import { ChevronLeftIcon } from "@/assets";
-import { colors } from "@/constants/colors";
+import { colors } from "@/constants";
 
 const newsData = [
     {
