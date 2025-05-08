@@ -15,4 +15,5 @@ export type RootTabParamList = {
     Home: undefined;
     LawCalendar: undefined;
     Profile: undefined;
+    Search: undefined;
 };

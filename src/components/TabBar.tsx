@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { CalendarIcon, HomeIcon, UserIcon } from '@/assets';
+import { CalendarIcon, HomeIcon, SearchIcon, UserIcon } from '@/assets';
 
 const TabBar = ({ state, descriptors, navigation }: any) => {
     return (
@@ -31,6 +31,13 @@ const TabBar = ({ state, descriptors, navigation }: any) => {
                                 <CalendarIcon width={20} height={20} fill='white' color={isFocused ? '#007AFF' : '#666'} />
                                 <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
                                     타임라인
+                                </Text>
+                            </View>
+                        ) : route.name === 'Search' ? (
+                            <View style={styles.iconContainer}>
+                                <SearchIcon width={20} height={20} fill='white' color={isFocused ? '#007AFF' : '#666'} />
+                                <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
+                                    검색
                                 </Text>
                             </View>
                         ) : route.name === 'Home' ? (
