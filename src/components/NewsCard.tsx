@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     newsTitleMoreTitle: {
         fontSize: 13,
         color: colors.primary,
-        marginBottom: 3,
+        marginBottom: 2,
     },
     newsTitleContainer: {
         flexDirection: 'row',

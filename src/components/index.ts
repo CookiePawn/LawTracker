@@ -4,3 +4,4 @@ export { default as Calendar } from './Calendar';
 export { default as FullCalendar } from './FullCalendar';
 export { default as NewsCard } from './NewsCard';
 export { default as AdBanner } from './AdBanner';
+export { default as LawList } from './LawList';
