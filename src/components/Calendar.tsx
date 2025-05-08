@@ -30,9 +30,9 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
     const dates = [];
     const today = new Date();
     const startDate = new Date(today);
-    startDate.setDate(today.getDate() - 30); // 30일 전부터
+    startDate.setDate(today.getDate() - 30);
 
-    for (let i = 0; i < 60; i++) { // 60일치 데이터
+    for (let i = 0; i < 60; i++) {
       const date = new Date(startDate);
       date.setDate(startDate.getDate() + i);
       dates.push(date);
@@ -53,37 +53,34 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
     return { month, day, dayOfWeek, hasBill };
   };
 
-  const scrollToDate = (date: Date) => {
+  const calculateScrollPosition = (date: Date) => {
     const index = dates.findIndex(d => d.toDateString() === date.toDateString());
-    if (index !== -1 && scrollViewRef.current) {
-      const centerPosition = (screenWidth - totalItemWidth) / 2;
-      const targetPosition = (index * totalItemWidth) - centerPosition + 10;
-      
-      scrollViewRef.current.scrollTo({
-        x: targetPosition,
-        animated: true
-      });
-    }
+    if (index === -1) return 0;
+    
+    const centerPosition = (screenWidth - totalItemWidth) / 2;
+    const targetPosition = Math.max(0, (index * totalItemWidth) - centerPosition + 10);
+    return targetPosition;
+  };
+
+  const scrollToDate = (date: Date) => {
+    if (!scrollViewRef.current) return;
+    
+    const targetPosition = calculateScrollPosition(date);
+    scrollViewRef.current.scrollTo({
+      x: targetPosition,
+      animated: true
+    });
   };
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
     onDateSelect?.(date);
-    requestAnimationFrame(() => {
-      scrollToDate(date);
-    });
+    scrollToDate(date);
   };
 
-  const scrollToToday = () => {
-    scrollToDate(new Date());
-  };
-
-  useEffect(() => {
-    if (propSelectedDate) {
-      scrollToDate(propSelectedDate);
-    } else {
-      scrollToToday();
-    }
+  const initialScrollPosition = useMemo(() => {
+    const initialDate = propSelectedDate || new Date();
+    return calculateScrollPosition(initialDate);
   }, []);
 
   return (
@@ -94,6 +91,7 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
         decelerationRate="normal"
+        contentOffset={{ x: initialScrollPosition, y: 0 }}
       >
         {dates.map((date, index) => {
           const { month, day, dayOfWeek, hasBill } = formatDate(date);
