@@ -81,7 +81,7 @@ const MyLawCard = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginVertical: 15,
+        marginVertical: 30,
     },
     newsTitle: {
         fontSize: 16,

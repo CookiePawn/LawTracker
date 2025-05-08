@@ -8,10 +8,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const guideImages = [
+  Guide4,
   Guide1,
   Guide2,
   Guide3,
-  Guide4,
 ];
 
 const Tutorial = () => {
@@ -67,7 +67,7 @@ const Tutorial = () => {
           style={styles.image}
           resizeMode="contain"
         />
-        {currentIndex === guideImages.length - 1 && (
+        {/* {currentIndex === guideImages.length - 1 && (
           <View style={styles.apiInfoContainer}>
             <Text style={styles.apiInfoText}>
               본 앱은 열린국회정보 Open API를 활용하여 제작되었습니다.
@@ -78,7 +78,7 @@ const Tutorial = () => {
               </Text>
             </TouchableOpacity>
           </View>
-        )}
+        )} */}
       </View>
       
       <View style={styles.footer}>

@@ -85,7 +85,7 @@ const LawList = ({ type = 'random' }: LawListProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 15,
+        marginVertical: 30,
     },
     newsTitle: {
         fontSize: 16,
