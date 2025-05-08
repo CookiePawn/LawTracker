@@ -54,7 +54,11 @@ const NewsCard = () => {
                     <View style={styles.newsContent}>
                         <Image source={item.image} style={styles.newsContentImage} />
                         <Text style={styles.newsContentTitle}>{item.title}</Text>
-                        <Text style={styles.newsContentText}>{item.text}</Text>
+                        <Text 
+                            style={styles.newsContentText}
+                            numberOfLines={2}
+                            ellipsizeMode="tail"
+                        >{item.text}</Text>
                         <View style={styles.newsContentDate}>
                             <Text style={styles.newsContentDateText}>{item.date}</Text>
                             <Text style={styles.newsContentDateText}>{item.source}</Text>

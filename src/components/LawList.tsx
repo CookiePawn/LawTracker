@@ -42,7 +42,11 @@ const LawList = ({ type = 'random' }: LawListProps) => {
                                 <Text style={styles.lawItemDate}>{bill.DT}</Text>
                                 <Text style={styles.lawItemProposer}>발의자: {cleanProposer}</Text>
                             </View>
-                            <Text style={styles.lawTitle}>{title}</Text>
+                            <Text 
+                                style={styles.lawTitle}
+                                numberOfLines={2}
+                                ellipsizeMode="tail"
+                            >{title}</Text>         
                             <View style={styles.lawItemTagContent}>
                                 <Text style={styles.lawItemTagText}>{bill.BILL_KIND}</Text>
                                 <Text style={[styles.lawItemTagText, 
