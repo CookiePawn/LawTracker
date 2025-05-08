@@ -1,10 +1,11 @@
-import { ChevronLeftIcon } from '@/assets';
+import { ChevronLeftIcon, UserIcon } from '@/assets';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types/navigate';
+import { colors } from '@/constants/colors';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -14,6 +15,14 @@ const Profile = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        <View style={styles.profileSection}>
+          <View style={styles.profileHeader}>
+            <View style={styles.profileImageContainer}>
+              <UserIcon width={100} height={100} color={colors.gray400}/>
+            </View>
+            <Text style={styles.profileHeaderText}>프로필</Text>
+          </View>
+        </View>
         {/* 약관 섹션 */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>약관</Text>
@@ -52,6 +61,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    padding: 20,
+  },
+  profileSection: {
+    paddingVertical: 20,
+    paddingHorizontal: 0,
+    borderBottomWidth: 1,
+    borderColor: colors.gray100,
+  },
+  profileHeader: {
+    alignItems: 'center',
+  },
+  profileImageContainer: {
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+    backgroundColor: colors.gray100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  profileHeaderText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.gray700,
   },
   section: {
     paddingVertical: 20,
@@ -62,7 +95,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 16,
     color: '#333',
-    paddingHorizontal: 20,
   },
   userInfoContainer: {
     backgroundColor: '#F5F5F5',
@@ -91,13 +123,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
-    paddingHorizontal: 20,
+    paddingVertical: 16,
   },
   divider: {
     height: 1,
     backgroundColor: '#E0E0E0',
-    marginHorizontal: 20,
   },
   termsText: {
     fontSize: 16,
