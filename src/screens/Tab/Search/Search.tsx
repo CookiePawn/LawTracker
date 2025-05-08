@@ -5,17 +5,25 @@ import { ChevronLeftIcon, SearchIcon } from '@/assets';
 import bills from '../../../components/nqfvrbsdafrmuzixe.json';
 import { Nqfvrbsdafrmuzixe, BillStatus } from '@/types';
 import DateFilterBottomSheet from '@/components/DateFilterBottomSheet';
+import BillTypeBottomSheet from '@/components/BillTypeBottomSheet';
 
 const Search = () => {
     const [selectedFilter, setSelectedFilter] = useState<string>('전체');
     const [searchQuery, setSearchQuery] = useState('');
     const [isDateFilterVisible, setIsDateFilterVisible] = useState(false);
+    const [isBillTypeFilterVisible, setIsBillTypeFilterVisible] = useState(false);
     const [dateRange, setDateRange] = useState<{ start: string; end: string }>({ start: '', end: '' });
     const [selectedPeriod, setSelectedPeriod] = useState<string>('전체');
+    const [selectedBillType, setSelectedBillType] = useState<string>('전체');
 
     const getPeriodText = () => {
         if (selectedPeriod === '전체') return '기간';
         return `최근 ${selectedPeriod}`;
+    };
+
+    const getBillTypeText = () => {
+        if (selectedBillType === '전체') return '의안구분';
+        return selectedBillType;
     };
 
     const filteredBills = useMemo(() => {
@@ -31,22 +39,34 @@ const Search = () => {
                     const billDate = new Date(bill.DT);
                     const startDate = new Date(dateRange.start);
                     const endDate = new Date(dateRange.end);
-                    endDate.setHours(23, 59, 59, 999); // 하루의 마지막 시간으로 설정
+                    endDate.setHours(23, 59, 59, 999);
 
                     if (billDate < startDate || billDate > endDate) {
                         return false;
                     }
                 }
+
+                // 의안구분 필터링
+                if (selectedBillType !== '전체' && bill.BILL_KIND !== selectedBillType) {
+                    return false;
+                }
                 
                 return titleMatch || proposerMatch || committeeMatch;
             })
             .sort((a, b) => new Date(b.DT).getTime() - new Date(a.DT).getTime()) as Nqfvrbsdafrmuzixe[];
-    }, [searchQuery, dateRange]);
+    }, [searchQuery, dateRange, selectedBillType]);
 
     const handleDateFilterApply = (startDate: string, endDate: string, period: string) => {
         setDateRange({ start: startDate, end: endDate });
         setSelectedPeriod(period);
         if (period === '전체') {
+            setSelectedFilter('전체');
+        }
+    };
+
+    const handleBillTypeApply = (billType: string) => {
+        setSelectedBillType(billType);
+        if (billType === '전체') {
             setSelectedFilter('전체');
         }
     };
@@ -149,8 +169,16 @@ const Search = () => {
                     </Text>
                     <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.filterChip, selectedFilter === '의안구분' && styles.selectedFilter]} onPress={() => setSelectedFilter('의안구분')}>
-                    <Text style={[styles.filterText, selectedFilter === '의안구분' && styles.selectedFilterText]}>의안구분</Text>
+                <TouchableOpacity 
+                    style={[styles.filterChip, selectedFilter === '의안구분' && styles.selectedFilter]} 
+                    onPress={() => {
+                        setSelectedFilter('의안구분');
+                        setIsBillTypeFilterVisible(true);
+                    }}
+                >
+                    <Text style={[styles.filterText, selectedFilter === '의안구분' && styles.selectedFilterText]}>
+                        {getBillTypeText()}
+                    </Text>
                     <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.filterChip, selectedFilter === '상태' && styles.selectedFilter]} onPress={() => setSelectedFilter('상태')}>
@@ -178,6 +206,13 @@ const Search = () => {
                 visible={isDateFilterVisible}
                 onClose={() => setIsDateFilterVisible(false)}
                 onApply={handleDateFilterApply}
+            />
+
+            {/* 의안구분 필터 바텀 시트 */}
+            <BillTypeBottomSheet
+                visible={isBillTypeFilterVisible}
+                onClose={() => setIsBillTypeFilterVisible(false)}
+                onApply={handleBillTypeApply}
             />
         </SafeAreaView>
     );
