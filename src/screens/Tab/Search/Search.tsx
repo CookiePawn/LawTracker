@@ -1,22 +1,47 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/constants';
-import { ChevronLeftIcon, SearchIcon } from '@/assets';
+import { ChevronLeftIcon, EyeIcon, SearchIcon } from '@/assets';
 import bills from '../../../components/nqfvrbsdafrmuzixe.json';
 import { Nqfvrbsdafrmuzixe, BillStatus } from '@/types';
 import DateFilterBottomSheet from '@/components/DateFilterBottomSheet';
 import BillTypeBottomSheet from '@/components/BillTypeBottomSheet';
 import BillStatusBottomSheet from '@/components/BillStatusBottomSheet';
+import SortBottomSheet from '@/components/SortBottomSheet';
+import { getViewCount, incrementViewCount } from '@/utils/viewCount';
+import { RouteProp } from '@react-navigation/native';
+import { RootTabParamList } from '@/types';
 
-const Search = () => {
+interface SearchProps {
+    route: RouteProp<RootTabParamList, 'Search'>;
+}
+
+const Search = ({ route }: SearchProps) => {
+    const { type = 'latest' } = route.params || {};
     const [searchQuery, setSearchQuery] = useState('');
     const [isDateFilterVisible, setIsDateFilterVisible] = useState(false);
     const [isBillTypeFilterVisible, setIsBillTypeFilterVisible] = useState(false);
     const [isStatusFilterVisible, setIsStatusFilterVisible] = useState(false);
+    const [isSortFilterVisible, setIsSortFilterVisible] = useState(false);
     const [dateRange, setDateRange] = useState<{ start: string; end: string }>({ start: '', end: '' });
     const [selectedPeriod, setSelectedPeriod] = useState<string>('전체');
     const [selectedBillType, setSelectedBillType] = useState<string>('전체');
     const [selectedStatus, setSelectedStatus] = useState<string>('전체');
+    const [selectedFilter, setSelectedFilter] = useState<string>('최신순');
+    const [viewCounts, setViewCounts] = useState<{ [key: string]: number }>({});
+
+    useEffect(() => {
+        if (type === 'random') {
+            setSelectedFilter('조회순');
+        } else {
+            setSelectedFilter('최신순');
+        }
+    }, [type]);
+
+    const getFilterText = () => {
+        if (selectedFilter === '최신순') return '최신순';
+        return `조회순`;
+    };
 
     const getPeriodText = () => {
         if (selectedPeriod === '전체') return '기간';
@@ -34,7 +59,7 @@ const Search = () => {
     };
 
     const filteredBills = useMemo(() => {
-        return bills
+        let filtered = bills
             .filter((bill) => {
                 const searchLower = searchQuery.toLowerCase();
                 const titleMatch = bill.BILL_NM.toLowerCase().includes(searchLower);
@@ -64,9 +89,17 @@ const Search = () => {
                 }
                 
                 return titleMatch || proposerMatch || committeeMatch;
-            })
-            .sort((a, b) => new Date(b.DT).getTime() - new Date(a.DT).getTime()) as Nqfvrbsdafrmuzixe[];
-    }, [searchQuery, dateRange, selectedBillType, selectedStatus]);
+            });
+
+        // 정렬 적용
+        if (selectedFilter === '최신순') {
+            filtered.sort((a, b) => new Date(b.DT).getTime() - new Date(a.DT).getTime());
+        } else {
+            filtered.sort((a, b) => (viewCounts[b.BILL_ID] || 0) - (viewCounts[a.BILL_ID] || 0));
+        }
+
+        return filtered as Nqfvrbsdafrmuzixe[];
+    }, [searchQuery, dateRange, selectedBillType, selectedStatus, selectedFilter, viewCounts]);
 
     const handleDateFilterApply = (startDate: string, endDate: string, period: string) => {
         setDateRange({ start: startDate, end: endDate });
@@ -81,12 +114,35 @@ const Search = () => {
         setSelectedStatus(status);
     };
 
+    useEffect(() => {
+        const loadViewCounts = async () => {
+            const counts: { [key: string]: number } = {};
+            for (const bill of bills) {
+                counts[bill.BILL_ID] = await getViewCount(bill.BILL_ID);
+            }
+            setViewCounts(counts);
+        };
+        loadViewCounts();
+    }, []);
+
+    const handleBillPress = async (billId: string) => {
+        const newCount = await incrementViewCount(billId);
+        setViewCounts(prev => ({
+            ...prev,
+            [billId]: newCount
+        }));
+    };
+
     const renderBillItem = ({ item }: { item: Nqfvrbsdafrmuzixe }) => {
         const [title, proposer] = item.BILL_NM.split('(');
         const cleanProposer = proposer?.replace(')', '');
 
         return (
-            <View style={styles.lawItem}>
+            <TouchableOpacity 
+                style={styles.lawItem}
+                onPress={() => handleBillPress(item.BILL_ID)}
+                activeOpacity={0.7}
+            >
                 <View style={styles.lawItemHeader}>
                     <Text style={styles.lawItemDate}>{item.DT}</Text>
                     <Text style={styles.lawItemProposer}>발의자: {cleanProposer.length > 15 ? cleanProposer.slice(0, 15) + '...' : cleanProposer}</Text>
@@ -127,8 +183,14 @@ const Search = () => {
                     }
                     ]}>{item.ACT_STATUS}</Text>
                 </View>
-                <Text style={styles.lawItemCommitteeText}>{item.COMMITTEE || '-'}</Text>
-            </View>
+                <View style={styles.lawItemFooterContainer}>
+                    <Text style={styles.lawItemCommitteeText}>{item.COMMITTEE || '-'}</Text>
+                    <View style={styles.lawItemFooterIconContainer}>
+                        <EyeIcon width={14} height={14} color={colors.gray400} />
+                        <Text style={styles.lawItemFooterIconText}>{viewCounts[item.BILL_ID] || 0}</Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
         );
     };
 
@@ -157,8 +219,8 @@ const Search = () => {
                 showsHorizontalScrollIndicator={false}
                 style={styles.filterContainer}
             >
-                <TouchableOpacity 
-                    style={[styles.filterChip, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilter]} 
+                <TouchableOpacity
+                    style={[styles.filterChip, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilter]}
                     onPress={() => {
                         setDateRange({ start: '', end: '' });
                         setSelectedPeriod('전체');
@@ -168,8 +230,19 @@ const Search = () => {
                 >
                     <Text style={[styles.filterText, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilterText]}>전체</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
-                    style={[styles.filterChip, selectedPeriod !== '전체' && styles.selectedFilter]} 
+                <TouchableOpacity
+                    style={[styles.filterChip, styles.selectedFilter]}
+                    onPress={() => {
+                        setIsSortFilterVisible(true);
+                    }}
+                >
+                    <Text style={[styles.filterText, styles.selectedFilterText]}>
+                        {getFilterText()}
+                    </Text>
+                    <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.filterChip, selectedPeriod !== '전체' && styles.selectedFilter]}
                     onPress={() => {
                         setIsDateFilterVisible(true);
                     }}
@@ -179,8 +252,8 @@ const Search = () => {
                     </Text>
                     <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity 
-                    style={[styles.filterChip, selectedBillType !== '전체' && styles.selectedFilter]} 
+                <TouchableOpacity
+                    style={[styles.filterChip, selectedBillType !== '전체' && styles.selectedFilter]}
                     onPress={() => {
                         setIsBillTypeFilterVisible(true);
                     }}
@@ -190,8 +263,8 @@ const Search = () => {
                     </Text>
                     <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity 
-                    style={[styles.filterChip, selectedStatus !== '전체' && styles.selectedFilter]} 
+                <TouchableOpacity
+                    style={[styles.filterChip, selectedStatus !== '전체' && styles.selectedFilter]}
                     onPress={() => {
                         setIsStatusFilterVisible(true);
                     }}
@@ -236,6 +309,14 @@ const Search = () => {
                 visible={isStatusFilterVisible}
                 onClose={() => setIsStatusFilterVisible(false)}
                 onApply={handleStatusApply}
+            />
+
+            {/* 정렬 필터 바텀 시트 */}
+            <SortBottomSheet
+                visible={isSortFilterVisible}
+                onClose={() => setIsSortFilterVisible(false)}
+                onApply={setSelectedFilter}
+                currentSort={selectedFilter}
             />
         </SafeAreaView>
     );
@@ -300,7 +381,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginRight: 5,
     },
-    filterIcon: { 
+    filterIcon: {
         transform: [{ rotate: '270deg' }],
     },
     selectedFilter: {
@@ -378,6 +459,20 @@ const styles = StyleSheet.create({
     emptyText: {
         fontSize: 14,
         color: colors.gray500,
+    },
+    lawItemFooterContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    lawItemFooterIconContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
+    },
+    lawItemFooterIconText: {
+        fontSize: 12,
+        color: colors.gray400,
     },
 });
 

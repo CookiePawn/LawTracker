@@ -6,3 +6,5 @@ export { default as SettingsIcon } from './settings.svg';
 export { default as ChevronLeftIcon } from './chevron-left.svg';
 export { default as UserIcon } from './user.svg';
 export { default as SearchIcon } from './search.svg';
+export { default as EyeIcon } from './eye.svg';
+export { default as HeartIcon } from './heart.svg';

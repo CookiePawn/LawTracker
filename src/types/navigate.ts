@@ -15,5 +15,5 @@ export type RootTabParamList = {
     Home: undefined;
     LawCalendar: undefined;
     Profile: undefined;
-    Search: undefined;
+    Search: { type?: 'random' | 'latest' };
 };

@@ -5,12 +5,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import bills from './nqfvrbsdafrmuzixe.json';
 import { BillStatus } from '@/types';
 import { useNavigation } from '@react-navigation/native';
+import { RootTabParamList } from '@/types';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 interface LawListProps {
     type: 'random' | 'latest';
 }
 
 const LawList = ({ type = 'random' }: LawListProps) => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>();
 
     const randomBills = useMemo(() => {
         const shuffled = [...bills].sort(() => 0.5 - Math.random());
@@ -27,7 +29,7 @@ const LawList = ({ type = 'random' }: LawListProps) => {
         <View style={styles.container}>
             <View style={styles.newsTitleContainer}>
                 <Text style={styles.newsTitle}>{type === 'random' ? '주목받는 법안' : '최신 법안'}</Text>
-                <TouchableOpacity style={styles.newsTitleMore} onPress={() => navigation.navigate('Search' as never)}>
+                <TouchableOpacity style={styles.newsTitleMore} onPress={() => navigation.navigate('Search', { type: type })}>
                     <Text style={styles.newsTitleMoreTitle}>더보기</Text>
                     <ChevronLeftIcon style={styles.newsTitleMoreIcon} width={17} height={17} color={colors.primary} />
                 </TouchableOpacity>
