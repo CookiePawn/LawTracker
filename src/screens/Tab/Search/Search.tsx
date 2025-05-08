@@ -4,10 +4,19 @@ import { colors } from '@/constants';
 import { ChevronLeftIcon, SearchIcon } from '@/assets';
 import bills from '../../../components/nqfvrbsdafrmuzixe.json';
 import { Nqfvrbsdafrmuzixe, BillStatus } from '@/types';
+import DateFilterBottomSheet from '@/components/DateFilterBottomSheet';
 
 const Search = () => {
     const [selectedFilter, setSelectedFilter] = useState<string>('전체');
     const [searchQuery, setSearchQuery] = useState('');
+    const [isDateFilterVisible, setIsDateFilterVisible] = useState(false);
+    const [dateRange, setDateRange] = useState<{ start: string; end: string }>({ start: '', end: '' });
+    const [selectedPeriod, setSelectedPeriod] = useState<string>('전체');
+
+    const getPeriodText = () => {
+        if (selectedPeriod === '전체') return '기간';
+        return `최근 ${selectedPeriod}`;
+    };
 
     const filteredBills = useMemo(() => {
         return bills
@@ -17,10 +26,30 @@ const Search = () => {
                 const proposerMatch = bill.BILL_NM.toLowerCase().includes(searchLower);
                 const committeeMatch = bill.COMMITTEE?.toLowerCase().includes(searchLower);
                 
+                // 날짜 필터링
+                if (dateRange.start && dateRange.end) {
+                    const billDate = new Date(bill.DT);
+                    const startDate = new Date(dateRange.start);
+                    const endDate = new Date(dateRange.end);
+                    endDate.setHours(23, 59, 59, 999); // 하루의 마지막 시간으로 설정
+
+                    if (billDate < startDate || billDate > endDate) {
+                        return false;
+                    }
+                }
+                
                 return titleMatch || proposerMatch || committeeMatch;
             })
             .sort((a, b) => new Date(b.DT).getTime() - new Date(a.DT).getTime()) as Nqfvrbsdafrmuzixe[];
-    }, [searchQuery]);
+    }, [searchQuery, dateRange]);
+
+    const handleDateFilterApply = (startDate: string, endDate: string, period: string) => {
+        setDateRange({ start: startDate, end: endDate });
+        setSelectedPeriod(period);
+        if (period === '전체') {
+            setSelectedFilter('전체');
+        }
+    };
 
     const renderBillItem = ({ item }: { item: Nqfvrbsdafrmuzixe }) => {
         const [title, proposer] = item.BILL_NM.split('(');
@@ -98,11 +127,26 @@ const Search = () => {
                 showsHorizontalScrollIndicator={false}
                 style={styles.filterContainer}
             >
-                <TouchableOpacity style={[styles.filterChip, selectedFilter === '전체' && styles.selectedFilter]} onPress={() => setSelectedFilter('전체')}>
+                <TouchableOpacity 
+                    style={[styles.filterChip, selectedFilter === '전체' && styles.selectedFilter]} 
+                    onPress={() => {
+                        setSelectedFilter('전체');
+                        setDateRange({ start: '', end: '' });
+                        setSelectedPeriod('전체');
+                    }}
+                >
                     <Text style={[styles.filterText, selectedFilter === '전체' && styles.selectedFilterText]}>전체</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.filterChip, selectedFilter === '기간' && styles.selectedFilter]} onPress={() => setSelectedFilter('기간')}>
-                    <Text style={[styles.filterText, selectedFilter === '기간' && styles.selectedFilterText]}>기간</Text>
+                <TouchableOpacity 
+                    style={[styles.filterChip, selectedFilter === '기간' && styles.selectedFilter]} 
+                    onPress={() => {
+                        setSelectedFilter('기간');
+                        setIsDateFilterVisible(true);
+                    }}
+                >
+                    <Text style={[styles.filterText, selectedFilter === '기간' && styles.selectedFilterText]}>
+                        {getPeriodText()}
+                    </Text>
                     <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.filterChip, selectedFilter === '의안구분' && styles.selectedFilter]} onPress={() => setSelectedFilter('의안구분')}>
@@ -127,6 +171,13 @@ const Search = () => {
                         <Text style={styles.emptyText}>검색 결과가 없습니다</Text>
                     </View>
                 }
+            />
+
+            {/* 기간 필터 바텀 시트 */}
+            <DateFilterBottomSheet
+                visible={isDateFilterVisible}
+                onClose={() => setIsDateFilterVisible(false)}
+                onApply={handleDateFilterApply}
             />
         </SafeAreaView>
     );
@@ -185,11 +236,11 @@ const styles = StyleSheet.create({
         paddingLeft: 12,
         paddingRight: 8,
         flexDirection: 'row',
-        gap: 2,
     },
     filterText: {
         color: colors.black,
         fontSize: 12,
+        marginRight: 5,
     },
     filterIcon: { 
         transform: [{ rotate: '270deg' }],
@@ -203,6 +254,7 @@ const styles = StyleSheet.create({
     billList: {
         flex: 1,
         padding: 16,
+        marginBottom: 10,
     },
     billItem: {
         padding: 16,
