@@ -83,7 +83,7 @@ export default NewsCard;
 
 const styles = StyleSheet.create({
     newsSection: {
-        marginVertical: 30,
+        marginVertical: 20,
         paddingHorizontal: 0,
         paddingVertical: 10,
     },

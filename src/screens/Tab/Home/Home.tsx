@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   logo: {
-    width: 125,
-    height: 30
+    width: 140,
+    height: 34
   },
   bellIcon: {
     width: 35,
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    marginTop: 7,
   },
   noticeTitle: {
     height: '100%',
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   },
   noticeTitleText: {
     color: colors.white,
-    fontSize: 12,
+    fontSize: 14,
   },
   noticeTitleIcon: {
     transform: [{ rotate: '180deg' }],
