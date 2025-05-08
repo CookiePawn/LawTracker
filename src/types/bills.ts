@@ -43,14 +43,14 @@ export interface Nqfvrbsdafrmuzixe {
 }
 
 export enum BillStatus {
-    MEETING = '회의',
-    APPROVAL = '상정',
-    PROCESSING = '처리',
-    GOVERNMENT_TRANSFER = '정부이송',
-    COMMITTEE_MEETING = '본회의 부의',
-    VOTE = '의결',
-    COMMITTEE_REVIEW = '회부',
-    PROMULGATION = '공포',
-    INTRODUCTION = '발의',
-    SUBMISSION = '제출'
+    INTRODUCTION = '발의', //1   
+    SUBMISSION = '제출', //2
+    GOVERNMENT_TRANSFER = '정부이송', //3
+    COMMITTEE_REVIEW = '회부', //4
+    COMMITTEE_MEETING = '본회의 부의', //5
+    MEETING = '회의', //6
+    APPROVAL = '상정', //7
+    PROCESSING = '처리', //8
+    VOTE = '의결', //9
+    PROMULGATION = '공포', //10
 }

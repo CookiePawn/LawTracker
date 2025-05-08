@@ -7,7 +7,7 @@ import { RootStackParamList } from '@/types';
 import RNExitApp from 'react-native-exit-app';
 import { colors } from '@/constants/colors';
 import { noticeData } from './data';
-import { NewsCard, LawList } from '@/components';
+import { NewsCard, LawList, MyLawCard } from '@/components';
 
 type NavigationProp = BottomTabNavigationProp<RootStackParamList>;
 
@@ -68,7 +68,7 @@ const HomeScreen = () => {
         </View>
         <NewsCard />  
         <LawList type='random' />
-        
+        <MyLawCard />
         <LawList type='latest' />
       </ScrollView>
     </View>
