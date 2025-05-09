@@ -1,6 +1,6 @@
 {
   "name": "templatecli",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "scripts": {
     "start": "react-native start --port=8083",
@@ -18,7 +18,8 @@
     "ios:prod:release": "react-native run-ios --scheme PROD --mode ProductionRelease --port=8083",
     "lint": "eslint .",
     "test": "jest",
-    "load-law": "node scripts/loadLaw.js"
+    "load-law": "node scripts/loadLaw.js",
+    "load-lawList": "node scripts/testloadLaw.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.2",
