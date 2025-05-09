@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
     View,
     StyleSheet,
@@ -20,6 +20,7 @@ interface BottomSheetProps {
 }
 
 const BottomSheet = ({ visible, onClose, children, height = SCREEN_HEIGHT * 0.7 }: BottomSheetProps) => {
+    const [isOverlayVisible, setIsOverlayVisible] = useState(false);
     const translateY = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
     const panResponder = useRef(
         PanResponder.create({
@@ -46,6 +47,7 @@ const BottomSheet = ({ visible, onClose, children, height = SCREEN_HEIGHT * 0.7 
     ).current;
 
     const openBottomSheet = useCallback(() => {
+        setIsOverlayVisible(true);
         Animated.spring(translateY, {
             toValue: 0,
             useNativeDriver: true,
@@ -54,6 +56,7 @@ const BottomSheet = ({ visible, onClose, children, height = SCREEN_HEIGHT * 0.7 
     }, [translateY]);
 
     const closeBottomSheet = useCallback(() => {
+        setIsOverlayVisible(false);
         Animated.timing(translateY, {
             toValue: SCREEN_HEIGHT,
             duration: 300,
@@ -85,7 +88,7 @@ const BottomSheet = ({ visible, onClose, children, height = SCREEN_HEIGHT * 0.7 
             onRequestClose={closeBottomSheet}
         >
             <TouchableWithoutFeedback onPress={closeBottomSheet}>
-                <View style={styles.overlay}>
+                <View style={[styles.overlay, { opacity: isOverlayVisible ? 1 : 0 }]}>
                     <TouchableWithoutFeedback>
                         <Animated.View
                             style={[
