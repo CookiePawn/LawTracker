@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions }
 import bills from './nqfvrbsdafrmuzixe.json';
 import { BillStatus, Nqfvrbsdafrmuzixe } from '@/types/bills';
 import { LawIcon } from '@/assets';
+import { AdBanner } from '@/components';
 
 interface BillScheduleItem extends Nqfvrbsdafrmuzixe {
   time: string;
@@ -106,6 +107,7 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
 
   return (
     <>
+    <AdBanner />
       {isToday && (
         <View style={styles.warningContainer}>
           <Text style={styles.warningText}>

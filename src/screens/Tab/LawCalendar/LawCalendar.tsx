@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { BillScheduleList, Calendar, FullCalendar } from '@/components';
-import { BellIcon, CalendarIcon } from '@/assets';
+import { CalendarIcon } from '@/assets';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '@/types';
-import { Nqfvrbsdafrmuzixe } from '@/types/bills';
-import bills from '@/components/nqfvrbsdafrmuzixe.json';
 
 const LawCalendar = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
