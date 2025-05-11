@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { colors } from '@/constants';
 import { Law, BillStatus } from '@/types';
 
@@ -49,51 +49,57 @@ const LawStatus = ({ law }: { law: Law }) => {
         <View style={styles.container}>
             <Text style={styles.lawStatusTitle}>진행 경과</Text>
             <View style={styles.progressContainer}>
-                {STATUS_ORDER.map((status, index) => {
-                    const isCompleted = index < currentStatusIndex;
-                    const isCurrent = index === currentStatusIndex;
+                <ScrollView 
+                    style={styles.scrollView} 
+                    showsVerticalScrollIndicator={false}
+                    nestedScrollEnabled={true}
+                >
+                    {STATUS_ORDER.map((status, index) => {
+                        const isCompleted = index < currentStatusIndex;
+                        const isCurrent = index === currentStatusIndex;
 
-                    return (
-                        <View key={status} style={styles.statusItem}>
-                            <View style={styles.statusContent}>
-                                <View style={styles.dotContainer}>
-                                    <View style={[
-                                        styles.statusDot,
-                                        isCompleted && styles.completedDot,
-                                        isCurrent && styles.currentDot,
-                                        !isCompleted && !isCurrent && styles.pendingDot
-                                    ]} />
-                                    {isCurrent && <View style={styles.currentDotBorder} />}
-                                </View>
-                                <View style={styles.statusTextContainer}>
-                                    <View style={styles.statusTextRowContainer}>
-                                        <Text style={[
-                                            styles.statusText,
-                                            isCompleted && styles.completedText,
-                                            isCurrent && styles.currentText,
-                                            !isCompleted && !isCurrent && styles.pendingText
-                                        ]}>{status}</Text>
-                                        {isCurrent && (
-                                            <Text style={styles.currentTagText}>
-                                                현재
-                                            </Text>
-                                        )}
+                        return (
+                            <View key={status} style={styles.statusItem}>
+                                <View style={styles.statusContent}>
+                                    <View style={styles.dotContainer}>
+                                        <View style={[
+                                            styles.statusDot,
+                                            isCompleted && styles.completedDot,
+                                            isCurrent && styles.currentDot,
+                                            !isCompleted && !isCurrent && styles.pendingDot
+                                        ]} />
+                                        {isCurrent && <View style={styles.currentDotBorder} />}
                                     </View>
-                                    <Text style={styles.dateText}>
-                                        {isCompleted ? '완료' : isCurrent ? law.DATE : '예정'}
-                                    </Text>
+                                    <View style={styles.statusTextContainer}>
+                                        <View style={styles.statusTextRowContainer}>
+                                            <Text style={[
+                                                styles.statusText,
+                                                isCompleted && styles.completedText,
+                                                isCurrent && styles.currentText,
+                                                !isCompleted && !isCurrent && styles.pendingText
+                                            ]}>{status}</Text>
+                                            {isCurrent && (
+                                                <Text style={styles.currentTagText}>
+                                                    현재
+                                                </Text>
+                                            )}
+                                        </View>
+                                        <Text style={styles.dateText}>
+                                            {isCompleted ? '완료' : isCurrent ? law.DATE : '예정'}
+                                        </Text>
+                                    </View>
                                 </View>
+                                {index < STATUS_ORDER.length - 1 && (
+                                    <View style={[
+                                        styles.line,
+                                        isCompleted && styles.completedLine,
+                                        !isCompleted && styles.pendingLine
+                                    ]} />
+                                )}
                             </View>
-                            {index < STATUS_ORDER.length - 1 && (
-                                <View style={[
-                                    styles.line,
-                                    isCompleted && styles.completedLine,
-                                    !isCompleted && styles.pendingLine
-                                ]} />
-                            )}
-                        </View>
-                    );
-                })}
+                        );
+                    })}
+                </ScrollView>
             </View>
         </View>
     );
@@ -107,11 +113,14 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 15,
     },
+    scrollView: {
+        height: 250,
+    },
     lawStatusTitle: {
         fontSize: 14,
         fontWeight: 'bold',
         color: colors.gray800,
-        marginBottom: 0,
+        marginBottom: 5,
     },
     progressContainer: {
         flexDirection: 'column',
@@ -129,7 +138,7 @@ const styles = StyleSheet.create({
         width: 120,
         paddingTop: 10,
         paddingBottom: 5,
-        marginLeft: -2.5,
+        marginLeft: 3,
     },
     dotContainer: {
         width: 15,
@@ -139,7 +148,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     statusDot: {
-        width: 15,
+        width: 15,  
         height: 15,
         borderRadius: 100,
     },
@@ -163,19 +172,19 @@ const styles = StyleSheet.create({
     statusTextContainer: {
         flexDirection: 'column',
     },
-    statusText: {
-        fontSize: 12,
-    },
-    completedText: {
-        color: colors.black,
-    },
-    currentText: {
-        color: colors.primary,
-    },
     statusTextRowContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 5,
+    },
+    statusText: {
+        fontSize: 12,
+    },
+    completedText: {
+        color: colors.primary,
+    },
+    currentText: {
+        color: colors.primary,
     },
     currentTagText: {
         fontSize: 10,
@@ -195,7 +204,7 @@ const styles = StyleSheet.create({
     },
     line: {
         position: 'absolute',
-        left: 5,
+        left: 10.,
         top: 27,
         width: 1,
         height: 45,
