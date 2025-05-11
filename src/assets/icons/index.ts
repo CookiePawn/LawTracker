@@ -8,3 +8,4 @@ export { default as UserIcon } from './user.svg';
 export { default as SearchIcon } from './search.svg';
 export { default as EyeIcon } from './eye.svg';
 export { default as HeartIcon } from './heart.svg';
+export { default as ShareIcon } from './share.svg';

@@ -50,7 +50,7 @@ const LawList = ({ type = 'random' }: LawListProps) => {
                                 ellipsizeMode="tail"
                             >{bill.TITLE}</Text>         
                             <View style={styles.lawItemTagContent}>
-                                <Text style={styles.lawItemTagText}>{bill.TEG}</Text>
+                                <Text style={styles.lawItemTagText}>{bill.TAG}</Text>
                                 <BillStatusTag status={bill.ACT_STATUS} />
                             </View>  
                             <Text style={styles.lawItemCommitteeText}>{bill.COMMITTEE || '-'}</Text>

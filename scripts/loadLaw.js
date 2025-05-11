@@ -31,7 +31,7 @@ function getDatesInRange(startDate, endDate) {
 function transformBillData(bill) {
     return {
         DATE: bill.DT,
-        TEG: bill.BILL_KIND,
+        TAG: bill.BILL_KIND,
         TITLE: bill.BILL_NM.split('(')[0],
         AGENT: bill.BILL_NM.split('(')[1]?.replace(')', '') || '-',
         COMMITTEE: bill.COMMITTEE,
@@ -52,7 +52,7 @@ function transformFutureBillData(bill) {
 
     return {
         DATE: bill.NOTI_ED_DT,
-        TEG: tag,
+        TAG: tag,
         TITLE: bill.BILL_NAME,
         AGENT: bill.PROPOSER,
         COMMITTEE: bill.CURR_COMMITTEE,

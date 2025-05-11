@@ -60,7 +60,7 @@ const MyLawCard = () => {
                                 >
                                     {bill.TITLE}
                                 </Text>
-                                <Text style={styles.lawItemTag}>{bill.TEG}</Text>
+                                <Text style={styles.lawItemTag}>{bill.TAG}</Text>
                             </View>
                             <View style={styles.lawItemStatusContent}>
                                 <Text style={styles.lawItemStatusTitle}>진행 상태: <Text style={styles.lawItemStatusPointText}>{bill.ACT_STATUS}</Text></Text>

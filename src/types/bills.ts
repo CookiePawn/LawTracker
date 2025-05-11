@@ -60,12 +60,22 @@ export enum BillStatus {
 // 의안 정보 - 열린 국회 데이터 파싱싱(사용)
 export interface Law {
     DATE: string;
-    TEG: string;
+    TAG: string;
     TITLE: string;
     AGENT: string;
     COMMITTEE: string;
     ACT_STATUS: string;
     BILL_ID: string;
+    ACT_INTRODUCTION_DATE?: string;
+    ACT_SUBMISSION_DATE?: string;
+    ACT_COMMITTEE_REVIEW_DATE?: string;
+    ACT_COMMITTEE_MEETING_DATE?: string;
+    ACT_MEETING_DATE?: string;
+    ACT_APPROVAL_DATE?: string;
+    ACT_VOTE_DATE?: string;
+    ACT_GOVERNMENT_TRANSFER_DATE?: string;
+    ACT_PROCESSING_DATE?: string;
+    ACT_PROMULGATION_DATE?: string;
 }
 
 // 의원 정보 - 열린 국회(사용)

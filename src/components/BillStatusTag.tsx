@@ -5,12 +5,19 @@ import { BillStatus } from '@/types';
 interface BillStatusTagProps {
     status: string;
     style?: any;
+    size?: 'small' | 'large';
 }
 
-const BillStatusTag: React.FC<BillStatusTagProps> = ({ status, style }) => {
+const BillStatusTag: React.FC<BillStatusTagProps> = ({ status, style, size = 'small' }) => {
     return (
         <Text style={[
             styles.tag,
+            size === 'large' && {
+                fontSize: 12,
+                paddingHorizontal: 10,
+                paddingVertical: 3,
+                maxHeight: 30,
+            },
             {
                 backgroundColor:
                     status === BillStatus.MEETING ? '#EFF6FF' :
@@ -50,6 +57,7 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         paddingHorizontal: 7,
         paddingVertical: 3,
+        maxHeight: 20,
     }
 });
 

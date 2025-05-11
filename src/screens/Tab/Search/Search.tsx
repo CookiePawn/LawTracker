@@ -85,7 +85,7 @@ const Search = ({ route }: SearchProps) => {
                 }
 
                 // 의안구분 필터링
-                if (selectedBillType !== '전체' && bill.TEG !== selectedBillType) {
+                if (selectedBillType !== '전체' && bill.TAG !== selectedBillType) {
                     return false;
                 }
 
@@ -157,7 +157,7 @@ const Search = ({ route }: SearchProps) => {
                     ellipsizeMode="tail"
                 >{item.TITLE}</Text>
                 <View style={styles.lawItemTagContent}>
-                    <Text style={styles.lawItemTagText}>{item.TEG}</Text>
+                    <Text style={styles.lawItemTagText}>{item.TAG}</Text>
                     <BillStatusTag status={item.ACT_STATUS} />
                 </View>
                 <View style={styles.lawItemFooterContainer}>
