@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon } from '@/assets/icons';
-import bills from './nqfvrbsdafrmuzixe.json';
 import { BillStatus } from '@/types';
+import { laws } from '@/constants';
 
 const getProgressPercentage = (status: BillStatus): number => {
     switch (status) {
@@ -11,30 +11,30 @@ const getProgressPercentage = (status: BillStatus): number => {
             return 10;
         case BillStatus.SUBMISSION:
             return 20;
-        case BillStatus.GOVERNMENT_TRANSFER:
-            return 30;
         case BillStatus.COMMITTEE_REVIEW:
-            return 40;
+            return 30;
         case BillStatus.COMMITTEE_MEETING:
-            return 50;
+            return 40;
         case BillStatus.MEETING:
-            return 60;
+            return 50;
         case BillStatus.APPROVAL:
-            return 70;
+            return 60;
         case BillStatus.PROCESSING:
+            return 70;
+        case BillStatus.GOVERNMENT_TRANSFER:
             return 80;
         case BillStatus.VOTE:
             return 90;
         case BillStatus.PROMULGATION:
             return 100;
-        default:                
+        default:
             return 0;
     }
 };
 
 const MyLawCard = () => {
     const randomBills = useMemo(() => {
-        const shuffled = [...bills].sort(() => 0.5 - Math.random());
+        const shuffled = [...laws].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, 3);
     }, []);
 
@@ -53,21 +53,21 @@ const MyLawCard = () => {
                     return (
                         <View style={styles.lawItem} key={index}>
                             <View style={styles.lawItemHeader}>
-                                <Text 
+                                <Text
                                     style={styles.lawItemTitle}
                                     numberOfLines={1}
                                     ellipsizeMode="tail"
                                 >
-                                    {bill.BILL_NM.split('(')[0]}
+                                    {bill.TITLE}
                                 </Text>
-                                <Text style={styles.lawItemTag}>{bill.BILL_KIND}</Text>
+                                <Text style={styles.lawItemTag}>{bill.TEG}</Text>
                             </View>
                             <View style={styles.lawItemStatusContent}>
                                 <Text style={styles.lawItemStatusTitle}>진행 상태: <Text style={styles.lawItemStatusPointText}>{bill.ACT_STATUS}</Text></Text>
-                                <Text style={styles.lawItemStatusText}>발의일: {bill.DT}</Text>
+                                <Text style={styles.lawItemStatusText}>발의일: {bill.DATE}</Text>
                             </View>
                             <View style={styles.lawItemProgressBar}>
-                                <View style={[styles.lawItemProgressBarFill, { width: `${progressPercentage}%` }]}/>
+                                <View style={[styles.lawItemProgressBarFill, { width: `${progressPercentage}%` }]} />
                             </View>
                         </View>
                     )

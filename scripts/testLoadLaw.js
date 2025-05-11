@@ -27,6 +27,39 @@ function getDatesInRange(startDate, endDate) {
     return dates;
 }
 
+// API 응답 데이터를 원하는 형식으로 변환하는 함수
+function transformBillData(bill) {
+    return {
+        DATE: bill.DT,
+        TEG: bill.BILL_KIND,
+        TITLE: bill.BILL_NM.split('(')[0],
+        AGENT: bill.BILL_NM.split('(')[1]?.replace(')', '') || '-',
+        COMMITTEE: bill.COMMITTEE,
+        ACT_STATUS: bill.ACT_STATUS,
+        BILL_ID: bill.BILL_ID
+    };
+}
+
+// 기존 데이터와 새로운 데이터를 병합하는 함수
+function mergeBills(existingBills, newBills) {
+    const billMap = new Map();
+    
+    // 기존 데이터를 Map에 추가
+    existingBills.forEach(bill => {
+        billMap.set(bill.BILL_ID, bill);
+    });
+    
+    // 새로운 데이터로 업데이트 또는 추가
+    newBills.forEach(newBill => {
+        const existingBill = billMap.get(newBill.BILL_ID);
+        if (!existingBill || new Date(newBill.DATE) > new Date(existingBill.DATE)) {
+            billMap.set(newBill.BILL_ID, newBill);
+        }
+    });
+    
+    return Array.from(billMap.values());
+}
+
 async function fetchBillsByMeeting() {
     try {
         const outputPath = path.join(__dirname, '..', 'src', 'components', 'nqfvrbsdafrmuzixe.json');
@@ -44,8 +77,8 @@ async function fetchBillsByMeeting() {
         // 마지막 날짜 찾기
         let lastDate = '2024-05-30'; // 기본값
         if (existingBills.length > 0) {
-            const sortedBills = existingBills.sort((a, b) => new Date(b.DT) - new Date(a.DT));
-            lastDate = sortedBills[0].DT;
+            const sortedBills = existingBills.sort((a, b) => new Date(b.DATE) - new Date(a.DATE));
+            lastDate = sortedBills[0].DATE;
         }
         
         const startDate = lastDate;
@@ -65,28 +98,21 @@ async function fetchBillsByMeeting() {
             });
 
             if (response.data && response.data.nqfvrbsdafrmuzixe && response.data.nqfvrbsdafrmuzixe[1] && response.data.nqfvrbsdafrmuzixe[1].row) {
-                newBills = newBills.concat(response.data.nqfvrbsdafrmuzixe[1].row);
+                const transformedBills = response.data.nqfvrbsdafrmuzixe[1].row.map(transformBillData);
+                newBills = newBills.concat(transformedBills);
             }
         }
 
         console.log('API에서 새로 가져온 법안 수:', newBills.length);
 
-        // 중복 체크
-        const existingSeqs = new Set(existingBills.map(bill => bill.SEQ));
-        const duplicates = newBills.filter(bill => existingSeqs.has(bill.SEQ));
-        console.log('중복된 법안 수:', duplicates.length);
-
-        // 중복 제거 후 새로운 법안만 추가
-        const uniqueNewBills = newBills.filter(bill => !existingSeqs.has(bill.SEQ));
-        console.log('추가될 새로운 법안 수:', uniqueNewBills.length);
-
-        // 기존 데이터와 새로운 데이터 합치기
-        const updatedBills = [...existingBills, ...uniqueNewBills];
+        // 기존 데이터와 새로운 데이터 병합
+        const updatedBills = mergeBills(existingBills, newBills);
+        
+        console.log('업데이트 후 최종 법안 수:', updatedBills.length);
 
         // JSON 파일로 저장
         await fs.writeFile(outputPath, JSON.stringify(updatedBills, null, 2), 'utf8');
         console.log(`업데이트된 데이터가 ${outputPath}에 저장되었습니다.`);
-        console.log('최종 법안 수:', updatedBills.length);
 
     } catch (error) {
         console.error('법안 데이터 가져오기 실패:', error);
@@ -101,6 +127,6 @@ async function main() {
       console.error('스크립트 실행 중 오류 발생:', error);
       process.exit(1);
     }
-  }
+}
   
-  main();
+main();

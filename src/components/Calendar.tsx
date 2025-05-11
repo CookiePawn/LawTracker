@@ -1,7 +1,6 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import bills from './nqfvrbsdafrmuzixe.json';
-import { Nqfvrbsdafrmuzixe } from '@/types/bills';
+import { laws } from '@/constants';
 
 interface CalendarProps {
   onDateSelect?: (date: Date) => void;
@@ -18,9 +17,9 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
 
   const datesWithBills = useMemo(() => {
     const billDates = new Set<string>();
-    (bills as Nqfvrbsdafrmuzixe[]).forEach(bill => {
-      if (bill.DT) {
-        billDates.add(bill.DT);
+    laws.forEach(bill => {
+      if (bill.DATE) {
+        billDates.add(bill.DATE);
       }
     });
     return billDates;

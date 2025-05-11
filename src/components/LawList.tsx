@@ -1,11 +1,9 @@
 import { ChevronLeftIcon } from '@/assets';
-import { colors } from '@/constants';
+import { colors, laws } from '@/constants';
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import bills from './nqfvrbsdafrmuzixe.json';
-import { BillStatus } from '@/types';
+import { BillStatus, RootTabParamList } from '@/types';
 import { useNavigation } from '@react-navigation/native';
-import { RootTabParamList } from '@/types';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 interface LawListProps {
     type: 'random' | 'latest';
@@ -15,12 +13,12 @@ const LawList = ({ type = 'random' }: LawListProps) => {
     const navigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>();
 
     const randomBills = useMemo(() => {
-        const shuffled = [...bills].sort(() => 0.5 - Math.random());
+        const shuffled = [...laws].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, 2);
     }, []);
 
     const latestBills = useMemo(() => {
-        const sorted = [...bills].sort((a, b) => new Date(b.DT).getTime() - new Date(a.DT).getTime());
+        const sorted = [...laws].sort((a, b) => new Date(b.DATE).getTime() - new Date(a.DATE).getTime());
         return sorted.slice(0, 2);
     }, []);
     
@@ -36,22 +34,19 @@ const LawList = ({ type = 'random' }: LawListProps) => {
             </View>
             <View style={styles.lawListContainer}>
                 {(type === 'latest' ? latestBills : randomBills).map((bill, index) => {
-                    const [title, proposer] = bill.BILL_NM.split('(');
-                    const cleanProposer = proposer?.replace(')', '');
-                    
                     return (
                         <View key={index} style={styles.lawItem}>
                             <View style={styles.lawItemHeader}>
-                                <Text style={styles.lawItemDate}>{bill.DT}</Text>
-                                <Text style={styles.lawItemProposer}>발의자: {cleanProposer.length > 15 ? cleanProposer.slice(0, 15) + '...' : cleanProposer}</Text>
+                                <Text style={styles.lawItemDate}>{bill.DATE}</Text>
+                                <Text style={styles.lawItemProposer}>발의자: {bill.AGENT.length > 15 ? bill.AGENT.slice(0, 15) + '...' : bill.AGENT}</Text>
                             </View>
                             <Text 
                                 style={styles.lawTitle}
                                 numberOfLines={2}
                                 ellipsizeMode="tail"
-                            >{title}</Text>         
+                            >{bill.TITLE}</Text>         
                             <View style={styles.lawItemTagContent}>
-                                <Text style={styles.lawItemTagText}>{bill.BILL_KIND}</Text>
+                                <Text style={styles.lawItemTagText}>{bill.TEG}</Text>
                                 <Text style={[styles.lawItemTagText, 
                                     { backgroundColor: 
                                         bill.ACT_STATUS === BillStatus.MEETING ? '#EFF6FF' : 

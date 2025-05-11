@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { ChevronLeftIcon } from '@/assets/icons';
-import { Nqfvrbsdafrmuzixe } from '@/types/bills';
-import bills from './nqfvrbsdafrmuzixe.json';
 import { Picker } from '@react-native-picker/picker';
+import { laws } from '@/constants';
 
 interface FullCalendarProps {
   selectedDate: Date;
@@ -20,9 +19,9 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
   const days = ['일', '월', '화', '수', '목', '금', '토'];
 
   const datesWithBills = new Set<string>();
-  (bills as Nqfvrbsdafrmuzixe[]).forEach(bill => {
-    if (bill.DT) {
-      datesWithBills.add(bill.DT);
+  laws.forEach(bill => {
+    if (bill.DATE) {
+      datesWithBills.add(bill.DATE);
     }
   });
 

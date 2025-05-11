@@ -1,14 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
-import bills from './nqfvrbsdafrmuzixe.json';
-import { BillStatus, Nqfvrbsdafrmuzixe } from '@/types/bills';
+import { BillStatus, Law } from '@/types';
 import { LawIcon } from '@/assets';
 import { AdBanner } from '@/components';
-
-interface BillScheduleItem extends Nqfvrbsdafrmuzixe {
-  time: string;
-  result: string | null;
-}
+import { laws } from '@/constants'; 
 
 interface ScheduleItemProps {
   time: string;
@@ -79,28 +74,23 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, descript
 const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => {
   const isToday = selectedDate && selectedDate.toDateString() === new Date().toDateString();
 
-  const filteredBills = (bills as Nqfvrbsdafrmuzixe[]).map(bill => ({
+  const filteredBills = laws.map(bill => ({
     ...bill,
-    time: bill.DT,
+    time: bill.DATE,
     result: bill.ACT_STATUS
   })).filter(bill => {
     if (!selectedDate) return true;
-    return bill.DT === selectedDate.toISOString().split('T')[0];
+    return bill.DATE === selectedDate.toISOString().split('T')[0];
   });
 
-  const renderItem = ({ item: bill }: { item: BillScheduleItem }) => {
-    // 법안명에서 괄호 부분을 분리
-    const titleMatch = bill.BILL_NM.match(/(.*?)\s*\((.*?)\)/);
-    const title = titleMatch ? titleMatch[1].replace(/^\d+\.\s*/, '').trim() : bill.BILL_NM.replace(/^\d+\.\s*/, '').trim();
-    const ppsr = titleMatch ? titleMatch[2] : bill.BILL_KIND;
-
+  const renderItem = ({ item }: { item: typeof filteredBills[0] }) => {
     return (
       <ScheduleItem
-        time={bill.time}
-        ppsr={ppsr}
-        title={title}
-        description={bill.COMMITTEE || ''}
-        result={bill.result || ''}
+        time={item.DATE}
+        ppsr={item.AGENT}
+        title={item.TITLE}
+        description={item.COMMITTEE || ''}
+        result={item.ACT_STATUS || ''}
       />
     );
   };
@@ -116,11 +106,11 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
           </Text>
         </View>
       )}
-      <FlatList<BillScheduleItem>
+      <FlatList
         style={styles.container}
         data={filteredBills}
         renderItem={renderItem}
-        keyExtractor={(item) => item.SEQ.toString()}
+        keyExtractor={(item) => item.BILL_ID.toString()}
         initialNumToRender={10}
         maxToRenderPerBatch={10}
         windowSize={5}
