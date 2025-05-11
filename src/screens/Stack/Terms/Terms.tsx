@@ -43,18 +43,27 @@ const Terms = () => {
 
         <Text style={styles.title}>제4조 (데이터 출처)</Text>
         <Text style={styles.text}>
-          본 서비스는 대한민국 국회에서 제공하는 열린국회정보 Open API를 활용하여 제작되었습니다. 모든 법률 정보는 국회에서 공식적으로 제공하는 데이터를 기반으로 합니다.{'\n'}
+          본 서비스는 다음과 같은 공공 데이터를 활용하여 제작되었습니다:{'\n'}
+          1. 대한민국 국회에서 제공하는 열린국회정보 Open API{'\n'}
+          2. 공공데이터포털(data.go.kr)에서 제공하는 국회 국회사무처_의안 정보 API{'\n\n'}
+          모든 법률 정보는 국회와 공공데이터포털에서 공식적으로 제공하는 데이터를 기반으로 합니다.{'\n'}
         </Text>
 
         <Text style={styles.title}>제5조 (면책 조항)</Text>
         <Text style={styles.text}>
-          본 서비스는 대한민국 국회의 공식 서비스가 아니며, 국회를 대표하지 않습니다. 제공되는 정보는 열린국회정보 Open API를 통해 수집된 데이터를 기반으로 하며, 최신 정보와 차이가 있을 수 있습니다.{'\n\n'}
-          정확한 법률 정보는 국회 홈페이지 또는 관련 공식 채널을 통해 확인하시기 바랍니다.{'\n'}
+          본 서비스는 대한민국 국회의 공식 서비스가 아니며, 국회를 대표하지 않습니다. 제공되는 정보는 열린국회정보 Open API와 공공데이터포털 API를 통해 수집된 데이터를 기반으로 하며, 최신 정보와 차이가 있을 수 있습니다.{'\n\n'}
+          정확한 법률 정보는 국회 홈페이지, 공공데이터포털 또는 관련 공식 채널을 통해 확인하시기 바랍니다.{'\n'}
         </Text>
 
         <TouchableOpacity onPress={handleApiLink}>
           <Text style={styles.apiLinkText}>
             열린국회정보 Open API 바로가기
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => Linking.openURL('https://www.data.go.kr/data/3037286/openapi.do')}>
+          <Text style={styles.apiLinkText}>
+            공공데이터포털 의안 정보 API 바로가기
           </Text>
         </TouchableOpacity>
       </ScrollView>
