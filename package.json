@@ -19,7 +19,8 @@
     "lint": "eslint .",
     "test": "jest",
     "load-law": "node scripts/loadLaw.js",
-    "load-naas": "node scripts/loadNAAS.js"
+    "load-naas": "node scripts/loadNAAS.js",
+    "load-law-detail": "node scripts/loadLawDetail.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.2",
