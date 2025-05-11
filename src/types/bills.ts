@@ -64,3 +64,31 @@ export interface Law {
     ACT_STATUS: string;
     BILL_ID: string;
 }
+
+
+export interface AssemblyMember {
+    NAAS_CD: string;
+    NAAS_NM: string;
+    NAAS_CH_NM: string;
+    NAAS_EN_NM: string;
+    BIRDY_DIV_CD: string;
+    BIRDY_DT: string;
+    DTY_NM: string;
+    PLPT_NM: string;
+    ELECD_NM: string;
+    ELECD_DIV_NM: string;
+    CMIT_NM: string;
+    BLNG_CMIT_NM: string;
+    RLCT_DIV_NM: string;
+    GTELT_ERACO: string;
+    NTR_DIV: string;
+    NAAS_TEL_NO: string;
+    NAAS_EMAIL_ADDR: string;
+    NAAS_HP_URL: string;
+    AIDE_NM: string;
+    CHF_SCRT_NM: string;
+    SCRT_NM: string;
+    BRF_HST: string;
+    OFFM_RNUM_NO: string;
+    NAAS_PIC: string;
+}
