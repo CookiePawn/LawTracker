@@ -14,6 +14,7 @@ import { laws } from '@/constants';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
+import { BillStatusTag } from '@/components';
 
 interface SearchProps {
     route: RouteProp<RootTabParamList, 'Search'>;
@@ -157,34 +158,7 @@ const Search = ({ route }: SearchProps) => {
                 >{item.TITLE}</Text>
                 <View style={styles.lawItemTagContent}>
                     <Text style={styles.lawItemTagText}>{item.TEG}</Text>
-                    <Text style={[styles.lawItemTagText,
-                    {
-                        backgroundColor:
-                            item.ACT_STATUS === BillStatus.MEETING ? '#EFF6FF' :
-                                item.ACT_STATUS === BillStatus.APPROVAL ? '#CAFFE0' :
-                                    item.ACT_STATUS === BillStatus.PROCESSING ? '#FFDAB1' :
-                                        item.ACT_STATUS === BillStatus.GOVERNMENT_TRANSFER ? '#E7BEFF' :
-                                            item.ACT_STATUS === BillStatus.COMMITTEE_MEETING ? '#92A3F8' :
-                                                item.ACT_STATUS === BillStatus.VOTE ? '#FFC8C8' :
-                                                    item.ACT_STATUS === BillStatus.COMMITTEE_REVIEW ? '#EEC979' :
-                                                        item.ACT_STATUS === BillStatus.PROMULGATION ? '#A1C3A9' :
-                                                            item.ACT_STATUS === BillStatus.INTRODUCTION ? '#FDF9D1' :
-                                                                item.ACT_STATUS === BillStatus.SUBMISSION ? '#FF7DFD' : '#DFDFDF'
-                    },
-                    {
-                        color:
-                            item.ACT_STATUS === BillStatus.MEETING ? '#519AFA' :
-                                item.ACT_STATUS === BillStatus.APPROVAL ? '#6CC58B' :
-                                    item.ACT_STATUS === BillStatus.PROCESSING ? '#DE9440' :
-                                        item.ACT_STATUS === BillStatus.GOVERNMENT_TRANSFER ? '#B04DEA' :
-                                            item.ACT_STATUS === BillStatus.COMMITTEE_MEETING ? '#3756F0' :
-                                                item.ACT_STATUS === BillStatus.VOTE ? '#DE3939' :
-                                                    item.ACT_STATUS === BillStatus.COMMITTEE_REVIEW ? '#BD8E29' :
-                                                        item.ACT_STATUS === BillStatus.PROMULGATION ? '#088B24' :
-                                                            item.ACT_STATUS === BillStatus.INTRODUCTION ? '#DCAE46' :
-                                                                item.ACT_STATUS === BillStatus.SUBMISSION ? '#CD16CA' : '#B1B1B1'
-                    }
-                    ]}>{item.ACT_STATUS}</Text>
+                    <BillStatusTag status={item.ACT_STATUS} />
                 </View>
                 <View style={styles.lawItemFooterContainer}>
                     <Text style={styles.lawItemCommitteeText}>{item.COMMITTEE || '-'}</Text>

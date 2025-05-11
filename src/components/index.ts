@@ -6,3 +6,4 @@ export { default as NewsCard } from './NewsCard';
 export { default as AdBanner } from './AdBanner';
 export { default as LawList } from './LawList';
 export { default as MyLawCard } from './MyLawCard';
+export { default as BillStatusTag } from './BillStatusTag';
