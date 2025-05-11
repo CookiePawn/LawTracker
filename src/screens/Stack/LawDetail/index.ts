@@ -1,0 +1,1 @@
+export { default as LawDetail } from './LawDetail';

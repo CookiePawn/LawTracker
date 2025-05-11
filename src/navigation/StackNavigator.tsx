@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
-import { Notification, Terms, PrivacyPolicy, Tutorial, ApiPolicy } from '@/screens';
 import { STORAGE_KEY } from '@/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { 
+  Notification, 
+  Terms, 
+  PrivacyPolicy, 
+  Tutorial, 
+  ApiPolicy, 
+  LawDetail 
+} from '@/screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +46,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Terms" component={Terms} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
         <Stack.Screen name="ApiPolicy" component={ApiPolicy} />
+        <Stack.Screen name="LawDetail" component={LawDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,3 +1,4 @@
+// 의안 통합합 리스트 - 열린 국회(사용 중지)
 export interface Bill {
     BILL_ID: string; // 의안 ID
     BILL_NO: string; // 의안 번호
@@ -25,7 +26,7 @@ export interface Bill {
     PROM_NO: string | null; // 공포 번호
 }
 
-
+// 의안 리스트 - 열린 국회(사용 중지)
 export interface Nqfvrbsdafrmuzixe {
     SEQ: number; // 순번
     DT: string; //일자
@@ -42,6 +43,7 @@ export interface Nqfvrbsdafrmuzixe {
     COMMITTEE_ID: string | null; // 소관위원회ID
 }
 
+// 법안 활동 상태
 export enum BillStatus {
     INTRODUCTION = '발의', // 1. 의원이 법안을 발의
     SUBMISSION = '제출', // 2. 법안을 국회에 제출
@@ -55,6 +57,7 @@ export enum BillStatus {
     PROMULGATION = '공포', // 10. 대통령이 공포
 }
 
+// 의안 정보 - 열린 국회 데이터 파싱싱(사용)
 export interface Law {
     DATE: string;
     TEG: string;
@@ -65,7 +68,7 @@ export interface Law {
     BILL_ID: string;
 }
 
-
+// 의원 정보 - 열린 국회(사용)
 export interface AssemblyMember {
     NAAS_CD: string;
     NAAS_NM: string;
@@ -91,4 +94,16 @@ export interface AssemblyMember {
     BRF_HST: string;
     OFFM_RNUM_NO: string;
     NAAS_PIC: string;
+}
+
+// 의안 상세 정보 - 공공데이터포탈(사용)
+export interface LawDetail {
+    billId: string;
+    billName: string;
+    billNo: number;
+    passGubn: string;
+    procStageCd: string;
+    proposeDt: string;
+    proposerKind: string;
+    summary: string;
 }

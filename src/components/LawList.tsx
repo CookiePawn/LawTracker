@@ -2,15 +2,17 @@ import { ChevronLeftIcon } from '@/assets';
 import { colors, laws } from '@/constants';
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { BillStatus, RootTabParamList } from '@/types';
+import { BillStatus, RootTabParamList, RootStackParamList } from '@/types';
 import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 interface LawListProps {
     type: 'random' | 'latest';
 }
 
 const LawList = ({ type = 'random' }: LawListProps) => {
     const navigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>();
+    const stackNavigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const randomBills = useMemo(() => {
         const shuffled = [...laws].sort(() => 0.5 - Math.random());
@@ -35,7 +37,7 @@ const LawList = ({ type = 'random' }: LawListProps) => {
             <View style={styles.lawListContainer}>
                 {(type === 'latest' ? latestBills : randomBills).map((bill, index) => {
                     return (
-                        <View key={index} style={styles.lawItem}>
+                        <TouchableOpacity key={index} style={styles.lawItem} onPress={() => stackNavigation.navigate('LawDetail', { law: bill })}>
                             <View style={styles.lawItemHeader}>
                                 <Text style={styles.lawItemDate}>{bill.DATE}</Text>
                                 <Text style={styles.lawItemProposer}>발의자: {bill.AGENT.length > 15 ? bill.AGENT.slice(0, 15) + '...' : bill.AGENT}</Text>
@@ -73,7 +75,7 @@ const LawList = ({ type = 'random' }: LawListProps) => {
                                 ]}>{bill.ACT_STATUS}</Text>
                             </View>  
                             <Text style={styles.lawItemCommitteeText}>{bill.COMMITTEE || '-'}</Text>
-                        </View>
+                        </TouchableOpacity>
                     );
                 })}
             </View>

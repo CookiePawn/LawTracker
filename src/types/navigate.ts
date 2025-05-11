@@ -1,4 +1,5 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
+import { Law } from "./bills";
 
 export type RootStackParamList = {
     Tab: NavigatorScreenParams<RootTabParamList>;
@@ -7,6 +8,7 @@ export type RootStackParamList = {
     PrivacyPolicy: undefined;
     ApiPolicy: undefined;
     Tutorial: undefined;
+    LawDetail: { law: Law };
 };
 
 

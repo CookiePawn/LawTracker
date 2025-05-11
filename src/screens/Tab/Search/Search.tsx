@@ -11,12 +11,17 @@ import { getViewCount, incrementViewCount } from '@/utils/viewCount';
 import { RouteProp } from '@react-navigation/native';
 import { RootTabParamList } from '@/types';
 import { laws } from '@/constants';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '@/types';
 
 interface SearchProps {
     route: RouteProp<RootTabParamList, 'Search'>;
 }
 
 const Search = ({ route }: SearchProps) => {
+    
+    const stackNavigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const { type = 'latest' } = route.params || {};
     const [searchQuery, setSearchQuery] = useState('');
     const [isDateFilterVisible, setIsDateFilterVisible] = useState(false);
@@ -125,19 +130,20 @@ const Search = ({ route }: SearchProps) => {
         loadViewCounts();
     }, []);
 
-    const handleBillPress = async (billId: string) => {
-        const newCount = await incrementViewCount(billId);
+    const handleBillPress = async (bill: Law) => {
+        const newCount = await incrementViewCount(bill.BILL_ID);
         setViewCounts(prev => ({
             ...prev,
-            [billId]: newCount
+            [bill.BILL_ID]: newCount
         }));
+        stackNavigation.navigate('LawDetail', { law: bill });
     };
 
     const renderBillItem = ({ item }: { item: Law }) => {
         return (
             <TouchableOpacity
                 style={styles.lawItem}
-                onPress={() => handleBillPress(item.BILL_ID)}
+                onPress={() => handleBillPress(item)}
                 activeOpacity={0.7}
             >
                 <View style={styles.lawItemHeader}>

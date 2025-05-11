@@ -1,17 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
-import { BillStatus, Law } from '@/types';
+import { BillStatus, Law, RootStackParamList } from '@/types';
 import { LawIcon } from '@/assets';
 import { AdBanner } from '@/components';
-import { laws } from '@/constants'; 
-
-interface ScheduleItemProps {
-  time: string;
-  ppsr: string;
-  title: string;
-  description: string;
-  result: string;
-}
+import { laws } from '@/constants';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface BillScheduleListProps {
   selectedDate?: Date;
@@ -19,57 +13,65 @@ interface BillScheduleListProps {
 
 const windowHeight = Dimensions.get('window').height;
 
-const ScheduleItem: React.FC<ScheduleItemProps> = ({ time, ppsr, title, description, result }) => (
-  <TouchableOpacity style={styles.itemContainer}>
-    <View style={styles.profileContainer}>
-      <View style={styles.profileImageContainer}>
-        <Image source={LawIcon} style={styles.profileImage} />
-      </View>
-      <View style={styles.horizontalLine} />
-    </View>
-    <View style={styles.billContainer}>
-      <View style={styles.timeContainer}>
-        <Text style={styles.time}>{time}</Text>
-        <Text style={styles.ppsr}>발의자: {ppsr.length > 15 ? ppsr.slice(0, 15) + '...' : ppsr}</Text>
-      </View>
-      <View style={styles.contentContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{title}</Text>
-          {result && (
-            <Text style={[
-              styles.result, 
-              { backgroundColor: 
-                result === BillStatus.MEETING ? '#EFF6FF' : 
-                result === BillStatus.APPROVAL ? '#CAFFE0' : 
-                result === BillStatus.PROCESSING ? '#FFDAB1' : 
-                result === BillStatus.GOVERNMENT_TRANSFER ? '#E7BEFF' :
-                result === BillStatus.COMMITTEE_MEETING ? '#92A3F8' :
-                result === BillStatus.VOTE ? '#FFC8C8' : 
-                result === BillStatus.COMMITTEE_REVIEW ? '#EEC979' : 
-                result === BillStatus.PROMULGATION ? '#A1C3A9' : 
-                result === BillStatus.INTRODUCTION ? '#FDF9D1' : 
-                result === BillStatus.SUBMISSION ? '#FF7DFD' : '#DFDFDF' },
-              { color: 
-                result === BillStatus.MEETING ? '#519AFA' : 
-                result === BillStatus.APPROVAL ? '#6CC58B' :
-                result === BillStatus.PROCESSING ? '#DE9440' : 
-                result === BillStatus.GOVERNMENT_TRANSFER ? '#B04DEA' : 
-                result === BillStatus.COMMITTEE_MEETING ? '#3756F0' : 
-                result === BillStatus.VOTE ? '#DE3939' : 
-                result === BillStatus.COMMITTEE_REVIEW ? '#BD8E29' : 
-                result === BillStatus.PROMULGATION ? '#088B24' : 
-                result === BillStatus.INTRODUCTION ? '#DCAE46' : 
-                result === BillStatus.SUBMISSION ? '#CD16CA' : '#B1B1B1' }
-            ]}>{result}</Text>
-          )}
+const ScheduleItem: React.FC<{ item: Law }> = ({ item }) => {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  
+  return (
+    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('LawDetail', { law: item })}>
+      <View style={styles.profileContainer}>
+        <View style={styles.profileImageContainer}>
+          <Image source={LawIcon} style={styles.profileImage} />
         </View>
-        <Text style={styles.description} numberOfLines={2}>
-          {description}
-        </Text>
+        <View style={styles.horizontalLine} />
       </View>
-    </View>
-  </TouchableOpacity>
-);
+      <View style={styles.billContainer}>
+        <View style={styles.timeContainer}>
+          <Text style={styles.time}>{item.DATE}</Text>
+          <Text style={styles.ppsr}>발의자: {item.AGENT.length > 15 ? item.AGENT.slice(0, 15) + '...' : item.AGENT}</Text>
+        </View>
+        <View style={styles.contentContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{item.TITLE}</Text>
+            {item.ACT_STATUS && (
+              <Text style={[
+                styles.result,
+                {
+                  backgroundColor:
+                    item.ACT_STATUS === BillStatus.MEETING ? '#EFF6FF' :
+                      item.ACT_STATUS === BillStatus.APPROVAL ? '#CAFFE0' :
+                        item.ACT_STATUS === BillStatus.PROCESSING ? '#FFDAB1' :
+                          item.ACT_STATUS === BillStatus.GOVERNMENT_TRANSFER ? '#E7BEFF' :
+                            item.ACT_STATUS === BillStatus.COMMITTEE_MEETING ? '#92A3F8' :
+                              item.ACT_STATUS === BillStatus.VOTE ? '#FFC8C8' :
+                                item.ACT_STATUS === BillStatus.COMMITTEE_REVIEW ? '#EEC979' :
+                                  item.ACT_STATUS === BillStatus.PROMULGATION ? '#A1C3A9' :
+                                    item.ACT_STATUS === BillStatus.INTRODUCTION ? '#FDF9D1' :
+                                      item.ACT_STATUS === BillStatus.SUBMISSION ? '#FF7DFD' : '#DFDFDF'
+                },
+                {
+                  color:
+                    item.ACT_STATUS === BillStatus.MEETING ? '#519AFA' :
+                      item.ACT_STATUS === BillStatus.APPROVAL ? '#6CC58B' :
+                        item.ACT_STATUS === BillStatus.PROCESSING ? '#DE9440' :
+                          item.ACT_STATUS === BillStatus.GOVERNMENT_TRANSFER ? '#B04DEA' :
+                            item.ACT_STATUS === BillStatus.COMMITTEE_MEETING ? '#3756F0' :
+                              item.ACT_STATUS === BillStatus.VOTE ? '#DE3939' :
+                                item.ACT_STATUS === BillStatus.COMMITTEE_REVIEW ? '#BD8E29' :
+                                  item.ACT_STATUS === BillStatus.PROMULGATION ? '#088B24' :
+                                    item.ACT_STATUS === BillStatus.INTRODUCTION ? '#DCAE46' :
+                                      item.ACT_STATUS === BillStatus.SUBMISSION ? '#CD16CA' : '#B1B1B1'
+                }
+              ]}>{item.ACT_STATUS}</Text>
+            )}
+          </View>
+          <Text style={styles.description} numberOfLines={2}>
+            {item.COMMITTEE}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => {
   const isToday = selectedDate && selectedDate.toDateString() === new Date().toDateString();
@@ -86,18 +88,14 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
   const renderItem = ({ item }: { item: typeof filteredBills[0] }) => {
     return (
       <ScheduleItem
-        time={item.DATE}
-        ppsr={item.AGENT}
-        title={item.TITLE}
-        description={item.COMMITTEE || ''}
-        result={item.ACT_STATUS || ''}
+        item={item}
       />
     );
   };
 
   return (
     <>
-    <AdBanner />
+      <AdBanner />
       {isToday && (
         <View style={styles.warningContainer}>
           <Text style={styles.warningText}>
