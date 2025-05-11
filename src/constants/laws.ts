@@ -1,4 +1,5 @@
-import bills from './beforeLaws.json';
+import beforeLaws from './beforeLaws.json';
+import afterLaws from './afterLaws.json';
 import { Law } from '@/types';
 
-export const laws = bills as Law[];
+export const laws = [...beforeLaws, ...afterLaws] as Law[];
