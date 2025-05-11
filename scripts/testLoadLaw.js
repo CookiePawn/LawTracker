@@ -62,7 +62,7 @@ function mergeBills(existingBills, newBills) {
 
 async function fetchBillsByMeeting() {
     try {
-        const outputPath = path.join(__dirname, '..', 'src', 'components', 'nqfvrbsdafrmuzixe.json');
+        const outputPath = path.join(__dirname, '..', 'src', 'constants', 'beforeLaws.json');
         
         // 기존 JSON 파일 읽기
         let existingBills = [];

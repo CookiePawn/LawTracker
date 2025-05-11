@@ -2,8 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList, Dimensions } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon, EyeIcon, SearchIcon } from '@/assets';
-import bills from '../../../components/nqfvrbsdafrmuzixe.json';
-import { Nqfvrbsdafrmuzixe, BillStatus } from '@/types';
+import { Law, BillStatus } from '@/types';
 import DateFilterBottomSheet from '@/components/DateFilterBottomSheet';
 import BillTypeBottomSheet from '@/components/BillTypeBottomSheet';
 import BillStatusBottomSheet from '@/components/BillStatusBottomSheet';
@@ -11,8 +10,7 @@ import SortBottomSheet from '@/components/SortBottomSheet';
 import { getViewCount, incrementViewCount } from '@/utils/viewCount';
 import { RouteProp } from '@react-navigation/native';
 import { RootTabParamList } from '@/types';
-
-const windowWidth = Dimensions.get('window').width;
+import { laws } from '@/constants';
 
 interface SearchProps {
     route: RouteProp<RootTabParamList, 'Search'>;
@@ -61,16 +59,16 @@ const Search = ({ route }: SearchProps) => {
     };
 
     const filteredBills = useMemo(() => {
-        let filtered = bills
+        let filtered = laws
             .filter((bill) => {
                 const searchLower = searchQuery.toLowerCase();
-                const titleMatch = bill.BILL_NM.toLowerCase().includes(searchLower);
-                const proposerMatch = bill.BILL_NM.toLowerCase().includes(searchLower);
+                const titleMatch = bill.TITLE.toLowerCase().includes(searchLower);
+                const proposerMatch = bill.AGENT.toLowerCase().includes(searchLower);
                 const committeeMatch = bill.COMMITTEE?.toLowerCase().includes(searchLower);
 
                 // 날짜 필터링
                 if (dateRange.start && dateRange.end) {
-                    const billDate = new Date(bill.DT);
+                    const billDate = new Date(bill.DATE);
                     const startDate = new Date(dateRange.start);
                     const endDate = new Date(dateRange.end);
                     endDate.setHours(23, 59, 59, 999);
@@ -81,7 +79,7 @@ const Search = ({ route }: SearchProps) => {
                 }
 
                 // 의안구분 필터링
-                if (selectedBillType !== '전체' && bill.BILL_KIND !== selectedBillType) {
+                if (selectedBillType !== '전체' && bill.TEG !== selectedBillType) {
                     return false;
                 }
 
@@ -95,12 +93,12 @@ const Search = ({ route }: SearchProps) => {
 
         // 정렬 적용
         if (selectedFilter === '최신순') {
-            filtered.sort((a, b) => new Date(b.DT).getTime() - new Date(a.DT).getTime());
+            filtered.sort((a, b) => new Date(b.DATE).getTime() - new Date(a.DATE).getTime());
         } else {
             filtered.sort((a, b) => (viewCounts[b.BILL_ID] || 0) - (viewCounts[a.BILL_ID] || 0));
         }
 
-        return filtered as Nqfvrbsdafrmuzixe[];
+        return filtered;
     }, [searchQuery, dateRange, selectedBillType, selectedStatus, selectedFilter, viewCounts]);
 
     const handleDateFilterApply = (startDate: string, endDate: string, period: string) => {
@@ -119,7 +117,7 @@ const Search = ({ route }: SearchProps) => {
     useEffect(() => {
         const loadViewCounts = async () => {
             const counts: { [key: string]: number } = {};
-            for (const bill of bills) {
+            for (const bill of laws) {
                 counts[bill.BILL_ID] = await getViewCount(bill.BILL_ID);
             }
             setViewCounts(counts);
@@ -135,10 +133,7 @@ const Search = ({ route }: SearchProps) => {
         }));
     };
 
-    const renderBillItem = ({ item }: { item: Nqfvrbsdafrmuzixe }) => {
-        const [title, proposer] = item.BILL_NM.split('(');
-        const cleanProposer = proposer?.replace(')', '');
-
+    const renderBillItem = ({ item }: { item: Law }) => {
         return (
             <TouchableOpacity
                 style={styles.lawItem}
@@ -146,16 +141,16 @@ const Search = ({ route }: SearchProps) => {
                 activeOpacity={0.7}
             >
                 <View style={styles.lawItemHeader}>
-                    <Text style={styles.lawItemDate}>{item.DT}</Text>
-                    <Text style={styles.lawItemProposer}>발의자: {cleanProposer.length > 15 ? cleanProposer.slice(0, 15) + '...' : cleanProposer}</Text>
+                    <Text style={styles.lawItemDate}>{item.DATE}</Text>
+                    <Text style={styles.lawItemProposer}>발의자: {item.AGENT.length > 15 ? item.AGENT.slice(0, 15) + '...' : item.AGENT}</Text>
                 </View>
                 <Text
                     style={styles.lawTitle}
                     numberOfLines={2}
                     ellipsizeMode="tail"
-                >{title}</Text>
+                >{item.TITLE}</Text>
                 <View style={styles.lawItemTagContent}>
-                    <Text style={styles.lawItemTagText}>{item.BILL_KIND}</Text>
+                    <Text style={styles.lawItemTagText}>{item.TEG}</Text>
                     <Text style={[styles.lawItemTagText,
                     {
                         backgroundColor:
