@@ -1,1569 +1,102 @@
 [
   {
-    "DATE": "2025-05-11",
+    "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "노인장기요양보험법 일부개정법률안",
-    "AGENT": "이개호의원 등 10인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2L5J0K4I2J8Q1R1Q2Q8O5N8O7V3W2"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "의료기사 등에 관한 법률 일부개정법률안",
-    "AGENT": "이개호의원 등 10인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_B2Z5A0Y4Z1U1T1T5S2S2Q0R4Z9A9Y1"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "국민건강증진법 일부개정법률안",
-    "AGENT": "박덕흠의원 등 11인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_E2D5B0C4K0K7J1J3I3I5G3C3D6B1C0"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "정보통신망 이용촉진 및 정보보호 등에 관한 법률 일부개정법률안",
-    "AGENT": "이수진의원 등 12인",
-    "COMMITTEE": "과학기술정보방송통신위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2A5Y0Y4X1Y8W1W0S3R5R2P6Q7O6P4"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "별정우체국법 일부개정법률안",
-    "AGENT": "장종태의원 등 10인",
-    "COMMITTEE": "과학기술정보방송통신위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2L5L0T4U2S1T1R4P2Q4Y3Y3X7X7V8"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "원자력안전위원회의 설치 및 운영에 관한 법률 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "과학기술정보방송통신위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_G2G5C0D4B2C3A1B5Z5H7H3G3G4F6F4"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "기술보증기금법 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_D2F5D0D4L2L3K1I5J5H3I1E0E5C6D7"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "신에너지 및 재생에너지 개발·이용·보급 촉진법 일부개정법률안",
-    "AGENT": "김교흥의원 등 11인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_F2F5E0E3M1K0L1J7K1I4J4E6F7E7C6"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "중소기업협동조합법 일부개정법률안",
-    "AGENT": "이정문의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_F2F5E0E4C2K5K1I0J0H5G1G9C7D6B1"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "자유무역지역의 지정 및 운영에 관한 법률 일부개정법률안",
-    "AGENT": "윤한홍의원 등 14인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2V5W0U4V2T9T1P5O3O0M2N3L7M1U4"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "농어촌 전기공급사업 촉진법 일부개정법률안",
-    "AGENT": "김원이의원 등 11인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_K2S5T0R4R2Q2R1P3P5X9Y0W8U0T9S6"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "항공·철도 사고조사에 관한 법률 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_L2M5U0V4T2T3R1Q5R5Z9Z1X7Y4W8X5"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "신행정수도 후속대책을 위한 연기·공주지역 행정중심복합도시 건설을 위한 특별법 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_T2T5B0C4A2Y3Z1X5Y5U6U5T1T3R0S9"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "대도시권 광역교통 관리에 관한 특별법 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_R2P5P0X4Y2W3X1V5W5U3U5C5D7B5A5"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "항공안전법 일부개정법률안",
-    "AGENT": "권향엽의원 등 10인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Q2O5W0X4V0W8U2V0T1P0Q5O6O1M4N7"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "공동주택관리법 일부개정법률안",
-    "AGENT": "박용갑의원 등 22인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2N5L0L4K0S8S1Q4R5P6Q1O1P1X7V0"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "여객자동차 운수사업법 일부개정법률안",
-    "AGENT": "박정의원 등 16인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_J2R5R0Q4Q1P5P1O7O1W4U5V7T8U1S5"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "형사소송법 일부개정법률안",
-    "AGENT": "김용민의원 등 25인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_T2S5S0B5Z0Z2X0Z7X4X7F1E6E8C1D0"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "형법 일부개정법률안",
-    "AGENT": "이수진의원 등 10인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_A2Z5Z0H4H1G8G1F0F3D0M1M4K8L3J5"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "형사소송법 일부개정법률안",
-    "AGENT": "이강일의원 등 13인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_H2G5G0O4P2N2O1M4K5L4T3U0S5T4R6"
-  },
-  {
-    "DATE": "2025-05-11",
-    "TAG": "법률안",
-    "TITLE": "의료·요양 등 지역 돌봄의 통합지원에 관한 법률 일부개정법률안",
-    "AGENT": "이개호의원 등 10인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_K2I5J0I4I1G1H1P5P2O1M2N9L7M9H6"
-  },
-  {
-    "DATE": "2025-05-12",
-    "TAG": "법률안",
-    "TITLE": "가축전염병 예방법 일부개정법률안",
-    "AGENT": "이만희의원 등 10인",
+    "TITLE": "수산자원관리법 일부개정법률안",
+    "AGENT": "이원택의원 등 12인",
     "COMMITTEE": "농림축산식품해양수산위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_G2E5F0N4N1M1K1K0J1J6R4S2Q6R0P6"
+    "BILL_ID": "PRC_T2S5R0Q3Y1X7W1V0E4C0C0A3J3H7E7"
   },
   {
-    "DATE": "2025-05-12",
+    "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "농림수산식품투자조합 결성 및 운용에 관한 법률 일부개정법률안",
-    "AGENT": "서왕진의원 등 12인",
+    "TITLE": "농어촌정비법 일부개정법률안",
+    "AGENT": "곽규택의원 등 10인",
     "COMMITTEE": "농림축산식품해양수산위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_P2N5N0M4N1L7T1T5S5S8Q5R1Q3Q4M1"
+    "BILL_ID": "PRC_D2E5D0D5B0C1K1K5J4H3I4G8H0P2P4"
   },
   {
-    "DATE": "2025-05-12",
-    "TAG": "법률안",
-    "TITLE": "산림재난방지법 일부개정법률안",
-    "AGENT": "이성권의원 등 10인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_V2T5U0C4A1B4Z1A8Y0Z7G2H6G5E2E8"
-  },
-  {
-    "DATE": "2025-05-12",
-    "TAG": "법률안",
-    "TITLE": "수의사법 일부개정법률안",
-    "AGENT": "임호선의원 등 11인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_H2G5E0E4M2N1L1M0K4K9J1R7R8P2Q9"
-  },
-  {
-    "DATE": "2025-05-12",
-    "TAG": "법률안",
-    "TITLE": "가축전염병 예방법 일부개정법률안",
-    "AGENT": "이만희의원 등 10인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_N2N5M0N4L1L1J1K0G1E7F0D9E7C0K4"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "김건희와 명태균ㆍ건진법사 관련 국정농단 및 불법 선거 개입 사건 등 진상규명을 위한 특별검사 임명 등에 관한 법률안",
-    "AGENT": "서영교의원ㆍ정춘생의원ㆍ정혜경의원 외 185인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_W2T5B0C4I2A5R1V6C2P6V2V8T5R1T6"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "윤석열 전 대통령 등에 의한 내란ㆍ외환 행위의 진상규명을 위한 특별검사 임명 등에 관한 법률안",
-    "AGENT": "김용민의원ㆍ정춘생의원ㆍ정혜경의원 외 185인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_R2Y5K0O4B2F5D1R5F0Y8X4H1Y7W8J5"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "근로기준법 일부개정법률안",
-    "AGENT": "한창민의원 등 11인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_P2N5O0M4T2S1S1R3R4P0Q1Y5Z7X0X5"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "금융투자피해보상공사 설립 등에 관한 법률안",
-    "AGENT": "이강일의원 등 10인",
-    "COMMITTEE": "정무위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_L2U5S0S4Q0R8Q1Q8Y2W9X2V8W7U5V6"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "남녀고용평등과 일·가정 양립 지원에 관한 법률 일부개정법률안",
-    "AGENT": "김태선의원 등 17인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Y2Y5X0X4V2W3V1Q4R0P0P5O6O3N5O4"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "순환경제사회 전환 촉진법 일부개정법률안",
-    "AGENT": "김성원의원 등 10인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2X5Y0F4G0E3F1D5C4C8K2L2J8J9I6"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "임금채권보장법 일부개정법률안",
-    "AGENT": "이용우의원 등 11인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_J2K5S0T4R2R5P1O4P1W5X1W7W8U4V6"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "직업안정법 일부개정법률안",
-    "AGENT": "김태선의원 등 17인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2X5F0G4E2F3D1C3C5Y9Y3X0Y6W6W4"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "화학물질관리법 일부개정법률안",
-    "AGENT": "박정의원 등 18인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2N5N0L4M1U5S1T7R1S2Q1R7Y5X4Y2"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "진실·화해를 위한 과거사정리 기본법 전부개정법률안",
-    "AGENT": "용혜인의원 등 22인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_E2E5D0L4L1K7K1I0J0I9I1Q6O5P5N4"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "토양환경보전법 일부개정법률안",
-    "AGENT": "박찬대의원 등 10인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_W2U5V0T4U1B8C1B0Z4Z8X3Y2G2H6F7"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "화학물질관리법 일부개정법률안",
-    "AGENT": "이용우의원 등 11인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_S2T5B0Z4A2Y5Z1X4X1T8S5S7Q6R1P4"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "윤석열 전 대통령 배우자 김건희의 주가조작 사건 등의 진상규명을 위한 특별검사 임명 등에 관한 법률안",
-    "AGENT": "이성윤의원 등 13인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_E2F5E0C4C2L3L1J8K2I4H3H6P8Q1O5"
-  },
-  {
-    "DATE": "2025-05-13",
-    "TAG": "법률안",
-    "TITLE": "윤석열 정부 12ㆍ3 내란 행위의 진상규명을 위한 특별검사 임명 등에 관한 법률안",
-    "AGENT": "이성윤의원 등 13인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_V2T5S0S4R2R3Z1A8Y2Z3X1V1W3E2E5"
-  },
-  {
-    "DATE": "2025-05-14",
-    "TAG": "법률안",
-    "TITLE": "기상법 일부개정법률안",
-    "AGENT": "김선교의원 등 10인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2V5V0U4S2T8A0B9A5A5Y3Z8Y7F8G4"
-  },
-  {
-    "DATE": "2025-05-14",
-    "TAG": "기타",
-    "TITLE": "특정건축물 정리에 관한 특별조치법안",
-    "AGENT": "이수진의원 등 10인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2G4F1D0B3C1L1J7I0H0P0Q0O1N2L3"
-  },
-  {
-    "DATE": "2025-05-14",
-    "TAG": "법률안",
-    "TITLE": "충청권산업투자공사 설립 및 운영에 관한 법률안",
-    "AGENT": "장철민의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_C2C5A0Z4A2V5W1U1V0T2U0S2T3A5Z7"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "근로기준법 일부개정법률안",
-    "AGENT": "박정의원 등 18인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_W2X5F0D4E1D5D1B7C1R6P1Q9O7P9N7"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "남녀고용평등과 일·가정 양립 지원에 관한 법률 일부개정법률안",
-    "AGENT": "성일종의원 등 10인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Q2X5Y0W1X1V7U1U7Q5R2P3P9O3M5N7"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "고용보험법 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_L2H5I0G4E2E3M1M5L5J1K2I1J4R7R1"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "김산업의 육성 및 지원에 관한 법률 일부개정법률안",
-    "AGENT": "김원이의원 등 11인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_A2W5X0V4V2U2S1T3B5C9A4A1Z5X7Y5"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "유류오염손해배상 보장법 일부개정법률안",
-    "AGENT": "박찬대의원 등 11인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_B2C5A0B4W2X3U1T0T1B2B5A9Y0Z2X9"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "해양사고의 조사 및 심판에 관한 법률 일부개정법률안",
-    "AGENT": "박찬대의원 등 11인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_A2A5Z0G4H2F3G1E0F1D4L0M9K5L3J2"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "농수산물 유통 및 가격안정에 관한 법률 일부개정법률안",
-    "AGENT": "이원택의원 등 10인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_C2D5B0C4K1K7J1J4H3I3H5O3P7N0O1"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "농어업재해보험법 일부개정법률안",
-    "AGENT": "이원택의원 등 10인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_S2Q5R0Z4Z1X7Y1X4V3V5D4E3C1D2B7"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "농어업재해대책법 일부개정법률안",
-    "AGENT": "이원택의원 등 10인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_B2C5K0L4J1J7I1G4H3O4P4O5O7M3N9"
-  },
-  {
-    "DATE": "2025-05-15",
+    "DATE": "2025-05-23",
     "TAG": "법률안",
     "TITLE": "양곡관리법 일부개정법률안",
-    "AGENT": "이원택의원 등 10인",
+    "AGENT": "송옥주의원 등 10인",
     "COMMITTEE": "농림축산식품해양수산위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2A5H0I4H1H7F1G4E3M6N3L1L5K9L9"
+    "BILL_ID": "PRC_L2K5K0J4J2R9R1Q0O0P5N4O6W5W9U2"
   },
   {
-    "DATE": "2025-05-15",
+    "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "해양사고의 조사 및 심판에 관한 법률 일부개정법률안",
-    "AGENT": "정일영의원 등 13인",
+    "TITLE": "농업·농촌 및 식품산업 기본법 일부개정법률안",
+    "AGENT": "송옥주의원 등 10인",
     "COMMITTEE": "농림축산식품해양수산위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_V2T5T0S4T1R4R1A3Y1Z9X0V7W6L3M2"
+    "BILL_ID": "PRC_Q2R5P0O4O2M9O0J9K5I8G2H3F9G5N2"
   },
   {
-    "DATE": "2025-05-15",
+    "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "고용보험법 일부개정법률안",
-    "AGENT": "성일종의원 등 10인",
+    "TITLE": "농수산물 유통 및 가격안정에 관한 법률 일부개정법률안",
+    "AGENT": "임미애의원 등 15인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_Q2R5P0P4Y1W4W1U8V1U1U4C6B8B4Z0"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "환경영향평가법 일부개정법률안",
+    "AGENT": "이만희의원 등 10인",
     "COMMITTEE": "환경노동위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_D2C5C0A1B1A7H1I7G5H3F2G7E0M2N0"
+    "BILL_ID": "PRC_H2I5G0F5F0D7E1M8N3L2L1J1I2J9E4"
   },
   {
-    "DATE": "2025-05-15",
+    "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "근로기준법 일부개정법률안",
-    "AGENT": "성일종의원 등 10인",
-    "COMMITTEE": "환경노동위원회",
+    "TITLE": "알오티씨 육성 및 활성화에 관한 법률안",
+    "AGENT": "전현희의원 등 14인",
+    "COMMITTEE": "국방위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_R2Q5Q0O1P1N7J1K7I5I4H2I4G0G3P7"
+    "BILL_ID": "PRC_M2K5L0J4J3I0J1Q4R3P7Q1O1O9N7V5"
   },
   {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "정부조직법 일부개정법률안",
-    "AGENT": "황운하의원 등 12인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_J2I5I0E4F2D9D1C0A5B6I0J4I4I1G4"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "정부조직법 일부개정법률안",
-    "AGENT": "민형배의원 등 11인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2N5O0V4W2U5V1U7S1S8O3P7N8N2M1"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "의용소방대 설치 및 운영에 관한 법률 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_B2Z5Z0H4I2G3H1F5G5E8T1U6S7S3R3"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "지방세특례제한법 일부개정법률안",
-    "AGENT": "윤종오의원 등 11인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_V2U5U0T4T1B1C1A3Y0Z0Y5Y6U5U6T5"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "지역사랑상품권 이용 활성화에 관한 법률 일부개정법률안",
-    "AGENT": "이원택의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_B2B5A0I3I0G4H1G5G3F7N0N2L1M9K2"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "지방세특례제한법 일부개정법률안",
-    "AGENT": "신영대의원 등 13인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_J2J5H0G4H1F4F1N3O0M9N5L4K4K9S8"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "정부조직법 일부개정법률안",
-    "AGENT": "전종덕의원 등 14인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2Y5W0X4W1W5R1S3R5P7Q4O5P4W9X8"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "전북특별자치도 설치 및 글로벌생명경제도시 조성을 위한 특별법 일부개정법률안",
-    "AGENT": "이춘석의원 등 13인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2F5F0D4E2D1B1B0J0K4I4J7H7I8G4"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "재해구호법 일부개정법률안",
-    "AGENT": "권향엽의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Y2Y5X0Y4F2G3E1D7D4B5C3K7L6J4H0"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "경범죄 처벌법 일부개정법률안",
-    "AGENT": "이훈기의원 등 14인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_F2N5M0K3J2K5S1R5P4O4W0X8Y8X8V6"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "공직자윤리법 일부개정법률안",
-    "AGENT": "황명선의원 등 17인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_C2D5L0L4J2K8J1J5H3I6D0C2D7B7B0"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "민원 처리에 관한 법률 일부개정법률안",
-    "AGENT": "김태선의원 등 17인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Y2W5X0V4V2D3C1D3B5B7Z5A2W2W5V0"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "지방세특례제한법 일부개정법률안",
-    "AGENT": "박상웅의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_U2V5D0D4B2C3A1Z6Z3H5I4G6H3F9G0"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "공직선거법 일부개정법률안",
-    "AGENT": "성일종의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2P4N0O8J0I8I1H9I0G3G5O7N6N0L3"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "정치자금법 일부개정법률안",
-    "AGENT": "이인영의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_G2H5F0G4E1C1D1L4M5K9K4I1H8I6P3"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "주민소환에 관한 법률 일부개정법률안",
-    "AGENT": "이인영의원 등 11인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Y2X5X0W4W0E9E1D5B0C7A1A9I4J2H2"
-  },
-  {
-    "DATE": "2025-05-15",
-    "TAG": "법률안",
-    "TITLE": "공직선거법 일부개정법률안",
-    "AGENT": "조승래의원 등 11인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2N5L0M4K2L2G0F9F2E4E4C8D7L9M1"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "근로기준법 일부개정법률안",
-    "AGENT": "김정호의원 등 14인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_E2D5B0C4A2B8W1X2V5W9U3S2T8B0C4"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "돌봄노동자의 고용개선 등에 관한 법률안",
-    "AGENT": "윤준병의원 등 15인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_J2H5I0G4H2F3G1N1O1N2L3L1J7L6G0"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "일터에서의 괴롭힘 예방 및 피해자 보호에 관한 법률안",
-    "AGENT": "김소희의원 등 41인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_F2D5C0C4A2B9J0K9I0I8H2F3G3N3O8"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "자원의 절약과 재활용촉진에 관한 법률 일부개정법률안",
-    "AGENT": "엄태영의원 등 10인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_C2D5B0Q4R0P7Q1O5P1N6V5V8U6V2T4"
-  },
-  {
-    "DATE": "2025-05-16",
+    "DATE": "2025-05-22",
     "TAG": "기타",
-    "TITLE": "종로구 소상공인 피해 지원을 위한 특별법안",
-    "AGENT": "곽상언의원 등 55인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2P5N0V4W2U4U1T3T4R9S5A9B9Z0A1"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "무역기술장벽 대응 및 지원에 관한 법률안",
-    "AGENT": "허성무의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_B2A5A0I4J2H3G0G9E0F5N0O7M4M6L6"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "고용보험법 일부개정법률안",
-    "AGENT": "백선희의원 등 12인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_A2Z5X0Y3G2F5D1C7D4L5K4I8H7I6D3"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "정보통신망 이용촉진 및 정보보호 등에 관한 법률 일부개정법률안",
-    "AGENT": "김상훈의원 등 13인",
-    "COMMITTEE": "과학기술정보방송통신위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_T2R5R0P4Q2O9P1X0X5W1W5V4T5U3B0"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "건축법 일부개정법률안",
-    "AGENT": "맹성규의원 등 20인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2L5L0K4K3S0S1R1S2Q4Q5P3P2X6V2"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "교육시설 등의 안전 및 유지관리 등에 관한 법률 일부개정법률안",
-    "AGENT": "민형배의원 등 10인",
-    "COMMITTEE": "교육위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2Q5O0O4M2V5V1T7U1S9T4R6S4Z1A9"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "지방대학 및 지역균형인재 육성에 관한 법률 일부개정법률안",
-    "AGENT": "민형배의원 등 11인",
-    "COMMITTEE": "교육위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2A5Y0Z4X2Y5G1G7F1D7D5C2D2K2L5"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "도시 및 주거환경정비법 일부개정법률안",
-    "AGENT": "맹성규의원 등 20인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_N2L5M0U4U3T0T1R1S2R6Y2Z7X0Y1W7"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "건설산업기본법 일부개정법률안",
-    "AGENT": "맹성규의원 등 20인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2P5N0O4V3U0U1T1T2R0S1A3B7Z0Z3"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "건축법 일부개정법률안",
-    "AGENT": "김태년의원 등 10인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2A5Z0Z4H2H5G1G1E2F6E5L8M6K1L1"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "공동주택관리법 일부개정법률안",
-    "AGENT": "정준호의원 등 10인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2I5H0G3B1A9Y0X8E4D2Q1P1W5V1U5"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "수입식품안전관리 특별법 일부개정법률안",
-    "AGENT": "신영대의원 등 12인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_E2C5C0K4J1J4I1I3G1H0D2B4C2A5B0"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "지방의료원의 설립 및 운영에 관한 법률 일부개정법률안",
-    "AGENT": "민형배의원 등 11인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_W2X5V0W4U2T5T1B7B1A9B1Z3Z6Y7U5"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "장애아동 복지지원법 일부개정법률안",
-    "AGENT": "안태준의원 등 19인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2V5W0D4F1D7D1B3C4B9I3J9H1I5G2"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "국민건강보험법 일부개정법률안",
-    "AGENT": "이기헌의원 등 10인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2P5N0O4M2N8L1L3T0S0S0Q8R9P7Q7"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "고위공직자범죄수사처 설치 및 운영에 관한 법률 일부개정법률안",
-    "AGENT": "윤준병의원 등 10인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_W2X5V0V4U2S4T1A3B2A5A3Y7Z7Y0F7"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "법원조직법 일부개정법률안",
-    "AGENT": "민형배의원 등 12인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_H2F5O0O3N2M6K1S1T4S0Q0R1Z8A9Z1"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "법원조직법 일부개정법률안",
-    "AGENT": "민형배의원 등 11인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2M5L0M4T2U5S1R7R1Q8D1E6C2A3B8"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "취업 후 학자금 상환 특별법 일부개정법률안",
-    "AGENT": "배현진의원 등 11인",
-    "COMMITTEE": "교육위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_J2K5I0G5H0D1E1C4C4B5Z4A8H8I8G6"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "한국장학재단 설립 등에 관한 법률 일부개정법률안",
-    "AGENT": "배현진의원 등 11인",
-    "COMMITTEE": "교육위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_T2U5T0T5B0B1A1Y4Z4X6Y2F1G8F2F1"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "주택법 일부개정법률안",
-    "AGENT": "정준호의원 등 11인",
-    "COMMITTEE": "국토교통위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_U2U5K0L4K0I1I1G1H3P8P1O3M9N3L7"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "게임산업진흥에 관한 법률 일부개정법률안",
-    "AGENT": "민형배의원 등 10인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_K2I5J0Q4R2Q5Q1O7P1N7O2W1W6U1T0"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "스포츠산업 진흥법 일부개정법률안",
-    "AGENT": "임오경의원 등 12인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_T2P5Q0O4P2N8N1L2U4U9T2T4R9S1Q5"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "사행산업통합감독위원회법 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_L2K5K0I4J2H3I1Q5Q5P5N2N5M9N9I3"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "이스포츠(전자스포츠) 진흥에 관한 법률 일부개정법률안",
-    "AGENT": "박덕흠의원 등 10인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_B2W5X0V4W3U0U0S8U5B1C2A4B7Z6X1"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "스포츠산업 진흥법 일부개정법률안",
-    "AGENT": "박덕흠의원 등 10인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_R2S5Q0Y4Z3X0X0V8X5V0V3R9P4Q7O6"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "문화유산의 보존 및 활용에 관한 법률 일부개정법률안",
-    "AGENT": "임종득의원 등 10인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_I2I5H0H4F2H8F0F8N4N9M4K1L1J7K5"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "전통사찰의 보존 및 지원에 관한 법률 일부개정법률안",
-    "AGENT": "임종득의원 등 10인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_A2A5I0I4H2H8G0E8E4M8N2L0M4K2L0"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "전통사찰의 보존 및 지원에 관한 법률 일부개정법률안",
-    "AGENT": "정희용의원 등 11인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_I2G5G0E4F2N5N1L1M2K9L1K1F1G2E7"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "국회법 일부개정법률안",
-    "AGENT": "오기형의원 등 10인",
-    "COMMITTEE": "국회운영위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_D2E5C0D4L2L9K0I9J4H1H0Q6Q6O2P3"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "국회법 일부개정법률안",
-    "AGENT": "황운하의원 등 12인",
-    "COMMITTEE": "국회운영위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_C2A5B0Z4A2Y9Z1G0F5G5E2E1C7E3L4"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "법원조직법 일부개정법률안",
-    "AGENT": "김용민의원 등 14인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_H2I5G0F5G0N2O1M6L4M5K2L0S2R1R9"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "가족친화 사회환경의 조성 촉진에 관한 법률 일부개정법률안",
-    "AGENT": "안태준의원 등 10인",
-    "COMMITTEE": "여성가족위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_K2L5J0K4I1J4H1I6Q4O2O4N7O1M6M7"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "성폭력방지 및 피해자보호 등에 관한 법률 일부개정법률안",
-    "AGENT": "임호선의원 등 10인",
-    "COMMITTEE": "여성가족위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_H2H5P0O4O0N3N1L7M1B3C1A8A3Z3X9"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "양성평등기본법 일부개정법률안",
-    "AGENT": "장철민의원 등 16인",
-    "COMMITTEE": "여성가족위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Q2R5P0P4Y2W1W1U3V2T9U0C5A4B8Z2"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "형사소송법 일부개정법률안",
-    "AGENT": "김예지의원 등 10인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_K2S5R0R4P2Q1O1P5L5L5J2I2J8H7H3"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "공탁법 일부개정법률안",
-    "AGENT": "김예지의원 등 10인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_P2X5Y0W4X2V1W1U5Q5Q4O5P8O3O0M9"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "형법 일부개정법률안",
-    "AGENT": "민형배의원 등 10인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_L2J5J0I5G0H2C1D2B0C8A3B1Z4A8H7"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "형사소송법 일부개정법률안",
-    "AGENT": "구자근의원 등 13인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_U2U5S0T5S0Q2Q1M1N3L4L4K5I1J4R4"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "형사소송법 일부개정법률안",
-    "AGENT": "민형배의원 등 10인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_C2B5Z0A5I0I2G1H2G0E8F0N0N5L1K8"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "형사소송법 일부개정법률안",
-    "AGENT": "이용우의원 등 10인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_S2S5A0B5Z0Z2Y1W2X3F2F1E3E1C0B3"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "형사소송법 일부개정법률안",
-    "AGENT": "박은정의원 등 11인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_D2E5D0B5B0J2K1I1J5H3F0G7C2D9B7"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "사면법 일부개정법률안",
-    "AGENT": "이강일의원 등 17인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_I2I5G0H4F2E2E1M4N5L6M1K5L7J3R3"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "형사소송법 일부개정법률안",
-    "AGENT": "김태년의원 등 10인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_S2N5O0M5N0L1M1K7L5T1R1R5Q8R1P2"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "전기통신사업법 일부개정법률안",
-    "AGENT": "전용기의원 등 11인",
-    "COMMITTEE": "과학기술정보방송통신위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_N2O5J0K4J3J0H1I5G0H3P3N3O5M3M2"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "문화유산의 보존 및 활용에 관한 법률 일부개정법률안",
-    "AGENT": "정희용의원 등 11인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_N2N5V0W4U2U5T1T1S2S7A1B2Z8Z4Y6"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "정부기관 및 공공법인 등의 광고시행에 관한 법률 일부개정법률안",
-    "AGENT": "최민희의원 등 14인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_U2U5C0C4A2B4A1A4Z0Z5H1H7G1E9F4"
-  },
-  {
-    "DATE": "2025-05-16",
-    "TAG": "법률안",
-    "TITLE": "매장유산 보호 및 조사에 관한 법률 일부개정법률안",
-    "AGENT": "이기헌의원 등 11인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2W5W0V4T2U4B1C5A5B5Z1A1Y7Y5U1"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "공공기관의 운영에 관한 법률 일부개정법률안",
-    "AGENT": "이성권의원 등 16인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2Y5Y0G4H2F5F1E7C2D8K3L1K2K8I0"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "국가재정법 일부개정법률안",
+    "TITLE": "석탄화력발전소 조기 폐지 및 정의로운 전환 지원에 관한 특별법안",
     "AGENT": "박지혜의원 등 13인",
-    "COMMITTEE": "기획재정위원회",
+    "COMMITTEE": "산업통상자원중소벤처기업위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2N5L0J4L2G7H1F8D0E8C1D5L6L6K5"
+    "BILL_ID": "PRC_J2H5I0G4G2F7N1N8M0M6L2L1J0S9S8"
   },
   {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "군인복지기본법 일부개정법률안",
-    "AGENT": "황희의원 등 11인",
-    "COMMITTEE": "국방위원회",
+    "DATE": "2025-05-22",
+    "TAG": "기타",
+    "TITLE": "주력산업 고부가가치화 및 경쟁력 강화 지원법안",
+    "AGENT": "이언주의원 등 17인",
+    "COMMITTEE": "산업통상자원중소벤처기업위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2Y4G1G2F0D3E1C8D4K1L3J3I9I2G5"
+    "BILL_ID": "PRC_T2B5B0A4A2Y4Z1Y5F4G2E0F6D7E2C0"
   },
   {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "군인사법 일부개정법률안",
-    "AGENT": "황희의원 등 11인",
-    "COMMITTEE": "국방위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_N2N5M0N2L1L3H1I0G5E0F0D9E6M6M0"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "헌법재판소법 일부개정법률안",
-    "AGENT": "정진욱의원 등 34인",
-    "COMMITTEE": "법제사법위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_C2J5K0I5J0H2F1G8O2O5N4O6M8M8K7"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "상속세 및 증여세법 일부개정법률안",
-    "AGENT": "이병진의원 등 11인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_I2G5H0F1G2E3E1N5L2L9K2K0J8J7F5"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "조세특례제한법 일부개정법률안",
-    "AGENT": "임미애의원 등 13인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_I2G5H0F4F1O4O1M8L1M0K4K1S2T7R6"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "조세특례제한법 일부개정법률안",
-    "AGENT": "김재원의원 등 11인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Q2O5O0N4O2V2U1V0T5T6S1S9A5B6Z2"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "조세특례제한법 일부개정법률안",
-    "AGENT": "신영대의원 등 13인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Y2Y5X0X4F1E4E1C3D0B9C2K9I1J8H3"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "양성평등기본법 일부개정법률안",
-    "AGENT": "권향엽의원 등 10인",
-    "COMMITTEE": "여성가족위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_R2S5R0R2P2Q7Y1W7X4V5V4U5V4C2B4"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "장애인복지법 일부개정법률안",
-    "AGENT": "최보윤의원 등 11인",
+    "DATE": "2025-05-22",
+    "TAG": "기타",
+    "TITLE": "아동기본법안",
+    "AGENT": "백선희의원 등 24인",
     "COMMITTEE": "보건복지위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_P2P5X0X4W2U9V1T7U4Q4Q2P4N2N2M7"
+    "BILL_ID": "PRC_Y2Y5X0X4F2E9E1C3D2C8C0R2R2Q2O4"
   },
   {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "아동복지법 일부개정법률안",
-    "AGENT": "최보윤의원 등 11인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2L5L0J4K2S9S1R7P4Q5O2O1K2L6J9"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "외국인투자 촉진법 일부개정법률안",
-    "AGENT": "박형수의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_A2I5H0H5F0G2E1F4B3B8Z4A3Z2X9X8"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "대·중소기업 상생협력 촉진에 관한 법률 일부개정법률안",
-    "AGENT": "권칠승의원 등 11인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Y2G5H0F1G0E6F1D1D1L6K5K4I9J7I9"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "광산안전법 일부개정법률안",
-    "AGENT": "권칠승의원 등 11인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_E2C5D0B1C0K6I1I1H1H2G0G2O2N7N6"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "모자보건법 일부개정법률안",
-    "AGENT": "김정재의원 등 11인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_D2C5A0A4I2J5H1I5G0G2F2N3N8M0N1"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "벤처투자 촉진에 관한 법률 일부개정법률안",
-    "AGENT": "권칠승의원 등 11인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_P2O5V0W1U0V6T1U1S2O3P2N0N4M0N6"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "변리사법 일부개정법률안",
-    "AGENT": "권칠승의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_W2W5V0V1T0S6S1A1B2Z4A3Y0Z2X8F9"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "부가가치세법 일부개정법률안",
-    "AGENT": "윤준병의원 등 10인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2N5N0M4M2U4S0T9S3S6Q2R0Z9X4Y0"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "조세특례제한법 일부개정법률안",
-    "AGENT": "이인선의원 등 11인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_K2L5S0T4S1Q7Q1O7P3X0Y4W5V6V0T4"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "중소기업협동조합법 일부개정법률안",
-    "AGENT": "권칠승의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2X5V0W1U0V6T1U1Q2O9O0N0N9M8M3"
-  },
-  {
-    "DATE": "2025-05-17",
-    "TAG": "법률안",
-    "TITLE": "대통령 등의 경호에 관한 법률 일부개정법률안",
-    "AGENT": "권향엽의원 등 10인",
-    "COMMITTEE": "국회운영위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_V2W5U0T2T2R7S1Z7A4Z7Z4X0W1X7S9"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "근로자의 날 제정에 관한 법률 전부개정법률안",
-    "AGENT": "이용우의원 등 11인",
-    "COMMITTEE": "환경노동위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_U2S5T0R4S2Q5Q1Z4X1Y7W0W6V4V7R4"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "장애인복지법 일부개정법률안",
-    "AGENT": "서미화의원 등 10인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_L2Q5O0N4N1V8W1U8U5T2U2S3S1B5Z3"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "노인복지법 일부개정법률안",
-    "AGENT": "김정재의원 등 10인",
-    "COMMITTEE": "보건복지위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_A2Z5Z0X4W0X8E1F6D4E5C2D0B8J9K1"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "상속세 및 증여세법 일부개정법률안",
-    "AGENT": "차규근의원 등 11인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_T2U5S0S5B0Z2Z1Y0Z2X4X2R6R8Q8O6"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "조세특례제한법 일부개정법률안",
-    "AGENT": "김정재의원 등 10인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2Z5X0Y4F2G5F1F5D0E2C5D5Z5X2Y0"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "조세특례제한법 일부개정법률안",
-    "AGENT": "이인선의원 등 10인",
-    "COMMITTEE": "기획재정위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_G2H5F0D4E1M7N1L7L3K2K5J1E1F4E5"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "고등교육법 일부개정법률안",
-    "AGENT": "이개호의원 등 10인",
-    "COMMITTEE": "교육위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_F2E5C0C4K1L1J1K5I2G0H3P5P4N6P4"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "규제자유특구 및 지역특화발전특구에 관한 규제특례법 일부개정법률안",
-    "AGENT": "이만희의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2X5Y0W5V0V7D1E8C3D4B1B5A7I6I3"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "소상공인 보호 및 지원에 관한 법률 일부개정법률안",
-    "AGENT": "이만희의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_P2P5N0O5N0N7V1U8U3S3T4R5S1A7Y0"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "우주개발 진흥법 일부개정법률안",
-    "AGENT": "황희의원 등 10인",
-    "COMMITTEE": "과학기술정보방송통신위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_R2Q5Q0Y2Y1X4Y1W0W5V3R3R1P2Q6P8"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "도시가스사업법 일부개정법률안",
-    "AGENT": "김성원의원 등 10인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_R2P5P0N4O2W2U1V7T5U3S1T1A2Z1A7"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "지방세특례제한법 일부개정법률안",
-    "AGENT": "이만희의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_O2M5L0M4K2K2S0T9R2S3Q2P9P9L0L3"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "공직선거법 일부개정법률안",
-    "AGENT": "정춘생의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_D2E5C0C4K1J4J1H9I3H8H2D7B3C4A5"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "공직선거법 일부개정법률안",
-    "AGENT": "민형배의원 등 11인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_H2F5F0N5O0M7N1L5M1K7L4T7R4R3Q6"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "공휴일에 관한 법률 일부개정법률안",
-    "AGENT": "정춘생의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_W2D5E0C5D0B7C1A4A5I8H5H8G3G9F6"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "공직선거법 일부개정법률안",
-    "AGENT": "이광희의원 등 12인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_V2W5U0V4T1S4S1A0A4Y0A3Y4Y4X7S4"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "국립국가폭력트라우마치유센터의 설립 및 운영에 관한 법률 일부개정법률안",
-    "AGENT": "백혜련의원 등 11인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2Y5Z0X4X2W8S1S5Q5R3P3Q8O7P8W2"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "지방세특례제한법 일부개정법률안",
+    "DATE": "2025-05-22",
+    "TAG": "기타",
+    "TITLE": "공유토지분할에 관한 특례법안",
     "AGENT": "곽규택의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
+    "COMMITTEE": "국토교통위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_S2R5R0Z5A0Y1Z1X5V4W5E0F6D1D7B1"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "공직선거법 일부개정법률안",
-    "AGENT": "고동진의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_S2T5B0C5A0A7Z1X0Y5T4U2S3T7R1S6"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "공직선거법 일부개정법률안",
-    "AGENT": "박수민의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_X2Y5W0X4V0U8U1C0D3B4B1A9Z1Z7H9"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "진실·화해를 위한 과거사정리 기본법 일부개정법률안",
-    "AGENT": "조지연의원 등 33인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_U2S5S0R5P0Q1Y1Z0X3V7W5U9V4C7D6"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "지방공기업법 일부개정법률안",
-    "AGENT": "이성권의원 등 16인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_L2T5T0S4Q2R5P1P7L2M7K4L8J4J6I9"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "국가공무원법 일부개정법률안",
-    "AGENT": "이성권의원 등 16인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_V2T5U0S4T2B5B1Z7A2Z6X2X7F4G1E4"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "지방공무원법 일부개정법률안",
-    "AGENT": "이성권의원 등 16인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_G2G5V0W4U2S5T1R7S2Z7A1Z2Z1X3Y2"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "어린이놀이시설 안전관리법 일부개정법률안",
-    "AGENT": "최보윤의원 등 10인",
-    "COMMITTEE": "행정안전위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_D2L5M0K4L1J6K1I1J2X2Y1X5V6V5U0"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "국민체육진흥법 일부개정법률안",
-    "AGENT": "김예지의원 등 12인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Z2A5Y0W4X2F1F1D5F5D7D5B4C9K4I0"
-  },
-  {
-    "DATE": "2025-05-18",
-    "TAG": "법률안",
-    "TITLE": "저작권법 일부개정법률안",
-    "AGENT": "김재원의원 등 11인",
-    "COMMITTEE": "문화체육관광위원회",
-    "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_G2G5E0D4E2C1C1K7L2J7K5I2H3H1P4"
+    "BILL_ID": "PRC_N2N5L0N5L0L1J1K5S4Q2R2P5Q0O4P3"
   },
   {
     "DATE": "2025-05-21",
@@ -1737,102 +270,912 @@
     "BILL_ID": "PRC_D2E5C0D4B2J9K1I0I1H3I4G5G6P9N7"
   },
   {
-    "DATE": "2025-05-22",
-    "TAG": "기타",
-    "TITLE": "석탄화력발전소 조기 폐지 및 정의로운 전환 지원에 관한 특별법안",
-    "AGENT": "박지혜의원 등 13인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "대규모유통업에서의 거래 공정화에 관한 법률 일부개정법률안",
+    "AGENT": "민형배의원 등 10인",
+    "COMMITTEE": "정무위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_J2H5I0G4G2F7N1N8M0M6L2L1J0S9S8"
+    "BILL_ID": "PRC_F2O5O0M5N0L1M2K1L2H9H2G1E9E4D2"
   },
   {
-    "DATE": "2025-05-22",
-    "TAG": "기타",
-    "TITLE": "주력산업 고부가가치화 및 경쟁력 강화 지원법안",
-    "AGENT": "이언주의원 등 17인",
-    "COMMITTEE": "산업통상자원중소벤처기업위원회",
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "개인정보 보호법 일부개정법률안",
+    "AGENT": "이정문의원 등 10인",
+    "COMMITTEE": "정무위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_T2B5B0A4A2Y4Z1Y5F4G2E0F6D7E2C0"
+    "BILL_ID": "PRC_H2I5G0G4E2N8N1L0M1K5L0J2K3S2S3"
   },
   {
-    "DATE": "2025-05-22",
-    "TAG": "기타",
-    "TITLE": "아동기본법안",
-    "AGENT": "백선희의원 등 24인",
-    "COMMITTEE": "보건복지위원회",
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "소비자기본법 일부개정법률안",
+    "AGENT": "유동수의원 등 10인",
+    "COMMITTEE": "정무위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Y2Y5X0X4F2E9E1C3D2C8C0R2R2Q2O4"
+    "BILL_ID": "PRC_D2E5D0D3B3C1J1K0J2H9I2G1H3O0P1"
   },
   {
-    "DATE": "2025-05-22",
-    "TAG": "기타",
-    "TITLE": "공유토지분할에 관한 특례법안",
-    "AGENT": "곽규택의원 등 10인",
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "공익신고자 보호법 일부개정법률안",
+    "AGENT": "조승래의원 등 10인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_Z2V5W0U4V2T3T1S0A1A9Y4Z9X1Y9W1"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "폐교재산의 활용촉진을 위한 특별법 일부개정법률안",
+    "AGENT": "김용태의원 등 13인",
+    "COMMITTEE": "교육위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_E2C5D0C5A0A8J1J1H1I5H1F2F5N8O9"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "주택법 일부개정법률안",
+    "AGENT": "황운하의원 등 12인",
     "COMMITTEE": "국토교통위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_N2N5L0N5L0L1J1K5S4Q2R2P5Q0O4P3"
+    "BILL_ID": "PRC_T2R5S0Q5Q0P7Q0X9Y4X3V5V0U7U1Q9"
   },
   {
     "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "수산자원관리법 일부개정법률안",
-    "AGENT": "이원택의원 등 12인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
+    "TITLE": "지하안전관리에 관한 특별법 일부개정법률안",
+    "AGENT": "김정재의원 등 10인",
+    "COMMITTEE": "국토교통위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_T2S5R0Q3Y1X7W1V0E4C0C0A3J3H7E7"
+    "BILL_ID": "PRC_C2A5Z0Z4V1V5T1U5T0T9R3S1A6Y8Z3"
   },
   {
     "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "농어촌정비법 일부개정법률안",
-    "AGENT": "곽규택의원 등 10인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
+    "TITLE": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+    "AGENT": "박덕흠의원 등 10인",
+    "COMMITTEE": "정무위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_D2E5D0D5B0C1K1K5J4H3I4G8H0P2P4"
+    "BILL_ID": "PRC_L2M5K0K5G0H8F1G5E2C0D3L8M8K0K3"
   },
   {
     "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "양곡관리법 일부개정법률안",
-    "AGENT": "송옥주의원 등 10인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
+    "TITLE": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+    "AGENT": "박덕흠의원 등 11인",
+    "COMMITTEE": "정무위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_L2K5K0J4J2R9R1Q0O0P5N4O6W5W9U2"
+    "BILL_ID": "PRC_F2N5N0L5M0L8L1J5K1S9Q0R0P2Q0M5"
   },
   {
     "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "농업·농촌 및 식품산업 기본법 일부개정법률안",
-    "AGENT": "송옥주의원 등 10인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
+    "TITLE": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+    "AGENT": "이정문의원 등 11인",
+    "COMMITTEE": "정무위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Q2R5P0O4O2M9O0J9K5I8G2H3F9G5N2"
+    "BILL_ID": "PRC_O2M5L0L4J2K1S1T3R2P6Q5O4P0W8X1"
   },
   {
     "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "농수산물 유통 및 가격안정에 관한 법률 일부개정법률안",
-    "AGENT": "임미애의원 등 15인",
-    "COMMITTEE": "농림축산식품해양수산위원회",
+    "TITLE": "금융실명거래 및 비밀보장에 관한 법률 일부개정법률안",
+    "AGENT": "박성준의원 등 15인",
+    "COMMITTEE": "정무위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_Q2R5P0P4Y1W4W1U8V1U1U4C6B8B4Z0"
+    "BILL_ID": "PRC_Z2A5Z0X4X2F5G1E4F4D0C5C0Y8Z9X6"
   },
   {
     "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "환경영향평가법 일부개정법률안",
-    "AGENT": "이만희의원 등 10인",
-    "COMMITTEE": "환경노동위원회",
+    "TITLE": "초·중등교육법 일부개정법률안",
+    "AGENT": "김용태의원 등 12인",
+    "COMMITTEE": "교육위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_H2I5G0F5F0D7E1M8N3L2L1J1I2J9E4"
+    "BILL_ID": "PRC_K2S5S0Q5R0P8O1P5W5X3V0W8U1V5T1"
   },
   {
     "DATE": "2025-05-23",
     "TAG": "법률안",
-    "TITLE": "알오티씨 육성 및 활성화에 관한 법률안",
-    "AGENT": "전현희의원 등 14인",
+    "TITLE": "독점규제 및 공정거래에 관한 법률 일부개정법률안",
+    "AGENT": "민형배의원 등 12인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_R2S5A0B5Z0Z1Y2W1X2S9T0S3S2Q1R3"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "독립유공자예우에 관한 법률 일부개정법률안",
+    "AGENT": "박덕흠의원 등 11인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_P2O5W0W5U0V8U1U5T1A9B5Z5A5Y6Z7"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "행정조사기본법 일부개정법률안",
+    "AGENT": "이해식의원 등 14인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_E2F5D0E4C2D8Y1X3Y4W6W2U9V1D2E1"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "은행법 일부개정법률안",
+    "AGENT": "이학영의원 등 10인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_O2M4L0M5K3S1R1Q6R0P2L3K0I9J8I5"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "할부거래에 관한 법률 일부개정법률안",
+    "AGENT": "한정애의원 등 13인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_H2I5Q0O4O2N8O1M1M1I1I1H3F6G4E9"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+    "AGENT": "권향엽의원 등 11인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_H2F5F0E4F2D9D1M0K5K0J0K3I6I1E3"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "소비자기본법 일부개정법률안",
+    "AGENT": "최보윤의원 등 10인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_N2L5J0K4S2S3R1S5Q5Q6P0X6X5V2W3"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "부패방지 및 국민권익위원회의 설치와 운영에 관한 법률 일부개정법률안",
+    "AGENT": "최보윤의원 등 10인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_G2E5C0D4B2C3R1S5Q5O4P4N3O5W7W2"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "금융실명거래 및 비밀보장에 관한 법률 일부개정법률안",
+    "AGENT": "문진석의원ㆍ황운하의원 등 14인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_O2W5V0V4T1U6T1T6B4B3A5Y4Z2X5Y7"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "독점규제 및 공정거래에 관한 법률 일부개정법률안",
+    "AGENT": "이강일의원 등 13인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_W2U5V0U4S2S3A1B7Z1A2Y2Z6X3F3G7"
+  },
+  {
+    "DATE": "2025-05-23",
+    "TAG": "법률안",
+    "TITLE": "국방개혁에 관한 법률 일부개정법률안",
+    "AGENT": "유용원의원 등 10인",
     "COMMITTEE": "국방위원회",
     "ACT_STATUS": "본회의 부의",
-    "BILL_ID": "PRC_M2K5L0J4J3I0J1Q4R3P7Q1O1O9N7V5"
+    "BILL_ID": "PRC_Z2X5W0X4E2F1D1E5C0D8B3J1K9I7I0"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "고위공직자범죄수사처 설치 및 운영에 관한 법률 일부개정법률안",
+    "AGENT": "최민희의원 등 13인",
+    "COMMITTEE": "법제사법위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_M2N5L0L5K0L2S1T6R2Q7Q5P2P0X7Y2"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "정보통신망 이용촉진 및 정보보호 등에 관한 법률 일부개정법률안",
+    "AGENT": "이훈기의원 등 15인",
+    "COMMITTEE": "과학기술정보방송통신위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_N2N5L0M4L1L4T1T3S5Q4R4P8Q7M9M1"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "소득세법 일부개정법률안",
+    "AGENT": "한지아의원 등 10인",
+    "COMMITTEE": "기획재정위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_I2J5H0I3Q3O1P1N8O3M1M4V1T2T4S3"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "조세특례제한법 일부개정법률안",
+    "AGENT": "임광현의원 등 10인",
+    "COMMITTEE": "기획재정위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_Y2Z5X0Y1G2G0F1D3E5C6D1K6L1K1I6"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "조세특례제한법 일부개정법률안",
+    "AGENT": "이인선의원 등 10인",
+    "COMMITTEE": "기획재정위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_S2A5B0Z4A1Y7X1X7F3F3E5F0D9D2C8"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "전기산업발전기본법 일부개정법률안",
+    "AGENT": "이철규의원 등 10인",
+    "COMMITTEE": "산업통상자원중소벤처기업위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_A2I5H0H4F3G0E0E8M5N9L0M0L0J3J3"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "군인사법 일부개정법률안",
+    "AGENT": "위성락의원 등 10인",
+    "COMMITTEE": "국방위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_U2T5U0B1C2A0Z1Z6Y5Y9G2H8F3G8E2"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "형법 일부개정법률안",
+    "AGENT": "김용민의원 등 25인",
+    "COMMITTEE": "법제사법위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_J2R4Q0O6N0V3W1U5D1B6Z0A8Z1V6T1"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "법원조직법 일부개정법률안",
+    "AGENT": "김용민의원 등 11인",
+    "COMMITTEE": "법제사법위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_Y2W5V0V5T1U3Q0R9P3P3N0M5N7U2V8"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "출입국관리법 일부개정법률안",
+    "AGENT": "한지아의원 등 14인",
+    "COMMITTEE": "법제사법위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_E2C5D0C3A3B1I1J8H3I2G2H7F6F8N6"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "고위공직자범죄수사처 설치 및 운영에 관한 법률 일부개정법률안",
+    "AGENT": "최민희의원 등 13인",
+    "COMMITTEE": "법제사법위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_W2U5U0C5B0B2Z1A6Z2Z8V3V2T6S9T2"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "형법 일부개정법률안",
+    "AGENT": "신장식의원 등 11인",
+    "COMMITTEE": "법제사법위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_J2R5P0Q4O2P2N1O1W0U4V1T5U8S4T9"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "전기통신사업법 일부개정법률안",
+    "AGENT": "최수진의원 등 13인",
+    "COMMITTEE": "과학기술정보방송통신위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_U2S5T0B4Z2A3Y0Z9X5Y4F4E7F9D2D3"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "인사청문회법 일부개정법률안",
+    "AGENT": "위성락의원 등 10인",
+    "COMMITTEE": "국회운영위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_A2B5Z0A1Y2X0X1F6F5D9F5D0D7C7K1"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "국회법 일부개정법률안",
+    "AGENT": "위성락의원 등 10인",
+    "COMMITTEE": "국회운영위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_L2L5K0K1I2Q0R1P6Q5O8P4N7O5K3I5"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "군인사법 일부개정법률안",
+    "AGENT": "한지아의원 등 12인",
+    "COMMITTEE": "국방위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_I2P5Q0P4P2N5M0N9I5J8H0F4N2O9M7"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "병역법 일부개정법률안",
+    "AGENT": "한지아의원 등 12인",
+    "COMMITTEE": "국방위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_P2N5N0M4U2V5T0T9R5S7R3R1N9N1M7"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "국민건강보험법 일부개정법률안",
+    "AGENT": "한지아의원 등 10인",
+    "COMMITTEE": "보건복지위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_C2B4C1A1B2Z2Z1H0G0G1E5F8E0E5A5"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "전기통신사업법 일부개정법률안",
+    "AGENT": "최수진의원 등 13인",
+    "COMMITTEE": "과학기술정보방송통신위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_A2B5Z0Z4X2Y3G0E9F5D3E1C9D3L8L5"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "기타",
+    "TITLE": "인공지능산업 인재 육성에 관한 특별법안",
+    "AGENT": "정동영의원 등 20인",
+    "COMMITTEE": "과학기술정보방송통신위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_L2J5K0F4G2F8F1D3E5D8K3L1J8K2I0"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "발명진흥법 일부개정법률안",
+    "AGENT": "권향엽의원 등 10인",
+    "COMMITTEE": "산업통상자원중소벤처기업위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_O2P5O0O4M0N3V1T6U0S4T3R9S5A1Y4"
+  },
+  {
+    "DATE": "2025-05-24",
+    "TAG": "법률안",
+    "TITLE": "중소기업진흥에 관한 법률 일부개정법률안",
+    "AGENT": "이종배의원 등 10인",
+    "COMMITTEE": "산업통상자원중소벤처기업위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_A2Z5Z0X4Y3U0V1T4T0R3Q1R8Y6Z5Y3"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "교육공무원법 일부개정법률안",
+    "AGENT": "강경숙의원 등 14인",
+    "COMMITTEE": "교육위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_V2T5U0T5T0R8S1N5O4M2L0L9K4K2S6"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "사립학교법 일부개정법률안",
+    "AGENT": "강경숙의원 등 14인",
+    "COMMITTEE": "교육위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_X2X5V0W5U0V8D1D5B4A2B4Z8Z7I1I5"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "지방교육자치에 관한 법률 일부개정법률안",
+    "AGENT": "강경숙의원 등 14인",
+    "COMMITTEE": "교육위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_I2J5R0S5Q0Q8P1N5O4V3W5V4V9U1S4"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "교원의 지위 향상 및 교육활동 보호를 위한 특별법 일부개정법률안",
+    "AGENT": "김정재의원 등 10인",
+    "COMMITTEE": "교육위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_M2K5L0T5R1R3Q1R1P4P0X1W3W0U7W8"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "국가첨단전략산업 경쟁력 강화 및 보호에 관한 특별조치법 일부개정법률안",
+    "AGENT": "고동진의원 등 14인",
+    "COMMITTEE": "산업통상자원중소벤처기업위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_O2O5X0X5V0U9U0T9T5P8Q0O2N9N5L9"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "국가를 당사자로 하는 계약에 관한 법률 일부개정법률안",
+    "AGENT": "이해민의원 등 12인",
+    "COMMITTEE": "기획재정위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_H2G5E0D3E2M6K1S0R4S6Q2P8L2K3K2"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "공직선거법 일부개정법률안",
+    "AGENT": "박수현의원 등 10인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_E2F5D0D5C1D3K1L5J3I3I4G8H2C5E6"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "공휴일에 관한 법률 일부개정법률안",
+    "AGENT": "김재섭의원 등 10인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_B2J5K0I4I3H0I1G7G4O3N0N5L6M1L5"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "접경지역 지원 특별법 일부개정법률안",
+    "AGENT": "김용태의원 등 13인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_Y2W5X0V5W0U8Q1Q1O0Q9O0O3N4V8V4"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "인천광역시 제물포구·영종구 및 검단구 설치 등에 관한 법률 일부개정법률안",
+    "AGENT": "배준영의원 등 15인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_Z2Y5W0X3F0F7E1E7C5D0B0J1K7I3J6"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "도로교통법 일부개정법률안",
+    "AGENT": "김승수의원 등 10인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_J2Q5R0Q4O0O9N1O0J3K6I3H0H2F8G2"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "공직선거법 일부개정법률안",
+    "AGENT": "윤준병의원 등 11인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_F2M5N0L5M0K7L1J2R2R6Q4R3P6P2N7"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "전직대통령 예우에 관한 법률 일부개정법률안",
+    "AGENT": "정춘생의원 등 10인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_Z2A5H0G4H2F8F1D4F3M2N1L5L0K1I0"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "지방세특례제한법 일부개정법률안",
+    "AGENT": "이만희의원 등 10인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_M2N5L0K4L2T2R0S9Q2O4P0X0W0U9V7"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "초고층 및 지하연계 복합건축물 재난관리에 관한 특별법 일부개정법률안",
+    "AGENT": "정부",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "ARC_M2O5P0F5O1M5I0X9X5C4Y3X7G8K7X6"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "정당법 일부개정법률안",
+    "AGENT": "강경숙의원 등 16인",
+    "COMMITTEE": "행정안전위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_Z2X5V0W5E0F8D1D5C4A3B1W8X3V7W8"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "하도급거래 공정화에 관한 법률 일부개정법률안",
+    "AGENT": "이헌승의원 등 12인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_U2V5T0U4C2C3A1Z1A0Y7Y4U2V2T5U0"
+  },
+  {
+    "DATE": "2025-05-25",
+    "TAG": "법률안",
+    "TITLE": "국회법 일부개정법률안",
+    "AGENT": "강명구의원 등 16인",
+    "COMMITTEE": "국회운영위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_T2U5S0T5B0B9Z1A7Z3X2X4G8G4E6F0"
+  },
+  {
+    "DATE": "2025-05-26",
+    "TAG": "기타",
+    "TITLE": "특정건축물 정리에 관한 특별조치법안",
+    "AGENT": "문진석의원 등 10인",
+    "COMMITTEE": "국토교통위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_O2Z5H0G3H2G4E1M1L0K1K5J3F2D8E6"
+  },
+  {
+    "DATE": "2025-05-27",
+    "TAG": "법률안",
+    "TITLE": "유류오염손해배상 보장법 일부개정법률안",
+    "AGENT": "배준영의원 등 13인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_W2V4T0A6Z2Y0G1F4E4D3Z1W4V3E8C0"
+  },
+  {
+    "DATE": "2025-05-27",
+    "TAG": "법률안",
+    "TITLE": "해양사고의 조사 및 심판에 관한 법률 일부개정법률안",
+    "AGENT": "배준영의원 등 13인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_U2T4S0A6X2W0E1D4C3B0X4W3V4U3A2"
+  },
+  {
+    "DATE": "2025-05-27",
+    "TAG": "법률안",
+    "TITLE": "산림재난방지법 일부개정법률안",
+    "AGENT": "윤준병의원 등 11인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_P2Q5O0P4N2M9M0H9I4G3H0G1G8E3M0"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "주택법 일부개정법률안",
+    "AGENT": "정동영의원 등 12인",
+    "COMMITTEE": "국토교통위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_S2Q5R0Y4Z2Y8Y1W4V0V0R2R8Q7R3P2"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "영화 및 비디오물의 진흥에 관한 법률 일부개정법률안",
+    "AGENT": "정부",
+    "COMMITTEE": "문화체육관광위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "ARC_C2J5Y0K5Y1C5K1T0C2T3R1U2D9R7X3"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "스포츠산업 진흥법 일부개정법률안",
+    "AGENT": "김재원의원 등 14인",
+    "COMMITTEE": "문화체육관광위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_J2J5R0P4Q2O9P2N0O0W7U3V6T2T3S3"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "저작권법 일부개정법률안",
+    "AGENT": "강대식의원 등 12인",
+    "COMMITTEE": "문화체육관광위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_H2Q5Q0O5P0N9M1M5I3I9H3H8G9G9E6"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "게임산업진흥에 관한 법률 일부개정법률안",
+    "AGENT": "강대식의원 등 12인",
+    "COMMITTEE": "문화체육관광위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_O2P5X0V5W0U9V1T5U4C0A0B1Z6A8Y4"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "남녀고용평등과 일·가정 양립 지원에 관한 법률 일부개정법률안",
+    "AGENT": "김재섭의원 등 11인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_E2E5D0D4C2C9K1L3J4J0I4G9H4P4P2"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "소프트웨어 진흥법 일부개정법률안",
+    "AGENT": "이해민의원 등 13인",
+    "COMMITTEE": "과학기술정보방송통신위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_L2G5F0F1E2E3D1D5L1M9K3K6J4H3I9"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "첨단재생의료 및 첨단바이오의약품 안전 및 지원에 관한 법률 일부개정법률안",
+    "AGENT": "정부",
+    "COMMITTEE": "보건복지위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "ARC_J2W5V0Z5O1U5U1A0E5C4F4E5I1Z3Q2"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "약사법 일부개정법률안",
+    "AGENT": "정부",
+    "COMMITTEE": "보건복지위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "ARC_V2S5C0V5F1N5A1Z0F4C1F1K6X4N1O3"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "국제과학비즈니스벨트 조성 및 지원에 관한 특별법 일부개정법률안",
+    "AGENT": "정부",
+    "COMMITTEE": "과학기술정보방송통신위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "ARC_V2B5L0U5R1F5A1V0T0Y2C0I9E6U0A8"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "노동조합 및 노동관계조정법 일부개정법률안",
+    "AGENT": "박해철의원 등 13인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_C2C4A1B2J1J8I1G6H2F0G3O1M3N3L3"
+  },
+  {
+    "DATE": "2025-05-28",
+    "TAG": "법률안",
+    "TITLE": "환경오염피해 배상책임 및 구제에 관한 법률 일부개정법률안",
+    "AGENT": "김형동의원 등 10인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_U2T5S0Z3I2H5F1E3M3L9K0I7E3D7E4"
+  },
+  {
+    "DATE": "2025-05-29",
+    "TAG": "법률안",
+    "TITLE": "은행법 일부개정법률안",
+    "AGENT": "김장겸의원 등 10인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_D2E5C0D5B1C4A1I4J2H9H1G5H6F8F7"
+  },
+  {
+    "DATE": "2025-05-29",
+    "TAG": "법률안",
+    "TITLE": "전자상거래 등에서의 소비자보호에 관한 법률 일부개정법률안",
+    "AGENT": "유영하의원 등 11인",
+    "COMMITTEE": "정무위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_A2B5Z0A5H0I2G1F1F0D3E1M0N8L2M1"
+  },
+  {
+    "DATE": "2025-05-29",
+    "TAG": "법률안",
+    "TITLE": "조희대 대법원장 등에 의한 사법 남용의 진상규명을 위한 특별검사 임명 등에 관한 법률안",
+    "AGENT": "이재강의원 등 13인",
+    "COMMITTEE": "법제사법위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_C2A5B0X5V1W2U1V3T0U5B3C1B4Z0Z4"
+  },
+  {
+    "DATE": "2025-05-29",
+    "TAG": "법률안",
+    "TITLE": "조세특례제한법 일부개정법률안",
+    "AGENT": "조지연의원 등 12인",
+    "COMMITTEE": "기획재정위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_V2W5U0V5D1D4C1A0B4Z9A3I9I7G1H5"
+  },
+  {
+    "DATE": "2025-05-29",
+    "TAG": "법률안",
+    "TITLE": "인공지능데이터센터 진흥 및 기반 조성에 관한 법률안",
+    "AGENT": "정동영의원 등 19인",
+    "COMMITTEE": "과학기술정보방송통신위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_R2P5N0O4W2W8V1V3T5U9T1A6B8Z9A6"
+  },
+  {
+    "DATE": "2025-05-30",
+    "TAG": "법률안",
+    "TITLE": "기상법 일부개정법률안",
+    "AGENT": "임이자의원 등 10인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_V2V5T0U5C0D9B1A0A1Y7Z5V3V3T9U1"
+  },
+  {
+    "DATE": "2025-05-30",
+    "TAG": "법률안",
+    "TITLE": "폐기물관리법 일부개정법률안",
+    "AGENT": "김소희의원 등 10인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_G2B5C0A5Y1Z2Y1Y4G4F8F5D8E4C4D1"
+  },
+  {
+    "DATE": "2025-05-30",
+    "TAG": "법률안",
+    "TITLE": "댐건설·관리 및 주변지역지원 등에 관한 법률 일부개정법률안",
+    "AGENT": "정부",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "ARC_L2H5D0B5P1N5Y1E0Y5U8U5B9E5W8O9"
+  },
+  {
+    "DATE": "2025-05-30",
+    "TAG": "법률안",
+    "TITLE": "순환경제사회 전환 촉진법 일부개정법률안",
+    "AGENT": "이훈기의원 등 16인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_E2C5K0L4J1J4I1J3H5H4D0B6C4A7B5"
+  },
+  {
+    "DATE": "2025-05-30",
+    "TAG": "법률안",
+    "TITLE": "환경영향평가법 일부개정법률안",
+    "AGENT": "서왕진의원 등 15인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_T2R5S0Q5R1Y2X0Y9W4X2V1W1D1C3C2"
+  },
+  {
+    "DATE": "2025-06-01",
+    "TAG": "법률안",
+    "TITLE": "남녀고용평등과 일·가정 양립 지원에 관한 법률 일부개정법률안",
+    "AGENT": "민형배의원 등 10인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_I2Q5Q0P5Q0O1O2N1N2V9V4U1S6T8R7"
+  },
+  {
+    "DATE": "2025-06-01",
+    "TAG": "기타",
+    "TITLE": "근로복지공단법안",
+    "AGENT": "김형동의원 등 10인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_N2N5V0W4U2V8T1R3S1N8O0M9N6L6M6"
+  },
+  {
+    "DATE": "2025-06-02",
+    "TAG": "법률안",
+    "TITLE": "반려동물산업 육성 및 지원에 관한 법률안",
+    "AGENT": "이개호의원 등 11인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_P2Q5P0N3V2U1V0U9S2A3B2A2Y2X1Y2"
+  },
+  {
+    "DATE": "2025-06-02",
+    "TAG": "법률안",
+    "TITLE": "농어업재해대책법 일부개정법률안",
+    "AGENT": "박수현의원 등 10인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_O2K5L0J5J1H2J1H0H5P8Q3O7O3N1L4"
+  },
+  {
+    "DATE": "2025-06-02",
+    "TAG": "법률안",
+    "TITLE": "농수산물 유통 및 가격안정에 관한 법률 일부개정법률안",
+    "AGENT": "박수현의원 등 10인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_V2V5T0U5S1A2B1Z0A5Y7Z2X4Y1G2E5"
+  },
+  {
+    "DATE": "2025-06-02",
+    "TAG": "법률안",
+    "TITLE": "자유무역협정 체결에 따른 농어업인 등의 지원에 관한 특별법 일부개정법률안",
+    "AGENT": "박수현의원 등 10인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_G2H5F0E5E1M2N1L1L0K1I0J6E0F2D1"
+  },
+  {
+    "DATE": "2025-06-02",
+    "TAG": "법률안",
+    "TITLE": "농어업재해보험법 일부개정법률안",
+    "AGENT": "박수현의원 등 10인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_E2M5K0L5J1J2I1J0Q5R9Q3O1O0M8N8"
+  },
+  {
+    "DATE": "2025-06-02",
+    "TAG": "법률안",
+    "TITLE": "양곡관리법 일부개정법률안",
+    "AGENT": "박수현의원 등 10인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_E2E5D0B5C1K2L1J0J5H7G5H9C7D3B3"
+  },
+  {
+    "DATE": "2025-06-02",
+    "TAG": "법률안",
+    "TITLE": "산림재난방지법 일부개정법률안",
+    "AGENT": "김소희의원 등 19인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_M2U5S0T5R0R8Q1R1Y5Z1Y5W4W5U3V4"
+  },
+  {
+    "DATE": "2025-06-02",
+    "TAG": "법률안",
+    "TITLE": "수산업협동조합법 일부개정법률안",
+    "AGENT": "문금주의원 등 10인",
+    "COMMITTEE": "농림축산식품해양수산위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_U2S5R0S5Q0Q9M1M3L0M6K0K9J7O7V4"
+  },
+  {
+    "DATE": "2025-06-03",
+    "TAG": "법률안",
+    "TITLE": "하천법 일부개정법률안",
+    "AGENT": "김위상의원 등 10인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_F2N5O0M5N0L2L1K0L0S7T4R9Q8Q7O5"
+  },
+  {
+    "DATE": "2025-06-03",
+    "TAG": "법률안",
+    "TITLE": "산업안전보건법 일부개정법률안",
+    "AGENT": "조지연의원 등 11인",
+    "COMMITTEE": "환경노동위원회",
+    "ACT_STATUS": "본회의 부의",
+    "BILL_ID": "PRC_J2K5J0J5H1I4Q1O0P5N1N2M0N9U8V5"
   }
 ]
