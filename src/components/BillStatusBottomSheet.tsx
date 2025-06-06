@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { colors } from '@/constants';
 import BottomSheet from './BottomSheet';
-import { BillStatus } from '@/types';
+import { BillStatus } from '@/models';
 
 interface BillStatusBottomSheetProps {
     visible: boolean;

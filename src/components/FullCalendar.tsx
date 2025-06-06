@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { ChevronLeftIcon } from '@/assets/icons';
 import { Picker } from '@react-native-picker/picker';
-import { laws } from '@/constants';
+import { Law } from '@/models';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { STORAGE_KEY } from '@/constants';
 
 interface FullCalendarProps {
   selectedDate: Date;
@@ -18,7 +20,26 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
 
   const days = ['일', '월', '화', '수', '목', '금', '토'];
 
-  const datesWithBills = new Set<string>();
+  const [laws, setLaws] = useState<Law[]>([]);
+
+  useEffect(() => {
+    const loadLawsList = async () => {
+      const laws = await AsyncStorage.getItem(STORAGE_KEY.LAWS);
+      setLaws(laws ? JSON.parse(laws) : []);
+    };
+    loadLawsList();
+  }, []);
+
+  const datesWithBills = useMemo(() => {
+    const billDates = new Set<string>();
+    laws.forEach(bill => {
+      if (bill.DATE) {
+        billDates.add(bill.DATE);
+      }
+    });
+    return billDates;
+  }, [laws]);
+
   laws.forEach(bill => {
     if (bill.DATE) {
       datesWithBills.add(bill.DATE);

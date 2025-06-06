@@ -1,3 +1,5 @@
+import { BillStatus } from "@/models";
+
 // 의안 통합합 리스트 - 열린 국회(사용 중지)
 export interface Bill {
     BILL_ID: string; // 의안 ID
@@ -41,20 +43,6 @@ export interface Nqfvrbsdafrmuzixe {
     BILL_ID: string; // 의안ID
     LINK_URL: string; // 링크URL
     COMMITTEE_ID: string | null; // 소관위원회ID
-}
-
-// 법안 활동 상태
-export enum BillStatus {
-    INTRODUCTION = '발의', // 1. 의원이 법안을 발의
-    SUBMISSION = '제출', // 2. 법안을 국회에 제출
-    COMMITTEE_REVIEW = '회부', // 3. 위원회에 회부
-    COMMITTEE_MEETING = '본회의 부의', // 4. 위원회에서 심사
-    MEETING = '회의', // 5. 위원회 회의 진행
-    APPROVAL = '상정', // 6. 본회의에 상정
-    VOTE = '의결', // 7. 본회의에서 의결
-    GOVERNMENT_TRANSFER = '정부이송', // 8. 정부로 이송
-    PROCESSING = '처리', // 9. 정부에서 처리
-    PROMULGATION = '공포', // 10. 대통령이 공포
 }
 
 // 의안 정보 - 열린 국회 데이터 파싱싱(사용)

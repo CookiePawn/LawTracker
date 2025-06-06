@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon } from '@/assets/icons';
-import { BillStatus } from '@/types';
-import { laws } from '@/constants';
+import { BillStatus, Law } from '@/models';
+import { loadLatestLaws } from '@/services';
 
 const getProgressPercentage = (status: BillStatus): number => {
     switch (status) {
@@ -33,9 +33,14 @@ const getProgressPercentage = (status: BillStatus): number => {
 };
 
 const MyLawCard = () => {
-    const randomBills = useMemo(() => {
-        const shuffled = [...laws].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, 3);
+    const [laws, setLaws] = useState<Law[]>([]);
+
+    useEffect(() => {
+        const loadLawsList = async () => {
+            const laws = await loadLatestLaws(3);
+            setLaws(laws);
+        };
+        loadLawsList();
     }, []);
 
     return (
@@ -48,7 +53,7 @@ const MyLawCard = () => {
                 </View>
             </View>
             <View style={styles.lawListContainer}>
-                {randomBills.map((bill, index) => {
+                {laws.map((bill, index) => {
                     const progressPercentage = getProgressPercentage(bill.ACT_STATUS as BillStatus);
                     return (
                         <View style={styles.lawItem} key={index}>

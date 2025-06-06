@@ -1,5 +1,5 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
-import { Law } from "./bills";
+import { Law } from "@/models";
 
 export type RootStackParamList = {
     Tab: NavigatorScreenParams<RootTabParamList>;

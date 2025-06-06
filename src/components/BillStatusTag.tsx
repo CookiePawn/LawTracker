@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
-import { BillStatus } from '@/types';
+import { BillStatus } from '@/models';
 
 interface BillStatusTagProps {
     status: string;

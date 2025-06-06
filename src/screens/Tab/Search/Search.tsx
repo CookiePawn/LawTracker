@@ -1,8 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon, EyeIcon, SearchIcon } from '@/assets';
-import { Law, BillStatus } from '@/types';
 import DateFilterBottomSheet from '@/components/DateFilterBottomSheet';
 import BillTypeBottomSheet from '@/components/BillTypeBottomSheet';
 import BillStatusBottomSheet from '@/components/BillStatusBottomSheet';
@@ -10,11 +9,12 @@ import SortBottomSheet from '@/components/SortBottomSheet';
 import { getViewCount, incrementViewCount } from '@/utils/viewCount';
 import { RouteProp } from '@react-navigation/native';
 import { RootTabParamList } from '@/types';
-import { laws } from '@/constants';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
 import { BillStatusTag } from '@/components';
+import { Law } from '@/models';
+import { searchLaws } from '@/services/firebase';
 
 interface SearchProps {
     route: RouteProp<RootTabParamList, 'Search'>;
@@ -35,6 +35,7 @@ const Search = ({ route }: SearchProps) => {
     const [selectedStatus, setSelectedStatus] = useState<string>('전체');
     const [selectedFilter, setSelectedFilter] = useState<string>('최신순');
     const [viewCounts, setViewCounts] = useState<{ [key: string]: number }>({});
+    const [searchResults, setSearchResults] = useState<Law[]>([]);
 
     useEffect(() => {
         if (type === 'random') {
@@ -43,6 +44,20 @@ const Search = ({ route }: SearchProps) => {
             setSelectedFilter('최신순');
         }
     }, [type]);
+
+    useEffect(() => {
+        const fetchResults = async () => {
+            const results = await searchLaws({
+                searchQuery,
+                dateRange,
+                billType: selectedBillType,
+                status: selectedStatus,
+                sortBy: selectedFilter as '최신순' | '조회순'
+            });
+            setSearchResults(results);
+        };
+        fetchResults();
+    }, [searchQuery, dateRange, selectedBillType, selectedStatus, selectedFilter]);
 
     const getFilterText = () => {
         if (selectedFilter === '최신순') return '최신순';
@@ -64,49 +79,6 @@ const Search = ({ route }: SearchProps) => {
         return selectedStatus;
     };
 
-    const filteredBills = useMemo(() => {
-        let filtered = laws
-            .filter((bill) => {
-                const searchLower = searchQuery.toLowerCase();
-                const titleMatch = bill.TITLE.toLowerCase().includes(searchLower);
-                const proposerMatch = bill.AGENT.toLowerCase().includes(searchLower);
-                const committeeMatch = bill.COMMITTEE?.toLowerCase().includes(searchLower);
-
-                // 날짜 필터링
-                if (dateRange.start && dateRange.end) {
-                    const billDate = new Date(bill.DATE);
-                    const startDate = new Date(dateRange.start);
-                    const endDate = new Date(dateRange.end);
-                    endDate.setHours(23, 59, 59, 999);
-
-                    if (billDate < startDate || billDate > endDate) {
-                        return false;
-                    }
-                }
-
-                // 의안구분 필터링
-                if (selectedBillType !== '전체' && bill.TAG !== selectedBillType) {
-                    return false;
-                }
-
-                // 상태 필터링
-                if (selectedStatus !== '전체' && bill.ACT_STATUS !== selectedStatus) {
-                    return false;
-                }
-
-                return titleMatch || proposerMatch || committeeMatch;
-            });
-
-        // 정렬 적용
-        if (selectedFilter === '최신순') {
-            filtered.sort((a, b) => new Date(b.DATE).getTime() - new Date(a.DATE).getTime());
-        } else {
-            filtered.sort((a, b) => (viewCounts[b.BILL_ID] || 0) - (viewCounts[a.BILL_ID] || 0));
-        }
-
-        return filtered;
-    }, [searchQuery, dateRange, selectedBillType, selectedStatus, selectedFilter, viewCounts]);
-
     const handleDateFilterApply = (startDate: string, endDate: string, period: string) => {
         setDateRange({ start: startDate, end: endDate });
         setSelectedPeriod(period);
@@ -123,13 +95,13 @@ const Search = ({ route }: SearchProps) => {
     useEffect(() => {
         const loadViewCounts = async () => {
             const counts: { [key: string]: number } = {};
-            for (const bill of laws) {
+            for (const bill of searchResults) {
                 counts[bill.BILL_ID] = await getViewCount(bill.BILL_ID);
             }
             setViewCounts(counts);
         };
         loadViewCounts();
-    }, []);
+    }, [searchResults]);
 
     const handleBillPress = async (bill: Law) => {
         const newCount = await incrementViewCount(bill.BILL_ID);
@@ -259,7 +231,7 @@ const Search = ({ route }: SearchProps) => {
             {/* 법안 리스트 */}
             <FlatList
                 style={styles.billList}
-                data={filteredBills}
+                data={searchResults}
                 ItemSeparatorComponent={() => <View style={styles.billItemSeparator} />}
                 renderItem={renderBillItem}
                 keyExtractor={(_, index) => index.toString()}

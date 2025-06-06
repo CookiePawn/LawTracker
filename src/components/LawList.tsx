@@ -1,12 +1,14 @@
 import { ChevronLeftIcon } from '@/assets';
-import { colors, laws } from '@/constants';
-import React, { useMemo } from 'react';
+import { colors } from '@/constants';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { BillStatus, RootTabParamList, RootStackParamList } from '@/types';
+import { RootTabParamList, RootStackParamList } from '@/types';
 import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BillStatusTag } from '@/components';
+import { loadLatestLaws } from '@/services';
+import { Law } from '@/models';
 
 interface LawListProps {
     type: 'random' | 'latest';
@@ -16,15 +18,17 @@ const LawList = ({ type = 'random' }: LawListProps) => {
     const navigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>();
     const stackNavigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-    const randomBills = useMemo(() => {
-        const shuffled = [...laws].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, 2);
-    }, []);
+    const [laws, setLaws] = useState<Law[]>([]);
 
-    const latestBills = useMemo(() => {
-        const sorted = [...laws].sort((a, b) => new Date(b.DATE).getTime() - new Date(a.DATE).getTime());
-        return sorted.slice(0, 2);
-    }, []);
+    useEffect(() => {
+        const loadLawsSync = async () => {
+            const lawList = await loadLatestLaws();
+            setLaws(lawList);
+        };
+        if (type === 'latest') {
+            loadLawsSync();
+        }
+    }, [type]);
     
 
     return (
@@ -37,7 +41,7 @@ const LawList = ({ type = 'random' }: LawListProps) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.lawListContainer}>
-                {(type === 'latest' ? latestBills : randomBills).map((bill, index) => {
+                {laws.map((bill, index) => {
                     return (
                         <TouchableOpacity key={index} style={styles.lawItem} onPress={() => stackNavigation.navigate('LawDetail', { law: bill })}>
                             <View style={styles.lawItemHeader}>

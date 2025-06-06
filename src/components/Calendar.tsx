@@ -1,6 +1,8 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import { laws } from '@/constants';
+import { Law } from '@/models';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { STORAGE_KEY } from '@/constants';
 
 interface CalendarProps {
   onDateSelect?: (date: Date) => void;
@@ -15,6 +17,16 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
   const itemMargin = 5;
   const totalItemWidth = itemWidth + (itemMargin * 2);
 
+  const [laws, setLaws] = useState<Law[]>([]);
+
+  useEffect(() => {
+    const loadLawsList = async () => {
+      const laws = await AsyncStorage.getItem(STORAGE_KEY.LAWS);
+      setLaws(laws ? JSON.parse(laws) : []);
+    };
+    loadLawsList();
+  }, []);
+
   const datesWithBills = useMemo(() => {
     const billDates = new Set<string>();
     laws.forEach(bill => {
@@ -23,7 +35,7 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
       }
     });
     return billDates;
-  }, []);
+  }, [laws]);
 
   const generateDates = () => {
     const dates = [];

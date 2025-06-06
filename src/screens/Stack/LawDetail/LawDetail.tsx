@@ -6,7 +6,7 @@ import { ArrowLeftIcon, ChevronLeftIcon, HeartIcon, ShareIcon } from '@/assets/i
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BillStatusTag, LawStatus } from '@/components';
-import { lawDetails, colors } from '@/constants';
+import { colors } from '@/constants';
 
 
 const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'> }) => {
@@ -55,9 +55,9 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                 <View style={styles.lawSummaryContainer}>
                     <Text style={styles.lawSummaryTitle}>주요 내용</Text>
                     {isSummaryExpanded ? (
-                        <Text style={styles.lawSummaryContent}>{lawDetails.find(detail => detail.billId === law.BILL_ID)?.summary}</Text>
+                        <Text style={styles.lawSummaryContent}>{law.SUMMARY}</Text>
                     ) : (
-                        <Text style={styles.lawSummaryContent}>{lawDetails.find(detail => detail.billId === law.BILL_ID)?.summary.slice(0, 100)}...</Text>
+                        <Text style={styles.lawSummaryContent}>{law.SUMMARY.slice(0, 100)}...</Text>
                     )}
                     <TouchableOpacity style={styles.lawSummaryMoreContainer} onPress={() => setIsSummaryExpanded(!isSummaryExpanded)}>
                         <Text style={styles.lawSummaryMore}>{isSummaryExpanded ? '접기' : '더보기'}</Text>

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { colors } from '@/constants';
-import { Law, BillStatus } from '@/types';
+import { Law, BillStatus } from '@/models';
 
 const STATUS_ORDER = [
     BillStatus.INTRODUCTION,
@@ -17,33 +17,6 @@ const STATUS_ORDER = [
 
 const LawStatus = ({ law }: { law: Law }) => {
     const currentStatusIndex = STATUS_ORDER.indexOf(law.ACT_STATUS as BillStatus);
-
-    const getStatusDate = (status: BillStatus) => {
-        switch (status) {
-            case BillStatus.INTRODUCTION:
-                return law.ACT_INTRODUCTION_DATE;
-            case BillStatus.SUBMISSION:
-                return law.ACT_SUBMISSION_DATE;
-            case BillStatus.COMMITTEE_REVIEW:
-                return law.ACT_COMMITTEE_REVIEW_DATE;
-            case BillStatus.COMMITTEE_MEETING:
-                return law.ACT_COMMITTEE_MEETING_DATE;
-            case BillStatus.MEETING:
-                return law.ACT_MEETING_DATE;
-            case BillStatus.APPROVAL:
-                return law.ACT_APPROVAL_DATE;
-            case BillStatus.VOTE:
-                return law.ACT_VOTE_DATE;
-            case BillStatus.GOVERNMENT_TRANSFER:
-                return law.ACT_GOVERNMENT_TRANSFER_DATE;
-            case BillStatus.PROCESSING:
-                return law.ACT_PROCESSING_DATE;
-            case BillStatus.PROMULGATION:
-                return law.ACT_PROMULGATION_DATE;
-            default:
-                return null;
-        }
-    };
 
     return (
         <View style={styles.container}>
