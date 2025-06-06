@@ -1,4 +1,4 @@
 export const COLLECTIONS = {
     LAWS: 'laws',
-    ASSEMBLY_MEMBERS: 'assemblyMembers',
+    CALENDAR: 'calendar',
 }

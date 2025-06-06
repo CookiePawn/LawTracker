@@ -2,7 +2,7 @@
 import { COLLECTIONS } from "@/constants";
 import { Law } from "@/models";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore, limit, orderBy, query, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -24,6 +24,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+
+// 달력 법안 유무 표시 로드
+export const loadCalendarLaws = async () => {
+    const dataRef = collection(db, COLLECTIONS.CALENDAR);
+    const docRef = doc(dataRef, 'isActive');
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+        console.log(docSnap.data());
+        return docSnap.data().DATE as string[];
+    }
+    return [];
+};
 
 // 날짜에 따라 의안 데이터 로드
 export const loadLaws = async (date?: string) => {

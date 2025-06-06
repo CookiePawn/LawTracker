@@ -1,6 +1,6 @@
 import AppNavigator from './src/navigation/StackNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { loadLaws } from './src/services';  
+import { loadCalendarLaws, loadLaws } from './src/services';  
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEY } from './src/constants';
@@ -13,6 +13,14 @@ export default function App() {
   //   };
   //   loadLawsList();
   // }, []);
+
+  useEffect(() => {
+    const loadIsActive = async () => {
+      const laws = await loadCalendarLaws();
+      await AsyncStorage.setItem(STORAGE_KEY.CALENDAR, JSON.stringify(laws));
+    };
+    loadIsActive();
+  }, []);
   
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

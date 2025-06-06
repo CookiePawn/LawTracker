@@ -20,31 +20,25 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
 
   const days = ['일', '월', '화', '수', '목', '금', '토'];
 
-  const [laws, setLaws] = useState<Law[]>([]);
+  const [isActive, setIsActive] = useState<string[]>([]);
 
   useEffect(() => {
     const loadLawsList = async () => {
-      const laws = await AsyncStorage.getItem(STORAGE_KEY.LAWS);
-      setLaws(laws ? JSON.parse(laws) : []);
+      const laws = await AsyncStorage.getItem(STORAGE_KEY.CALENDAR);
+      setIsActive(laws ? JSON.parse(laws) : []);
     };
     loadLawsList();
   }, []);
 
   const datesWithBills = useMemo(() => {
     const billDates = new Set<string>();
-    laws.forEach(bill => {
-      if (bill.DATE) {
-        billDates.add(bill.DATE);
+    isActive.forEach(date => {
+      if (date) {
+        billDates.add(date);
       }
     });
     return billDates;
-  }, [laws]);
-
-  laws.forEach(bill => {
-    if (bill.DATE) {
-      datesWithBills.add(bill.DATE);
-    }
-  });
+  }, [isActive]);
 
   const MIN_YEAR = 2024;
   const MIN_MONTH = 5;
