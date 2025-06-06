@@ -54,10 +54,10 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                 </View>
                 <View style={styles.lawSummaryContainer}>
                     <Text style={styles.lawSummaryTitle}>주요 내용</Text>
-                    {isSummaryExpanded ? (
+                    {isSummaryExpanded && law.SUMMARY ? (
                         <Text style={styles.lawSummaryContent}>{law.SUMMARY}</Text>
                     ) : (
-                        <Text style={styles.lawSummaryContent}>{law.SUMMARY.slice(0, 100)}...</Text>
+                        <Text style={styles.lawSummaryContent}>{law.SUMMARY ? law.SUMMARY.slice(0, 100) : ''}...</Text>
                     )}
                     <TouchableOpacity style={styles.lawSummaryMoreContainer} onPress={() => setIsSummaryExpanded(!isSummaryExpanded)}>
                         <Text style={styles.lawSummaryMore}>{isSummaryExpanded ? '접기' : '더보기'}</Text>
