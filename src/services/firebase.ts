@@ -2,7 +2,7 @@
 import { COLLECTIONS } from "@/constants";
 import { Law } from "@/models";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -53,6 +53,22 @@ export const loadLatestLaws = async (limitCount: number = 2) => {
     const snapshot = await getDocs(queryRef);
     const laws = snapshot.docs.map((doc) => doc.data());
     return laws as Law[];
+};
+
+// 조회순 의안 로드
+export const loadViewLaws = async (limitCount: number = 2) => {
+    const dataRef = collection(db, COLLECTIONS.LAWS);
+    const queryRef = query(dataRef, orderBy('VIEW_COUNT', 'desc'), limit(limitCount));
+    const snapshot = await getDocs(queryRef);
+    const laws = snapshot.docs.map((doc) => doc.data());
+    return laws as Law[];
+};
+
+// 조회수 증가
+export const increaseViewCount = async (billId: string) => {
+    const dataRef = collection(db, COLLECTIONS.LAWS);
+    const docRef = doc(dataRef, billId);
+    await updateDoc(docRef, { VIEW_COUNT: increment(1) });
 };
 
 // 의안 검색 및 필터링

@@ -6,7 +6,6 @@ import DateFilterBottomSheet from '@/components/DateFilterBottomSheet';
 import BillTypeBottomSheet from '@/components/BillTypeBottomSheet';
 import BillStatusBottomSheet from '@/components/BillStatusBottomSheet';
 import SortBottomSheet from '@/components/SortBottomSheet';
-import { getViewCount, incrementViewCount } from '@/utils/viewCount';
 import { RouteProp } from '@react-navigation/native';
 import { RootTabParamList } from '@/types';
 import { useNavigation } from '@react-navigation/native';
@@ -14,14 +13,13 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
 import { BillStatusTag } from '@/components';
 import { Law } from '@/models';
-import { searchLaws } from '@/services/firebase';
+import { searchLaws, increaseViewCount } from '@/services';
 
 interface SearchProps {
     route: RouteProp<RootTabParamList, 'Search'>;
 }
 
 const Search = ({ route }: SearchProps) => {
-    
     const stackNavigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const { type = 'latest' } = route.params || {};
     const [searchQuery, setSearchQuery] = useState('');
@@ -35,9 +33,16 @@ const Search = ({ route }: SearchProps) => {
     const [selectedBillType, setSelectedBillType] = useState<'전체' | '법률안' | '예산안' | '기타'>('전체');
     const [selectedStatus, setSelectedStatus] = useState<string>('전체');
     const [selectedFilter, setSelectedFilter] = useState<string>('최신순');
-    const [viewCounts, setViewCounts] = useState<{ [key: string]: number }>({});
     const [originalResults, setOriginalResults] = useState<Law[]>([]);
     const [searchResults, setSearchResults] = useState<Law[]>([]);
+
+    const fetchResults = async () => {
+        const results = await searchLaws({
+            searchQuery: debouncedSearchQuery,
+        });
+        setOriginalResults(results as Law[]);
+        setSearchResults(results as Law[]);
+    };
 
     useEffect(() => {
         if (type === 'random') {
@@ -49,13 +54,6 @@ const Search = ({ route }: SearchProps) => {
 
     // 검색어로 데이터 가져오기
     useEffect(() => {
-        const fetchResults = async () => {
-            const results = await searchLaws({
-                searchQuery: debouncedSearchQuery,
-            });
-            setOriginalResults(results as Law[]);
-            setSearchResults(results as Law[]);
-        };
         fetchResults();
     }, [debouncedSearchQuery]);
 
@@ -65,21 +63,21 @@ const Search = ({ route }: SearchProps) => {
 
         // 기간 필터
         if (dateRange.start !== '' && dateRange.end !== '') {
-            filteredResults = filteredResults.filter((law) => 
+            filteredResults = filteredResults.filter((law) =>
                 law.DATE >= dateRange.start && law.DATE <= dateRange.end
             );
         }
 
         // 의안구분 필터
         if (selectedBillType !== '전체') {
-            filteredResults = filteredResults.filter((law) => 
+            filteredResults = filteredResults.filter((law) =>
                 law.TAG === selectedBillType
             );
         }
 
         // 상태 필터
         if (selectedStatus !== '전체') {
-            filteredResults = filteredResults.filter((law) => 
+            filteredResults = filteredResults.filter((law) =>
                 law.ACT_STATUS === selectedStatus
             );
         }
@@ -127,23 +125,9 @@ const Search = ({ route }: SearchProps) => {
         setSelectedStatus(status);
     };
 
-    useEffect(() => {
-        const loadViewCounts = async () => {
-            const counts: { [key: string]: number } = {};
-            for (const bill of searchResults) {
-                counts[bill.BILL_ID] = await getViewCount(bill.BILL_ID);
-            }
-            setViewCounts(counts);
-        };
-        loadViewCounts();
-    }, [searchResults]);
-
     const handleBillPress = async (bill: Law) => {
-        const newCount = await incrementViewCount(bill.BILL_ID);
-        setViewCounts(prev => ({
-            ...prev,
-            [bill.BILL_ID]: newCount
-        }));
+        await increaseViewCount(bill.BILL_ID);
+        await fetchResults();
         stackNavigation.navigate('LawDetail', { law: bill });
     };
 
@@ -175,7 +159,7 @@ const Search = ({ route }: SearchProps) => {
                     <Text style={styles.lawItemCommitteeText}>{item.COMMITTEE || '-'}</Text>
                     <View style={styles.lawItemFooterIconContainer}>
                         <EyeIcon width={14} height={14} color={colors.gray400} />
-                        <Text style={styles.lawItemFooterIconText}>{viewCounts[item.BILL_ID] || 0}</Text>
+                        <Text style={styles.lawItemFooterIconText}>{item.VIEW_COUNT || 0}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

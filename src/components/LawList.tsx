@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BillStatusTag } from '@/components';
-import { loadLatestLaws } from '@/services';
+import { loadLatestLaws, loadViewLaws } from '@/services';
 import { Law } from '@/models';
 
 interface LawListProps {
@@ -25,8 +25,14 @@ const LawList = ({ type = 'random' }: LawListProps) => {
             const lawList = await loadLatestLaws();
             setLaws(lawList);
         };
+        const loadViewLawsSync = async () => {
+            const lawList = await loadViewLaws();
+            setLaws(lawList);
+        };
         if (type === 'latest') {
             loadLawsSync();
+        } else if (type === 'random') {
+            loadViewLawsSync();
         }
     }, [type]);
     
