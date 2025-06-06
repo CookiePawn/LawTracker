@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
-import { BillStatus, Law, RootStackParamList } from '@/types';
+import { RootStackParamList } from '@/types';
 import { LawIcon } from '@/assets';
 import { AdBanner, BillStatusTag } from '@/components';
-import { laws } from '@/constants';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { loadLaws } from '@/services';
+import { Law } from '@/models';
 
 interface BillScheduleListProps {
   selectedDate?: Date;
@@ -44,18 +45,18 @@ const ScheduleItem: React.FC<{ item: Law }> = ({ item }) => {
 };
 
 const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => {
+  const [laws, setLaws] = useState<Law[]>([]);
   const isToday = selectedDate && selectedDate.toDateString() === new Date().toDateString();
 
-  const filteredBills = laws.map(bill => ({
-    ...bill,
-    time: bill.DATE,
-    result: bill.ACT_STATUS
-  })).filter(bill => {
-    if (!selectedDate) return true;
-    return bill.DATE === selectedDate.toISOString().split('T')[0];
-  });
+  useEffect(() => { 
+    const loadLawsSync = async () => {
+      const lawList = await loadLaws(selectedDate?.toISOString().split('T')[0]);
+      setLaws(lawList);
+    };
+    loadLawsSync();
+  }, [selectedDate]);
 
-  const renderItem = ({ item }: { item: typeof filteredBills[0] }) => {
+  const renderItem = ({ item }: { item: Law }) => {
     return (
       <ScheduleItem
         item={item}
@@ -76,9 +77,9 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
       )}
       <FlatList
         style={styles.container}
-        data={filteredBills}
+        data={laws}
         renderItem={renderItem}
-        keyExtractor={(item) => item.BILL_ID.toString()}
+        keyExtractor={(item) => item.BILL_ID}
         initialNumToRender={10}
         maxToRenderPerBatch={10}
         windowSize={5}

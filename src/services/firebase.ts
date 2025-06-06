@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { COLLECTIONS } from "@/constants";
+import { Law } from "@/models";
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
@@ -30,5 +31,5 @@ export const loadLaws = async (date?: string) => {
     const queryRef = date ? query(dataRef, where('DATE', '==', date)) : dataRef;
     const snapshot = await getDocs(queryRef);
     const laws = snapshot.docs.map((doc) => doc.data());
-    return laws;
+    return laws as Law[];
 };
