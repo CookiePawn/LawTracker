@@ -50,10 +50,16 @@ const BillTypeBottomSheet = ({ visible, onClose, onApply }: BillTypeBottomSheetP
                     ))}
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => {
+                        setSelectedType('전체');
+                        onClose();
+                    }}>
                         <Text style={styles.cancelButtonText}>취소</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.applyButton} onPress={handleApply}>
+                    <TouchableOpacity style={styles.applyButton} onPress={() => {
+                        handleApply();
+                        setSelectedType('전체');
+                    }}>
                         <Text style={styles.applyButtonText}>적용</Text>
                     </TouchableOpacity>
                 </View>

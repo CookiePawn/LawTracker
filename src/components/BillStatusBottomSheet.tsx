@@ -67,10 +67,16 @@ const BillStatusBottomSheet = ({ visible, onClose, onApply }: BillStatusBottomSh
                     </ScrollView>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => {
+                        setSelectedStatus('전체');
+                        onClose();
+                    }}>
                         <Text style={styles.cancelButtonText}>취소</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.applyButton} onPress={handleApply}>
+                    <TouchableOpacity style={styles.applyButton} onPress={() => {
+                        handleApply();
+                        setSelectedStatus('전체');
+                    }}>
                         <Text style={styles.applyButtonText}>적용</Text>
                     </TouchableOpacity>
                 </View>

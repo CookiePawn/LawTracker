@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon, EyeIcon, SearchIcon } from '@/assets';
@@ -25,16 +25,18 @@ const Search = ({ route }: SearchProps) => {
     const stackNavigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const { type = 'latest' } = route.params || {};
     const [searchQuery, setSearchQuery] = useState('');
+    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
     const [isDateFilterVisible, setIsDateFilterVisible] = useState(false);
     const [isBillTypeFilterVisible, setIsBillTypeFilterVisible] = useState(false);
     const [isStatusFilterVisible, setIsStatusFilterVisible] = useState(false);
     const [isSortFilterVisible, setIsSortFilterVisible] = useState(false);
     const [dateRange, setDateRange] = useState<{ start: string; end: string }>({ start: '', end: '' });
     const [selectedPeriod, setSelectedPeriod] = useState<string>('전체');
-    const [selectedBillType, setSelectedBillType] = useState<string>('전체');
+    const [selectedBillType, setSelectedBillType] = useState<'전체' | '법률안' | '예산안' | '기타'>('전체');
     const [selectedStatus, setSelectedStatus] = useState<string>('전체');
     const [selectedFilter, setSelectedFilter] = useState<string>('최신순');
     const [viewCounts, setViewCounts] = useState<{ [key: string]: number }>({});
+    const [originalResults, setOriginalResults] = useState<Law[]>([]);
     const [searchResults, setSearchResults] = useState<Law[]>([]);
 
     useEffect(() => {
@@ -45,19 +47,52 @@ const Search = ({ route }: SearchProps) => {
         }
     }, [type]);
 
+    // 검색어로 데이터 가져오기
     useEffect(() => {
         const fetchResults = async () => {
             const results = await searchLaws({
-                searchQuery,
-                dateRange,
-                billType: selectedBillType,
-                status: selectedStatus,
-                sortBy: selectedFilter as '최신순' | '조회순'
+                searchQuery: debouncedSearchQuery,
             });
-            setSearchResults(results);
+            setOriginalResults(results as Law[]);
+            setSearchResults(results as Law[]);
         };
         fetchResults();
-    }, [searchQuery, dateRange, selectedBillType, selectedStatus, selectedFilter]);
+    }, [debouncedSearchQuery]);
+
+    // 모든 필터 적용
+    useEffect(() => {
+        let filteredResults = [...originalResults];
+
+        // 기간 필터
+        if (dateRange.start !== '' && dateRange.end !== '') {
+            filteredResults = filteredResults.filter((law) => 
+                law.DATE >= dateRange.start && law.DATE <= dateRange.end
+            );
+        }
+
+        // 의안구분 필터
+        if (selectedBillType !== '전체') {
+            filteredResults = filteredResults.filter((law) => 
+                law.TAG === selectedBillType
+            );
+        }
+
+        // 상태 필터
+        if (selectedStatus !== '전체') {
+            filteredResults = filteredResults.filter((law) => 
+                law.ACT_STATUS === selectedStatus
+            );
+        }
+
+        // 정렬
+        if (selectedFilter === '최신순') {
+            filteredResults.sort((a, b) => b.DATE.localeCompare(a.DATE));
+        } else {
+            filteredResults.sort((a, b) => b.VIEW_COUNT - a.VIEW_COUNT);
+        }
+
+        setSearchResults(filteredResults);
+    }, [originalResults, dateRange, selectedBillType, selectedStatus, selectedFilter]);
 
     const getFilterText = () => {
         if (selectedFilter === '최신순') return '최신순';
@@ -85,7 +120,7 @@ const Search = ({ route }: SearchProps) => {
     };
 
     const handleBillTypeApply = (billType: string) => {
-        setSelectedBillType(billType);
+        setSelectedBillType(billType as '전체' | '법률안' | '예산안' | '기타');
     };
 
     const handleStatusApply = (status: string) => {
@@ -110,6 +145,10 @@ const Search = ({ route }: SearchProps) => {
             [bill.BILL_ID]: newCount
         }));
         stackNavigation.navigate('LawDetail', { law: bill });
+    };
+
+    const handleSearchSubmit = () => {
+        setDebouncedSearchQuery(searchQuery);
     };
 
     const renderBillItem = ({ item }: { item: Law }) => {
@@ -158,6 +197,8 @@ const Search = ({ route }: SearchProps) => {
                         placeholderTextColor={colors.gray500}
                         value={searchQuery}
                         onChangeText={setSearchQuery}
+                        onSubmitEditing={handleSearchSubmit}
+                        returnKeyType="search"
                     />
                 </View>
             </View>

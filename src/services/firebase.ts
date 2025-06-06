@@ -32,7 +32,6 @@ export const loadCalendarLaws = async () => {
     const docSnap = await getDoc(docRef);
     
     if (docSnap.exists()) {
-        console.log(docSnap.data());
         return docSnap.data().DATE as string[];
     }
     return [];
@@ -59,44 +58,21 @@ export const loadLatestLaws = async (limitCount: number = 2) => {
 // 의안 검색 및 필터링
 export const searchLaws = async (params: {
     searchQuery?: string;
-    dateRange?: { start?: string; end?: string };
-    billType?: string;
-    status?: string;
-    sortBy?: '최신순' | '조회순';
 }) => {
     const dataRef = collection(db, COLLECTIONS.LAWS);
     let queryConstraints = [];
+
+    if (params.searchQuery === '') {
+        return [];
+    }
 
     // 검색어 필터링
     if (params.searchQuery) {
         const searchLower = params.searchQuery.toLowerCase();
         queryConstraints.push(
-            where('TITLE_LOWER', '>=', searchLower),
-            where('TITLE_LOWER', '<=', searchLower + '\uf8ff')
+            where('TITLE', '>=', searchLower),
+            where('TITLE', '<=', searchLower + '\uf8ff')
         );
-    }
-
-    // 날짜 범위 필터링
-    if (params.dateRange?.start) {
-        queryConstraints.push(where('DATE', '>=', params.dateRange.start));
-    }
-    if (params.dateRange?.end) {
-        queryConstraints.push(where('DATE', '<=', params.dateRange.end));
-    }
-
-    // 의안 구분 필터링
-    if (params.billType && params.billType !== '전체') {
-        queryConstraints.push(where('TAG', '==', params.billType));
-    }
-
-    // 상태 필터링
-    if (params.status && params.status !== '전체') {
-        queryConstraints.push(where('ACT_STATUS', '==', params.status));
-    }
-
-    // 정렬
-    if (params.sortBy === '최신순') {
-        queryConstraints.push(orderBy('DATE', 'desc'));
     }
 
     const queryRef = query(dataRef, ...queryConstraints);

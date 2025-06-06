@@ -7,6 +7,7 @@ export interface Law {
     ACT_STATUS: string;
     BILL_ID: string;
     SUMMARY: string;
+    VIEW_COUNT: number;
 }
 
 // 법안 활동 상태
