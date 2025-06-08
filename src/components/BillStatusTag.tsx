@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { BillStatus } from '@/models';
+import { colors } from '@/constants';
 
 interface BillStatusTagProps {
     status: string;
@@ -20,7 +21,7 @@ const BillStatusTag: React.FC<BillStatusTagProps> = ({ status, style, size = 'sm
             },
             {
                 backgroundColor:
-                    status === BillStatus.MEETING ? '#EFF6FF' :
+                    status === BillStatus.MEETING ? colors.skyblue :
                     status === BillStatus.APPROVAL ? '#CAFFE0' :
                     status === BillStatus.PROCESSING ? '#FFDAB1' :
                     status === BillStatus.GOVERNMENT_TRANSFER ? '#E7BEFF' :

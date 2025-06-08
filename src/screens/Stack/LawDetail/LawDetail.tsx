@@ -5,7 +5,7 @@ import { RootStackParamList } from '@/types';
 import { ArrowLeftIcon, ChevronLeftIcon, HeartIcon, ShareIcon } from '@/assets/icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { BillStatusTag, LawStatus } from '@/components';
+import { BillStatusTag, LawStatus, LawVote } from '@/components';
 import { colors } from '@/constants';
 import { toggleFavoriteLaw, increaseViewCount } from '@/services';
 import { useUser } from '@/lib';
@@ -98,7 +98,7 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                     </TouchableOpacity>
                 </View>
                 <LawStatus law={law} />
-
+                <LawVote law={law} />
             </ScrollView>
         </SafeAreaView>
     )

@@ -6,8 +6,13 @@ export interface Law {
     COMMITTEE: string;
     ACT_STATUS: string;
     BILL_ID: string;
-    SUMMARY: string;
-    VIEW_COUNT: number;
+    SUMMARY?: string;
+    // 조회수   
+    VIEW_COUNT?: number;
+    // 찬성 투표수
+    VOTE_TRUE?: number;
+    // 반대 투표수
+    VOTE_FALSE?: number;
 }
 
 // 법안 활동 상태

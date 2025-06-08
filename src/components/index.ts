@@ -8,3 +8,4 @@ export { default as LawList } from './LawList';
 export { default as MyLawCard } from './MyLawCard';
 export { default as BillStatusTag } from './BillStatusTag';
 export { default as LawStatus } from './LawStatus';
+export { default as LawVote } from './LawVote';
