@@ -1,16 +1,28 @@
-import { ChevronLeftIcon, UserIcon } from '@/assets';
+import { ChevronLeftIcon } from '@/assets';
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types/navigate';
-import { colors } from '@/constants';
+import { colors, STORAGE_KEY } from '@/constants';
+import { useUser } from '@/lib';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import NaverLogin from '@react-native-seoul/naver-login';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Profile = () => {
   const navigation = useNavigation<NavigationProp>();
+  const [user, setUser] = useUser();
+
+  const logout = () => {
+    AsyncStorage.removeItem(STORAGE_KEY.USER_ID);
+    AsyncStorage.removeItem(STORAGE_KEY.TUTORIAL);
+    setUser(null);
+    NaverLogin.logout();
+    navigation.navigate('SignIn');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,10 +30,21 @@ const Profile = () => {
         <View style={styles.profileSection}>
           <View style={styles.profileHeader}>
             <View style={styles.profileImageContainer}>
-              <UserIcon width={100} height={100} color={colors.gray400}/>
+              <Image source={{ uri: user?.profileImage }} style={styles.profileImage} />
             </View>
-            <Text style={styles.profileHeaderText}>프로필</Text>
+            <Text style={styles.profileHeaderText}>{user?.nickname}</Text>
+            <Text style={styles.profileHeaderText}>{user?.email}</Text>
+            <Text style={styles.profileHeaderText}>{user?.age}</Text>
+            <Text style={styles.profileHeaderText}>{user?.gender}</Text>
+            <Text style={styles.profileHeaderText}>{user?.createdAt}</Text>
           </View>
+        </View>
+        {/* 계정 관리 섹션 */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>계정 관리</Text>
+          <TouchableOpacity style={styles.termsItem} onPress={logout}>
+            <Text style={styles.termsText}>로그아웃</Text>
+          </TouchableOpacity>
         </View>
         {/* 약관 섹션 */}
         <View style={styles.section}>
@@ -80,6 +103,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+  },
+  profileImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 100,
   },
   profileHeaderText: {
     fontSize: 20,

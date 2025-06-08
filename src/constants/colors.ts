@@ -16,4 +16,7 @@ export const colors = {
   gray700: '#404040',
   gray800: '#202020',
   gray900: '#101010',
+
+  naver: '#03C75A',
+  kakao: '#FEE500',
 };

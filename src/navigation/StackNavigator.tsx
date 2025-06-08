@@ -5,42 +5,64 @@ import TabNavigator from './TabNavigator';
 import { STORAGE_KEY } from '@/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootStackParamList } from '@/types';
-import { 
-  Notification, 
-  Terms, 
-  PrivacyPolicy, 
-  Tutorial, 
-  ApiPolicy, 
+import {
+  Notification,
+  Terms,
+  PrivacyPolicy,
+  Tutorial,
+  ApiPolicy,
   LawDetail,
   SignIn
 } from '@/screens';
+import { loadUser } from '@/services';
+import { useSetUser } from '@/lib';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
-  const [isTutorialCompleted, setIsTutorialCompleted] = useState<boolean | null>(null);
+  const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList | null>(null);
+  const setUser = useSetUser();
 
   useEffect(() => {
-    const checkTutorial = async () => {
+    const checkInitialRoute = async () => {
       try {
-        const isCompleted = await AsyncStorage.getItem(STORAGE_KEY.TUTORIAL);
-        setIsTutorialCompleted(isCompleted === 'true');
+        const [tutorialCompleted, userId] = await Promise.all([
+          AsyncStorage.getItem(STORAGE_KEY.TUTORIAL),
+          AsyncStorage.getItem(STORAGE_KEY.USER_ID)
+        ]);
+
+        if (userId) {
+          const user = await loadUser(userId);
+          if (user) {
+            setUser(user);
+            if (tutorialCompleted === 'false') {
+              setInitialRoute('Tab');
+            } else {
+              setInitialRoute('Tutorial');
+            }
+          } else {
+            setInitialRoute('SignIn');
+          }
+        } else {
+          setInitialRoute('SignIn');
+        }
       } catch (error) {
-        setIsTutorialCompleted(false);
+        console.error('초기 라우트 확인 중 오류:', error);
+        setInitialRoute('SignIn');
       }
     };
-    checkTutorial();
+
+    checkInitialRoute();
   }, []);
 
-  if (isTutorialCompleted === null) {
-    return null; // 로딩 중
+  if (initialRoute === null) {
+    return null;
   }
 
   return (
     <NavigationContainer>
       <Stack.Navigator
-        // initialRouteName={isTutorialCompleted ? 'Tab' : 'Tutorial'}
-        initialRouteName="SignIn"
+        initialRouteName={initialRoute}
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="SignIn" component={SignIn} />

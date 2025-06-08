@@ -3,5 +3,6 @@ export const STORAGE_KEY = {
   VIEW_COUNT: '@view_count',
   LAWS: '@laws',
   CALENDAR: '@calendar',
+  USER_ID: '@user_id',
 };
 

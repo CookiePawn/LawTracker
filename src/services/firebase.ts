@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { COLLECTIONS } from "@/constants";
-import { Law } from "@/models";
+import { Law, User } from "@/models";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -95,4 +95,19 @@ export const searchLaws = async (params: {
     const snapshot = await getDocs(queryRef);
     const laws = snapshot.docs.map((doc) => doc.data());
     return laws as Law[];
+};
+
+// 네이버 로그인 회원 정보 저장
+export const signIn = async (user: User) => {
+    const dataRef = collection(db, COLLECTIONS.USERS);
+    const docRef = doc(dataRef, user.id);
+    await setDoc(docRef, user, { merge: true });
+};
+
+// 회원 정보 로드
+export const loadUser = async (userId: string) => {
+    const dataRef = collection(db, COLLECTIONS.USERS);
+    const docRef = doc(dataRef, userId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data() as User;
 };
