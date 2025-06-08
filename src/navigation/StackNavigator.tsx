@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
 import { STORAGE_KEY } from '@/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { RootStackParamList } from '@/types';
 import { 
   Notification, 
   Terms, 
@@ -13,7 +14,7 @@ import {
   LawDetail 
 } from '@/screens';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
   const [isTutorialCompleted, setIsTutorialCompleted] = useState<boolean | null>(null);
