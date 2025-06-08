@@ -18,7 +18,6 @@ const Profile = () => {
 
   const logout = () => {
     AsyncStorage.removeItem(STORAGE_KEY.USER_ID);
-    AsyncStorage.removeItem(STORAGE_KEY.TUTORIAL);
     setUser(null);
     NaverLogin.logout();
     navigation.navigate('SignIn');

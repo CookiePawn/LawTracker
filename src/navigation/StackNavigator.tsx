@@ -26,8 +26,7 @@ const AppNavigator = () => {
   useEffect(() => {
     const checkInitialRoute = async () => {
       try {
-        const [tutorialCompleted, userId] = await Promise.all([
-          AsyncStorage.getItem(STORAGE_KEY.TUTORIAL),
+        const [userId] = await Promise.all([
           AsyncStorage.getItem(STORAGE_KEY.USER_ID)
         ]);
 
@@ -35,11 +34,7 @@ const AppNavigator = () => {
           const user = await loadUser(userId);
           if (user) {
             setUser(user);
-            if (tutorialCompleted === 'false') {
-              setInitialRoute('Tab');
-            } else {
-              setInitialRoute('Tutorial');
-            }
+            setInitialRoute('Tab');
           } else {
             setInitialRoute('SignIn');
           }

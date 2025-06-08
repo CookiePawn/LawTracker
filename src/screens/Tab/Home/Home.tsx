@@ -1,13 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, BackHandler, ToastAndroid, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { LogoHeader, BellIcon, ChevronLeftIcon } from '@/assets';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { RootStackParamList } from '@/types';
 import RNExitApp from 'react-native-exit-app';
-import { colors } from '@/constants';
+import { colors, STORAGE_KEY } from '@/constants';
 import { noticeData } from './data';
 import { NewsCard, LawList, MyLawCard, AdBanner } from '@/components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type NavigationProp = BottomTabNavigationProp<RootStackParamList>;
 
@@ -15,6 +16,16 @@ const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp>();
   const backPressedTime = useRef(0);
   const [noticeIndex, setNoticeIndex] = useState(0);
+
+  useEffect(() => {
+    const checkTutorial = async () => {
+      const tutorialCompleted = await AsyncStorage.getItem(STORAGE_KEY.TUTORIAL);
+      if (tutorialCompleted !== 'true') {
+        navigation.navigate('Tutorial');
+      }
+    };
+    checkTutorial();
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -66,7 +77,7 @@ const HomeScreen = () => {
             </View>
           </View>
         </View>
-        <NewsCard />  
+        <NewsCard />
         <AdBanner />
         <LawList type='random' />
         <MyLawCard />
