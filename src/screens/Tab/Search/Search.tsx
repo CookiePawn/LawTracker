@@ -126,8 +126,6 @@ const Search = ({ route }: SearchProps) => {
     };
 
     const handleBillPress = async (bill: Law) => {
-        await increaseViewCount(bill.BILL_ID);
-        await fetchResults();
         stackNavigation.navigate('LawDetail', { law: bill });
     };
 

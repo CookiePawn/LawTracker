@@ -2,7 +2,7 @@
 import { COLLECTIONS } from "@/constants";
 import { Law, User } from "@/models";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -111,3 +111,20 @@ export const loadUser = async (userId: string) => {
     const docSnap = await getDoc(docRef);
     return docSnap.data() as User;
 };
+
+// 법안 즐겨찾기 토글 (추가/삭제)
+export const toggleFavoriteLaw = async (userId: string, billId: string) => {
+    const dataRef = collection(db, COLLECTIONS.USERS);
+    const docRef = doc(dataRef, userId);
+    const userDoc = await getDoc(docRef);
+    const userData = userDoc.data();
+    
+    if (userData?.FAVORITE_LAWS?.includes(billId)) {
+        // 이미 있으면 삭제
+        await updateDoc(docRef, { FAVORITE_LAWS: arrayRemove(billId) });
+    } else {
+        // 없으면 추가
+        await updateDoc(docRef, { FAVORITE_LAWS: arrayUnion(billId) });
+    }
+};
+

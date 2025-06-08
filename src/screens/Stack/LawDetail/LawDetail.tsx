@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/types';
@@ -7,6 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BillStatusTag, LawStatus } from '@/components';
 import { colors } from '@/constants';
+import { toggleFavoriteLaw, increaseViewCount } from '@/services';
+import { useUser } from '@/lib';
 
 
 const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'> }) => {
@@ -14,6 +16,23 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const [isHearted, setIsHearted] = useState(false);
     const [isSummaryExpanded, setIsSummaryExpanded] = useState(false);
+    const [user, setUser] = useUser();
+
+    useEffect(() => {
+        const increaseView = async () => {
+            setIsHearted(user?.FAVORITE_LAWS?.includes(law.BILL_ID) || false);
+            await increaseViewCount(law.BILL_ID);
+        }
+        increaseView();
+    }, [law]);
+
+    const handleHeartPress = async () => {
+        if (user) {
+            await toggleFavoriteLaw(user.id, law.BILL_ID);
+            setIsHearted(!isHearted);
+            setUser({ ...user, FAVORITE_LAWS: user.FAVORITE_LAWS?.includes(law.BILL_ID) ? user.FAVORITE_LAWS?.filter(id => id !== law.BILL_ID) : [...(user.FAVORITE_LAWS || []), law.BILL_ID] });
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -29,7 +48,7 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
             <ScrollView>
                 <View style={styles.lawTagContainer}>
                     <BillStatusTag status={law.ACT_STATUS} size="large" />
-                    <TouchableOpacity onPress={() => setIsHearted(!isHearted)}>
+                    <TouchableOpacity onPress={handleHeartPress}>
                         <HeartIcon width={18} height={18} color={isHearted ? colors.red : colors.gray400} fill={isHearted ? colors.red : 'none'} />
                     </TouchableOpacity>
                 </View>

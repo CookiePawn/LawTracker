@@ -7,4 +7,5 @@ export interface User {
     profileImage: string;
     createdAt: string;
     SNS: string;
+    FAVORITE_LAWS?: string[];
 }
