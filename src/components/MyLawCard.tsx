@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon } from '@/assets/icons';
 import { BillStatus, Law } from '@/models';
-import { loadLatestLaws } from '@/services';
+import { loadLawById } from '@/services';
+import { useUser } from '@/lib';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '@/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const getProgressPercentage = (status: BillStatus): number => {
     switch (status) {
@@ -34,29 +38,37 @@ const getProgressPercentage = (status: BillStatus): number => {
 
 const MyLawCard = () => {
     const [laws, setLaws] = useState<Law[]>([]);
+    const [user] = useUser();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     useEffect(() => {
         const loadLawsList = async () => {
-            const laws = await loadLatestLaws(3);
-            setLaws(laws);
+            const favoriteLaws = user?.FAVORITE_LAWS?.slice(0, 3) || [];
+            const laws = await Promise.all(favoriteLaws.map(async (billId) => await loadLawById(billId)));
+            setLaws(laws as Law[]);
         };
         loadLawsList();
-    }, []);
+    }, [user]);
 
     return (
         <View style={styles.container}>
             <View style={styles.newsTitleContainer}>
                 <Text style={styles.newsTitle}>나의 관심 법안</Text>
-                <View style={styles.newsTitleMore}>
+                <TouchableOpacity style={styles.newsTitleMore} onPress={() => navigation.navigate('Tab', { screen: 'Profile' })}>
                     <Text style={styles.newsTitleMoreTitle}>더보기</Text>
                     <ChevronLeftIcon style={styles.newsTitleMoreIcon} width={17} height={17} color={colors.primary} />
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.lawListContainer}>
+                {laws.length === 0 && (
+                    <View style={styles.lawItemEmpty}>
+                        <Text style={styles.lawItemEmptyText}>관심 법안이 없습니다.</Text>
+                    </View>
+                )}
                 {laws.map((bill, index) => {
                     const progressPercentage = getProgressPercentage(bill.ACT_STATUS as BillStatus);
                     return (
-                        <View style={styles.lawItem} key={index}>
+                        <TouchableOpacity style={styles.lawItem} key={index} onPress={() => navigation.navigate('LawDetail', { law: bill })}>
                             <View style={styles.lawItemHeader}>
                                 <Text
                                     style={styles.lawItemTitle}
@@ -74,7 +86,7 @@ const MyLawCard = () => {
                             <View style={styles.lawItemProgressBar}>
                                 <View style={[styles.lawItemProgressBarFill, { width: `${progressPercentage}%` }]} />
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     )
                 })}
             </View>
@@ -172,6 +184,16 @@ const styles = StyleSheet.create({
         height: 6,
         backgroundColor: colors.primary,
         borderRadius: 10,
+    },
+    lawItemEmpty: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    lawItemEmptyText: {
+        fontSize: 14,
+        color: colors.gray500,
+        paddingVertical: 50,
     },
 });
 export default MyLawCard;

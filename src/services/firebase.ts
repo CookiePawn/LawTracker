@@ -46,6 +46,14 @@ export const loadLaws = async (date?: string) => {
     return laws as Law[];
 };
 
+// 특정 의안 로드
+export const loadLawById = async (billId: string) => {
+    const dataRef = collection(db, COLLECTIONS.LAWS);
+    const docRef = doc(dataRef, billId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data() as Law;
+};
+
 // 최신 의안 로드
 export const loadLatestLaws = async (limitCount: number = 2) => {
     const dataRef = collection(db, COLLECTIONS.LAWS);
