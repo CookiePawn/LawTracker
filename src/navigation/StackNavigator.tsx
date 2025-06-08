@@ -11,7 +11,8 @@ import {
   PrivacyPolicy, 
   Tutorial, 
   ApiPolicy, 
-  LawDetail 
+  LawDetail,
+  SignIn
 } from '@/screens';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -38,9 +39,11 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={isTutorialCompleted ? 'Tab' : 'Tutorial'}
+        // initialRouteName={isTutorialCompleted ? 'Tab' : 'Tutorial'}
+        initialRouteName="SignIn"
         screenOptions={{ headerShown: false }}
       >
+        <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Tutorial" component={Tutorial} />
         <Stack.Screen name="Tab" component={TabNavigator} />
         <Stack.Screen name="Notification" component={Notification} />

@@ -9,6 +9,7 @@ export type RootStackParamList = {
     ApiPolicy: undefined;
     Tutorial: undefined;
     LawDetail: { law: Law };
+    SignIn: undefined;
 };
 
 

@@ -1,6 +1,6 @@
 import AppNavigator from './src/navigation/StackNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { loadCalendarLaws, loadLaws } from './src/services';  
+import { loadCalendarLaws } from './src/services';  
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEY } from './src/constants';
