@@ -2,7 +2,7 @@
 import { COLLECTIONS } from "@/constants";
 import { Law, User } from "@/models";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc, arrayUnion, arrayRemove, deleteDoc } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -117,6 +117,13 @@ export const signIn = async (user: User) => {
     const dataRef = collection(db, COLLECTIONS.USERS);
     const docRef = doc(dataRef, user.id);
     await setDoc(docRef, user, { merge: true });
+};
+
+// 회원 탈퇴
+export const withdrawUser = async (userId: string) => {
+    const dataRef = collection(db, COLLECTIONS.USERS);
+    const docRef = doc(dataRef, userId);
+    await deleteDoc(docRef);
 };
 
 // 회원 정보 로드

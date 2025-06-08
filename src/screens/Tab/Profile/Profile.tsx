@@ -1,26 +1,50 @@
 import { ChevronLeftIcon } from '@/assets';
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types/navigate';
 import { colors, STORAGE_KEY } from '@/constants';
-import { useUser } from '@/lib';
+import { useSetAlert, useUser } from '@/lib';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NaverLogin from '@react-native-seoul/naver-login';
+import { withdrawUser } from '@/services/firebase';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Profile = () => {
   const navigation = useNavigation<NavigationProp>();
   const [user, setUser] = useUser();
+  const setAlert = useSetAlert();
 
   const logout = () => {
     AsyncStorage.removeItem(STORAGE_KEY.USER_ID);
     setUser(null);
     NaverLogin.logout();
     navigation.navigate('SignIn');
+  };
+
+  const withdraw = async () => {
+    if (!user?.id) return;
+    await withdrawUser(user?.id);
+    await AsyncStorage.removeItem(STORAGE_KEY.USER_ID);
+    await AsyncStorage.removeItem(STORAGE_KEY.TUTORIAL);
+    setUser(null);
+    NaverLogin.logout();
+    navigation.navigate('SignIn');
+  }
+
+  const showWithdrawAlert = () => {
+    setAlert({
+      visible: true,
+      title: '회원탈퇴',
+      message: '회원탈퇴 하시겠습니까?',
+      buttons: [
+        { text: '예', onPress: withdraw, style: 'default' },
+        { text: '아니요', style: 'cancel' },
+      ],
+    });
   };
 
   return (
@@ -46,33 +70,37 @@ const Profile = () => {
             <Text style={styles.termsText}>로그아웃</Text>
           </TouchableOpacity>
           <View style={styles.divider} />
+          <TouchableOpacity style={styles.termsItem} onPress={showWithdrawAlert}>
+            <Text style={styles.termsText}>회원탈퇴</Text>
+          </TouchableOpacity>
+          <View style={styles.divider} />
         </View>
         {/* 약관 섹션 */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>약관</Text>
           <View style={styles.termsContainer}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.termsItem}
               onPress={() => navigation.navigate('Terms')}
             >
               <Text style={styles.termsText}>이용약관</Text>
-              <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333'/>
+              <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333' />
             </TouchableOpacity>
             <View style={styles.divider} />
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.termsItem}
               onPress={() => navigation.navigate('PrivacyPolicy')}
             >
               <Text style={styles.termsText}>개인정보 처리방침</Text>
-              <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333'/>
-            </TouchableOpacity>   
+              <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333' />
+            </TouchableOpacity>
             <View style={styles.divider} />
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.termsItem}
               onPress={() => navigation.navigate('ApiPolicy')}
             >
               <Text style={styles.termsText}>API 이용 정책</Text>
-              <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333'/>
+              <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333' />
             </TouchableOpacity>
             <View style={styles.divider} />
           </View>
