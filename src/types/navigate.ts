@@ -10,6 +10,7 @@ export type RootStackParamList = {
     Tutorial: undefined;
     LawDetail: { law: Law };
     SignIn: undefined;
+    Setting: undefined;
 };
 
 

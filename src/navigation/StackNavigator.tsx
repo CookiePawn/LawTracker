@@ -12,7 +12,8 @@ import {
   Tutorial,
   ApiPolicy,
   LawDetail,
-  SignIn
+  SignIn,
+  Setting
 } from '@/screens';
 import { loadUser } from '@/services';
 import { useSetUser } from '@/lib';
@@ -68,6 +69,7 @@ const AppNavigator = () => {
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
         <Stack.Screen name="ApiPolicy" component={ApiPolicy} />
         <Stack.Screen name="LawDetail" component={LawDetail} />
+        <Stack.Screen name="Setting" component={Setting} />
       </Stack.Navigator>
     </NavigationContainer>
   );
