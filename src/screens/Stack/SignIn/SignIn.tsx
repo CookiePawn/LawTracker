@@ -1,20 +1,22 @@
 import { colors, STORAGE_KEY } from '@/constants';
 import NaverLogin from '@react-native-seoul/naver-login';
-import React, { ReactElement, useEffect, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Alert, Image, ActivityIndicator } from 'react-native';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text, Alert, Image, ActivityIndicator, ToastAndroid, BackHandler } from 'react-native';
 import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET, NAVER_APP_NAME } from '@env';
 import { LogoPrimary } from '@/assets';
 import { signIn } from '@/services';
 import { User } from '@/models';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSetUser } from '@/lib/jotai/user';
+import RNExitApp from 'react-native-exit-app';
 
 const SignIn = (): ReactElement => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const setUser = useSetUser();
+    const backPressedTime = useRef(0);
 
     useEffect(() => {
         const initialize = async () => {
@@ -37,6 +39,30 @@ const SignIn = (): ReactElement => {
 
         initialize();
     }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const backAction = () => {
+                const currentTime = new Date().getTime();
+                const timeDiff = currentTime - backPressedTime.current;
+
+                if (timeDiff < 2000) { // 2초 이내에 두 번 누른 경우
+                    RNExitApp.exitApp();
+                    return true;
+                }
+
+                backPressedTime.current = currentTime;
+                ToastAndroid.show('한번 더 누르면 종료됩니다', ToastAndroid.SHORT);
+                return true;
+            };
+
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+            return () => {
+                backHandler.remove();
+            };
+        }, [])
+    );
 
     const naverLogin = async () => {
         if (!NAVER_CLIENT_ID || !NAVER_CLIENT_SECRET || !NAVER_APP_NAME) {
