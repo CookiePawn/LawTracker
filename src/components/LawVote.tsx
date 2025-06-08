@@ -1,21 +1,34 @@
 import { colors } from '@/constants';
 import { Law } from '@/models';
+import { increaseVoteCount, loadLawById } from '@/services/firebase';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import { PieChart } from 'react-native-chart-kit'
 
 const LawVote = ({ law }: { law: Law }) => {
-    const totalVotes = (law.VOTE_TRUE || 0) + (law.VOTE_FALSE || 0);
+    const [item, setItem] = useState<Law>(law);
+
+    const loadLaw = async () => {
+            const newLaw = await loadLawById(law.BILL_ID);
+            setItem(newLaw);
+        }
+
+    useEffect(() => {
+        loadLaw();
+    }, [law]);
+
+    const totalVotes = (item.VOTE_TRUE || 0) + (item.VOTE_FALSE || 0);
     const chartData = [
         {
             name: '찬성',
-            population: law.VOTE_TRUE || 0,
+            population: item.VOTE_TRUE || 0,
             color: colors.primary,
             legendFontColor: colors.gray800,
             legendFontSize: 12
         },
         {
             name: '반대',
-            population: law.VOTE_FALSE || 0,
+            population: item.VOTE_FALSE || 0,
             color: colors.red,
             legendFontColor: colors.gray800,
             legendFontSize: 12
@@ -27,16 +40,23 @@ const LawVote = ({ law }: { law: Law }) => {
         chartData[1].population = 1;
     }
 
+    const handleVote = async (voteType: 'VOTE_TRUE' | 'VOTE_FALSE') => {
+        if (item?.BILL_ID) {
+            await increaseVoteCount(item.BILL_ID, voteType);
+            await loadLaw();
+        }
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.lawStatusTitle}>진행 경과</Text>
             <View style={styles.lawVoteContainer}>
                 <View style={styles.lawVoteTrueItem}>
                     <Text style={styles.lawVoteTrueItemPercentText}>
-                        {totalVotes === 0 ? '0%' : `${((law.VOTE_TRUE || 0) / totalVotes * 100).toFixed(0)}%`}
+                        {totalVotes === 0 ? '0%' : `${((item.VOTE_TRUE || 0) / totalVotes * 100).toFixed(0)}%`}
                     </Text>
                     <Text style={styles.lawVoteTrueItemText}>찬성</Text>
-                    <TouchableOpacity style={styles.lawVoteTrueItemButton}>
+                    <TouchableOpacity style={styles.lawVoteTrueItemButton} onPress={() => handleVote('VOTE_TRUE')}>
                         <Text style={styles.lawVoteTrueItemButtonText}>찬성하기</Text>
                     </TouchableOpacity>
                 </View>
@@ -59,10 +79,10 @@ const LawVote = ({ law }: { law: Law }) => {
 
                 <View style={styles.lawVoteFalseItem}>
                     <Text style={styles.lawVoteFalseItemPercentText}>
-                        {totalVotes === 0 ? '0%' : `${((law.VOTE_FALSE || 0) / totalVotes * 100).toFixed(0)}%`}
+                        {totalVotes === 0 ? '0%' : `${((item.VOTE_FALSE || 0) / totalVotes * 100).toFixed(0)}%`}
                     </Text>
                     <Text style={styles.lawVoteFalseItemText}>반대</Text>
-                    <TouchableOpacity style={styles.lawVoteFalseItemButton}>
+                    <TouchableOpacity style={styles.lawVoteFalseItemButton} onPress={() => handleVote('VOTE_FALSE')}>
                         <Text style={styles.lawVoteFalseItemButtonText}>반대하기</Text>
                     </TouchableOpacity>
                 </View>

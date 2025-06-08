@@ -63,6 +63,13 @@ export const loadLatestLaws = async (limitCount: number = 2) => {
     return laws as Law[];
 };
 
+// 의안 찬/반 투표 증가
+export const increaseVoteCount = async (billId: string, voteType: 'VOTE_TRUE' | 'VOTE_FALSE') => {
+    const dataRef = collection(db, COLLECTIONS.LAWS);
+    const docRef = doc(dataRef, billId);
+    await updateDoc(docRef, { [voteType]: increment(1) }); // VOTE_TRUE 또는 VOTE_FALSE 필드 증가
+};
+
 // 조회순 의안 로드
 export const loadViewLaws = async (limitCount: number = 2) => {
     const dataRef = collection(db, COLLECTIONS.LAWS);
