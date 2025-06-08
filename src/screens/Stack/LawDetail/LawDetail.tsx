@@ -9,6 +9,7 @@ import { BillStatusTag, LawStatus } from '@/components';
 import { colors } from '@/constants';
 import { toggleFavoriteLaw, increaseViewCount } from '@/services';
 import { useUser } from '@/lib';
+import Share from 'react-native-share';
 
 
 const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'> }) => {
@@ -34,6 +35,19 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
         }
     }
 
+    const handleSharePress = async () => {
+        await Share.open({
+            message: `법안 상세 페이지: ${law.TITLE}`,
+            url: 'https://play.google.com/store/apps/details?id=com.lawtracker',
+        })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                err && console.log(err);
+            });
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
@@ -41,7 +55,7 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                     <ArrowLeftIcon width={24} height={24} color={colors.black} />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>법안 상세</Text>
-                <TouchableOpacity style={styles.headerShareIconContainer}>
+                <TouchableOpacity style={styles.headerShareIconContainer} onPress={handleSharePress}>
                     <ShareIcon width={20} height={20} color={colors.black} fill={colors.black} />
                 </TouchableOpacity>
             </View>
@@ -84,6 +98,7 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                     </TouchableOpacity>
                 </View>
                 <LawStatus law={law} />
+
             </ScrollView>
         </SafeAreaView>
     )

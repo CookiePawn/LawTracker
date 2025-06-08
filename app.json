@@ -3,5 +3,25 @@
   "displayName": "templateCli",
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-2191530294530492~9341516392"
-  }
+  },
+  "plugins": [
+    [
+      "react-native-share",
+      {
+        "ios": [
+          "fb",
+          "instagram",
+          "twitter",
+          "tiktoksharesdk"
+        ],
+        "android": [
+          "com.facebook.katana",
+          "com.instagram.android",
+          "com.twitter.android",
+          "com.zhiliaoapp.musically"
+        ],
+        "enableBase64ShareAndroid": true
+      }
+    ]
+  ]
 }
