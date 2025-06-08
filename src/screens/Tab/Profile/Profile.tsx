@@ -32,10 +32,11 @@ const Profile = () => {
               <Image source={{ uri: user?.profileImage }} style={styles.profileImage} />
             </View>
             <Text style={styles.profileHeaderText}>{user?.nickname}</Text>
-            <Text style={styles.profileHeaderText}>{user?.email}</Text>
-            <Text style={styles.profileHeaderText}>{user?.age}</Text>
-            <Text style={styles.profileHeaderText}>{user?.gender}</Text>
-            <Text style={styles.profileHeaderText}>{user?.createdAt}</Text>
+            <Text style={styles.profileHeaderSubText}>{user?.email}</Text>
+            <Text style={styles.profileHeaderSubText}>{user?.SNS === 'naver' ? '네이버 로그인' : '카카오 로그인'}</Text>
+            <Text style={styles.profileHeaderSubText}>나이: {user?.age}</Text>
+            <Text style={styles.profileHeaderSubText}>성별: {user?.gender === 'M' ? '남자' : '여자'}</Text>
+            <Text style={styles.profileHeaderSubText}>가입일: {user?.createdAt}</Text>
           </View>
         </View>
         {/* 계정 관리 섹션 */}
@@ -44,6 +45,7 @@ const Profile = () => {
           <TouchableOpacity style={styles.termsItem} onPress={logout}>
             <Text style={styles.termsText}>로그아웃</Text>
           </TouchableOpacity>
+          <View style={styles.divider} />
         </View>
         {/* 약관 섹션 */}
         <View style={styles.section}>
@@ -72,6 +74,7 @@ const Profile = () => {
               <Text style={styles.termsText}>API 이용 정책</Text>
               <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333'/>
             </TouchableOpacity>
+            <View style={styles.divider} />
           </View>
         </View>
       </ScrollView>
@@ -107,6 +110,10 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 100,
+  },
+  profileHeaderSubText: {
+    fontSize: 14,
+    color: colors.gray500,
   },
   profileHeaderText: {
     fontSize: 20,

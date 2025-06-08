@@ -6,4 +6,5 @@ export interface User {
     gender: string;
     profileImage: string;
     createdAt: string;
+    SNS: string;
 }

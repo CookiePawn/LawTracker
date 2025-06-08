@@ -67,6 +67,7 @@ const SignIn = (): ReactElement => {
             gender: profileResult.response.gender ?? '',
             profileImage: profileResult.response.profile_image ?? '',
             createdAt: new Date().toISOString(),
+            SNS: 'naver',
         }
         try {
             await signIn(user);
