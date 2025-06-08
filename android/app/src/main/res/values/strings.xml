@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">templateCli</string>
+    <string name="kakao_app_key">1366b1d3d921fb1e441de170663f76e6</string>
 </resources>

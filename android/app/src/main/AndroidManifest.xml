@@ -15,7 +15,7 @@
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
-      android:allowBackup="false"
+      android:allowBackup="true"
       android:theme="@style/AppTheme"
       android:supportsRtl="true">
       <activity
@@ -31,5 +31,18 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      
+      <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+        android:exported="true">
+      <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+
+          <!-- Redirect URI: "kakao1366b1d3d921fb1e441de170663f76e6://oauth" -->
+          <data android:host="oauth"
+              android:scheme="kakao1366b1d3d921fb1e441de170663f76e6" />
+      </intent-filter>
+    </activity>
     </application>
 </manifest>
