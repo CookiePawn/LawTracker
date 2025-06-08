@@ -92,9 +92,9 @@ const SignIn = (): ReactElement => {
                 <TouchableOpacity onPress={naverLogin} style={styles.naverLoginButton}>
                     <Text style={styles.naverLoginButtonText}>네이버 로그인</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.kakaoLoginButton}>
+                {/* <TouchableOpacity style={styles.kakaoLoginButton}>
                     <Text style={styles.kakaoLoginButtonText}>카카오 로그인</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </View>
     );
