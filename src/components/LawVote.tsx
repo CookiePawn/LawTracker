@@ -1,12 +1,15 @@
 import { colors } from '@/constants';
 import { Law } from '@/models';
-import { increaseVoteCount, loadLawById } from '@/services/firebase';
+import { increaseVoteCount, loadLawById, toggleVoteLaw } from '@/services';
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { PieChart } from 'react-native-chart-kit'
+import { useSetAlert, useUser } from '@/lib';
 
 const LawVote = ({ law }: { law: Law }) => {
     const [item, setItem] = useState<Law>(law);
+    const [user] = useUser();
+    const setAlert = useSetAlert();
 
     const loadLaw = async () => {
             const newLaw = await loadLawById(law.BILL_ID);
@@ -42,8 +45,30 @@ const LawVote = ({ law }: { law: Law }) => {
 
     const handleVote = async (voteType: 'VOTE_TRUE' | 'VOTE_FALSE') => {
         if (item?.BILL_ID) {
-            await increaseVoteCount(item.BILL_ID, voteType);
-            await loadLaw();
+            const result = await increaseVoteCount(user?.id || '', item.BILL_ID, voteType);
+            if (result === '200') {
+                await loadLaw();
+            } else if (result === '402') {
+                setAlert({
+                    visible: true,
+                    title: '안내',
+                    message: `이미 투표한 의안입니다. ${voteType === 'VOTE_TRUE' ? '\n찬성' : '\n반대'}로 바꾸시겠습니까?`,
+                    buttons: [
+                        { text: '확인', onPress: () => {
+                            toggleVoteLaw(item.BILL_ID, voteType);
+                            loadLaw();
+                        } },
+                        { text: '취소', style: 'cancel' }
+                    ],
+                });
+            } else {
+                setAlert({
+                    visible: true,
+                    title: '투표 오류',
+                    message: '투표 오류가 발생했습니다.',
+                    buttons: [{ text: '확인', }],
+                });
+            }
         }
     }
 
