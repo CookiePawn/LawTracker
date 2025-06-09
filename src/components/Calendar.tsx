@@ -59,7 +59,7 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const dayOfWeek = days[date.getDay()];
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = `${date.getFullYear()}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const hasBill = datesWithBills.has(dateStr);
     return { month, day, dayOfWeek, hasBill };
   };
