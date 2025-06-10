@@ -83,3 +83,68 @@ export const fetchMeetingDetail = async (billId: string) => {
     throw error;
   }
 };
+
+
+// 발의자 및 정당 정보 로드
+export const fetchBillInfoPPSR = async (billId: string) => {
+  try {
+    const response = await api.get('/BILLINFOPPSR', {
+      params: {
+        Key: LAW_API_KEY,
+        Type: 'json',
+        BILL_ID: billId,
+        pIndex: 1,
+        pSize: 1,
+      },
+    });
+
+    // 응답 데이터 구조 확인 및 안전한 처리
+    if (!response.data?.BILLINFOPPSR?.[1]?.row?.[0]) {
+      return {
+        BILL_ID: billId,
+        PPSR_NM: '-',
+        PPSR_POLY_NM: '-',
+      }
+    }
+    
+    return response.data.BILLINFOPPSR[1].row[0];
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error('API 응답 오류:', error.response?.data || error.message);
+    } else {
+      console.error('발의자 및 정당 정보 조회 중 오류 발생:', error);
+    }
+    throw error;
+  }
+};
+
+// 공동 발의자 정보 로드
+export const fetchBillInfoPPSRAll = async (billId: string) => {
+  try {
+    const response = await api.get('/nzmimeepazxkubdpn', {
+      params: {
+        Key: LAW_API_KEY,
+        Type: 'json',
+        BILL_ID: billId,
+        pIndex: 1,
+        pSize: 1,
+        AGE: 22
+      },
+    });
+    if (!response.data?.nzmimeepazxkubdpn?.[1]?.row?.[0]) {
+      return {
+        BILL_ID: billId,
+        PROPOSER: '-',
+        PUBL_PROPOSER: '-',
+      }
+    }
+    return response.data.nzmimeepazxkubdpn[1].row[0];
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error('API 응답 오류:', error.response?.data || error.message);
+    } else {
+      console.error('공동 발의자 정보 조회 중 오류 발생:', error);
+    }
+    throw error;
+  }
+};

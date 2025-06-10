@@ -28,3 +28,19 @@ export enum BillStatus {
     PROCESSING = '처리', // 9. 정부에서 처리
     PROMULGATION = '공포', // 10. 대통령이 공포
 }
+
+
+// 발의자 및 정당 정보
+export interface BillInfoPPSR {
+    BILL_ID: string;
+    PPSR_NM: string;
+    PPSR_POLY_NM: string;
+}
+
+
+// 공동 발의자 정보
+export interface BillInfoPPSRAll {
+    BILL_ID: string;
+    PROPOSER: string;
+    PUBL_PROPOSER: string;
+}

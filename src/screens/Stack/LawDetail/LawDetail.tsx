@@ -7,9 +7,10 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BillStatusTag, LawStatus, LawVote } from '@/components';
 import { colors } from '@/constants';
-import { toggleFavoriteLaw, increaseViewCount } from '@/services';
+import { toggleFavoriteLaw, increaseViewCount, fetchBillInfoPPSR, fetchBillInfoPPSRAll } from '@/services';
 import { useUser } from '@/lib';
 import Share from 'react-native-share';
+import { BillInfoPPSR, BillInfoPPSRAll } from '@/models';
 
 
 const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'> }) => {
@@ -18,11 +19,17 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
     const [isHearted, setIsHearted] = useState(false);
     const [isSummaryExpanded, setIsSummaryExpanded] = useState(false);
     const [user, setUser] = useUser();
+    const [ppsr, setPPSR] = useState<BillInfoPPSR | null>(null);
+    const [ppsrAll, setPPSRAll] = useState<BillInfoPPSRAll | null>(null);
 
     useEffect(() => {
         const increaseView = async () => {
             setIsHearted(user?.FAVORITE_LAWS?.includes(law.BILL_ID) || false);
             await increaseViewCount(law.BILL_ID);
+            const billInfo = await fetchBillInfoPPSR(law.BILL_ID);
+            setPPSR(billInfo);
+            const billInfoAll = await fetchBillInfoPPSRAll(law.BILL_ID);
+            setPPSRAll(billInfoAll);
         }
         increaseView();
     }, [law]);
@@ -70,12 +77,21 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                 <View style={styles.lawInfo1Container}>
                     <View style={styles.lawInfo1AgentContainer}>
                         <Text style={styles.lawInfo1AgentTitle}>발의자</Text>
-                        <Text style={styles.lawInfo1AgentName}>{law.AGENT}</Text>
+                        <Text style={styles.lawInfo1AgentName}>{ppsr?.PPSR_NM === '-' ? law.AGENT : ppsr?.PPSR_NM}</Text>
                     </View>
-                    <View style={styles.lawInfo1AgentContainer}>
-                        <Text style={styles.lawInfo1AgentTitle}>소속 정당</Text>
-                        <Text style={styles.lawInfo1AgentName}>{law.AGENT}</Text>
-                    </View>
+                    {ppsr?.PPSR_NM !== '-' && (
+                        <>
+                            <View style={styles.lawInfo1AgentContainer}>
+                                <Text style={styles.lawInfo1AgentTitle}>소속 정당</Text>
+                                <Text style={styles.lawInfo1AgentName}>{ppsr?.PPSR_POLY_NM}</Text>
+                            </View>
+
+                            <View style={styles.lawInfo1AgentAllContainer}>
+                                <Text style={styles.lawInfo1AgentTitle}>공동 발의자</Text>
+                                <Text style={styles.lawInfo1AgentName}>{ppsrAll?.PUBL_PROPOSER.replace(/,/g, ', ')}</Text>
+                            </View>
+                        </>
+                    )}
                     <View style={styles.lawInfo1AgentContainer}>
                         <Text style={styles.lawInfo1AgentTitle}>발의일</Text>
                         <Text style={styles.lawInfo1AgentName}>{law.DATE}</Text>
@@ -142,6 +158,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexWrap: 'wrap',
         marginBottom: 20,
+    },
+    lawInfo1AgentAllContainer: {
+        width: '100%',
+        marginBottom: 15,
     },
     lawInfo1AgentContainer: {
         width: '50%',
