@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 5,
-    borderRadius: 15,
+    borderRadius: 16,
     backgroundColor: '#F5F5F5',
     position: 'relative',
   },

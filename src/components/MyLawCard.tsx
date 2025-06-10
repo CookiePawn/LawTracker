@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     lawItem: {
         flex: 1,
-        borderRadius: 10,
+        borderRadius: 16,
         padding: 10,
         borderWidth: 1,
         borderColor: colors.gray100,

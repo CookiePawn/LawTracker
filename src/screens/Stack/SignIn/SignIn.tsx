@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
         gap: 10,
         backgroundColor: colors.naver,
         padding: 15,
-        borderRadius: 5,
+        borderRadius: 16,
     },
     naverLoginButtonText: {
         color: colors.white,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 10,
         padding: 15,
-        borderRadius: 5,
+        borderRadius: 16,
         backgroundColor: colors.kakao,
     },
     kakaoLoginButtonText: {

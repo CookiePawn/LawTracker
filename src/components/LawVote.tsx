@@ -89,14 +89,14 @@ const LawVote = ({ law }: { law: Law }) => {
                 <View style={styles.pieChartContainer}>
                     <PieChart
                         data={chartData}
-                        width={100}
-                        height={100}
+                        width={90}
+                        height={90}
                         chartConfig={{
                             color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                         }}
                         accessor="population"
                         backgroundColor="transparent"
-                        paddingLeft="25"
+                        paddingLeft="22.5"
                         hasLegend={false}
                     />
                     <View style={styles.whiteCircle}/>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderWidth: 1,
         borderColor: colors.gray200,
-        borderRadius: 10,
+        borderRadius: 16,
         padding: 15,
         marginBottom: 20,
     },
@@ -196,21 +196,21 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     pieChartContainer: {
-        width: 100,
-        height: 100,
+        width: 90,
+        height: 90,
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
     },
     whiteCircle: {
-        width: 65,
-        height: 65,
+        width: 55,
+        height: 55,
         backgroundColor: 'white',
         borderRadius: 100,
         position: 'absolute',
         top: '50%',
         left: '50%',
-        transform: [{ translateX: -32.5 }, { translateY: -32.5 }],
+        transform: [{ translateX: -27.5 }, { translateY: -27.5 }],
     },
 });
 

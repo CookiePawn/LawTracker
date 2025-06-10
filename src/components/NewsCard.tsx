@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderWidth: 1,
         borderColor: colors.gray200,
-        borderRadius: 10,
+        borderRadius: 16,
         padding: 10,
         backgroundColor: '#fff',
         width: SCREEN_WIDTH - 40,
