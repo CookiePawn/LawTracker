@@ -3,7 +3,7 @@ import NaverLogin from '@react-native-seoul/naver-login';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Alert, Image, ActivityIndicator, ToastAndroid, BackHandler } from 'react-native';
 import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET, NAVER_APP_NAME } from '@env';
-import { LogoPrimary } from '@/assets';
+import { SplashLogoIcon } from '@/assets';
 import { signIn } from '@/services';
 import { User } from '@/models';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSetUser } from '@/lib/jotai/user';
 import RNExitApp from 'react-native-exit-app';
 import { login, KakaoOAuthToken, KakaoProfile, getProfile } from '@react-native-seoul/kakao-login';
+
 
 const SignIn = (): ReactElement => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -140,8 +141,7 @@ const SignIn = (): ReactElement => {
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                <Image source={LogoPrimary} style={styles.logo} />
-                <Text style={styles.title}>국회 추적기</Text>
+                <SplashLogoIcon width={200} height={200} color={colors.primary} />
             </View>
 
             <View style={styles.loginContainer}>
@@ -173,10 +173,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 20,
         gap: 10
-    },
-    logo: {
-        width: 100,
-        height: 100,
     },
     title: {
         fontSize: 24,

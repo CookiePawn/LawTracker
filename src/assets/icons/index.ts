@@ -9,3 +9,7 @@ export { default as SearchIcon } from './search.svg';
 export { default as EyeIcon } from './eye.svg';
 export { default as HeartIcon } from './heart.svg';
 export { default as ShareIcon } from './share.svg';
+export { default as VectorIcon } from './Vector.svg';
+export { default as CommunityIcon } from './community.svg';
+export { default as LogoIcon } from './logo.svg';
+export { default as SplashLogoIcon } from './splash_logo.svg';

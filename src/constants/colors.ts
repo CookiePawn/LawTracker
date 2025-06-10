@@ -21,4 +21,7 @@ export const colors = {
 
   naver: '#03C75A',
   kakao: '#FEE500',
+
+  tab_no_active: '#6B7280',
+  tab_active: '#4F46E5',
 };

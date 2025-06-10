@@ -2,8 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home, LawCalendar, Profile, Search } from '@/screens';
 import { TabBar } from '@/components';
+import { RootTabParamList } from '@/types';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const TabNavigator = () => {
     return (

@@ -86,7 +86,7 @@ const Search = ({ route }: SearchProps) => {
         if (selectedFilter === '최신순') {
             filteredResults.sort((a, b) => b.DATE.localeCompare(a.DATE));
         } else {
-            filteredResults.sort((a, b) => b.VIEW_COUNT - a.VIEW_COUNT);
+            filteredResults.sort((a, b) => (b.VIEW_COUNT || 0) - (a.VIEW_COUNT || 0));
         }
 
         setSearchResults(filteredResults);
