@@ -31,8 +31,12 @@ const Profile = () => {
             <Text style={styles.profileHeaderText}>{user?.nickname}</Text>
             <Text style={styles.profileHeaderSubText}>{user?.email}</Text>
             <Text style={styles.profileHeaderSubText}>{user?.SNS === 'naver' ? '네이버 로그인' : '카카오 로그인'}</Text>
-            <Text style={styles.profileHeaderSubText}>나이: {user?.age}</Text>
-            <Text style={styles.profileHeaderSubText}>성별: {user?.gender === 'M' ? '남자' : '여자'}</Text>
+            {user?.age && user?.age !== '' && (
+              <Text style={styles.profileHeaderSubText}>나이: {user?.age}</Text>
+            )}
+            {user?.gender && user?.gender !== '' && (
+              <Text style={styles.profileHeaderSubText}>성별: {user?.gender === 'M' ? '남자' : '여자'}</Text>
+            )}
             <Text style={styles.profileHeaderSubText}>가입일: {user?.createdAt}</Text>
           </View>
         </View>

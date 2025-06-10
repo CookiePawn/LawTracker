@@ -12,6 +12,7 @@ import { RootStackParamList } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSetUser } from '@/lib/jotai/user';
 import RNExitApp from 'react-native-exit-app';
+import { login, KakaoOAuthToken, KakaoProfile, getProfile } from '@react-native-seoul/kakao-login';
 
 const SignIn = (): ReactElement => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -107,6 +108,35 @@ const SignIn = (): ReactElement => {
         }
     };
 
+    const signInWithKakao = async (): Promise<void> => {
+        try {
+            const token: KakaoOAuthToken = await login();
+            if (token.accessToken) {
+                const profile: KakaoProfile = await getProfile();
+                const user: User = {
+                    id: profile.id.toString(),
+                    nickname: profile.nickname ?? '사용자',
+                    email: profile.email ?? '',
+                    profileImage: profile.profileImageUrl ?? '',
+                    createdAt: new Date().toISOString(),
+                    SNS: 'kakao',
+                }
+                try {
+                    await signIn(user);
+                    await AsyncStorage.setItem(STORAGE_KEY.USER_ID, user.id);
+                    setUser(user);
+                    navigation.navigate('Tab', {
+                        screen: 'Home',
+                    });
+                } catch {
+                    Alert.alert("로그인 실패", "다시 시도해주세요.");
+                }
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
@@ -118,9 +148,9 @@ const SignIn = (): ReactElement => {
                 <TouchableOpacity onPress={naverLogin} style={styles.naverLoginButton}>
                     <Text style={styles.naverLoginButtonText}>네이버 로그인</Text>
                 </TouchableOpacity>
-                {/* <TouchableOpacity style={styles.kakaoLoginButton}>
+                <TouchableOpacity onPress={signInWithKakao} style={styles.kakaoLoginButton}>
                     <Text style={styles.kakaoLoginButtonText}>카카오 로그인</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
             </View>
         </View>
     );
