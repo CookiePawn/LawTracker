@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   alertContainer: {
     width: Dimensions.get('window').width * 0.9,
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius: 16,
     padding: 20,
     alignItems: 'center',
   },

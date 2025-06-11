@@ -12,9 +12,9 @@ const LawVote = ({ law }: { law: Law }) => {
     const setAlert = useSetAlert();
 
     const loadLaw = async () => {
-            const newLaw = await loadLawById(law.BILL_ID);
-            setItem(newLaw);
-        }
+        const newLaw = await loadLawById(law.BILL_ID);
+        setItem(newLaw);
+    }
 
     useEffect(() => {
         loadLaw();
@@ -48,17 +48,25 @@ const LawVote = ({ law }: { law: Law }) => {
             const result = await increaseVoteCount(user?.id || '', item.BILL_ID, voteType);
             if (result === '200') {
                 await loadLaw();
-            } else if (result === '402') {
+            } else if (result === '411' || result === '410') {
                 setAlert({
                     visible: true,
                     title: '안내',
-                    message: `이미 투표한 의안입니다. ${voteType === 'VOTE_TRUE' ? '\n찬성' : '\n반대'}로 바꾸시겠습니까?`,
+                    message: (result === '411' && voteType === 'VOTE_TRUE') ? `이미 찬성한 의안입니다.` :
+                        (result === '410' && voteType === 'VOTE_FALSE') ? `이미 반대한 의안입니다.` :
+                        (result === '411' && voteType === 'VOTE_FALSE') ? `이미 참여한 의안입니다. 반대로 수정하시겠습니까?` :
+                        (result === '410' && voteType === 'VOTE_TRUE') ? `이미 참여한 의안입니다. 찬성으로 수정하시겠습니까?` :
+                        '투표 오류가 발생했습니다.',
                     buttons: [
-                        { text: '확인', onPress: () => {
-                            toggleVoteLaw(item.BILL_ID, voteType);
-                            loadLaw();
-                        } },
-                        { text: '취소', style: 'cancel' }
+                        {
+                            text: '확인', onPress: async () => {
+                                if ((result === '411' && voteType === 'VOTE_FALSE') || (result === '410' && voteType === 'VOTE_TRUE')) {
+                                    await toggleVoteLaw(user?.id || '', item.BILL_ID, voteType);
+                                    await loadLaw();
+                                }
+                            }
+                        },
+                        ...(((result === '411' && voteType === 'VOTE_FALSE') || (result === '410' && voteType === 'VOTE_TRUE')) ? [{ text: '취소', style: 'cancel' as const }] : [])
                     ],
                 });
             } else {
@@ -99,7 +107,7 @@ const LawVote = ({ law }: { law: Law }) => {
                         paddingLeft="22.5"
                         hasLegend={false}
                     />
-                    <View style={styles.whiteCircle}/>
+                    <View style={styles.whiteCircle} />
                 </View>
 
                 <View style={styles.lawVoteFalseItem}>
