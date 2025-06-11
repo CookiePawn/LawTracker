@@ -1,12 +1,12 @@
 import { ChevronLeftIcon } from '@/assets';
 import { colors } from '@/constants';
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { RootTabParamList, RootStackParamList } from '@/types';
 import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { BillStatusTag } from '@/components';
+import { BillStatusTag, Typography } from '@/components';
 import { loadLatestLaws, loadViewLaws } from '@/services';
 import { Law } from '@/models';
 
@@ -40,9 +40,9 @@ const LawList = ({ type = 'random' }: LawListProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.newsTitleContainer}>
-                <Text style={styles.newsTitle}>{type === 'random' ? '주목받는 법안' : '최신 법안'}</Text>
+                <Typography style={styles.newsTitle}>{type === 'random' ? '주목받는 법안' : '최신 법안'}</Typography>
                 <TouchableOpacity style={styles.newsTitleMore} onPress={() => navigation.navigate('Search', { type: type })}>
-                    <Text style={styles.newsTitleMoreTitle}>더보기</Text>
+                    <Typography style={styles.newsTitleMoreTitle}>더보기</Typography>
                     <ChevronLeftIcon style={styles.newsTitleMoreIcon} width={17} height={17} color={colors.primary} />
                 </TouchableOpacity>
             </View>
@@ -51,19 +51,19 @@ const LawList = ({ type = 'random' }: LawListProps) => {
                     return (
                         <TouchableOpacity key={index} style={styles.lawItem} onPress={() => stackNavigation.navigate('LawDetail', { law: bill })}>
                             <View style={styles.lawItemHeader}>
-                                <Text style={styles.lawItemDate}>{bill.DATE}</Text>
-                                <Text style={styles.lawItemProposer}>발의자: {bill.AGENT.length > 15 ? bill.AGENT.slice(0, 15) + '...' : bill.AGENT}</Text>
+                                <Typography style={styles.lawItemDate}>{bill.DATE}</Typography>
+                                <Typography style={styles.lawItemProposer}>발의자: {bill.AGENT.length > 15 ? bill.AGENT.slice(0, 15) + '...' : bill.AGENT}</Typography>
                             </View>
-                            <Text 
+                            <Typography 
                                 style={styles.lawTitle}
                                 numberOfLines={2}
                                 ellipsizeMode="tail"
-                            >{bill.TITLE}</Text>         
+                            >{bill.TITLE}</Typography>         
                             <View style={styles.lawItemTagContent}>
-                                <Text style={styles.lawItemTagText}>{bill.TAG}</Text>
+                                <Typography style={styles.lawItemTagText}>{bill.TAG}</Typography>
                                 <BillStatusTag status={bill.ACT_STATUS} />
                             </View>  
-                            <Text style={styles.lawItemCommitteeText}>{bill.COMMITTEE || '-'}</Text>
+                            <Typography style={styles.lawItemCommitteeText}>{bill.COMMITTEE || '-'}</Typography>
                         </TouchableOpacity>
                     );
                 })}

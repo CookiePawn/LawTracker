@@ -1,7 +1,7 @@
 import { colors, STORAGE_KEY } from '@/constants';
 import NaverLogin from '@react-native-seoul/naver-login';
 import React, { ReactElement, useEffect, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Alert, ToastAndroid, BackHandler } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert, ToastAndroid, BackHandler } from 'react-native';
 import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET, NAVER_APP_NAME } from '@env';
 import { SplashLogoIcon } from '@/assets';
 import { signIn } from '@/services';
@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSetUser, useSetAlert } from '@/lib';
 import RNExitApp from 'react-native-exit-app';
 import { login, KakaoOAuthToken, KakaoProfile, getProfile } from '@react-native-seoul/kakao-login';
+import { Typography } from '@/components';
 
 
 const SignIn = (): ReactElement => {
@@ -167,11 +168,11 @@ const SignIn = (): ReactElement => {
 
             <View style={styles.loginContainer}>
                 <TouchableOpacity onPress={naverLogin} style={styles.naverLoginButton}>
-                    <Text style={styles.naverLoginButtonText}>네이버 로그인</Text>
+                    <Typography style={styles.naverLoginButtonText}>네이버 로그인</Typography>
                 </TouchableOpacity>
                 {__DEV__ &&
                     <TouchableOpacity onPress={signInWithKakao} style={styles.kakaoLoginButton}>
-                        <Text style={styles.kakaoLoginButtonText}>카카오 로그인</Text>
+                        <Typography style={styles.kakaoLoginButtonText}>카카오 로그인</Typography>
                     </TouchableOpacity>
                 }
             </View>

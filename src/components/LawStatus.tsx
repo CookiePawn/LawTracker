@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { colors } from '@/constants';
 import { Law, BillStatus } from '@/models';
+import { Typography } from '@/components';
 
 const STATUS_ORDER = [
     BillStatus.INTRODUCTION,
@@ -20,7 +21,7 @@ const LawStatus = ({ law }: { law: Law }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.lawStatusTitle}>진행 경과</Text>
+            <Typography style={styles.lawStatusTitle}>진행 경과</Typography>
             <View style={styles.progressContainer}>
                 <ScrollView 
                     style={styles.scrollView} 
@@ -45,21 +46,21 @@ const LawStatus = ({ law }: { law: Law }) => {
                                     </View>
                                     <View style={styles.statusTextContainer}>
                                         <View style={styles.statusTextRowContainer}>
-                                            <Text style={[
+                                            <Typography style={[
                                                 styles.statusText,
                                                 isCompleted && styles.completedText,
                                                 isCurrent && styles.currentText,
                                                 !isCompleted && !isCurrent && styles.pendingText
-                                            ]}>{status}</Text>
+                                            ]}>{status}</Typography>
                                             {isCurrent && (
-                                                <Text style={styles.currentTagText}>
+                                                <Typography style={styles.currentTagText}>
                                                     현재
-                                                </Text>
+                                                </Typography>
                                             )}
                                         </View>
-                                        <Text style={styles.dateText}>
+                                        <Typography style={styles.dateText}>
                                             {isCompleted ? '완료' : isCurrent ? law.DATE : '예정'}
-                                        </Text>
+                                        </Typography>
                                     </View>
                                 </View>
                                 {index < STATUS_ORDER.length - 1 && (
@@ -174,7 +175,6 @@ const styles = StyleSheet.create({
     dateText: {
         fontSize: 10,
         color: colors.gray600,
-        marginTop: 2,
     },
     line: {
         position: 'absolute',

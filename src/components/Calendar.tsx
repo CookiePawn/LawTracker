@@ -1,8 +1,8 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import { Law } from '@/models';
+import { View, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEY } from '@/constants';
+import { Typography } from '@/components';
 
 interface CalendarProps {
   onDateSelect?: (date: Date) => void;
@@ -55,13 +55,11 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
   const dates = generateDates();
 
   const formatDate = (date: Date) => {
-    const days = ['일', '월', '화', '수', '목', '금', '토'];
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    const dayOfWeek = days[date.getDay()];
     const dateStr = `${date.getFullYear()}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const hasBill = datesWithBills.has(dateStr);
-    return { month, day, dayOfWeek, hasBill };
+    return { month, day, hasBill };
   };
 
   const calculateScrollPosition = (date: Date) => {
@@ -105,7 +103,7 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
         contentOffset={{ x: initialScrollPosition, y: 0 }}
       >
         {dates.map((date, index) => {
-          const { month, day, dayOfWeek, hasBill } = formatDate(date);
+          const { month, day, hasBill } = formatDate(date);
           const isSelected = selectedDate.toDateString() === date.toDateString();
           const isToday = new Date().toDateString() === date.toDateString();
 
@@ -115,20 +113,20 @@ const Calendar: React.FC<CalendarProps> = ({ onDateSelect, selectedDate: propSel
               style={[styles.dateItem, isSelected && styles.selectedDate]}
               onPress={() => handleDateSelect(date)}
             >
-              <Text style={[
+              <Typography style={[
                 styles.date,
                 isToday && !isSelected && styles.todayText,
                 isSelected && styles.selectedText
               ]}>
                 {day}
-              </Text>
-              <Text style={[
+              </Typography>
+              <Typography style={[
                 styles.month,
                 isToday && !isSelected && styles.todayText,
                 isSelected && styles.selectedText
               ]}>
                 {month}월
-              </Text>
+              </Typography>
               {hasBill && <View style={[
                 styles.dot,
                 isSelected && styles.selectedDot
@@ -166,7 +164,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 2,
   },
   month: {
     fontSize: 12,

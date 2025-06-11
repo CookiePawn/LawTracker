@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { colors } from '@/constants';
 import BottomSheet from './BottomSheet';
 import { BillStatus } from '@/models';
+import { Typography } from '@/components';
 
 interface BillStatusBottomSheetProps {
     visible: boolean;
@@ -35,7 +36,7 @@ const BillStatusBottomSheet = ({ visible, onClose, onApply }: BillStatusBottomSh
     return (
         <BottomSheet visible={visible} onClose={onClose} height={500}>
             <View style={styles.container}>
-                <Text style={styles.title}>상태 선택</Text>
+                <Typography style={styles.title}>상태 선택</Typography>
                 <View style={styles.statusList}>
                     <ScrollView
                         style={styles.statusList}
@@ -54,14 +55,14 @@ const BillStatusBottomSheet = ({ visible, onClose, onApply }: BillStatusBottomSh
                             onPress={() => setSelectedStatus(status.value)}
                             activeOpacity={0.7}
                         >
-                            <Text
+                            <Typography
                                 style={[
                                     styles.statusText,
                                     selectedStatus === status.value && styles.selectedStatusText,
                                 ]}
                             >
                                 {status.label}
-                            </Text>
+                            </Typography>
                             </TouchableOpacity>
                         ))}
                     </ScrollView>
@@ -71,13 +72,13 @@ const BillStatusBottomSheet = ({ visible, onClose, onApply }: BillStatusBottomSh
                         setSelectedStatus('전체');
                         onClose();
                     }}>
-                        <Text style={styles.cancelButtonText}>취소</Text>
+                        <Typography style={styles.cancelButtonText}>취소</Typography>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.applyButton} onPress={() => {
                         handleApply();
                         setSelectedStatus('전체');
                     }}>
-                        <Text style={styles.applyButtonText}>적용</Text>
+                        <Typography style={styles.applyButtonText}>적용</Typography>
                     </TouchableOpacity>
                 </View>
             </View>

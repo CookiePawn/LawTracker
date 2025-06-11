@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { NewsImage } from "@/assets";
 import { ChevronLeftIcon } from "@/assets";
 import { colors } from "@/constants";
+import { Typography } from "@/components";
 
 const newsData = [
     {
@@ -30,7 +31,7 @@ const newsData = [
 ];
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const CARD_HEIGHT = 290;
+const CARD_HEIGHT = 310;
 
 const NewsCard = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,9 +39,9 @@ const NewsCard = () => {
     return (
         <View style={styles.newsSection}>
             <View style={styles.newsTitleContainer}>
-                <Text style={styles.newsTitle}>입법 동향</Text>
+                <Typography style={styles.newsTitle}>입법 동향</Typography>
                 <View style={styles.newsTitleMore}>
-                    <Text style={styles.newsTitleMoreTitle}>더보기</Text>
+                    <Typography style={styles.newsTitleMoreTitle}>더보기</Typography>
                     <ChevronLeftIcon style={styles.newsTitleMoreIcon} width={17} height={17} color={colors.primary} />
                 </View>
             </View>
@@ -53,15 +54,15 @@ const NewsCard = () => {
                 renderItem={({ item }) => (
                     <View style={styles.newsContent}>
                         <Image source={item.image} style={styles.newsContentImage} />
-                        <Text style={styles.newsContentTitle}>{item.title}</Text>
-                        <Text 
+                        <Typography style={styles.newsContentTitle}>{item.title}</Typography>
+                        <Typography 
                             style={styles.newsContentText}
                             numberOfLines={2}
                             ellipsizeMode="tail"
-                        >{item.text}</Text>
+                        >{item.text}</Typography>
                         <View style={styles.newsContentDate}>
-                            <Text style={styles.newsContentDateText}>{item.date}</Text>
-                            <Text style={styles.newsContentDateText}>{item.source}</Text>
+                            <Typography style={styles.newsContentDateText}>{item.date}</Typography>
+                            <Typography style={styles.newsContentDateText}>{item.source}</Typography>
                         </View>
                     </View>
                 )}

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ArrowLeftIcon } from '@/assets';
+import { Typography } from '@/components';
 
 interface NotificationItem {
   id: string;
@@ -40,9 +41,9 @@ const NotificationScreen = () => {
       }}
     >
       <View style={styles.notificationContent}>
-        <Text style={styles.notificationTitle}>{item.title}</Text>
-        <Text style={styles.notificationText} numberOfLines={2}>{item.content}</Text>
-        <Text style={styles.notificationDate}>{item.date}</Text>
+        <Typography style={styles.notificationTitle}>{item.title}</Typography>
+        <Typography style={styles.notificationText} numberOfLines={2}>{item.content}</Typography>
+        <Typography style={styles.notificationDate}>{item.date}</Typography>
       </View>
       {!item.isRead && <View style={styles.unreadDot} />}
     </TouchableOpacity>
@@ -54,7 +55,7 @@ const NotificationScreen = () => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <ArrowLeftIcon />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>알림</Text>
+        <Typography style={styles.headerTitle}>알림</Typography>
         <TouchableOpacity>
         </TouchableOpacity>
       </View>
@@ -66,7 +67,7 @@ const NotificationScreen = () => {
         contentContainerStyle={styles.listContainer}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>알림이 없습니다.</Text>
+            <Typography style={styles.emptyText}>알림이 없습니다.</Typography>
           </View>
         }
       />
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 16,
     backgroundColor: '#fff',
-    borderRadius: 8,
+    borderRadius: 16,
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#f0f0f0',

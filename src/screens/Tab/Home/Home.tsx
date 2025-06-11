@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, BackHandler, ToastAndroid, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, BackHandler, ToastAndroid, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { LogoHeader, BellIcon, ChevronLeftIcon } from '@/assets';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
@@ -7,7 +7,7 @@ import { RootStackParamList } from '@/types';
 import RNExitApp from 'react-native-exit-app';
 import { colors, STORAGE_KEY } from '@/constants';
 import { noticeData } from './data';
-import { NewsCard, LawList, MyLawCard, AdBanner } from '@/components';
+import { NewsCard, LawList, MyLawCard, AdBanner, Typography } from '@/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type NavigationProp = BottomTabNavigationProp<RootStackParamList>;
@@ -62,11 +62,11 @@ const HomeScreen = () => {
         </View>
         <View style={styles.noticeSection}>
           <TouchableOpacity style={styles.noticeTitle}>
-            <Text style={styles.noticeTitleText}>공지사항</Text>
+            <Typography style={styles.noticeTitleText}>공지사항</Typography>
             <ChevronLeftIcon style={styles.noticeTitleIcon} width={17} height={17} color={colors.white} />
           </TouchableOpacity>
           <View style={styles.noticeContent}>
-            <Text style={styles.noticeContentText}>{noticeData[noticeIndex].title}</Text>
+            <Typography style={styles.noticeContentText}>{noticeData[noticeIndex].title}</Typography>
             <View style={styles.noticeContentIcon}>
               <TouchableOpacity disabled={noticeIndex === 0} onPress={() => setNoticeIndex(noticeIndex - 1)}>
                 <ChevronLeftIcon style={styles.noticeContentIconUp} color={noticeIndex === 0 ? colors.gray300 : colors.gray500} />

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { CalendarIcon, HomeIcon, SearchIcon, UserIcon } from '@/assets';
-import { colors } from '@/constants/colors';
+import { colors } from '@/constants';
+import { Typography } from '@/components';
 
 const TabBar = ({ state, navigation }: any) => {
     return (
@@ -30,35 +31,35 @@ const TabBar = ({ state, navigation }: any) => {
                         {route.name === 'LawCalendar' ? (
                             <View style={styles.iconContainer}>
                                 <CalendarIcon width={20} height={20} fill='white' color={isFocused ? colors.tab_active : colors.tab_no_active} />
-                                <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
+                                <Typography style={[styles.tabText, isFocused && styles.tabTextFocused]}>
                                     타임라인
-                                </Text>
+                                </Typography>
                             </View>
                         ) : route.name === 'Search' ? (
                             <View style={styles.iconContainer}>
                                 <SearchIcon width={20} height={20} fill='white' color={isFocused ? colors.tab_active : colors.tab_no_active} />
-                                <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
+                                <Typography style={[styles.tabText, isFocused && styles.tabTextFocused]}>
                                     검색
-                                </Text>
+                                </Typography>
                             </View>
                         ) : route.name === 'Home' ? (
                             <View style={styles.iconContainer}>
                                 <HomeIcon width={20} height={20} fill='white' color={isFocused ? colors.tab_active : colors.tab_no_active} />
-                                <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
+                                <Typography style={[styles.tabText, isFocused && styles.tabTextFocused]}>
                                     홈
-                                </Text>
+                                </Typography>
                             </View>
                         ) : route.name === 'Profile' ? (
                             <View style={styles.iconContainer}>
                                 <UserIcon width={20} height={20} fill='white' color={isFocused ? colors.tab_active : colors.tab_no_active} />
-                                <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
+                                <Typography style={[styles.tabText, isFocused && styles.tabTextFocused]}>
                                     프로필
-                                </Text>
+                                </Typography>
                             </View>
                         ) : (
-                            <Text style={[styles.tabText, isFocused && styles.tabTextFocused]}>
+                            <Typography style={[styles.tabText, isFocused && styles.tabTextFocused]}>
                                 {route.name}
-                            </Text>
+                            </Typography>
                         )}
                     </TouchableOpacity>
                 );

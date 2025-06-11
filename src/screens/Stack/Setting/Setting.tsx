@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { colors, STORAGE_KEY } from '@/constants';
-import { ChevronLeftIcon, SettingsIcon } from '@/assets';
+import { ChevronLeftIcon } from '@/assets';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
@@ -10,6 +10,7 @@ import { useSetAlert, useUser } from '@/lib';
 import NaverLogin from '@react-native-seoul/naver-login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { withdrawUser } from '@/services/firebase';
+import { Typography } from '@/components';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -50,7 +51,7 @@ const Setting = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>설정</Text>
+                <Typography style={styles.headerText}>설정</Typography>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerIcon}>
                     <ChevronLeftIcon width={24} height={24} color={colors.gray700} />
                 </TouchableOpacity>
@@ -58,25 +59,25 @@ const Setting = () => {
             <ScrollView>
                 {/* 계정 관리 섹션 */}
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>계정 관리</Text>
+                    <Typography style={styles.sectionTitle}>계정 관리</Typography>
                     <TouchableOpacity style={styles.termsItem} onPress={logout}>
-                        <Text style={styles.termsText}>로그아웃</Text>
+                        <Typography style={styles.termsText}>로그아웃</Typography>
                     </TouchableOpacity>
                     <View style={styles.divider} />
                     <TouchableOpacity style={styles.termsItem} onPress={showWithdrawAlert}>
-                        <Text style={styles.termsText}>회원탈퇴</Text>
+                        <Typography style={styles.termsText}>회원탈퇴</Typography>
                     </TouchableOpacity>
                     <View style={styles.divider} />
                 </View>
                 {/* 약관 섹션 */}
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>약관</Text>
+                    <Typography style={styles.sectionTitle}>약관</Typography>
                     <View style={styles.termsContainer}>
                         <TouchableOpacity
                             style={styles.termsItem}
                             onPress={() => navigation.navigate('Terms')}
                         >
-                            <Text style={styles.termsText}>이용약관</Text>
+                            <Typography style={styles.termsText}>이용약관</Typography>
                             <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333' />
                         </TouchableOpacity>
                         <View style={styles.divider} />
@@ -84,7 +85,7 @@ const Setting = () => {
                             style={styles.termsItem}
                             onPress={() => navigation.navigate('PrivacyPolicy')}
                         >
-                            <Text style={styles.termsText}>개인정보 처리방침</Text>
+                            <Typography style={styles.termsText}>개인정보 처리방침</Typography>
                             <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333' />
                         </TouchableOpacity>
                         <View style={styles.divider} />
@@ -92,7 +93,7 @@ const Setting = () => {
                             style={styles.termsItem}
                             onPress={() => navigation.navigate('ApiPolicy')}
                         >
-                            <Text style={styles.termsText}>API 이용 정책</Text>
+                            <Typography style={styles.termsText}>API 이용 정책</Typography>
                             <ChevronLeftIcon style={styles.arrow} width={20} height={20} color='#333' />
                         </TouchableOpacity>
                         <View style={styles.divider} />

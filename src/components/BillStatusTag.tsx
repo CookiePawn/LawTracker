@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { BillStatus } from '@/models';
 import { colors } from '@/constants';
+import { Typography } from '@/components';
 
 interface BillStatusTagProps {
     status: string;
@@ -11,7 +12,7 @@ interface BillStatusTagProps {
 
 const BillStatusTag: React.FC<BillStatusTagProps> = ({ status, style, size = 'small' }) => {
     return (
-        <Text style={[
+        <Typography style={[
             styles.tag,
             size === 'large' && {
                 fontSize: 12,
@@ -48,7 +49,7 @@ const BillStatusTag: React.FC<BillStatusTagProps> = ({ status, style, size = 'sm
             style
         ]}>
             {status}
-        </Text>
+        </Typography>
     );
 };
 
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         paddingHorizontal: 7,
         paddingVertical: 3,
-        maxHeight: 20,
+        maxHeight: 25,
     }
 });
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { RootStackParamList } from '@/types';
 import { LawIcon } from '@/assets';
-import { AdBanner, BillStatusTag } from '@/components';
+import { AdBanner, BillStatusTag, Typography } from '@/components';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { loadLaws } from '@/services';
@@ -27,17 +27,17 @@ const ScheduleItem: React.FC<{ item: Law }> = ({ item }) => {
       </View>
       <View style={styles.billContainer}>
         <View style={styles.timeContainer}>
-          <Text style={styles.time}>{item.DATE}</Text>
-          <Text style={styles.ppsr}>발의자: {item.AGENT.length > 15 ? item.AGENT.slice(0, 15) + '...' : item.AGENT}</Text>
+          <Typography style={styles.time}>{item.DATE}</Typography>
+          <Typography style={styles.ppsr}>발의자: {item.AGENT.length > 15 ? item.AGENT.slice(0, 15) + '...' : item.AGENT}</Typography>
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{item.TITLE}</Text>
+            <Typography style={styles.title}>{item.TITLE}</Typography>
             {item.ACT_STATUS && <BillStatusTag status={item.ACT_STATUS} />}
           </View>
-          <Text style={styles.description} numberOfLines={2}>
+          <Typography style={styles.description} numberOfLines={2}>
             {item.COMMITTEE}
-          </Text>
+          </Typography>
         </View>
       </View>
     </TouchableOpacity>
@@ -69,10 +69,10 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
       <AdBanner mode='list' />
       {isToday && (
         <View style={styles.warningContainer}>
-          <Text style={styles.warningText}>
+          <Typography style={styles.warningText}>
             ⚠️ 데이터는 매일 00시에 업데이트됩니다.{'\n'}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;국회 데이터 업로드에 따라 차이가 발생할 수 있습니다.
-          </Text>
+          </Typography>
         </View>
       )}
       <FlatList
@@ -85,7 +85,7 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
         windowSize={5}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>해당 날짜의 법안이 없습니다.</Text>
+            <Typography style={styles.emptyText}>해당 날짜의 법안이 없습니다.</Typography>
           </View>
         }
       />

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/types';
 import { ArrowLeftIcon, ChevronLeftIcon, HeartIcon, ShareIcon } from '@/assets/icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { BillStatusTag, LawStatus, LawVote } from '@/components';
+import { BillStatusTag, LawStatus, LawVote, Typography } from '@/components';
 import { colors } from '@/constants';
 import { toggleFavoriteLaw, increaseViewCount, fetchBillInfoPPSR, fetchBillInfoPPSRAll } from '@/services';
 import { useUser } from '@/lib';
@@ -61,7 +61,7 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <ArrowLeftIcon width={24} height={24} color={colors.black} />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>법안 상세</Text>
+                <Typography style={styles.headerTitle}>법안 상세</Typography>
                 <TouchableOpacity style={styles.headerShareIconContainer} onPress={handleSharePress}>
                     <ShareIcon width={20} height={20} color={colors.black} fill={colors.black} />
                 </TouchableOpacity>
@@ -73,43 +73,43 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                         <HeartIcon width={18} height={18} color={isHearted ? colors.red : colors.gray400} fill={isHearted ? colors.red : 'none'} />
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.lawTitle}>{law.TITLE}</Text>
+                <Typography style={styles.lawTitle}>{law.TITLE}</Typography>
                 <View style={styles.lawInfo1Container}>
                     <View style={styles.lawInfo1AgentContainer}>
-                        <Text style={styles.lawInfo1AgentTitle}>발의자</Text>
-                        <Text style={styles.lawInfo1AgentName}>{ppsr?.PPSR_NM === '-' ? law.AGENT : ppsr?.PPSR_NM}</Text>
+                        <Typography style={styles.lawInfo1AgentTitle}>발의자</Typography>
+                        <Typography style={styles.lawInfo1AgentName}>{ppsr?.PPSR_NM === '-' ? law.AGENT : ppsr?.PPSR_NM}</Typography>
                     </View>
                     {ppsr?.PPSR_NM !== '-' && (
                         <>
                             <View style={styles.lawInfo1AgentContainer}>
-                                <Text style={styles.lawInfo1AgentTitle}>소속 정당</Text>
-                                <Text style={styles.lawInfo1AgentName}>{ppsr?.PPSR_POLY_NM}</Text>
+                                <Typography style={styles.lawInfo1AgentTitle}>소속 정당</Typography>
+                                <Typography style={styles.lawInfo1AgentName}>{ppsr?.PPSR_POLY_NM}</Typography>
                             </View>
 
                             <View style={styles.lawInfo1AgentAllContainer}>
-                                <Text style={styles.lawInfo1AgentTitle}>공동 발의자</Text>
-                                <Text style={styles.lawInfo1AgentName}>{ppsrAll?.PUBL_PROPOSER.replace(/,/g, ', ')}</Text>
+                                <Typography style={styles.lawInfo1AgentTitle}>공동 발의자</Typography>
+                                <Typography style={styles.lawInfo1AgentName}>{ppsrAll?.PUBL_PROPOSER.replace(/,/g, ', ')}</Typography>
                             </View>
                         </>
                     )}
                     <View style={styles.lawInfo1AgentContainer}>
-                        <Text style={styles.lawInfo1AgentTitle}>발의일</Text>
-                        <Text style={styles.lawInfo1AgentName}>{law.DATE}</Text>
+                        <Typography style={styles.lawInfo1AgentTitle}>발의일</Typography>
+                        <Typography style={styles.lawInfo1AgentName}>{law.DATE}</Typography>
                     </View>
                     <View style={styles.lawInfo1AgentContainer}>
-                        <Text style={styles.lawInfo1AgentTitle}>분야</Text>
-                        <Text style={styles.lawInfo1AgentName}>{law.TAG}</Text>
+                        <Typography style={styles.lawInfo1AgentTitle}>분야</Typography>
+                        <Typography style={styles.lawInfo1AgentName}>{law.TAG}</Typography>
                     </View>
                 </View>
                 <View style={styles.lawSummaryContainer}>
-                    <Text style={styles.lawSummaryTitle}>주요 내용</Text>
+                    <Typography style={styles.lawSummaryTitle}>주요 내용</Typography>
                     {isSummaryExpanded && law.SUMMARY ? (
-                        <Text style={styles.lawSummaryContent}>{law.SUMMARY}</Text>
+                        <Typography style={styles.lawSummaryContent}>{law.SUMMARY}</Typography>
                     ) : (
-                        <Text style={styles.lawSummaryContent}>{law.SUMMARY ? law.SUMMARY.slice(0, 100) : ''}...</Text>
+                        <Typography style={styles.lawSummaryContent}>{law.SUMMARY ? law.SUMMARY.slice(0, 100) : ''}...</Typography>
                     )}
                     <TouchableOpacity style={styles.lawSummaryMoreContainer} onPress={() => setIsSummaryExpanded(!isSummaryExpanded)}>
-                        <Text style={styles.lawSummaryMore}>{isSummaryExpanded ? '접기' : '더보기'}</Text>
+                        <Typography style={styles.lawSummaryMore}>{isSummaryExpanded ? '접기' : '더보기'}</Typography>
                         <ChevronLeftIcon style={[styles.lawSummaryMoreIcon, { transform: [{ rotate: isSummaryExpanded ? '90deg' : '270deg' }] }]} width={18} height={18} color={colors.primary} />
                     </TouchableOpacity>
                 </View>

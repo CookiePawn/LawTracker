@@ -10,3 +10,4 @@ export { default as BillStatusTag } from './BillStatusTag';
 export { default as LawStatus } from './LawStatus';
 export { default as LawVote } from './LawVote';
 export { default as CustomAlert } from './CustomAlert';
+export { default as Typography } from './Typography';

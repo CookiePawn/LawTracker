@@ -2,12 +2,12 @@ import { colors } from '@/constants';
 import React from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
   } from 'react-native';
 import { useSetAlert } from '@/lib';
+import { Typography } from '@/components';
 
 interface CustomAlertProps {
   visible: boolean;
@@ -35,8 +35,8 @@ const CustomAlert: React.FC<CustomAlertProps> = ({
     <View style={styles.container}>
       <View style={styles.overlay}>
         <View style={styles.alertContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.message}>{message}</Text>
+          <Typography style={styles.title}>{title}</Typography>
+          <Typography style={styles.message}>{message}</Typography>
           <View style={styles.buttonContainer}>
             {buttons.map((button, index) => (
               <TouchableOpacity
@@ -56,7 +56,7 @@ const CustomAlert: React.FC<CustomAlertProps> = ({
                   });
                 }}
               >
-                <Text
+                <Typography
                   style={[
                     styles.buttonText,
                     button.style === 'cancel'
@@ -65,7 +65,7 @@ const CustomAlert: React.FC<CustomAlertProps> = ({
                   ]}
                 >
                   {button.text}
-                </Text>
+                </Typography>
               </TouchableOpacity>
             ))}
           </View>

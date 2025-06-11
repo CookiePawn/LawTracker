@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { ChevronLeftIcon } from '@/assets/icons';
 import { Picker } from '@react-native-picker/picker';
-import { Law } from '@/models';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEY } from '@/constants';
+import { Typography } from '@/components';
 
 interface FullCalendarProps {
   selectedDate: Date;
@@ -150,9 +150,9 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
           style={styles.dateSelector}
           onPress={handleModalOpen}
         >
-          <Text style={styles.monthText}>
+          <Typography style={styles.monthText}>
             {currentMonth.getFullYear()}년 {currentMonth.getMonth() + 1}월
-          </Text>
+          </Typography>
           <ChevronLeftIcon style={{ transform: [{ rotate: '270deg' }], marginTop: 7 }} width={20} height={20} />
         </TouchableOpacity>
         <TouchableOpacity
@@ -172,9 +172,9 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>년월 선택</Text>
+              <Typography style={styles.modalTitle}>년월 선택</Typography>
               <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-                <Text style={styles.closeButton}>닫기</Text>
+                <Typography style={styles.closeButton}>닫기</Typography>
               </TouchableOpacity>
             </View>
             
@@ -229,7 +229,7 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
               style={styles.confirmButton}
               onPress={handleYearMonthSelect}
             >
-              <Text style={styles.confirmButtonText}>확인</Text>
+              <Typography style={styles.confirmButtonText}>확인</Typography>
             </TouchableOpacity>
           </View>
         </View>
@@ -237,7 +237,7 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
 
       <View style={styles.daysHeader}>
         {days.map((day, index) => (
-          <Text
+          <Typography
             key={day}
             style={[
               styles.dayHeader,
@@ -246,7 +246,7 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
             ]}
           >
             {day}
-          </Text>
+          </Typography>
         ))}
       </View>
 
@@ -272,7 +272,7 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
                   ]}
                   onPress={() => handleDateSelect(date)}
                 >
-                  <Text
+                  <Typography
                     style={[
                       styles.dayText,
                       isSunday && styles.sundayText,
@@ -283,7 +283,7 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
                     ]}
                   >
                     {date.getDate()}
-                  </Text>
+                  </Typography>
                   {hasBill && isCurrentMonth && (
                     <View style={[
                       styles.dot,

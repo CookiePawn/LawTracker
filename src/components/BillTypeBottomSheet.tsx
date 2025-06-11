@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '@/constants';
 import BottomSheet from './BottomSheet';
+import { Typography } from '@/components';
 
 interface BillTypeBottomSheetProps {
     visible: boolean;
@@ -26,7 +27,7 @@ const BillTypeBottomSheet = ({ visible, onClose, onApply }: BillTypeBottomSheetP
     return (
         <BottomSheet visible={visible} onClose={onClose} height={350}>
             <View style={styles.container}>
-                <Text style={styles.title}>의안구분 선택</Text>
+                <Typography style={styles.title}>의안구분 선택</Typography>
                 <View style={styles.typeList}>
                     {billTypes.map((type) => (
                         <TouchableOpacity
@@ -38,14 +39,14 @@ const BillTypeBottomSheet = ({ visible, onClose, onApply }: BillTypeBottomSheetP
                             onPress={() => setSelectedType(type.value)}
                             activeOpacity={0.7}
                         >
-                            <Text
+                            <Typography
                                 style={[
                                     styles.typeText,
                                     selectedType === type.value && styles.selectedTypeText,
                                 ]}
                             >
                                 {type.label}
-                            </Text>
+                            </Typography>
                         </TouchableOpacity>
                     ))}
                 </View>
@@ -54,13 +55,13 @@ const BillTypeBottomSheet = ({ visible, onClose, onApply }: BillTypeBottomSheetP
                         setSelectedType('전체');
                         onClose();
                     }}>
-                        <Text style={styles.cancelButtonText}>취소</Text>
+                        <Typography style={styles.cancelButtonText}>취소</Typography>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.applyButton} onPress={() => {
                         handleApply();
                         setSelectedType('전체');
                     }}>
-                        <Text style={styles.applyButtonText}>적용</Text>
+                        <Typography style={styles.applyButtonText}>적용</Typography>
                     </TouchableOpacity>
                 </View>
             </View>

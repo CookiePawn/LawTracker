@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon, EyeIcon, SearchIcon } from '@/assets';
 import DateFilterBottomSheet from '@/components/DateFilterBottomSheet';
@@ -11,9 +11,9 @@ import { RootTabParamList } from '@/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
-import { BillStatusTag } from '@/components';
+import { BillStatusTag, Typography } from '@/components';
 import { Law } from '@/models';
-import { searchLaws, increaseViewCount } from '@/services';
+import { searchLaws } from '@/services';
 
 interface SearchProps {
     route: RouteProp<RootTabParamList, 'Search'>;
@@ -141,23 +141,23 @@ const Search = ({ route }: SearchProps) => {
                 activeOpacity={0.7}
             >
                 <View style={styles.lawItemHeader}>
-                    <Text style={styles.lawItemDate}>{item.DATE}</Text>
-                    <Text style={styles.lawItemProposer}>발의자: {item.AGENT.length > 15 ? item.AGENT.slice(0, 15) + '...' : item.AGENT}</Text>
+                    <Typography style={styles.lawItemDate}>{item.DATE}</Typography>
+                    <Typography style={styles.lawItemProposer}>발의자: {item.AGENT.length > 15 ? item.AGENT.slice(0, 15) + '...' : item.AGENT}</Typography>
                 </View>
-                <Text
+                <Typography
                     style={styles.lawTitle}
                     numberOfLines={2}
                     ellipsizeMode="tail"
-                >{item.TITLE}</Text>
+                >{item.TITLE}</Typography>
                 <View style={styles.lawItemTagContent}>
-                    <Text style={styles.lawItemTagText}>{item.TAG}</Text>
+                    <Typography style={styles.lawItemTagText}>{item.TAG}</Typography>
                     <BillStatusTag status={item.ACT_STATUS} />
                 </View>
                 <View style={styles.lawItemFooterContainer}>
-                    <Text style={styles.lawItemCommitteeText}>{item.COMMITTEE || '-'}</Text>
+                    <Typography style={styles.lawItemCommitteeText}>{item.COMMITTEE || '-'}</Typography>
                     <View style={styles.lawItemFooterIconContainer}>
                         <EyeIcon width={14} height={14} color={colors.gray400} />
-                        <Text style={styles.lawItemFooterIconText}>{item.VIEW_COUNT || 0}</Text>
+                        <Typography style={styles.lawItemFooterIconText}>{item.VIEW_COUNT || 0}</Typography>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -167,7 +167,7 @@ const Search = ({ route }: SearchProps) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>법안 검색</Text>
+                <Typography style={styles.headerText}>법안 검색</Typography>
             </View>
             {/* 검색 헤더 */}
             <View style={styles.searchHeader}>
@@ -198,9 +198,9 @@ const Search = ({ route }: SearchProps) => {
                             setIsSortFilterVisible(true);
                         }}
                     >
-                        <Text style={[styles.filterText, styles.selectedFilterText]}>
+                        <Typography style={[styles.filterText, styles.selectedFilterText]}>
                             {getFilterText()}
-                        </Text>
+                        </Typography>
                         <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                     </TouchableOpacity>
                     <View style={styles.filterChipSeparator} />
@@ -213,7 +213,7 @@ const Search = ({ route }: SearchProps) => {
                             setSelectedStatus('전체');
                         }}
                     >
-                        <Text style={[styles.filterText, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilterText]}>전체</Text>
+                        <Typography style={[styles.filterText, selectedBillType === '전체' && selectedPeriod === '전체' && selectedStatus === '전체' && styles.selectedFilterText]}>전체</Typography>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.filterChip, selectedPeriod !== '전체' && styles.selectedFilter]}
@@ -221,9 +221,9 @@ const Search = ({ route }: SearchProps) => {
                             setIsDateFilterVisible(true);
                         }}
                     >
-                        <Text style={[styles.filterText, selectedPeriod !== '전체' && styles.selectedFilterText]}>
+                        <Typography style={[styles.filterText, selectedPeriod !== '전체' && styles.selectedFilterText]}>
                             {getPeriodText()}
-                        </Text>
+                        </Typography>
                         <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -232,9 +232,9 @@ const Search = ({ route }: SearchProps) => {
                             setIsBillTypeFilterVisible(true);
                         }}
                     >
-                        <Text style={[styles.filterText, selectedBillType !== '전체' && styles.selectedFilterText]}>
+                        <Typography style={[styles.filterText, selectedBillType !== '전체' && styles.selectedFilterText]}>
                             {getBillTypeText()}
-                        </Text>
+                        </Typography>
                         <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -243,9 +243,9 @@ const Search = ({ route }: SearchProps) => {
                             setIsStatusFilterVisible(true);
                         }}
                     >
-                        <Text style={[styles.filterText, selectedStatus !== '전체' && styles.selectedFilterText]}>
+                        <Typography style={[styles.filterText, selectedStatus !== '전체' && styles.selectedFilterText]}>
                             {getStatusText()}
-                        </Text>
+                        </Typography>
                         <ChevronLeftIcon width={12} height={12} color={colors.gray500} style={styles.filterIcon} />
                     </TouchableOpacity>
                 </ScrollView>
@@ -260,7 +260,7 @@ const Search = ({ route }: SearchProps) => {
                 keyExtractor={(_, index) => index.toString()}
                 ListEmptyComponent={
                     <View style={styles.emptyContainer}>
-                        <Text style={styles.emptyText}>검색 결과가 없습니다</Text>
+                        <Typography style={styles.emptyText}>검색 결과가 없습니다</Typography>
                     </View>
                 }
             />

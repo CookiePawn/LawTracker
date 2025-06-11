@@ -1,0 +1,41 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/MinSans-Black.otf",
+      "sha1": "99bd512bf2bffea2414e6a364764e052eb8de18c"
+    },
+    {
+      "path": "src/assets/fonts/MinSans-Bold.otf",
+      "sha1": "2dc3285904b4de3d4e1d0c4dca8bd3e3330b00b0"
+    },
+    {
+      "path": "src/assets/fonts/MinSans-ExtraBold.otf",
+      "sha1": "e941b7d999da7f27b89389c762005373f62a77e9"
+    },
+    {
+      "path": "src/assets/fonts/MinSans-ExtraLight.otf",
+      "sha1": "74de50b980968ec41a6684cbde7161f33fb20417"
+    },
+    {
+      "path": "src/assets/fonts/MinSans-Light.otf",
+      "sha1": "066c59d6db13d596c60ead08fecc4a75a75cbdef"
+    },
+    {
+      "path": "src/assets/fonts/MinSans-Medium.otf",
+      "sha1": "81f42c11452c665c015cf37e31f69c2468ba9b11"
+    },
+    {
+      "path": "src/assets/fonts/MinSans-Regular.otf",
+      "sha1": "57305ea67ec58bd00a00b4b791925967d0340a86"
+    },
+    {
+      "path": "src/assets/fonts/MinSans-SemiBold.otf",
+      "sha1": "376761c211b571726c17eebe6820ba5b0191d50b"
+    },
+    {
+      "path": "src/assets/fonts/MinSans-Thin.otf",
+      "sha1": "d5e09baa2fd14554e336e37196b92136658c123c"
+    }
+  ]
+}

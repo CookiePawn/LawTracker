@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, StyleSheet, Dimensions, TouchableOpacity, Text, Linking } from 'react-native';
+import { View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Guide1, Guide2, Guide3, Guide4 } from '@/assets';
 import { STORAGE_KEY } from '@/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Typography } from '@/components';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -55,10 +56,6 @@ const Tutorial = () => {
     }
   };
 
-  const handleApiLink = () => {
-    Linking.openURL('https://open.assembly.go.kr/portal/openapi/openApiNaListPage.do');
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -67,18 +64,6 @@ const Tutorial = () => {
           style={styles.image}
           resizeMode="contain"
         />
-        {/* {currentIndex === guideImages.length - 1 && (
-          <View style={styles.apiInfoContainer}>
-            <Text style={styles.apiInfoText}>
-              본 앱은 열린국회정보 Open API를 활용하여 제작되었습니다.
-            </Text>
-            <TouchableOpacity onPress={handleApiLink}>
-              <Text style={styles.apiLinkText}>
-                열린국회정보 Open API 바로가기
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )} */}
       </View>
       
       <View style={styles.footer}>
@@ -95,13 +80,13 @@ const Tutorial = () => {
         </View>
         
         <TouchableOpacity style={styles.button} onPress={handleNext}>
-          <Text style={styles.buttonText}>
+          <Typography style={styles.buttonText}>
             {currentIndex === guideImages.length - 1 ? '시작하기' : '다음'}
-          </Text>
+          </Typography>
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
-          <Text style={styles.skipButtonText}>건너뛰기</Text>
+          <Typography style={styles.skipButtonText}>건너뛰기</Typography>
         </TouchableOpacity>
       </View>
     </View>

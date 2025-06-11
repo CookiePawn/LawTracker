@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
-import { BillScheduleList, Calendar, FullCalendar } from '@/components';
+import { SafeAreaView, StyleSheet, View, TouchableOpacity, FlatList } from 'react-native';
+import { BillScheduleList, Calendar, FullCalendar, Typography } from '@/components';
 import { CalendarIcon } from '@/assets';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '@/types';
 
 const LawCalendar = () => {
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [isFullCalendar, setIsFullCalendar] = useState(false);
 
@@ -36,7 +32,7 @@ const LawCalendar = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>오늘의 법안 현황</Text>
+        <Typography style={styles.headerText}>오늘의 법안 현황</Typography>
         <TouchableOpacity onPress={() => setIsFullCalendar(!isFullCalendar)}>
           <CalendarIcon width={20} height={20} />
         </TouchableOpacity>

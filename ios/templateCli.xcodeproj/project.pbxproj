@@ -12,6 +12,15 @@
 		2F894C86979C01DD008978F8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		815AFE09784D424392577D5B /* MinSans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = BB69095226034A6AB63EC2FA /* MinSans-Black.otf */; };
+		641C129F4D8244449CDB9CB8 /* MinSans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 621761887CF64B90B50503FD /* MinSans-Bold.otf */; };
+		A86401A9345E486191C363D2 /* MinSans-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC746041531249FC94439A88 /* MinSans-ExtraBold.otf */; };
+		6B997298961A4CDA9C4EC430 /* MinSans-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CBE9C71D61E246398924D2AE /* MinSans-ExtraLight.otf */; };
+		FEA09A0A50054B8D833E4C7D /* MinSans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EAC2CFFA399B497683A6C04F /* MinSans-Light.otf */; };
+		3D60E29360A4464B9BB894E0 /* MinSans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31C779BFD2D9412099D81DCE /* MinSans-Medium.otf */; };
+		9E70691823F04F8FA51AD1BF /* MinSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26FA3526708A4D91906E09A3 /* MinSans-Regular.otf */; };
+		BA472C5E4787451B8C99914E /* MinSans-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C0E822DD78834E7C870546AE /* MinSans-SemiBold.otf */; };
+		55CA0C5E32B74F2B967DE0F5 /* MinSans-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 231B7140C9A1446BB84F3362 /* MinSans-Thin.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +38,15 @@
 		92BBD9F6BB0B9BCE1A2303A7 /* Pods-templateCli.productionrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-templateCli.productionrelease.xcconfig"; path = "Target Support Files/Pods-templateCli/Pods-templateCli.productionrelease.xcconfig"; sourceTree = "<group>"; };
 		DA38362DEAD431DE616C335A /* Pods-templateCli.productiondebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-templateCli.productiondebug.xcconfig"; path = "Target Support Files/Pods-templateCli/Pods-templateCli.productiondebug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		BB69095226034A6AB63EC2FA /* MinSans-Black.otf */ = {isa = PBXFileReference; name = "MinSans-Black.otf"; path = "../src/assets/fonts/MinSans-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		621761887CF64B90B50503FD /* MinSans-Bold.otf */ = {isa = PBXFileReference; name = "MinSans-Bold.otf"; path = "../src/assets/fonts/MinSans-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AC746041531249FC94439A88 /* MinSans-ExtraBold.otf */ = {isa = PBXFileReference; name = "MinSans-ExtraBold.otf"; path = "../src/assets/fonts/MinSans-ExtraBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CBE9C71D61E246398924D2AE /* MinSans-ExtraLight.otf */ = {isa = PBXFileReference; name = "MinSans-ExtraLight.otf"; path = "../src/assets/fonts/MinSans-ExtraLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EAC2CFFA399B497683A6C04F /* MinSans-Light.otf */ = {isa = PBXFileReference; name = "MinSans-Light.otf"; path = "../src/assets/fonts/MinSans-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		31C779BFD2D9412099D81DCE /* MinSans-Medium.otf */ = {isa = PBXFileReference; name = "MinSans-Medium.otf"; path = "../src/assets/fonts/MinSans-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		26FA3526708A4D91906E09A3 /* MinSans-Regular.otf */ = {isa = PBXFileReference; name = "MinSans-Regular.otf"; path = "../src/assets/fonts/MinSans-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C0E822DD78834E7C870546AE /* MinSans-SemiBold.otf */ = {isa = PBXFileReference; name = "MinSans-SemiBold.otf"; path = "../src/assets/fonts/MinSans-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		231B7140C9A1446BB84F3362 /* MinSans-Thin.otf */ = {isa = PBXFileReference; name = "MinSans-Thin.otf"; path = "../src/assets/fonts/MinSans-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +97,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				251BC18D1AC34E6D88DA3D3B /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -105,6 +124,23 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		251BC18D1AC34E6D88DA3D3B /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				BB69095226034A6AB63EC2FA /* MinSans-Black.otf */,
+				621761887CF64B90B50503FD /* MinSans-Bold.otf */,
+				AC746041531249FC94439A88 /* MinSans-ExtraBold.otf */,
+				CBE9C71D61E246398924D2AE /* MinSans-ExtraLight.otf */,
+				EAC2CFFA399B497683A6C04F /* MinSans-Light.otf */,
+				31C779BFD2D9412099D81DCE /* MinSans-Medium.otf */,
+				26FA3526708A4D91906E09A3 /* MinSans-Regular.otf */,
+				C0E822DD78834E7C870546AE /* MinSans-SemiBold.otf */,
+				231B7140C9A1446BB84F3362 /* MinSans-Thin.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -169,6 +205,15 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				2F894C86979C01DD008978F8 /* PrivacyInfo.xcprivacy in Resources */,
+				815AFE09784D424392577D5B /* MinSans-Black.otf in Resources */,
+				641C129F4D8244449CDB9CB8 /* MinSans-Bold.otf in Resources */,
+				A86401A9345E486191C363D2 /* MinSans-ExtraBold.otf in Resources */,
+				6B997298961A4CDA9C4EC430 /* MinSans-ExtraLight.otf in Resources */,
+				FEA09A0A50054B8D833E4C7D /* MinSans-Light.otf in Resources */,
+				3D60E29360A4464B9BB894E0 /* MinSans-Medium.otf in Resources */,
+				9E70691823F04F8FA51AD1BF /* MinSans-Regular.otf in Resources */,
+				BA472C5E4787451B8C99914E /* MinSans-SemiBold.otf in Resources */,
+				55CA0C5E32B74F2B967DE0F5 /* MinSans-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

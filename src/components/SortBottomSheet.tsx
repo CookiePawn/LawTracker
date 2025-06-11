@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '@/constants';
 import BottomSheet from './BottomSheet';
+import { Typography } from '@/components';
 
 interface SortBottomSheetProps {
     visible: boolean;
@@ -26,7 +27,7 @@ const SortBottomSheet = ({ visible, onClose, onApply, currentSort }: SortBottomS
     return (
         <BottomSheet visible={visible} onClose={onClose} height={300}>
             <View style={styles.container}>
-                <Text style={styles.title}>정렬</Text>
+                <Typography style={styles.title}>정렬</Typography>
                 <View style={styles.sortList}>
                     {sortOptions.map((option) => (
                         <TouchableOpacity
@@ -38,23 +39,23 @@ const SortBottomSheet = ({ visible, onClose, onApply, currentSort }: SortBottomS
                             onPress={() => setSelectedSort(option.value)}
                             activeOpacity={0.7}
                         >
-                            <Text
+                            <Typography
                                 style={[
                                     styles.sortText,
                                     selectedSort === option.value && styles.selectedSortText,
                                 ]}
                             >
                                 {option.label}
-                            </Text>
+                            </Typography>
                         </TouchableOpacity>
                     ))}
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
-                        <Text style={styles.cancelButtonText}>취소</Text>
+                        <Typography style={styles.cancelButtonText}>취소</Typography>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.applyButton} onPress={handleApply}>
-                        <Text style={styles.applyButtonText}>적용</Text>
+                        <Typography style={styles.applyButtonText}>적용</Typography>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { colors } from '@/constants';
 import BottomSheet from './BottomSheet';
+import { Typography } from '@/components';
 
 interface DateFilterBottomSheetProps {
     visible: boolean;
@@ -60,7 +61,7 @@ const DateFilterBottomSheet = ({ visible, onClose, onApply }: DateFilterBottomSh
     return (
         <BottomSheet visible={visible} onClose={onClose} height={400}>
             <View style={styles.container}>
-                <Text style={styles.title}>기간 선택</Text>
+                <Typography style={styles.title}>기간 선택</Typography>
                 <ScrollView 
                     style={styles.periodList}
                     showsVerticalScrollIndicator={false}
@@ -78,14 +79,14 @@ const DateFilterBottomSheet = ({ visible, onClose, onApply }: DateFilterBottomSh
                             onPress={() => setSelectedPeriod(period.value)}
                             activeOpacity={0.7}
                         >
-                            <Text
+                            <Typography
                                 style={[
                                     styles.periodText,
                                     selectedPeriod === period.value && styles.selectedPeriodText,
                                 ]}
                             >
                                 {period.label}
-                            </Text>
+                            </Typography>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
@@ -94,13 +95,13 @@ const DateFilterBottomSheet = ({ visible, onClose, onApply }: DateFilterBottomSh
                         setSelectedPeriod('전체');
                         onClose();
                     }}>
-                        <Text style={styles.cancelButtonText}>취소</Text>
+                        <Typography style={styles.cancelButtonText}>취소</Typography>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.applyButton} onPress={() => {
                         handleApply();
                         setSelectedPeriod('전체');
                     }}>
-                        <Text style={styles.applyButtonText}>적용</Text>
+                        <Typography style={styles.applyButtonText}>적용</Typography>
                     </TouchableOpacity>
                 </View>
             </View>

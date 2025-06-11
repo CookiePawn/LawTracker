@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon } from '@/assets/icons';
 import { BillStatus, Law } from '@/models';
@@ -8,6 +8,7 @@ import { useUser } from '@/lib';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '@/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Typography } from '@/components';
 
 const getProgressPercentage = (status: BillStatus): number => {
     switch (status) {
@@ -53,16 +54,16 @@ const MyLawCard = () => {
     return (
         <View style={styles.container}>
             <View style={styles.newsTitleContainer}>
-                <Text style={styles.newsTitle}>나의 관심 법안</Text>
+                <Typography style={styles.newsTitle}>나의 관심 법안</Typography>
                 <TouchableOpacity style={styles.newsTitleMore} onPress={() => navigation.navigate('Tab', { screen: 'Profile' })}>
-                    <Text style={styles.newsTitleMoreTitle}>더보기</Text>
+                    <Typography style={styles.newsTitleMoreTitle}>더보기</Typography>
                     <ChevronLeftIcon style={styles.newsTitleMoreIcon} width={17} height={17} color={colors.primary} />
                 </TouchableOpacity>
             </View>
             <View style={styles.lawListContainer}>
                 {laws.length === 0 && (
                     <View style={styles.lawItemEmpty}>
-                        <Text style={styles.lawItemEmptyText}>관심 법안이 없습니다.</Text>
+                        <Typography style={styles.lawItemEmptyText}>관심 법안이 없습니다.</Typography>
                     </View>
                 )}
                 {laws.map((bill, index) => {
@@ -70,18 +71,18 @@ const MyLawCard = () => {
                     return (
                         <TouchableOpacity style={styles.lawItem} key={index} onPress={() => navigation.navigate('LawDetail', { law: bill })}>
                             <View style={styles.lawItemHeader}>
-                                <Text
+                                <Typography
                                     style={styles.lawItemTitle}
                                     numberOfLines={1}
                                     ellipsizeMode="tail"
                                 >
                                     {bill.TITLE}
-                                </Text>
-                                <Text style={styles.lawItemTag}>{bill.TAG}</Text>
+                                </Typography>
+                                <Typography style={styles.lawItemTag}>{bill.TAG}</Typography>
                             </View>
                             <View style={styles.lawItemStatusContent}>
-                                <Text style={styles.lawItemStatusTitle}>진행 상태: <Text style={styles.lawItemStatusPointText}>{bill.ACT_STATUS}</Text></Text>
-                                <Text style={styles.lawItemStatusText}>발의일: {bill.DATE}</Text>
+                                <Typography style={styles.lawItemStatusTitle}>진행 상태: <Typography style={styles.lawItemStatusPointText}>{bill.ACT_STATUS}</Typography></Typography>
+                                <Typography style={styles.lawItemStatusText}>발의일: {bill.DATE}</Typography>
                             </View>
                             <View style={styles.lawItemProgressBar}>
                                 <View style={[styles.lawItemProgressBarFill, { width: `${progressPercentage}%` }]} />

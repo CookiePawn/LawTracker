@@ -2,9 +2,10 @@ import { colors } from '@/constants';
 import { Law } from '@/models';
 import { increaseVoteCount, loadLawById, toggleVoteLaw } from '@/services';
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { PieChart } from 'react-native-chart-kit'
 import { useSetAlert, useUser } from '@/lib';
+import { Typography } from '@/components';
 
 const LawVote = ({ law }: { law: Law }) => {
     const [item, setItem] = useState<Law>(law);
@@ -82,15 +83,15 @@ const LawVote = ({ law }: { law: Law }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.lawStatusTitle}>진행 경과</Text>
+            <Typography style={styles.lawStatusTitle}>진행 경과</Typography>
             <View style={styles.lawVoteContainer}>
                 <View style={styles.lawVoteTrueItem}>
-                    <Text style={styles.lawVoteTrueItemPercentText}>
+                    <Typography style={styles.lawVoteTrueItemPercentText}>
                         {totalVotes === 0 ? '0%' : `${((item.VOTE_TRUE || 0) / totalVotes * 100).toFixed(0)}%`}
-                    </Text>
-                    <Text style={styles.lawVoteTrueItemText}>찬성</Text>
+                    </Typography>
+                    <Typography style={styles.lawVoteTrueItemText}>찬성</Typography>
                     <TouchableOpacity style={styles.lawVoteTrueItemButton} onPress={() => handleVote('VOTE_TRUE')}>
-                        <Text style={styles.lawVoteTrueItemButtonText}>찬성하기</Text>
+                        <Typography style={styles.lawVoteTrueItemButtonText}>찬성하기</Typography>
                     </TouchableOpacity>
                 </View>
 
@@ -111,16 +112,16 @@ const LawVote = ({ law }: { law: Law }) => {
                 </View>
 
                 <View style={styles.lawVoteFalseItem}>
-                    <Text style={styles.lawVoteFalseItemPercentText}>
+                    <Typography style={styles.lawVoteFalseItemPercentText}>
                         {totalVotes === 0 ? '0%' : `${((item.VOTE_FALSE || 0) / totalVotes * 100).toFixed(0)}%`}
-                    </Text>
-                    <Text style={styles.lawVoteFalseItemText}>반대</Text>
+                    </Typography>
+                    <Typography style={styles.lawVoteFalseItemText}>반대</Typography>
                     <TouchableOpacity style={styles.lawVoteFalseItemButton} onPress={() => handleVote('VOTE_FALSE')}>
-                        <Text style={styles.lawVoteFalseItemButtonText}>반대하기</Text>
+                        <Typography style={styles.lawVoteFalseItemButtonText}>반대하기</Typography>
                     </TouchableOpacity>
                 </View>
             </View>
-            <Text style={styles.lawVoteSummary}>총 {totalVotes}명이 투표에 참여했습니다.</Text>
+            <Typography style={styles.lawVoteSummary}>총 {totalVotes}명이 투표에 참여했습니다.</Typography>
         </View>
     )
 }
