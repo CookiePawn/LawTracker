@@ -4,6 +4,7 @@ export interface User {
     email: string;
     age?: string;
     gender?: string;
+    phone?: string;
     profileImage: string;
     createdAt: string;
     SNS: string;

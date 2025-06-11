@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">templateCli</string>
-    <string name="kakao_app_key">1366b1d3d921fb1e441de170663f76e6</string>
+    <!-- 프로덕션 키 <string name="kakao_app_key">1366b1d3d921fb1e441de170663f76e6</string> -->
+    <string name="kakao_app_key">5919f5dd8853d3673ddfcf0660340459</string>
 </resources>

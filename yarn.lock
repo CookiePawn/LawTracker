@@ -2895,6 +2895,11 @@
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.14.tgz"
   integrity sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==
 
+"@types/react-native-crypto-js@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react-native-crypto-js/-/react-native-crypto-js-1.0.3.tgz#3b21ea40883ef880e3face5476ef3893c853ecac"
+  integrity sha512-RrXgp58Lf8cfj5fLJoSHecSG+L87t1o5g5XwOHqgSpj18CtRUuwYKWFobqMK1nivTidcTveQG9lJDUUV7rJv8A==
+
 "@types/react-test-renderer@^18.0.0":
   version "18.3.1"
   resolved "https://registry.npmjs.org/@types/react-test-renderer/-/react-test-renderer-18.3.1.tgz"
@@ -7030,6 +7035,11 @@ react-native-config@^1.5.5:
   version "1.5.5"
   resolved "https://registry.npmjs.org/react-native-config/-/react-native-config-1.5.5.tgz"
   integrity sha512-dGdLnBU0cd5xL5bF0ROTmHYbsstZnQKOEPfglvZi1vStvAjpld14X25K6mY3KGPTMWAzx6TbjKeq5dR+ILuMMA==
+
+react-native-crypto-js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-crypto-js/-/react-native-crypto-js-1.0.0.tgz#e677e022e147f41b35614416c92d655f87e2450a"
+  integrity sha512-FNbLuG/HAdapQoybeZSoes1PWdOj0w242gb+e1R0hicf3Gyj/Mf8M9NaED2AnXVOX01b2FXomwUiw1xP1K+8sA==
 
 react-native-dotenv@^3.4.11:
   version "3.4.11"

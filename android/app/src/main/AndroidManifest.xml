@@ -40,8 +40,10 @@
           <category android:name="android.intent.category.BROWSABLE" />
 
           <!-- Redirect URI: "kakao1366b1d3d921fb1e441de170663f76e6://oauth" -->
+          <!-- 프로덕션 키 <data android:host="oauth"
+              android:scheme="kakao1366b1d3d921fb1e441de170663f76e6" /> -->
           <data android:host="oauth"
-              android:scheme="kakao1366b1d3d921fb1e441de170663f76e6" />
+              android:scheme="kakao5919f5dd8853d3673ddfcf0660340459" />
       </intent-filter>
     </activity>
     </application>

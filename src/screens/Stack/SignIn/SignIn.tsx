@@ -1,7 +1,7 @@
 import { colors, STORAGE_KEY } from '@/constants';
 import NaverLogin from '@react-native-seoul/naver-login';
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Alert, Image, ActivityIndicator, ToastAndroid, BackHandler } from 'react-native';
+import React, { ReactElement, useEffect, useRef } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text, Alert, ToastAndroid, BackHandler } from 'react-native';
 import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET, NAVER_APP_NAME } from '@env';
 import { SplashLogoIcon } from '@/assets';
 import { signIn } from '@/services';
@@ -10,7 +10,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useSetUser } from '@/lib/jotai/user';
+import { useSetUser, useSetAlert } from '@/lib';
 import RNExitApp from 'react-native-exit-app';
 import { login, KakaoOAuthToken, KakaoProfile, getProfile } from '@react-native-seoul/kakao-login';
 
@@ -19,7 +19,8 @@ const SignIn = (): ReactElement => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const setUser = useSetUser();
     const backPressedTime = useRef(0);
-
+    const setAlert = useSetAlert();
+    
     useEffect(() => {
         const initialize = async () => {
             try {
@@ -91,14 +92,23 @@ const SignIn = (): ReactElement => {
             id: profileResult.response.id,
             nickname: profileResult.response.nickname ?? '사용자',
             email: profileResult.response.email ?? '',
-            age: profileResult.response.age ?? '',
+            age: profileResult.response.age?.slice(0, 2) ?? '',
             gender: profileResult.response.gender ?? '',
             profileImage: profileResult.response.profile_image ?? '',
             createdAt: new Date().toISOString(),
             SNS: 'naver',
+            phone: profileResult.response.mobile ?? '',
         }
         try {
-            await signIn(user);
+            const result = await signIn(user);
+            setAlert({
+                visible: true,
+                title: result === 0 ? "회원가입" : "로그인",
+                message: result === 0 ? "회원가입이 완료되었습니다." : "로그인이 완료되었습니다.",
+                buttons: [
+                    { text: '확인', style: 'default' },
+                ],
+            });
             await AsyncStorage.setItem(STORAGE_KEY.USER_ID, user.id);
             setUser(user);
             navigation.navigate('Tab', {
@@ -120,10 +130,21 @@ const SignIn = (): ReactElement => {
                     email: profile.email ?? '',
                     profileImage: profile.profileImageUrl ?? '',
                     createdAt: new Date().toISOString(),
+                    age: profile.ageRange.slice(4, 6) ?? '',
+                    gender: profile.gender === 'MALE' ? 'M' : 'F',
+                    phone: profile.phoneNumber.replace(/^(\+82 |0)/g, '0') ?? '',
                     SNS: 'kakao',
                 }
                 try {
-                    await signIn(user);
+                    const result = await signIn(user);
+                    setAlert({
+                        visible: true,
+                        title: result === 0 ? "회원가입" : "로그인",
+                        message: result === 0 ? "회원가입이 완료되었습니다." : "로그인이 완료되었습니다.",
+                        buttons: [
+                            { text: '확인', style: 'default' },
+                        ],
+                    });
                     await AsyncStorage.setItem(STORAGE_KEY.USER_ID, user.id);
                     setUser(user);
                     navigation.navigate('Tab', {

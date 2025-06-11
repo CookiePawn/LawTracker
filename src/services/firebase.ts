@@ -2,9 +2,10 @@
 import { COLLECTIONS } from "@/constants";
 import { Law, User } from "@/models";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc, arrayUnion, arrayRemove, deleteDoc, runTransaction } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc, arrayUnion, arrayRemove, deleteDoc } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
-import { useSetAlert } from "@/lib";
+import CryptoJS from 'react-native-crypto-js';
+import { DATA_SECRET_KEY } from '@env';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -157,11 +158,28 @@ export const searchLaws = async (params: {
     return laws as Law[];
 };
 
-// 네이버 로그인 회원 정보 저장
+// SNS 로그인 회원 정보 저장
 export const signIn = async (user: User) => {
     const dataRef = collection(db, COLLECTIONS.USERS);
     const docRef = doc(dataRef, user.id);
-    await setDoc(docRef, user, { merge: true });
+    const docSnap = await getDoc(docRef);
+    
+    // 민감한 정보 암호화
+    const encryptedUser = {
+        ...user,
+        email: user.email ? CryptoJS.AES.encrypt(user.email, DATA_SECRET_KEY).toString() : '',
+        phone: user.phone ? CryptoJS.AES.encrypt(user.phone, DATA_SECRET_KEY).toString() : '',
+        age: user.age ? CryptoJS.AES.encrypt(user.age, DATA_SECRET_KEY).toString() : '',
+        gender: user.gender ? CryptoJS.AES.encrypt(user.gender, DATA_SECRET_KEY).toString() : '',
+    };
+    
+    if (!docSnap.exists()) {
+        await setDoc(docRef, encryptedUser, { merge: true });
+        return 0; // 회원가입 완료
+    }
+    
+    await setDoc(docRef, encryptedUser, { merge: true });
+    return 1; // 로그인 완료
 };
 
 // 회원 탈퇴
@@ -176,7 +194,18 @@ export const loadUser = async (userId: string) => {
     const dataRef = collection(db, COLLECTIONS.USERS);
     const docRef = doc(dataRef, userId);
     const docSnap = await getDoc(docRef);
-    return docSnap.data() as User;
+    const userData = docSnap.data() as User;
+    
+    if (!userData) return null;
+    
+    // 암호화된 정보 복호화
+    return {
+        ...userData,
+        email: userData.email ? CryptoJS.AES.decrypt(userData.email, DATA_SECRET_KEY).toString(CryptoJS.enc.Utf8) : '',
+        phone: userData.phone ? CryptoJS.AES.decrypt(userData.phone, DATA_SECRET_KEY).toString(CryptoJS.enc.Utf8) : '',
+        age: userData.age ? CryptoJS.AES.decrypt(userData.age, DATA_SECRET_KEY).toString(CryptoJS.enc.Utf8) : '',
+        gender: userData.gender ? CryptoJS.AES.decrypt(userData.gender, DATA_SECRET_KEY).toString(CryptoJS.enc.Utf8) : '',
+    };
 };
 
 // 법안 즐겨찾기 토글 (추가/삭제)

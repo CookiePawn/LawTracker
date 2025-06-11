@@ -37,6 +37,9 @@ const Profile = () => {
             {user?.gender && user?.gender !== '' && (
               <Text style={styles.profileHeaderSubText}>성별: {user?.gender === 'M' ? '남자' : '여자'}</Text>
             )}
+            {user?.phone && user?.phone !== '' && (
+              <Text style={styles.profileHeaderSubText}>전화번호: {user?.phone}</Text>
+            )}
             <Text style={styles.profileHeaderSubText}>가입일: {user?.createdAt}</Text>
           </View>
         </View>
