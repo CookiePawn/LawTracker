@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Animated, ScrollView } from 'react-native';
 import { ChevronLeftIcon } from '@/assets/icons';
-import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEY } from '@/constants';
 import { Typography } from '@/components';
@@ -17,6 +16,8 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
   const today = new Date();
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
+  const animatedHeight = useState(new Animated.Value(0))[0];
+  const [contentHeight, setContentHeight] = useState(0);
 
   const days = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -30,6 +31,15 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
     loadLawsList();
   }, []);
 
+  useEffect(() => {
+    Animated.spring(animatedHeight, {
+      toValue: isModalVisible ? 1 : 0,
+      useNativeDriver: false,
+      tension: 65,
+      friction: 11
+    }).start();
+  }, [isModalVisible]);
+
   const datesWithBills = useMemo(() => {
     const billDates = new Set<string>();
     isActive.forEach(date => {
@@ -40,23 +50,10 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
     return billDates;
   }, [isActive]);
 
-  const MIN_YEAR = 2024;
-  const MIN_MONTH = 5;
-  const MAX_YEAR = today.getFullYear();
-  const MAX_MONTH = today.getMonth() + 1;
-  const years = Array.from({ length: MAX_YEAR - MIN_YEAR + 1 }, (_, i) => MIN_YEAR + i);
+  const years = Array.from({ length: today.getFullYear() - 2024 + 1 }, (_, i) => 2024 + i);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
 
-  const isDateSelectable = (year: number, month: number) => {
-    if (year < MIN_YEAR) return false;
-    if (year === MIN_YEAR && month < MIN_MONTH) return false;
-    if (year > MAX_YEAR) return false;
-    if (year === MAX_YEAR && month > MAX_MONTH) return false;
-    return true;
-  };
-
   const handleYearMonthSelect = () => {
-    if (!isDateSelectable(selectedYear, selectedMonth)) return;
     const newDate = new Date(selectedYear, selectedMonth - 1, 1);
     setCurrentMonth(newDate);
     setIsModalVisible(false);
@@ -92,15 +89,6 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
   const changeMonth = (increment: number) => {
     const newDate = new Date(currentMonth);
     newDate.setMonth(newDate.getMonth() + increment);
-    
-    // 2024년 5월 이전이나 현재 월 이후로는 이동할 수 없도록 체크
-    if (newDate.getFullYear() < MIN_YEAR || 
-        (newDate.getFullYear() === MIN_YEAR && newDate.getMonth() + 1 < MIN_MONTH) ||
-        newDate.getFullYear() > MAX_YEAR ||
-        (newDate.getFullYear() === MAX_YEAR && newDate.getMonth() + 1 > MAX_MONTH)) {
-      return;
-    }
-    
     setCurrentMonth(newDate);
   };
 
@@ -126,7 +114,7 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
   const handleModalOpen = () => {
     setSelectedYear(currentMonth.getFullYear());
     setSelectedMonth(currentMonth.getMonth() + 1);
-    setIsModalVisible(true);
+    setIsModalVisible(!isModalVisible);
   };
 
   const handleDateSelect = (date: Date) => {
@@ -153,7 +141,7 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
           <Typography style={styles.monthText}>
             {currentMonth.getFullYear()}년 {currentMonth.getMonth() + 1}월
           </Typography>
-          <ChevronLeftIcon style={{ transform: [{ rotate: '270deg' }], marginTop: 7 }} width={20} height={20} />
+          <ChevronLeftIcon style={{ transform: [{ rotate: !isModalVisible ? '270deg' : '90deg' }], marginLeft: 5 }} width={20} height={20} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => changeMonth(1)}
@@ -163,77 +151,83 @@ const FullCalendar: React.FC<FullCalendarProps> = ({ selectedDate, onDateSelect 
         </TouchableOpacity>
       </View>
 
-      <Modal
-        visible={isModalVisible}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={() => setIsModalVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Typography style={styles.modalTitle}>년월 선택</Typography>
-              <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-                <Typography style={styles.closeButton}>닫기</Typography>
+      <Animated.View style={[
+        styles.yearMonthSelector,
+        {
+          height: animatedHeight.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, contentHeight]
+          }),
+          opacity: animatedHeight,
+          transform: [{
+            translateY: animatedHeight.interpolate({
+              inputRange: [0, 1],
+              outputRange: [-10, 0]
+            })
+          }]
+        }
+      ]}>
+        <View 
+          style={styles.yearMonthContent}
+          onLayout={(event) => {
+            const { height } = event.nativeEvent.layout;
+            setContentHeight(height);
+          }}
+        >
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.yearSelector}
+          >
+            {years.map((year) => (
+              <TouchableOpacity
+                key={year}
+                style={[
+                  styles.yearMonthButton,
+                  selectedYear === year && styles.selectedYearMonth
+                ]}
+                onPress={() => setSelectedYear(year)}
+              >
+                <Typography style={[
+                  styles.yearMonthText,
+                  selectedYear === year && styles.selectedYearMonthText
+                ]}>
+                  {year}년
+                </Typography>
               </TouchableOpacity>
-            </View>
-            
-            <View style={styles.pickerContainer}>
-              <View style={styles.pickerWrapper}>
-                <Picker
-                  selectedValue={selectedYear}
-                  onValueChange={(value: number) => setSelectedYear(value)}
-                  style={styles.picker}
-                  itemStyle={styles.pickerItem}
-                >
-                  {years.map((year) => {
-                    // 해당 년도에 선택 가능한 월이 있는지 확인
-                    const hasSelectableMonth = months.some(month => isDateSelectable(year, month));
-                    if (!hasSelectableMonth) return null;
-                    
-                    return (
-                      <Picker.Item 
-                        key={year} 
-                        label={`${year}년`} 
-                        value={year}
-                        color="#000"
-                      />
-                    );
-                  })}
-                </Picker>
-              </View>
-              <View style={styles.pickerWrapper}>
-                <Picker
-                  selectedValue={selectedMonth}
-                  onValueChange={(value: number) => setSelectedMonth(value)}
-                  style={styles.picker}
-                  itemStyle={styles.pickerItem}
-                >
-                  {months.map((month) => {
-                    if (!isDateSelectable(selectedYear, month)) return null;
-                    
-                    return (
-                      <Picker.Item 
-                        key={month} 
-                        label={`${month}월`} 
-                        value={month}
-                        color="#000"
-                      />
-                    );
-                  })}
-                </Picker>
-              </View>
-            </View>
-
-            <TouchableOpacity 
-              style={styles.confirmButton}
-              onPress={handleYearMonthSelect}
-            >
-              <Typography style={styles.confirmButtonText}>확인</Typography>
-            </TouchableOpacity>
-          </View>
+            ))}
+          </ScrollView>
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.monthSelector}
+          >
+            {months.map((month) => (
+              <TouchableOpacity
+                key={month}
+                style={[
+                  styles.yearMonthButton,
+                  selectedMonth === month && styles.selectedYearMonth
+                ]}
+                onPress={() => setSelectedMonth(month)}
+              >
+                <Typography style={[
+                  styles.yearMonthText,
+                  selectedMonth === month && styles.selectedYearMonthText
+                ]}>
+                  {month}월
+                </Typography>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+          <TouchableOpacity
+            style={styles.confirmButton}
+            onPress={handleYearMonthSelect}
+          >
+            <Typography style={styles.confirmButtonText}>확인</Typography>
+          </TouchableOpacity>
         </View>
-      </Modal>
+      </Animated.View>
 
       <View style={styles.daysHeader}>
         {days.map((day, index) => (
@@ -421,68 +415,58 @@ const styles = StyleSheet.create({
   todayDot: {
     backgroundColor: '#5046E6',
   },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    width: '80%',
-    padding: 20,
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  closeButton: {
-    fontSize: 16,
-    color: '#5046E6',
-  },
   dateSelector: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  pickerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-    borderRadius: 8,
-  },
-  pickerWrapper: {
-    width: '49%',
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 8,
+  yearMonthSelector: {
     overflow: 'hidden',
+    borderRadius: 8,
+    marginBottom: 12,
   },
-  picker: {
+  yearMonthContent: {
+    position: 'absolute',
     width: '100%',
-    minWidth: 250,
-    height: 60,
   },
-  pickerItem: {
-    fontSize: 16,
-    height: 50,
-    textAlign: 'center',
+  yearSelector: {
+    flexDirection: 'row',
+    padding: 8,
+    paddingRight: 16,
+  },
+  monthSelector: {
+    flexDirection: 'row',
+    padding: 8,
+    paddingRight: 16,
+  },
+  yearMonthButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    margin: 4,
+    borderRadius: 16,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#E9ECEF',
+  },
+  selectedYearMonth: {
+    backgroundColor: '#5046E6',
+    borderColor: '#5046E6',
+  },
+  yearMonthText: {
+    fontSize: 14,
+    color: '#495057',
+  },
+  selectedYearMonthText: {
+    color: '#FFFFFF',
   },
   confirmButton: {
     backgroundColor: '#5046E6',
-    paddingVertical: 12,
-    borderRadius: 8,
+    padding: 10,
+    margin: 8,
+    borderRadius: 16,
     alignItems: 'center',
   },
   confirmButtonText: {
-    color: 'white',
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },
