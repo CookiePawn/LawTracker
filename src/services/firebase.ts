@@ -2,7 +2,7 @@
 import { COLLECTIONS } from "@/constants";
 import { Law, User } from "@/models";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc, arrayUnion, arrayRemove, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc, arrayUnion, arrayRemove, deleteDoc, startAfter } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
 import CryptoJS from 'react-native-crypto-js';
 import { DATA_SECRET_KEY } from '@env';
@@ -57,12 +57,66 @@ export const loadLawById = async (billId: string) => {
 };
 
 // 최신 의안 로드
-export const loadLatestLaws = async (limitCount: number = 2) => {
+export const loadLatestLaws = async (limitCount: number = 10, lastDoc?: any) => {
     const dataRef = collection(db, COLLECTIONS.LAWS);
-    const queryRef = query(dataRef, orderBy('DATE', 'desc'), limit(limitCount));
+    let queryRef;
+    
+    if (lastDoc) {
+        queryRef = query(
+            dataRef,
+            orderBy('DATE', 'desc'),
+            startAfter(lastDoc),
+            limit(limitCount)
+        );
+    } else {
+        queryRef = query(
+            dataRef,
+            orderBy('DATE', 'desc'),
+            limit(limitCount)
+        );
+    }
+    
     const snapshot = await getDocs(queryRef);
     const laws = snapshot.docs.map((doc) => doc.data());
-    return laws as Law[];
+    return {
+        laws: laws as Law[],
+        lastDoc: snapshot.docs[snapshot.docs.length - 1]
+    };
+};
+
+// 조회순 의안 로드
+export const loadViewLaws = async (limitCount: number = 10, lastDoc?: any) => {
+    const dataRef = collection(db, COLLECTIONS.LAWS);
+    let queryRef;
+    
+    if (lastDoc) {
+        queryRef = query(
+            dataRef,
+            orderBy('VIEW_COUNT', 'desc'),
+            startAfter(lastDoc),
+            limit(limitCount)
+        );
+    } else {
+        queryRef = query(
+            dataRef,
+            orderBy('VIEW_COUNT', 'desc'),
+            limit(limitCount)
+        );
+    }
+    
+    const snapshot = await getDocs(queryRef);
+    const laws = snapshot.docs.map((doc) => doc.data());
+    return {
+        laws: laws as Law[],
+        lastDoc: snapshot.docs[snapshot.docs.length - 1]
+    };
+};
+
+// 조회수 증가
+export const increaseViewCount = async (billId: string) => {
+    const dataRef = collection(db, COLLECTIONS.LAWS);
+    const docRef = doc(dataRef, billId);
+    await updateDoc(docRef, { VIEW_COUNT: increment(1) });
 };
 
 // 의안 찬/반 투표 체크 후 증가
@@ -146,22 +200,6 @@ export const toggleVoteLaw = async (userUid: string, billId: string, voteType: '
         [voteType]: increment(1),
         [voteType === 'VOTE_TRUE' ? 'VOTE_FALSE' : 'VOTE_TRUE']: increment(-1)
     });
-};
-
-// 조회순 의안 로드
-export const loadViewLaws = async (limitCount: number = 2) => {
-    const dataRef = collection(db, COLLECTIONS.LAWS);
-    const queryRef = query(dataRef, orderBy('VIEW_COUNT', 'desc'), limit(limitCount));
-    const snapshot = await getDocs(queryRef);
-    const laws = snapshot.docs.map((doc) => doc.data());
-    return laws as Law[];
-};
-
-// 조회수 증가
-export const increaseViewCount = async (billId: string) => {
-    const dataRef = collection(db, COLLECTIONS.LAWS);
-    const docRef = doc(dataRef, billId);
-    await updateDoc(docRef, { VIEW_COUNT: increment(1) });
 };
 
 // 의안 검색 및 필터링

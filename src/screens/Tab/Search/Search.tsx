@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import { colors } from '@/constants';
-import { ChevronLeftIcon, EyeIcon, SearchIcon } from '@/assets';
-import DateFilterBottomSheet from '@/components/DateFilterBottomSheet';
-import BillTypeBottomSheet from '@/components/BillTypeBottomSheet';
-import BillStatusBottomSheet from '@/components/BillStatusBottomSheet';
-import SortBottomSheet from '@/components/SortBottomSheet';
+import { ChevronLeftIcon, SearchIcon } from '@/assets';
+import { DateFilterBottomSheet, BillTypeBottomSheet, BillStatusBottomSheet, SortBottomSheet } from '@/components';
 import { RouteProp } from '@react-navigation/native';
 import { RootTabParamList } from '@/types';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@/types';
-import { BillStatusTag, Typography } from '@/components';
+import { Typography } from '@/components';
 import { Law } from '@/models';
-import { searchLaws } from '@/services';
+import { searchLaws, loadLatestLaws, loadViewLaws } from '@/services';
+import { BillItem } from './components';
 
 interface SearchProps {
     route: RouteProp<RootTabParamList, 'Search'>;
 }
 
 const Search = ({ route }: SearchProps) => {
-    const stackNavigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-    const { type = 'latest' } = route.params || {};
+    const { type } = route.params || {};
     const [searchQuery, setSearchQuery] = useState('');
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
     const [isDateFilterVisible, setIsDateFilterVisible] = useState(false);
@@ -32,30 +26,104 @@ const Search = ({ route }: SearchProps) => {
     const [selectedPeriod, setSelectedPeriod] = useState<string>('전체');
     const [selectedBillType, setSelectedBillType] = useState<'전체' | '법률안' | '예산안' | '기타'>('전체');
     const [selectedStatus, setSelectedStatus] = useState<string>('전체');
-    const [selectedFilter, setSelectedFilter] = useState<string>('최신순');
+    const [selectedFilter, setSelectedFilter] = useState<'최신순' | '조회순'>('최신순');
     const [originalResults, setOriginalResults] = useState<Law[]>([]);
     const [searchResults, setSearchResults] = useState<Law[]>([]);
+    const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
+    const [lastDoc, setLastDoc] = useState<any>(null);
 
-    const fetchResults = async () => {
-        const results = await searchLaws({
-            searchQuery: debouncedSearchQuery,
-        });
-        setOriginalResults(results as Law[]);
-        setSearchResults(results as Law[]);
-    };
-
+    // 컴포넌트 마운트 시 초기화
     useEffect(() => {
-        if (type === 'random') {
-            setSelectedFilter('조회순');
-        } else {
-            setSelectedFilter('최신순');
+        const initialFilter = type === 'random' ? '조회순' : '최신순';
+        setSelectedFilter(initialFilter);
+        setPage(1);
+        setHasMore(true);
+        setLastDoc(null);
+        setOriginalResults([]);
+        setSearchResults([]);
+        setSearchQuery('');
+        setDebouncedSearchQuery('');
+        setDateRange({ start: '', end: '' });
+        setSelectedPeriod('전체');
+        setSelectedBillType('전체');
+        setSelectedStatus('전체');
+        fetchResults(true);
+    }, []);
+
+    // type 변경 시 처리
+    useEffect(() => {
+        const newFilter = type === 'random' ? '조회순' : '최신순';
+        if (selectedFilter !== newFilter) {
+            setSelectedFilter(newFilter);
+            setPage(1);
+            setHasMore(true);
+            setLastDoc(null);
+            setOriginalResults([]);
+            setSearchResults([]);
+            fetchResults(true);
         }
     }, [type]);
 
+    const fetchResults = async (isInitial: boolean = false) => {
+        if (isLoading || !hasMore) return;
+        
+        setIsLoading(true);
+        try {
+            const limit = 10;
+            let results: { laws: Law[], lastDoc: any };
+            
+            if (debouncedSearchQuery) {
+                const searchResults = await searchLaws({
+                    searchQuery: debouncedSearchQuery,
+                });
+                results = {
+                    laws: searchResults,
+                    lastDoc: null
+                };
+            } else {
+                const currentFilter = type === 'random' ? '조회순' : '최신순';
+                if (currentFilter === '최신순') {
+                    results = await loadLatestLaws(limit, isInitial ? null : lastDoc);
+                } else {
+                    results = await loadViewLaws(limit, isInitial ? null : lastDoc);
+                }
+            }
+
+            if (isInitial) {
+                setOriginalResults(results.laws);
+                setSearchResults(results.laws);
+            } else {
+                setOriginalResults(prev => [...prev, ...results.laws]);
+                setSearchResults(prev => [...prev, ...results.laws]);
+            }
+            setLastDoc(results.lastDoc);
+            setHasMore(results.laws.length === limit);
+        } catch (error) {
+            console.error('Error fetching results:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     // 검색어로 데이터 가져오기
     useEffect(() => {
-        fetchResults();
+        if (debouncedSearchQuery) {
+            setPage(1);
+            setHasMore(true);
+            setLastDoc(null);
+            fetchResults(true);
+        }
     }, [debouncedSearchQuery]);
+
+    // 필터 변경시 데이터 초기화
+    useEffect(() => {
+        setPage(1);
+        setHasMore(true);
+        setLastDoc(null);
+        fetchResults(true);
+    }, [selectedFilter]);
 
     // 모든 필터 적용
     useEffect(() => {
@@ -82,15 +150,15 @@ const Search = ({ route }: SearchProps) => {
             );
         }
 
-        // 정렬
-        if (selectedFilter === '최신순') {
-            filteredResults.sort((a, b) => b.DATE.localeCompare(a.DATE));
-        } else {
-            filteredResults.sort((a, b) => (b.VIEW_COUNT || 0) - (a.VIEW_COUNT || 0));
-        }
-
         setSearchResults(filteredResults);
-    }, [originalResults, dateRange, selectedBillType, selectedStatus, selectedFilter]);
+    }, [originalResults, dateRange, selectedBillType, selectedStatus]);
+
+    const handleLoadMore = () => {
+        if (!isLoading && hasMore) {
+            setPage(prev => prev + 1);
+            fetchResults();
+        }
+    };
 
     const getFilterText = () => {
         if (selectedFilter === '최신순') return '최신순';
@@ -125,43 +193,8 @@ const Search = ({ route }: SearchProps) => {
         setSelectedStatus(status);
     };
 
-    const handleBillPress = async (bill: Law) => {
-        stackNavigation.navigate('LawDetail', { law: bill });
-    };
-
     const handleSearchSubmit = () => {
         setDebouncedSearchQuery(searchQuery);
-    };
-
-    const renderBillItem = ({ item }: { item: Law }) => {
-        return (
-            <TouchableOpacity
-                style={styles.lawItem}
-                onPress={() => handleBillPress(item)}
-                activeOpacity={0.7}
-            >
-                <View style={styles.lawItemHeader}>
-                    <Typography style={styles.lawItemDate}>{item.DATE}</Typography>
-                    <Typography style={styles.lawItemProposer}>발의자: {item.AGENT.length > 15 ? item.AGENT.slice(0, 15) + '...' : item.AGENT}</Typography>
-                </View>
-                <Typography
-                    style={styles.lawTitle}
-                    numberOfLines={2}
-                    ellipsizeMode="tail"
-                >{item.TITLE}</Typography>
-                <View style={styles.lawItemTagContent}>
-                    <Typography style={styles.lawItemTagText}>{item.TAG}</Typography>
-                    <BillStatusTag status={item.ACT_STATUS} />
-                </View>
-                <View style={styles.lawItemFooterContainer}>
-                    <Typography style={styles.lawItemCommitteeText}>{item.COMMITTEE || '-'}</Typography>
-                    <View style={styles.lawItemFooterIconContainer}>
-                        <EyeIcon width={14} height={14} color={colors.gray400} />
-                        <Typography style={styles.lawItemFooterIconText}>{item.VIEW_COUNT || 0}</Typography>
-                    </View>
-                </View>
-            </TouchableOpacity>
-        );
     };
 
     return (
@@ -256,12 +289,21 @@ const Search = ({ route }: SearchProps) => {
                 style={styles.billList}
                 data={searchResults}
                 ItemSeparatorComponent={() => <View style={styles.billItemSeparator} />}
-                renderItem={renderBillItem}
+                renderItem={({ item }) => <BillItem item={item} />}
                 keyExtractor={(_, index) => index.toString()}
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={0.5}
                 ListEmptyComponent={
                     <View style={styles.emptyContainer}>
                         <Typography style={styles.emptyText}>검색 결과가 없습니다</Typography>
                     </View>
+                }
+                ListFooterComponent={
+                    isLoading ? (
+                        <View style={styles.loadingContainer}>
+                            <Typography style={styles.loadingText}>로딩중...</Typography>
+                        </View>
+                    ) : null
                 }
             />
 
@@ -390,50 +432,6 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.gray100,
         borderBottomWidth: 1,
     },
-    lawItem: {
-
-    },
-    lawTitle: {
-        fontSize: 14,
-        fontWeight: '500',
-        marginBottom: 5,
-    },
-    lawInfo: {
-        fontSize: 12,
-        color: '#666',
-    },
-    lawItemHeader: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 5,
-    },
-    lawItemDate: {
-        fontSize: 12,
-        color: colors.gray500,
-    },
-    lawItemProposer: {
-        fontSize: 12,
-        color: colors.gray500,
-    },
-    lawItemTagContent: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 5,
-    },
-    lawItemTagText: {
-        fontSize: 10,
-        color: colors.gray500,
-        borderRadius: 100,
-        paddingHorizontal: 7,
-        paddingVertical: 3,
-        backgroundColor: colors.gray100,
-    },
-    lawItemCommitteeText: {
-        fontSize: 12,
-        color: colors.gray500,
-        marginTop: 5,
-    },
     emptyContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -444,19 +442,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.gray500,
     },
-    lawItemFooterContainer: {
-        flexDirection: 'row',
+    loadingContainer: {
+        paddingVertical: 20,
         alignItems: 'center',
-        justifyContent: 'space-between',
     },
-    lawItemFooterIconContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 5,
-    },
-    lawItemFooterIconText: {
-        fontSize: 12,
-        color: colors.gray400,
+    loadingText: {
+        fontSize: 14,
+        color: colors.gray500,
     },
 });
 

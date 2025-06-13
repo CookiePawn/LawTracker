@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from '@/assets';
+import { ChevronLeftIcon, EyeIcon } from '@/assets';
 import { colors } from '@/constants';
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
@@ -22,12 +22,12 @@ const LawList = ({ type = 'random' }: LawListProps) => {
 
     useEffect(() => {
         const loadLawsSync = async () => {
-            const lawList = await loadLatestLaws();
-            setLaws(lawList);
+            const lawList = await loadLatestLaws(2);
+            setLaws(lawList.laws);
         };
         const loadViewLawsSync = async () => {
-            const lawList = await loadViewLaws();
-            setLaws(lawList);
+            const lawList = await loadViewLaws(2);
+            setLaws(lawList.laws);
         };
         if (type === 'latest') {
             loadLawsSync();
@@ -35,7 +35,7 @@ const LawList = ({ type = 'random' }: LawListProps) => {
             loadViewLawsSync();
         }
     }, [type]);
-    
+
 
     return (
         <View style={styles.container}>
@@ -54,16 +54,22 @@ const LawList = ({ type = 'random' }: LawListProps) => {
                                 <Typography style={styles.lawItemDate}>{bill.DATE}</Typography>
                                 <Typography style={styles.lawItemProposer}>발의자: {bill.AGENT.length > 15 ? bill.AGENT.slice(0, 15) + '...' : bill.AGENT}</Typography>
                             </View>
-                            <Typography 
+                            <Typography
                                 style={styles.lawTitle}
                                 numberOfLines={2}
                                 ellipsizeMode="tail"
-                            >{bill.TITLE}</Typography>         
+                            >{bill.TITLE}</Typography>
                             <View style={styles.lawItemTagContent}>
                                 <Typography style={styles.lawItemTagText}>{bill.TAG}</Typography>
                                 <BillStatusTag status={bill.ACT_STATUS} />
-                            </View>  
-                            <Typography style={styles.lawItemCommitteeText}>{bill.COMMITTEE || '-'}</Typography>
+                            </View>
+                            <View style={styles.lawItemFooterContainer}>
+                                <Typography style={styles.lawItemCommitteeText}>{bill.COMMITTEE || '-'}</Typography>
+                                <View style={styles.lawItemFooterIconContainer}>
+                                    <EyeIcon width={14} height={14} color={colors.gray400} />
+                                    <Typography style={styles.lawItemFooterIconText}>{bill.VIEW_COUNT || 0}</Typography>
+                                </View>
+                            </View>
                         </TouchableOpacity>
                     );
                 })}
@@ -105,7 +111,7 @@ const styles = StyleSheet.create({
         gap: 15,
     },
     lawItem: {
-        
+
     },
     lawTitle: {
         fontSize: 14,
@@ -146,7 +152,22 @@ const styles = StyleSheet.create({
     lawItemCommitteeText: {
         fontSize: 12,
         color: colors.gray500,
-        marginTop: 5,  
+        marginTop: 5,
+    },
+
+    lawItemFooterContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    lawItemFooterIconContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
+    },
+    lawItemFooterIconText: {
+        fontSize: 12,
+        color: colors.gray400,
     },
 })
 

@@ -7,14 +7,14 @@ import { Typography } from '@/components';
 interface SortBottomSheetProps {
     visible: boolean;
     onClose: () => void;
-    onApply: (sortType: string) => void;
-    currentSort: string;
+    onApply: (sortType: '최신순' | '조회순') => void;
+    currentSort: '최신순' | '조회순';
 }
 
 const SortBottomSheet = ({ visible, onClose, onApply, currentSort }: SortBottomSheetProps) => {
-    const [selectedSort, setSelectedSort] = useState<string>(currentSort);
+    const [selectedSort, setSelectedSort] = useState<'최신순' | '조회순'>(currentSort);
 
-    const sortOptions = [
+    const sortOptions: { label: string; value: '최신순' | '조회순' }[] = [
         { label: '최신순', value: '최신순' },
         { label: '조회순', value: '조회순' },
     ];
