@@ -31,7 +31,7 @@ const newsData = [
 ];
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const CARD_HEIGHT = 310;
+const CARD_HEIGHT = 300;
 
 const NewsCard = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,11 +46,19 @@ const NewsCard = () => {
                 </View>
             </View>
             <Carousel
-                width={SCREEN_WIDTH - 40}
+                width={SCREEN_WIDTH}
                 height={CARD_HEIGHT}
                 data={newsData}
                 scrollAnimationDuration={400}
                 onSnapToItem={setCurrentIndex}
+                mode="parallax"
+                modeConfig={{
+                    parallaxScrollingScale: 1,
+                    parallaxScrollingOffset: 10,
+                    parallaxAdjacentItemScale: 0.8,
+                }}
+                autoPlay={true}
+                autoPlayInterval={3000}
                 renderItem={({ item }) => (
                     <View style={styles.newsContent}>
                         <Image source={item.image} style={styles.newsContentImage} />
@@ -66,7 +74,7 @@ const NewsCard = () => {
                         </View>
                     </View>
                 )}
-                style={{ marginTop: 10 }}
+                style={styles.carousel}
             />
             <View style={styles.newsIndicator}>
                 {newsData.map((_, idx) => (
@@ -85,7 +93,6 @@ export default NewsCard;
 const styles = StyleSheet.create({
     newsSection: {
         marginVertical: 20,
-        paddingHorizontal: 0,
         paddingVertical: 10,
     },
     newsTitle: {
@@ -110,6 +117,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        paddingHorizontal: 20,
     },
     newsContent: {
         flex: 1,
@@ -119,6 +127,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#fff',
         width: SCREEN_WIDTH - 40,
+        marginHorizontal: 20,
         justifyContent: 'flex-start',
     },
     newsIndicator: {
@@ -165,5 +174,9 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 10,
         marginBottom: 10,
+    },
+    carousel: {
+        marginTop: 10,
+        width: SCREEN_WIDTH,
     },
 });

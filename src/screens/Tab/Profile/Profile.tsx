@@ -20,6 +20,7 @@ const Profile = () => {
   const [routes] = useState([
     { key: 'first', title: 'First' },
     { key: 'second', title: 'Second' },
+    { key: 'third', title: 'Third' },
   ]);
 
   const renderScene = ({ route }: { route: { key: string; title: string } }) => {
@@ -63,13 +64,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 20,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   headerText: {
     fontSize: 16,
@@ -78,11 +79,11 @@ const styles = StyleSheet.create({
   },
   headerIcon: {
     position: 'absolute',
-    right: 0,
-    top: 0,
+    right: 20,
+    top: 20,
   },
   profileContainer: {
-    marginTop: 20,
+    padding: 20,
   },
   profileImageContainer: {
     flexDirection: 'row',

@@ -91,18 +91,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: 20,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
+    paddingTop: 20,
+    paddingHorizontal: 20,
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: colors.primary,
+    paddingHorizontal: 20,
   },
   logo: {
     width: 140,
@@ -122,6 +124,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     marginTop: 7,
+    paddingHorizontal: 20,
   },
   noticeTitle: {
     height: '100%',
