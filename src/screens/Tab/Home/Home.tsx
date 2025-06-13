@@ -78,7 +78,7 @@ const HomeScreen = () => {
           </View>
         </View>
         <NewsCard />
-        <AdBanner mode='home' />
+        <AdBanner />
         <LawList type='random' />
         <MyLawCard />
         <LawList type='latest' />

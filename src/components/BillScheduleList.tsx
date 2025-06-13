@@ -66,7 +66,7 @@ const BillScheduleList: React.FC<BillScheduleListProps> = ({ selectedDate }) => 
 
   return (
     <>
-      <AdBanner mode='list' />
+      <AdBanner />
       {isToday && (
         <View style={styles.warningContainer}>
           <Typography style={styles.warningText}>

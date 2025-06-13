@@ -1,24 +1,19 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
-import { GOOGLE_ADMOB_HOME_BANNER_KEY, GOOGLE_ADMOB_LIST_BANNER_KEY} from '@env';
+import { GOOGLE_ADMOB_BANNER_KEY } from '@env';
 
-const adUnitId = (mode: 'home' | 'list') => {
-  if (mode === 'home') {
-    return __DEV__ 
-      ? TestIds.BANNER 
-      : GOOGLE_ADMOB_HOME_BANNER_KEY;
-  }
+const adUnitId = () => {
   return __DEV__ 
     ? TestIds.BANNER 
-    : GOOGLE_ADMOB_LIST_BANNER_KEY;
+    : GOOGLE_ADMOB_BANNER_KEY;
 };
 
-const AdBanner = ({ mode }: { mode: 'home' | 'list' }) => {
+const AdBanner = () => {
   return (
     <View style={styles.container}>
       <BannerAd
-        unitId={adUnitId(mode)}
+        unitId={adUnitId()}
         size={BannerAdSize.BANNER}
         requestOptions={{
           requestNonPersonalizedAdsOnly: true,
