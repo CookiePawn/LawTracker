@@ -265,14 +265,7 @@ export const signIn = async (user: User) => {
             
             userId = querySnapshot.docs[0].id;
         } else {
-            // 새로운 사용자인 경우
-            // userUid_ 뒤에 정확히 20자리 랜덤 문자열 생성
-            const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            let randomSuffix = '';
-            for (let i = 0; i < 30; i++) {
-                randomSuffix += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            userId = `userUid_${randomSuffix}`;
+            userId = user.id;
         }
         
         const docRef = doc(dataRef, userId);
@@ -291,8 +284,6 @@ export const signIn = async (user: User) => {
         };
         
         await setDoc(docRef, encryptedUser, { merge: true });
-
-        await AsyncStorage.setItem(STORAGE_KEY.USER_ID, userId);
         
         return querySnapshot.empty ? 0 : 1; // 0: 회원가입 완료, 1: 로그인 완료
     } catch (error) {

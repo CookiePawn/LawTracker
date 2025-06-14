@@ -21,7 +21,7 @@ const SignIn = (): ReactElement => {
     const setUser = useSetUser();
     const backPressedTime = useRef(0);
     const setAlert = useSetAlert();
-    
+
     useEffect(() => {
         const initialize = async () => {
             try {
@@ -89,8 +89,18 @@ const SignIn = (): ReactElement => {
             Alert.alert("로그인 실패", profileResult.message);
             return;
         }
+
+        // 새로운 사용자인 경우
+        // userUid_ 뒤에 정확히 20자리 랜덤 문자열 생성
+        const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let randomSuffix = '';
+        for (let i = 0; i < 30; i++) {
+            randomSuffix += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        const userId = `userUid_${randomSuffix}`;
+
         const user: User = {
-            id: profileResult.response.id,
+            id: userId,
             nickname: profileResult.response.nickname ?? '사용자',
             email: profileResult.response.email ?? '',
             age: profileResult.response.age?.slice(0, 2) ?? '',
@@ -123,6 +133,7 @@ const SignIn = (): ReactElement => {
                     { text: '확인', style: 'default' },
                 ],
             });
+            await AsyncStorage.setItem(STORAGE_KEY.USER_ID, user.id);
             setUser(user);
             navigation.navigate('Tab', {
                 screen: 'Home',
@@ -137,8 +148,18 @@ const SignIn = (): ReactElement => {
             const token: KakaoOAuthToken = await login();
             if (token.accessToken) {
                 const profile: KakaoProfile = await getProfile();
+
+                // 새로운 사용자인 경우
+                // userUid_ 뒤에 정확히 20자리 랜덤 문자열 생성
+                const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                let randomSuffix = '';
+                for (let i = 0; i < 30; i++) {
+                    randomSuffix += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                const userId = `userUid_${randomSuffix}`;
+                
                 const user: User = {
-                    id: profile.id.toString(),
+                    id: userId,
                     nickname: profile.nickname ?? '사용자',
                     email: profile.email ?? '',
                     profileImage: profile.profileImageUrl ?? '',
