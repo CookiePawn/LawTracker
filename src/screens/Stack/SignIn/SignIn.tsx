@@ -102,6 +102,19 @@ const SignIn = (): ReactElement => {
         }
         try {
             const result = await signIn(user);
+
+            if (result === -2) {
+                setAlert({
+                    visible: true,
+                    title: "알림",
+                    message: "이미 다른 SNS로 가입된 계정입니다.",
+                    buttons: [
+                        { text: '확인', style: 'default' },
+                    ],
+                });
+                return;
+            }
+
             setAlert({
                 visible: true,
                 title: result === 0 ? "회원가입" : "로그인",

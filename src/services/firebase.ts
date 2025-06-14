@@ -240,32 +240,30 @@ export const searchLaws = async (params: {
 export const signIn = async (user: User) => {
     try {
         if (!user.phone) {
-            console.error('전화번호가 없습니다.');
             return -1; // 전화번호 없음
         }
 
         const dataRef = collection(db, COLLECTIONS.USERS);
         
-        // 민감 정보 해시
+        // 민감 정보 해시 (검색용)
         const hashedPhone = hashData(user.phone);
-        const hashedEmail = user.email ? hashData(user.email) : '';
-        const hashedAge = user.age ? hashData(user.age) : '';
-        const hashedGender = user.gender ? hashData(user.gender) : '';
-        
-        console.log('해시된 전화번호:', hashedPhone);
         
         // 전화번호로 기존 사용자 검색
-        const queryRef = query(dataRef, where('phone', '==', hashedPhone));
+        const queryRef = query(dataRef, where('phone_hash', '==', hashedPhone));
         const querySnapshot = await getDocs(queryRef);
-        
-        console.log('검색된 사용자 수:', querySnapshot.size);
         
         let userId: string;
         
         if (!querySnapshot.empty) {
             // 기존 사용자가 있는 경우
+            const existingUser = querySnapshot.docs[0].data();
+            
+            // SNS 타입이 다른 경우
+            if (existingUser.SNS !== user.SNS) {
+                return -2; // 다른 SNS로 가입된 계정
+            }
+            
             userId = querySnapshot.docs[0].id;
-            console.log('기존 사용자 ID:', userId);
         } else {
             // 새로운 사용자인 경우
             // userUid_ 뒤에 정확히 20자리 랜덤 문자열 생성
@@ -275,15 +273,16 @@ export const signIn = async (user: User) => {
                 randomSuffix += characters.charAt(Math.floor(Math.random() * characters.length));
             }
             userId = `userUid_${randomSuffix}`;
-            console.log('새로운 사용자 ID:', userId);
         }
         
         const docRef = doc(dataRef, userId);
         
-        // 민감한 정보 저장 (해시값과 원본 모두 저장)
+        // 민감한 정보 저장 (해시값과 암호화된 원본)
         const encryptedUser = {
             ...user,
             id: userId,
+            // 해시값 (검색용)
+            phone_hash: hashedPhone,
             // 원본 데이터 (AES 암호화)
             phone: user.phone ? CryptoJS.AES.encrypt(user.phone, DATA_SECRET_KEY).toString() : '',
             email: user.email ? CryptoJS.AES.encrypt(user.email, DATA_SECRET_KEY).toString() : '',
@@ -292,7 +291,6 @@ export const signIn = async (user: User) => {
         };
         
         await setDoc(docRef, encryptedUser, { merge: true });
-        console.log('사용자 정보 저장 완료');
 
         await AsyncStorage.setItem(STORAGE_KEY.USER_ID, userId);
         

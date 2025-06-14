@@ -9,4 +9,5 @@ export interface User {
     createdAt: string;
     SNS: string;
     FAVORITE_LAWS?: string[];
+    phone_hash?: string;
 }
