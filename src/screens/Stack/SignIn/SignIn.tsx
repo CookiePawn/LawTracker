@@ -110,7 +110,6 @@ const SignIn = (): ReactElement => {
                     { text: '확인', style: 'default' },
                 ],
             });
-            await AsyncStorage.setItem(STORAGE_KEY.USER_ID, user.id);
             setUser(user);
             navigation.navigate('Tab', {
                 screen: 'Home',

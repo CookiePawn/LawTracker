@@ -1,11 +1,12 @@
 // Import the functions you need from the SDKs you need
-import { COLLECTIONS } from "@/constants";
+import { COLLECTIONS, STORAGE_KEY } from "@/constants";
 import { Law, User } from "@/models";
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore, limit, orderBy, query, where, doc, getDoc, updateDoc, increment, setDoc, arrayUnion, arrayRemove, deleteDoc, startAfter } from "firebase/firestore";
 import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_APP_ID, FIREBASE_MEASUREMENT_ID } from '@env';
 import CryptoJS from 'react-native-crypto-js';
 import { DATA_SECRET_KEY } from '@env';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,6 +27,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+
+// 데이터 해시 함수
+const hashData = (data: string): string => {
+    if (!data) return '';
+    const wordArray = CryptoJS.enc.Utf8.parse(data + DATA_SECRET_KEY);
+    return CryptoJS.MD5(wordArray).toString();
+};
 
 // 달력 법안 유무 표시 로드
 export const loadCalendarLaws = async () => {
@@ -230,26 +238,69 @@ export const searchLaws = async (params: {
 
 // SNS 로그인 회원 정보 저장
 export const signIn = async (user: User) => {
-    const dataRef = collection(db, COLLECTIONS.USERS);
-    const docRef = doc(dataRef, user.id);
-    const docSnap = await getDoc(docRef);
-    
-    // 민감한 정보 암호화
-    const encryptedUser = {
-        ...user,
-        email: user.email ? CryptoJS.AES.encrypt(user.email, DATA_SECRET_KEY).toString() : '',
-        phone: user.phone ? CryptoJS.AES.encrypt(user.phone, DATA_SECRET_KEY).toString() : '',
-        age: user.age ? CryptoJS.AES.encrypt(user.age, DATA_SECRET_KEY).toString() : '',
-        gender: user.gender ? CryptoJS.AES.encrypt(user.gender, DATA_SECRET_KEY).toString() : '',
-    };
-    
-    if (!docSnap.exists()) {
+    try {
+        if (!user.phone) {
+            console.error('전화번호가 없습니다.');
+            return -1; // 전화번호 없음
+        }
+
+        const dataRef = collection(db, COLLECTIONS.USERS);
+        
+        // 민감 정보 해시
+        const hashedPhone = hashData(user.phone);
+        const hashedEmail = user.email ? hashData(user.email) : '';
+        const hashedAge = user.age ? hashData(user.age) : '';
+        const hashedGender = user.gender ? hashData(user.gender) : '';
+        
+        console.log('해시된 전화번호:', hashedPhone);
+        
+        // 전화번호로 기존 사용자 검색
+        const queryRef = query(dataRef, where('phone', '==', hashedPhone));
+        const querySnapshot = await getDocs(queryRef);
+        
+        console.log('검색된 사용자 수:', querySnapshot.size);
+        
+        let userId: string;
+        
+        if (!querySnapshot.empty) {
+            // 기존 사용자가 있는 경우
+            userId = querySnapshot.docs[0].id;
+            console.log('기존 사용자 ID:', userId);
+        } else {
+            // 새로운 사용자인 경우
+            // userUid_ 뒤에 정확히 20자리 랜덤 문자열 생성
+            const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let randomSuffix = '';
+            for (let i = 0; i < 30; i++) {
+                randomSuffix += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            userId = `userUid_${randomSuffix}`;
+            console.log('새로운 사용자 ID:', userId);
+        }
+        
+        const docRef = doc(dataRef, userId);
+        
+        // 민감한 정보 저장 (해시값과 원본 모두 저장)
+        const encryptedUser = {
+            ...user,
+            id: userId,
+            // 원본 데이터 (AES 암호화)
+            phone: user.phone ? CryptoJS.AES.encrypt(user.phone, DATA_SECRET_KEY).toString() : '',
+            email: user.email ? CryptoJS.AES.encrypt(user.email, DATA_SECRET_KEY).toString() : '',
+            age: user.age ? CryptoJS.AES.encrypt(user.age, DATA_SECRET_KEY).toString() : '',
+            gender: user.gender ? CryptoJS.AES.encrypt(user.gender, DATA_SECRET_KEY).toString() : '',
+        };
+        
         await setDoc(docRef, encryptedUser, { merge: true });
-        return 0; // 회원가입 완료
+        console.log('사용자 정보 저장 완료');
+
+        await AsyncStorage.setItem(STORAGE_KEY.USER_ID, userId);
+        
+        return querySnapshot.empty ? 0 : 1; // 0: 회원가입 완료, 1: 로그인 완료
+    } catch (error) {
+        console.error('로그인/회원가입 중 에러 발생:', error);
+        return -1; // 에러 발생
     }
-    
-    await setDoc(docRef, encryptedUser, { merge: true });
-    return 1; // 로그인 완료
 };
 
 // 회원 탈퇴
