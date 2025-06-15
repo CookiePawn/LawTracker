@@ -113,7 +113,7 @@ const SignIn = (): ReactElement => {
         try {
             const result = await signIn(user);
 
-            if (result === -2) {
+            if (result.result === -2) {
                 setAlert({
                     visible: true,
                     title: "알림",
@@ -127,18 +127,19 @@ const SignIn = (): ReactElement => {
 
             setAlert({
                 visible: true,
-                title: result === 0 ? "회원가입" : "로그인",
-                message: result === 0 ? "회원가입이 완료되었습니다." : "로그인이 완료되었습니다.",
+                title: result.result === 0 ? "회원가입" : "로그인",
+                message: result.result === 0 ? "회원가입이 완료되었습니다." : "로그인이 완료되었습니다.",
                 buttons: [
                     { text: '확인', style: 'default' },
                 ],
             });
-            await AsyncStorage.setItem(STORAGE_KEY.USER_ID, user.id);
-            setUser(user);
+            await AsyncStorage.setItem(STORAGE_KEY.USER_ID, result.userId ?? '');
+            setUser({ ...user, id: result.userId ?? '' });
             navigation.navigate('Tab', {
                 screen: 'Home',
             });
-        } catch {
+        } catch (error) {
+            console.error(error);
             Alert.alert("로그인 실패", "다시 시도해주세요.");
         }
     };
@@ -157,7 +158,7 @@ const SignIn = (): ReactElement => {
                     randomSuffix += characters.charAt(Math.floor(Math.random() * characters.length));
                 }
                 const userId = `userUid_${randomSuffix}`;
-                
+
                 const user: User = {
                     id: userId,
                     nickname: profile.nickname ?? '사용자',
@@ -171,16 +172,29 @@ const SignIn = (): ReactElement => {
                 }
                 try {
                     const result = await signIn(user);
+
+                    if (result.result === -2) {
+                        setAlert({
+                            visible: true,
+                            title: "알림",
+                            message: "이미 다른 SNS로 가입된 계정입니다.",
+                            buttons: [
+                                { text: '확인', style: 'default' },
+                            ],
+                        });
+                        return;
+                    }
+
                     setAlert({
                         visible: true,
-                        title: result === 0 ? "회원가입" : "로그인",
-                        message: result === 0 ? "회원가입이 완료되었습니다." : "로그인이 완료되었습니다.",
+                        title: result.result === 0 ? "회원가입" : "로그인",
+                        message: result.result === 0 ? "회원가입이 완료되었습니다." : "로그인이 완료되었습니다.",
                         buttons: [
                             { text: '확인', style: 'default' },
                         ],
                     });
-                    await AsyncStorage.setItem(STORAGE_KEY.USER_ID, user.id);
-                    setUser(user);
+                    await AsyncStorage.setItem(STORAGE_KEY.USER_ID, result.userId ?? '');
+                    setUser({ ...user, id: result.userId ?? '' });
                     navigation.navigate('Tab', {
                         screen: 'Home',
                     });

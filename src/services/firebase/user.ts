@@ -16,7 +16,9 @@ const hashData = (data: string): string => {
 export const signIn = async (user: User) => {
     try {
         if (!user.phone) {
-            return -1; // 전화번호 없음
+            return {
+                result: -1, // 전화번호 없음
+            };
         }
 
         const dataRef = collection(db, COLLECTIONS.USERS);
@@ -24,21 +26,24 @@ export const signIn = async (user: User) => {
         // 민감 정보 해시 (검색용)
         const hashedPhone = hashData(user.phone);
         
-        // 전화번호로 기존 사용자 검색
+        // 전화번호로 모든 사용자 검색
         const queryRef = query(dataRef, where('phone_hash', '==', hashedPhone));
         const querySnapshot = await getDocs(queryRef);
         
         let userId: string;
         
+        // 같은 전화번호를 가진 사용자가 있는지 확인
         if (!querySnapshot.empty) {
-            // 기존 사용자가 있는 경우
-            const existingUser = querySnapshot.docs[0].data();
-            
-            // SNS 타입이 다른 경우
-            if (existingUser.SNS !== user.SNS) {
-                return -2; // 다른 SNS로 가입된 계정
+            // 모든 문서를 확인하여 SNS 타입 체크
+            for (const doc of querySnapshot.docs) {
+                const existingUser = doc.data();
+                if (existingUser.SNS !== user.SNS) {
+                    return {
+                        result: -2, // 다른 SNS로 가입된 계정
+                    };
+                }
             }
-            
+            // 기존 사용자의 ID 사용
             userId = querySnapshot.docs[0].id;
         } else {
             userId = user.id;
@@ -59,12 +64,17 @@ export const signIn = async (user: User) => {
             gender: user.gender ? CryptoJS.AES.encrypt(user.gender, DATA_SECRET_KEY).toString() : '',
         };
         
-        await setDoc(docRef, encryptedUser, { merge: true });
+        await setDoc(docRef, encryptedUser);
         
-        return querySnapshot.empty ? 0 : 1; // 0: 회원가입 완료, 1: 로그인 완료
+        return {
+            result: querySnapshot.empty ? 0 : 1, // 0: 회원가입 완료, 1: 로그인 완료
+            userId: userId,
+        };
     } catch (error) {
         console.error('로그인/회원가입 중 에러 발생:', error);
-        return -1; // 에러 발생
+        return {
+            result: -1, // 에러 발생
+        };
     }
 };
 
