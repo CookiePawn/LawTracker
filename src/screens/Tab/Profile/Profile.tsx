@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -7,30 +7,15 @@ import { RootStackParamList } from '@/types/navigate';
 import { colors } from '@/constants';
 import { useUser } from '@/lib';
 import { SettingsIcon } from '@/assets';
-import { TabView } from 'react-native-tab-view';
 import { Typography } from '@/components';
+import { TabViewComponent } from './components';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Profile = () => {
   const navigation = useNavigation<NavigationProp>();
   const [user] = useUser();
-  const layout = useWindowDimensions();
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
-    { key: 'third', title: 'Third' },
-  ]);
-
-  const renderScene = ({ route }: { route: { key: string; title: string } }) => {
-    switch (route.key) {
-      case 'first':
-        return <View style={{ flex: 1, backgroundColor: 'red' }} />;
-      case 'second':
-        return <View style={{ flex: 1, backgroundColor: 'blue' }} />;
-    }
-  };
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -50,12 +35,7 @@ const Profile = () => {
           </View>
         </View>
       </View>
-      <TabView
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={{ width: layout.width }}
-      />
+      <TabViewComponent />
     </SafeAreaView>
   );
 };
