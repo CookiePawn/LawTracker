@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { CalendarIcon, HomeIcon, SearchIcon, UserIcon } from '@/assets';
+import { CalendarIcon, HomeIcon, SearchIcon, UserIcon, ChatIcon } from '@/assets';
 import { colors } from '@/constants';
 import { Typography } from '@/components';
 
@@ -54,6 +54,13 @@ const TabBar = ({ state, navigation }: any) => {
                                 <UserIcon width={20} height={20} fill='white' color={isFocused ? colors.tab_active : colors.tab_no_active} />
                                 <Typography style={[styles.tabText, isFocused && styles.tabTextFocused]}>
                                     프로필
+                                </Typography>
+                            </View>
+                        ) : route.name === 'Community' ? (
+                            <View style={styles.iconContainer}>
+                                <ChatIcon width={20} height={20} fill={isFocused ? colors.tab_active : colors.tab_no_active} color={isFocused ? colors.tab_active : colors.tab_no_active} />
+                                <Typography style={[styles.tabText, isFocused && styles.tabTextFocused]}>
+                                    커뮤니티
                                 </Typography>
                             </View>
                         ) : (

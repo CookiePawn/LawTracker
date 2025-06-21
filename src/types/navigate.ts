@@ -20,4 +20,5 @@ export type RootTabParamList = {
     LawCalendar: undefined;
     Profile: undefined;
     Search: { type?: 'random' | 'latest' };
+    Community: undefined;
 };
