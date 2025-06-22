@@ -17,9 +17,11 @@ const Community = () => {
             content: '최근 발의된 디지털 플랫폼 규제법에 대해 IT 업계 종사자로서 몇 가지 우려 사항이 있습니다. 특히 스타트업',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-            likeCount: 10,
             viewCount: 10,
             tags: ['IT/과학', '규제', '스타트업'],
+            likes: [
+              'userUid_bisju7gopcktd8b9ldbg5ji3mez03n',
+            ],
             comments: [
                 {
                     uid: '1',
@@ -49,6 +51,7 @@ const Community = () => {
             </View>
             <FlatList
                 data={data}
+                keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => <PostCard item={item} />}
                 ListEmptyComponent={<Typography style={styles.emptyText}>게시글이 없습니다.</Typography>}
                 contentContainerStyle={styles.postContainer}

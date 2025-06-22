@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 // 의안정보 목록조회 API 예시
 const BASE_URL = 'https://open.assembly.go.kr/portal/openapi';
@@ -24,11 +24,10 @@ export const fetchBillDetail = async (billId: string) => {
         BILL_ID: billId,
         pIndex: 1,
         pSize: 1,
+        AGE: 22
       },
     });
-    
-    console.log('의안 상세 정보:', JSON.stringify(response.data, null, 2));
-    return response.data;
+    return response.data.nzmimeepazxkubdpn[1].row[0];
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error('API 응답 오류:', error.response?.data || error.message);
@@ -69,11 +68,13 @@ export const fetchMeetingDetail = async (billId: string) => {
         Key: Config.LAW_API_KEY,
         Type: 'json',
         BILL_ID: billId,
+        pIndex: 1,
+        pSize: 1,
       },
     });
 
-    console.log('회의록 상세 정보:', JSON.stringify(response.data.BILLINFODETAIL[1].row, null, 2));
-    return response.data;
+    console.log('회의록 상세 정보:', JSON.stringify(response.data, null, 2));
+    return response.data.BILLINFODETAIL[1].row[0];
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error('API 응답 오류:', error.response?.data || error.message);

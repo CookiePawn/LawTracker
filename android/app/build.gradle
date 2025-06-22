@@ -86,7 +86,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.templatecli"
+    namespace "com.lawtracker"
     defaultConfig {
         applicationId "com.lawtracker"
         minSdkVersion rootProject.ext.minSdkVersion

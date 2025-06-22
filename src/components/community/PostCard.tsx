@@ -1,8 +1,9 @@
 import { colors } from '@/constants';
-import { View, StyleSheet, Image } from 'react-native';
-import { Typography } from '@/components';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { BillStatusTag, Typography } from '@/components';
 import { useLayoutEffect, useState } from 'react';
-import { fetchBillDetail } from '@/services';
+import { loadLawById } from '@/services';
+import { ChatIcon, HeartIcon, ShareIcon } from '@/assets';
 
 interface PostCardProps {
     item: any;
@@ -13,8 +14,8 @@ const PostCard = ({ item }: PostCardProps) => {
 
     useLayoutEffect(() => {
         const fetchBill = async () => {
-            const bill = await fetchBillDetail(item.billID);
-            console.log(bill);
+            const bill = await loadLawById(item.billID);
+            setBill(bill);
         }
         fetchBill();
     }, []);
@@ -43,7 +44,24 @@ const PostCard = ({ item }: PostCardProps) => {
                 </View>
             </View>
             <View style={styles.billContainer}>
-
+                <View>
+                    <Typography style={styles.billText}>관련 법안</Typography>
+                    <Typography style={styles.billTitle}>{bill?.TITLE}</Typography>
+                </View>
+                <BillStatusTag status={bill?.ACT_STATUS} />
+            </View>
+            <View style={styles.footer}>
+                <View style={styles.footerItem}>
+                    <HeartIcon width={16} height={16} color={colors.red} fill={colors.red} />
+                    <Typography style={styles.footerText}>{item.likes.length}</Typography>
+                </View>
+                <View style={styles.footerItem}>
+                    <ChatIcon width={16} height={16} color={colors.primary} fill={colors.primary} />
+                    <Typography style={styles.footerText}>{item.comments.length}</Typography>
+                </View>
+                <TouchableOpacity style={styles.footerItemRight}>
+                    <ShareIcon width={14} height={14} color={colors.primary} fill={colors.primary} />
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -110,9 +128,40 @@ const styles = StyleSheet.create({
         color: colors.gray500,
     },
     billContainer: {
+        backgroundColor: colors.skyblue,
+        padding: 10,
+        borderRadius: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    billText: {
+        fontSize: 11,
+        color: colors.primary,
+        lineHeight: 16,
+    },
+    billTitle: {
+        fontSize: 12,
+    },
+    billContent: {
+        fontSize: 12,
+    },
+    footer: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5,
+        gap: 20,
+    },
+    footerItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 3,
+    },
+    footerText: {
+        fontSize: 12,
+        color: colors.gray500,
+    },
+    footerItemRight: {
+        marginLeft: 'auto',
     },
 })
 

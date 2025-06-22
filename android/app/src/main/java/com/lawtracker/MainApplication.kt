@@ -1,4 +1,4 @@
-package com.templatecli
+package com.lawtracker
 
 import android.app.Application
 import com.facebook.react.PackageList
