@@ -2,7 +2,7 @@ import { colors, STORAGE_KEY } from '@/constants';
 import NaverLogin from '@react-native-seoul/naver-login';
 import React, { ReactElement, useEffect, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, ToastAndroid, BackHandler } from 'react-native';
-import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET, NAVER_APP_NAME } from '@env';
+import Config from 'react-native-config';
 import { SplashLogoIcon } from '@/assets';
 import { signIn } from '@/services';
 import { User } from '@/models';
@@ -26,15 +26,15 @@ const SignIn = (): ReactElement => {
         const initialize = async () => {
             try {
                 // 네이버 로그인 초기화
-                if (!NAVER_CLIENT_ID || !NAVER_CLIENT_SECRET || !NAVER_APP_NAME) {
+                if (!Config.NAVER_CLIENT_ID || !Config.NAVER_CLIENT_SECRET || !Config.NAVER_APP_NAME) {
                     console.error('네이버 로그인 환경 변수가 설정되지 않았습니다.');
                     return;
                 }
 
                 NaverLogin.initialize({
-                    consumerKey: NAVER_CLIENT_ID,
-                    consumerSecret: NAVER_CLIENT_SECRET,
-                    appName: NAVER_APP_NAME
+                    consumerKey: Config.NAVER_CLIENT_ID,
+                    consumerSecret: Config.NAVER_CLIENT_SECRET,
+                    appName: Config.NAVER_APP_NAME
                 });
             } catch (error) {
                 console.error('초기화 중 오류 발생:', error);
@@ -69,7 +69,7 @@ const SignIn = (): ReactElement => {
     );
 
     const naverLogin = async () => {
-        if (!NAVER_CLIENT_ID || !NAVER_CLIENT_SECRET || !NAVER_APP_NAME) {
+        if (!Config.NAVER_CLIENT_ID || !Config.NAVER_CLIENT_SECRET || !Config.NAVER_APP_NAME) {
             console.error('네이버 로그인 환경 변수가 설정되지 않았습니다.');
             return;
         }

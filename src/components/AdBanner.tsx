@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
-import { GOOGLE_ADMOB_BANNER_KEY } from '@env';
+import Config from 'react-native-config';
 
 const adUnitId = () => {
   return __DEV__ 
     ? TestIds.BANNER 
-    : GOOGLE_ADMOB_BANNER_KEY;
+    : Config.GOOGLE_ADMOB_BANNER_KEY || '';
 };
 
 const AdBanner = () => {

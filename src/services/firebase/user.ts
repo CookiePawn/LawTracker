@@ -1,4 +1,4 @@
-import { DATA_SECRET_KEY } from "@env";
+import Config from 'react-native-config';
 import { db } from ".";
 import CryptoJS from 'react-native-crypto-js';
 import { collection, deleteDoc, doc, getDoc, query, where, getDocs, setDoc } from "firebase/firestore";
@@ -8,7 +8,7 @@ import { User } from "@/models";
 // 데이터 해시 함수
 const hashData = (data: string): string => {
     if (!data) return '';
-    const wordArray = CryptoJS.enc.Utf8.parse(data + DATA_SECRET_KEY);
+    const wordArray = CryptoJS.enc.Utf8.parse(data + Config.DATA_SECRET_KEY);
     return CryptoJS.MD5(wordArray).toString();
 };
 
@@ -58,10 +58,10 @@ export const signIn = async (user: User) => {
             // 해시값 (검색용)
             phone_hash: hashedPhone,
             // 원본 데이터 (AES 암호화)
-            phone: user.phone ? CryptoJS.AES.encrypt(user.phone, DATA_SECRET_KEY).toString() : '',
-            email: user.email ? CryptoJS.AES.encrypt(user.email, DATA_SECRET_KEY).toString() : '',
-            age: user.age ? CryptoJS.AES.encrypt(user.age, DATA_SECRET_KEY).toString() : '',
-            gender: user.gender ? CryptoJS.AES.encrypt(user.gender, DATA_SECRET_KEY).toString() : '',
+            phone: user.phone ? CryptoJS.AES.encrypt(user.phone, Config.DATA_SECRET_KEY || '').toString() : '',
+            email: user.email ? CryptoJS.AES.encrypt(user.email, Config.DATA_SECRET_KEY || '').toString() : '',
+            age: user.age ? CryptoJS.AES.encrypt(user.age, Config.DATA_SECRET_KEY || '').toString() : '',
+            gender: user.gender ? CryptoJS.AES.encrypt(user.gender, Config.DATA_SECRET_KEY || '').toString() : '',
         };
         
         await setDoc(docRef, encryptedUser);
@@ -97,9 +97,9 @@ export const loadUser = async (userId: string) => {
     // 암호화된 정보 복호화
     return {
         ...userData,
-        email: userData.email ? CryptoJS.AES.decrypt(userData.email, DATA_SECRET_KEY).toString(CryptoJS.enc.Utf8) : '',
-        phone: userData.phone ? CryptoJS.AES.decrypt(userData.phone, DATA_SECRET_KEY).toString(CryptoJS.enc.Utf8) : '',
-        age: userData.age ? CryptoJS.AES.decrypt(userData.age, DATA_SECRET_KEY).toString(CryptoJS.enc.Utf8) : '',
-        gender: userData.gender ? CryptoJS.AES.decrypt(userData.gender, DATA_SECRET_KEY).toString(CryptoJS.enc.Utf8) : '',
+        email: userData.email ? CryptoJS.AES.decrypt(userData.email, Config.DATA_SECRET_KEY || '').toString(CryptoJS.enc.Utf8) : '',
+        phone: userData.phone ? CryptoJS.AES.decrypt(userData.phone, Config.DATA_SECRET_KEY || '').toString(CryptoJS.enc.Utf8) : '',
+        age: userData.age ? CryptoJS.AES.decrypt(userData.age, Config.DATA_SECRET_KEY || '').toString(CryptoJS.enc.Utf8) : '',
+        gender: userData.gender ? CryptoJS.AES.decrypt(userData.gender, Config.DATA_SECRET_KEY || '').toString(CryptoJS.enc.Utf8) : '',
     };
 };

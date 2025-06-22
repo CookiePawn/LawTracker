@@ -1,4 +1,4 @@
-import { LAW_API_KEY } from '@env';
+import Config from 'react-native-config';
 import axios, { AxiosError } from 'axios';
 
 // 의안정보 목록조회 API 예시
@@ -19,7 +19,7 @@ export const fetchBillDetail = async (billId: string) => {
   try {
     const response = await api.get('/nzmimeepazxkubdpn', {
       params: {
-        Key: LAW_API_KEY,
+        Key: Config.LAW_API_KEY,
         Type: 'json',
         BILL_ID: billId,
         pIndex: 1,
@@ -45,7 +45,7 @@ export const fetchBillsByMeeting = async () => {
   try {
     const response = await api.get('/VCONFBILLLIST', {
       params: {
-        Key: LAW_API_KEY,
+        Key: Config.LAW_API_KEY,
         Type: 'json',
       },
     });
@@ -66,7 +66,7 @@ export const fetchMeetingDetail = async (billId: string) => {
   try {
     const response = await api.get('/BILLINFODETAIL', {
       params: {
-        Key: LAW_API_KEY,
+        Key: Config.LAW_API_KEY,
         Type: 'json',
         BILL_ID: billId,
       },
@@ -90,7 +90,7 @@ export const fetchBillInfoPPSR = async (billId: string) => {
   try {
     const response = await api.get('/BILLINFOPPSR', {
       params: {
-        Key: LAW_API_KEY,
+        Key: Config.LAW_API_KEY,
         Type: 'json',
         BILL_ID: billId,
         pIndex: 1,
@@ -123,7 +123,7 @@ export const fetchBillInfoPPSRAll = async (billId: string) => {
   try {
     const response = await api.get('/nzmimeepazxkubdpn', {
       params: {
-        Key: LAW_API_KEY,
+        Key: Config.LAW_API_KEY,
         Type: 'json',
         BILL_ID: billId,
         pIndex: 1,
