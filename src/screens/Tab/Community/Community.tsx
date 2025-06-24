@@ -37,6 +37,7 @@ const Community = () => {
             </View>
             <FlatList
                 data={data}
+                style={styles.list}
                 keyExtractor={item => item.uid}
                 renderItem={({ item }) => <PostCard item={item} />}
                 ListEmptyComponent={<Typography style={styles.emptyText}>게시글이 없습니다.</Typography>}
@@ -105,6 +106,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: colors.gray500,
         marginTop: 150,
+    },
+    list: {
+        marginBottom: 20,
     },
 });
 

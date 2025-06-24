@@ -9,7 +9,9 @@ export const colors = {
   skyblue: '#EFF6FF',
   skyred: '#FFC8C8',
 
+  gray50: '#F9FAFB',
   gray100: '#F5F5F5',
+  gray150: '#E5E7EB',
   gray200: '#E0E0E0',
   gray300: '#C0C0C0',
   gray400: '#A0A0A0',

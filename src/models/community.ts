@@ -12,6 +12,7 @@ export interface CommunityPost {
     viewCount: string[];
     likes: string[];
     comments: Comment[];
+    vote?: Vote;
 }
 
 export interface Comment {
@@ -20,4 +21,14 @@ export interface Comment {
     profileImage?: string;
     content: string;
     createdAt: string;
+}
+
+export interface Vote {
+    title: string;
+    item1?: string;
+    item2?: string;
+    item3?: string;
+    item4?: string;
+    item5?: string;
+    count?: string[];
 }

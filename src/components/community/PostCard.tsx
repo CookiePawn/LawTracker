@@ -51,6 +51,33 @@ const PostCard = ({ item }: PostCardProps) => {
                 </View>
                 <BillStatusTag status={bill?.ACT_STATUS || ''} />
             </View>
+            {item.vote && (
+                <View style={styles.voteContainer}>
+                    <Typography style={styles.voteTitle}>{item.vote.title}</Typography>
+                    {[item.vote.item1, item.vote.item2, item.vote.item3, item.vote.item4, item.vote.item5]
+                        .filter(voteItem => voteItem && voteItem.trim() !== '')
+                        .map((voteItem, index) => {
+                            const itemVoteCount = item.vote?.count ?
+                                item.vote.count.filter(countItem => {
+                                    const voteNumber = parseInt(countItem.split('-')[1]);
+                                    return voteNumber === index + 1;
+                                }).length : 0;
+
+                            const totalVotes = item.vote?.count ? item.vote.count.length : 0;
+
+                            const percentage = totalVotes > 0 ? ((itemVoteCount / totalVotes) * 100).toFixed(1) : '0.0';
+
+                            return (
+                                <View key={`vote-item-${index}`} style={styles.voteItemContainer}>
+                                    <View style={[styles.voteItemPercentBar, { width: `${parseFloat(percentage)}%` }]} />
+                                    <Typography style={styles.voteItemText}>{voteItem}</Typography>
+                                    <Typography style={styles.voteItemPercent}>{percentage}%</Typography>
+                                </View>
+                            );
+                        })}
+                    <Typography style={styles.voteCount}>총 {item.vote?.count && item.vote.count.length}명 참여</Typography>
+                </View>
+            )}
             <View style={styles.footer}>
                 <View style={styles.footerItem}>
                     <HeartIcon width={16} height={16} color={colors.red} fill={colors.red} />
@@ -146,6 +173,53 @@ const styles = StyleSheet.create({
     },
     billContent: {
         fontSize: 12,
+    },
+    voteContainer: {
+        backgroundColor: colors.gray50,
+        padding: 10,
+        borderRadius: 16,
+        gap: 10,
+    },
+    voteTitle: {
+        fontSize: 12,
+    },
+    voteItemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 3,
+        backgroundColor: colors.gray150,
+        borderRadius: 10,
+        justifyContent: 'space-between',
+        overflow: 'hidden',
+    },
+    voteItemTextContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 3,
+    },
+    voteItemText: {
+        fontSize: 12,
+        color: colors.black,
+        marginVertical: 5,
+        marginLeft: 10,
+    },
+    voteItemPercentBar: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        backgroundColor: colors.skyblue,
+        borderRadius: 0,
+    },
+    voteItemPercent: {
+        fontSize: 12,
+        color: colors.primary,
+        fontWeight: 'bold',
+        marginRight: 10,
+    },
+    voteCount: {
+        fontSize: 10,
+        color: colors.gray500,
     },
     footer: {
         flexDirection: 'row',
