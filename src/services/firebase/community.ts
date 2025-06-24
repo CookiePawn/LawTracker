@@ -11,6 +11,5 @@ export const getCommunityPosts = async (userUid?: string) => {
     if (userUid) {
         return posts.filter((post) => post.userUid === userUid);
     }
-    console.log(JSON.stringify(posts, null, 2));
     return posts;
 }

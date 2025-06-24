@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, useWindowDimensions, StyleSheet } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { colors } from '@/constants/colors';
-import { HeartLaws } from '.';
+import { HeartLaws, MyPost } from '.';
 
 const TabViewComponent = () => {
     const layout = useWindowDimensions();
@@ -20,7 +20,7 @@ const TabViewComponent = () => {
             case '1':
                 return <View style={{ flex: 1, backgroundColor: 'blue' }} />;
             case '2':
-                return <View style={{ flex: 1, backgroundColor: 'green' }} />;
+                return <MyPost />;
         }
     };
 
