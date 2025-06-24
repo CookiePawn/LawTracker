@@ -1,5 +1,5 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
-import { Law } from "@/models";
+import { CommunityPost, Law } from "@/models";
 
 export type RootStackParamList = {
     Tab: NavigatorScreenParams<RootTabParamList>;
@@ -11,6 +11,7 @@ export type RootStackParamList = {
     LawDetail: { law: Law };
     SignIn: undefined;
     Setting: undefined;
+    PostDetail: { post: CommunityPost };
 };
 
 

@@ -21,6 +21,7 @@ export interface Comment {
     profileImage?: string;
     content: string;
     createdAt: string;
+    likes?: string[];
 }
 
 export interface Vote {

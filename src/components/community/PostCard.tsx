@@ -5,14 +5,19 @@ import { useLayoutEffect, useState } from 'react';
 import { loadLawById } from '@/services';
 import { ChatIcon, HeartIcon, ShareIcon } from '@/assets';
 import { CommunityPost, Law } from '@/models';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '@/types';
+import { useNavigation } from '@react-navigation/native';
 
 interface PostCardProps {
     item: CommunityPost;
+    border?: boolean;
 }
 
-const PostCard = ({ item }: PostCardProps) => {
+const PostCard = ({ item, border = true }: PostCardProps) => {
     const [bill, setBill] = useState<Law | null>(null);
-
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    
     useLayoutEffect(() => {
         const fetchBill = async () => {
             const bill = await loadLawById(item.billID);
@@ -23,7 +28,11 @@ const PostCard = ({ item }: PostCardProps) => {
 
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity 
+            style={[styles.container, { borderWidth: border ? 1 : 0 }]} 
+            disabled={!border}
+            onPress={() => navigation.navigate('PostDetail', { post: item })}
+        >
             <View style={styles.header}>
                 <View style={styles.profileContainer}>
                     <Image source={{ uri: item.profileImage }} style={styles.profileImage} />

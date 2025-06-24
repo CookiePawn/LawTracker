@@ -1,6 +1,6 @@
 import { PostCard, Typography } from "@/components";
 import { CommunityPost } from "@/models";
-import { getCommunityPosts } from "@/services/firebase/community";
+import { getCommunityPosts } from "@/services";
 import { FlatList, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -14,7 +14,7 @@ const MyPost = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             const posts = await getCommunityPosts(user?.id);
-            setPosts(posts);
+            setPosts(posts as CommunityPost[]);
         };
         fetchPosts();
     }, []);

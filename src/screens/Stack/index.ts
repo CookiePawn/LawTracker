@@ -6,3 +6,4 @@ export * from './ApiPolicy';
 export * from './LawDetail';
 export * from './SignIn';
 export * from './Setting';
+export * from './PostDetail';
