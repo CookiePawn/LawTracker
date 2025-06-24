@@ -4,13 +4,14 @@ import { BillStatusTag, Typography } from '@/components';
 import { useLayoutEffect, useState } from 'react';
 import { loadLawById } from '@/services';
 import { ChatIcon, HeartIcon, ShareIcon } from '@/assets';
+import { CommunityPost, Law } from '@/models';
 
 interface PostCardProps {
-    item: any;
+    item: CommunityPost;
 }
 
 const PostCard = ({ item }: PostCardProps) => {
-    const [bill, setBill] = useState<any>(null);
+    const [bill, setBill] = useState<Law | null>(null);
 
     useLayoutEffect(() => {
         const fetchBill = async () => {
@@ -22,13 +23,13 @@ const PostCard = ({ item }: PostCardProps) => {
 
 
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.profileContainer}>
                     <Image source={{ uri: item.profileImage }} style={styles.profileImage} />
                     <View style={styles.profileInfo}>
                         <Typography style={styles.nickname}>{item.nickname}</Typography>
-                        <Typography style={styles.createdAt}>{item.createdAt.split('T')[0]} {item.createdAt.split('T')[1].split('.')[0].slice(0, 5)}</Typography>
+                        <Typography style={styles.createdAt}>{item.createdAt.split(' ')[0]} {item.createdAt.split(' ')[1].split('.')[0].slice(0, 5)}</Typography>
                     </View>
                 </View>
             </View>
@@ -36,9 +37,9 @@ const PostCard = ({ item }: PostCardProps) => {
                 <Typography style={styles.title}>{item.title}</Typography>
                 <Typography style={styles.content} numberOfLines={2}>{item.content}</Typography>
                 <View style={styles.tagsContainer}>
-                    {item.tags.map((tag: string) => (
-                        <View style={styles.tag}>
-                            <Typography style={styles.tagText}>{tag}</Typography>
+                    {item.tags && item.tags.map((tag: string, index: number) => (
+                        <View key={`${tag}-${index}`} style={styles.tag}>
+                            <Typography style={styles.tagText}>#{tag}</Typography>
                         </View>
                     ))}
                 </View>
@@ -48,22 +49,22 @@ const PostCard = ({ item }: PostCardProps) => {
                     <Typography style={styles.billText}>관련 법안</Typography>
                     <Typography style={styles.billTitle}>{bill?.TITLE}</Typography>
                 </View>
-                <BillStatusTag status={bill?.ACT_STATUS} />
+                <BillStatusTag status={bill?.ACT_STATUS || ''} />
             </View>
             <View style={styles.footer}>
                 <View style={styles.footerItem}>
                     <HeartIcon width={16} height={16} color={colors.red} fill={colors.red} />
-                    <Typography style={styles.footerText}>{item.likes.length}</Typography>
+                    <Typography style={styles.footerText}>{item.likes ? item.likes.length : 0}</Typography>
                 </View>
                 <View style={styles.footerItem}>
                     <ChatIcon width={16} height={16} color={colors.primary} fill={colors.primary} />
-                    <Typography style={styles.footerText}>{item.comments.length}</Typography>
+                    <Typography style={styles.footerText}>{item.comments ? item.comments.length : 0}</Typography>
                 </View>
                 <TouchableOpacity style={styles.footerItemRight}>
                     <ShareIcon width={14} height={14} color={colors.primary} fill={colors.primary} />
                 </TouchableOpacity>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

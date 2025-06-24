@@ -2,35 +2,21 @@ import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Typography, PostCard } from '@/components';
 import { colors } from '@/constants';
 import { PenIcon } from '@/assets';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getCommunityPosts } from '@/services/firebase/community';
+import { CommunityPost } from '@/models';
 
 const Community = () => {
     const [selectedCategory, setSelectedCategory] = useState('최신순');
+    const [data, setData] = useState<CommunityPost[]>([]);
 
-    const data = [
-        {
-            uid: '1',
-            nickname: '홍길동',
-            profileImage: 'https://img1.kakaocdn.net/thumb/R640x640.q70/?fname=https://t1.kakaocdn.net/account_images/default_profile.jpeg',
-            billID: 'PRC_D2E5D0D5B2C7J1I7J0H3H0G9G2P1P1',
-            title: '디지털 플랫폼 규제법에 대한 의견',
-            content: '최근 발의된 디지털 플랫폼 규제법에 대해 IT 업계 종사자로서 몇 가지 우려 사항이 있습니다. 특히 스타트업',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-            viewCount: 10,
-            tags: ['IT/과학', '규제', '스타트업'],
-            likes: [
-              'userUid_bisju7gopcktd8b9ldbg5ji3mez03n',
-            ],
-            comments: [
-                {
-                    uid: '1',
-                    content: '디지털 플랫폼 규제법에 대한 의견',
-                    createdAt: new Date().toISOString(),
-                },
-            ],
-        },
-    ];
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getCommunityPosts();
+            setData(data);
+        }
+        fetchData();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -51,7 +37,7 @@ const Community = () => {
             </View>
             <FlatList
                 data={data}
-                keyExtractor={(_, index) => index.toString()}
+                keyExtractor={item => item.uid}
                 renderItem={({ item }) => <PostCard item={item} />}
                 ListEmptyComponent={<Typography style={styles.emptyText}>게시글이 없습니다.</Typography>}
                 contentContainerStyle={styles.postContainer}
