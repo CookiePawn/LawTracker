@@ -19,11 +19,17 @@ const MyPost = () => {
         fetchPosts();
     }, []);
 
+    const handleVoteUpdate = async (postUid: string, updatedVotes: string[]) => {
+        // 데이터 새로 패치
+        const posts = await getCommunityPosts(user?.id);
+        setPosts(posts as CommunityPost[]);
+    };
+
     return (
         <View style={styles.container}>
             <FlatList
                 data={posts}
-                renderItem={({ item }: { item: CommunityPost }) => <PostCard item={item} />}
+                renderItem={({ item }: { item: CommunityPost }) => <PostCard item={item} onVoteUpdate={handleVoteUpdate} />}
                 keyExtractor={(item) => item.uid}
                 ListEmptyComponent={<Typography style={styles.emptyText}>게시글이 없습니다.</Typography>}
             />

@@ -33,11 +33,16 @@ const PostDetail = ({ route }: PostDetailProps) => {
         fetchPost();
     }, [routePost.uid]);
 
-    const handleVoteUpdate = (postUid: string, updatedVotes: string[]) => {
-        setPost(prevPost => ({
-            ...prevPost,
-            vote: { ...prevPost.vote!, count: updatedVotes }
-        }));
+    const handleVoteUpdate = async (postUid: string, updatedVotes: string[]) => {
+        // 게시글 새로 패치
+        try {
+            const fetchedPost = await getCommunityPosts(undefined, postUid);
+            if (fetchedPost) {
+                setPost(fetchedPost as CommunityPost);
+            }
+        } catch (error) {
+            console.error('게시글을 불러오는데 실패했습니다:', error);
+        }
     };
 
     return (

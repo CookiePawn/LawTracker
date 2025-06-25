@@ -30,14 +30,10 @@ const Community = () => {
         setRefreshing(false);
     }
 
-    const handleVoteUpdate = (postUid: string, updatedVotes: string[]) => {
-        setData(prevData => 
-            prevData.map(post => 
-                post.uid === postUid 
-                    ? { ...post, vote: { ...post.vote!, count: updatedVotes } } as CommunityPost
-                    : post
-            )
-        );
+    const handleVoteUpdate = async (postUid: string, updatedVotes: string[]) => {
+        // 데이터 새로 패치
+        const data = await getCommunityPosts();
+        setData(data as CommunityPost[]);
     };
 
     return (

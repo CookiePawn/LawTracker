@@ -43,6 +43,20 @@ export const updateCommunityPostVote = async (postUid: string, voteCount: string
     }
 }
 
+// 커뮤니티 좋아요 업데이트
+export const updateCommunityPostLike = async (postUid: string, likes: string[]) => {
+    try {
+        const postRef = doc(db, COLLECTIONS.COMMUNITY, postUid);
+        await updateDoc(postRef, {
+            'likes': likes
+        });
+        return true;
+    } catch (error) {
+        console.error('좋아요 업데이트 오류:', error);
+        return false;
+    }
+}
+
 // TODO: 댓글 좋아요 추가 및 삭제
 // 댓글 좋아요
 export const likeComment = async (postUid: string, commentUid: string, userUid: string, isLiked: boolean) => {

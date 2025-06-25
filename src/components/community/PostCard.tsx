@@ -9,7 +9,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
 import { useNavigation } from '@react-navigation/native';
 import { useUserValue } from '@/lib';
-import { updateCommunityPostVote } from '@/services';
+import { updateCommunityPostVote, updateCommunityPostLike } from '@/services';
 
 interface PostCardProps {
     item: CommunityPost;
@@ -58,6 +58,31 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
         if (success && onVoteUpdate) {
             // 부모 컴포넌트에 업데이트 알림
             onVoteUpdate(item.uid, updatedVotes);
+        }
+    };
+
+    const handleLike = async () => {
+        if (!user?.id) return;
+
+        const currentLikes = item.likes || [];
+        const hasLiked = currentLikes.includes(user.id);
+        
+        let updatedLikes: string[];
+        
+        if (hasLiked) {
+            // 좋아요 취소
+            updatedLikes = currentLikes.filter(like => like !== user.id);
+        } else {
+            // 좋아요 추가
+            updatedLikes = [...currentLikes, user.id];
+        }
+        
+        // Firebase 업데이트
+        const success = await updateCommunityPostLike(item.uid, updatedLikes);
+        
+        if (success && onVoteUpdate) {
+            // 부모 컴포넌트에 업데이트 알림 (좋아요도 같은 콜백 사용)
+            onVoteUpdate(item.uid, updatedLikes);
         }
     };
 
@@ -135,10 +160,15 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
                 </View>
             )}
             <View style={styles.footer}>
-                <View style={styles.footerItem}>
-                    <HeartIcon width={16} height={16} color={colors.gray400} />
+                <TouchableOpacity style={styles.footerItem} onPress={handleLike}>
+                    <HeartIcon 
+                        width={16} 
+                        height={16} 
+                        color={item.likes?.includes(user?.id || '') ? colors.red : colors.gray400} 
+                        fill={item.likes?.includes(user?.id || '') ? colors.red : colors.white}
+                    />
                     <Typography style={styles.footerText}>{item.likes ? item.likes.length : 0}</Typography>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.footerItem}>
                     <ChatIcon width={16} height={16} color={colors.gray200} fill={colors.gray200} />
                     <Typography style={styles.footerText}>{item.comments ? item.comments.length : 0}</Typography>
