@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.skyblue,
         borderRadius: 10,
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 16,
     },
     lawVoteTrueItemButtonText: {
         fontSize: 12,
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.skyred,
         borderRadius: 10,
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 16,
     },
     lawVoteFalseItemButtonText: {
         fontSize: 12,

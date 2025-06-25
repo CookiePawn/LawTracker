@@ -98,13 +98,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 20,
     paddingTop: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: colors.primary,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   logo: {
     width: 140,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     marginTop: 7,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   noticeTitle: {
     height: '100%',
