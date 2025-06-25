@@ -80,7 +80,7 @@ const PostDetail = ({ route }: PostDetailProps) => {
                             []
                         }
                         renderItem={({ item }: { item: Comment }) => <CommentCard item={item} postUid={post.uid} />}
-                        keyExtractor={(item) => item.uid}
+                        keyExtractor={(_, index) => index.toString()}
                         ListEmptyComponent={<Typography style={styles.commentEmptyText}>댓글이 없습니다.</Typography>}
                     />
                 </View>

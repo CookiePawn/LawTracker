@@ -116,7 +116,7 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
                 <Typography style={styles.content} numberOfLines={2}>{item.content}</Typography>
                 <View style={styles.tagsContainer}>
                     {item.tags && item.tags.map((tag: string, index: number) => (
-                        <View key={`${tag}-${index}`} style={styles.tag}>
+                        <View key={index} style={styles.tag}>
                             <Typography style={styles.tagText}>#{tag}</Typography>
                         </View>
                     ))}
@@ -153,7 +153,7 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
 
                             return (
                                 <TouchableOpacity
-                                    key={`vote-item-${index}`}
+                                    key={index}
                                     style={[
                                         styles.voteItemContainer,
                                         userVotedForThis && styles.voteItemSelected
