@@ -14,6 +14,7 @@ import { useSetUser, useSetAlert } from '@/lib';
 import RNExitApp from 'react-native-exit-app';
 import { login, KakaoOAuthToken, KakaoProfile, getProfile } from '@react-native-seoul/kakao-login';
 import { Typography } from '@/components';
+import { createUid } from '@/utils';
 
 
 const SignIn = (): ReactElement => {
@@ -91,13 +92,7 @@ const SignIn = (): ReactElement => {
         }
 
         // 새로운 사용자인 경우
-        // userUid_ 뒤에 정확히 20자리 랜덤 문자열 생성
-        const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        let randomSuffix = '';
-        for (let i = 0; i < 30; i++) {
-            randomSuffix += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-        const userId = `userUid_${randomSuffix}`;
+        const userId = `userUid_${createUid()}`;
 
         const user: User = {
             id: userId,
@@ -151,13 +146,7 @@ const SignIn = (): ReactElement => {
                 const profile: KakaoProfile = await getProfile();
 
                 // 새로운 사용자인 경우
-                // userUid_ 뒤에 정확히 20자리 랜덤 문자열 생성
-                const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-                let randomSuffix = '';
-                for (let i = 0; i < 30; i++) {
-                    randomSuffix += characters.charAt(Math.floor(Math.random() * characters.length));
-                }
-                const userId = `userUid_${randomSuffix}`;
+                const userId = `userUid_${createUid()}`;
 
                 const user: User = {
                     id: userId,

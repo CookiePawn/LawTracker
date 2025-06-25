@@ -14,7 +14,8 @@ import {
   LawDetail,
   SignIn,
   Setting,
-  PostDetail
+  PostDetail,
+  PostWrite
 } from '@/screens';
 import { loadUser } from '@/services';
 import { useSetUser } from '@/lib';
@@ -72,6 +73,7 @@ const AppNavigator = () => {
         <Stack.Screen name="LawDetail" component={LawDetail} />
         <Stack.Screen name="Setting" component={Setting} />
         <Stack.Screen name="PostDetail" component={PostDetail} />
+        <Stack.Screen name="PostWrite" component={PostWrite} />
       </Stack.Navigator>
     </NavigationContainer>
   );

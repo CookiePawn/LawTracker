@@ -12,6 +12,7 @@ export type RootStackParamList = {
     SignIn: undefined;
     Setting: undefined;
     PostDetail: { post: CommunityPost };
+    PostWrite: undefined;
 };
 
 

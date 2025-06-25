@@ -1,28 +1,50 @@
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Typography, PostCard } from '@/components';
 import { colors } from '@/constants';
 import { PenIcon } from '@/assets';
 import { useEffect, useState } from 'react';
-import { getCommunityPosts } from '@/services/firebase/community';
+import { getCommunityPosts } from '@/services';
 import { CommunityPost } from '@/models';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '@/types';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const Community = () => {
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const [selectedCategory, setSelectedCategory] = useState('최신순');
     const [data, setData] = useState<CommunityPost[]>([]);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             const data = await getCommunityPosts();
-            setData(data);
+            setData(data as CommunityPost[]);
         }
         fetchData();
     }, []);
+
+    const onRefresh = async () => {
+        setRefreshing(true);
+        const data = await getCommunityPosts();
+        setData(data as CommunityPost[]);
+        setRefreshing(false);
+    }
+
+    const handleVoteUpdate = (postUid: string, updatedVotes: string[]) => {
+        setData(prevData => 
+            prevData.map(post => 
+                post.uid === postUid 
+                    ? { ...post, vote: { ...post.vote!, count: updatedVotes } } as CommunityPost
+                    : post
+            )
+        );
+    };
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Typography style={styles.headerTitle}>커뮤니티</Typography>
-                <TouchableOpacity style={styles.headerButton}>
+                <TouchableOpacity style={styles.headerButton} onPress={() => navigation.navigate('PostWrite')}>
                     <PenIcon width={14} height={14} fill={colors.white} color={colors.white} />
                     <Typography style={styles.headerButtonText}>글쓰기</Typography>
                 </TouchableOpacity>
@@ -39,9 +61,10 @@ const Community = () => {
                 data={data}
                 style={styles.list}
                 keyExtractor={item => item.uid}
-                renderItem={({ item }) => <PostCard item={item} />}
+                renderItem={({ item }) => <PostCard item={item} onVoteUpdate={handleVoteUpdate} />}
                 ListEmptyComponent={<Typography style={styles.emptyText}>게시글이 없습니다.</Typography>}
                 contentContainerStyle={styles.postContainer}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             />
         </View>
     )

@@ -3,15 +3,15 @@ export interface CommunityPost {
     userUid: string;
     nickname: string;
     profileImage: string;
-    billID: string;
+    billID?: string;
     title: string;
     content: string;
     createdAt: string;
     updatedAt: string;
-    tags: string[];
-    viewCount: string[];
-    likes: string[];
-    comments: Comment[];
+    tags?: string[];
+    viewCount?: string[];
+    likes?: string[];
+    comments?: Comment[];
     vote?: Vote;
 }
 

@@ -33,6 +33,13 @@ const PostDetail = ({ route }: PostDetailProps) => {
         fetchPost();
     }, [routePost.uid]);
 
+    const handleVoteUpdate = (postUid: string, updatedVotes: string[]) => {
+        setPost(prevPost => ({
+            ...prevPost,
+            vote: { ...prevPost.vote!, count: updatedVotes }
+        }));
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -42,7 +49,7 @@ const PostDetail = ({ route }: PostDetailProps) => {
                 <Typography style={styles.headerText}>뒤로가기</Typography>
             </View>
             <ScrollView>
-                <PostCard item={post} border={false} />
+                <PostCard item={post} border={false} onVoteUpdate={handleVoteUpdate} />
                 <View style={styles.commentContainer}>
                     <View style={styles.commentHeader}>
                         <Typography style={styles.commentHeaderText}>댓글 {post.comments ? Object.keys(post.comments).length : 0}개</Typography>
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
         gap: 10,
         borderWidth: 1,
         borderColor: colors.gray200,
-        borderRadius: 10,
+        borderRadius: 12,
         paddingHorizontal: 5,
         paddingVertical: 2,
     },
@@ -112,7 +119,7 @@ const styles = StyleSheet.create({
         width: 65,
         paddingHorizontal: 10,
         paddingVertical: 5,
-        borderRadius: 10,
+        borderRadius: 8,
         backgroundColor: colors.primary,
         alignItems: 'center',
         justifyContent: 'center',

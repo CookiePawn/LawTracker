@@ -17,7 +17,33 @@ export const getCommunityPosts = async (userUid?: string, postUid?: string) => {
     return posts;
 }
 
+// 커뮤니티 게시글 작성
+export const createCommunityPost = async (post: CommunityPost) => {
+    try {
+        const postRef = doc(db, COLLECTIONS.COMMUNITY, post.uid);
+        await setDoc(postRef, post);
+        return true;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
 
+// 커뮤니티 투표 업데이트
+export const updateCommunityPostVote = async (postUid: string, voteCount: string[]) => {
+    try {
+        const postRef = doc(db, COLLECTIONS.COMMUNITY, postUid);
+        await updateDoc(postRef, {
+            'vote.count': voteCount
+        });
+        return true;
+    } catch (error) {
+        console.error('투표 업데이트 오류:', error);
+        return false;
+    }
+}
+
+// TODO: 댓글 좋아요 추가 및 삭제
 // 댓글 좋아요
 export const likeComment = async (postUid: string, commentUid: string, userUid: string, isLiked: boolean) => {
     const postRef = doc(db, COLLECTIONS.COMMUNITY, postUid);

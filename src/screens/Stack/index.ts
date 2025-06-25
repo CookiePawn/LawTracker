@@ -7,3 +7,4 @@ export * from './LawDetail';
 export * from './SignIn';
 export * from './Setting';
 export * from './PostDetail';
+export * from './PostWrite';
