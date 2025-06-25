@@ -88,13 +88,13 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
                 </View>
             </View>
             {item.billID && (
-                <View style={styles.billContainer}>
+                <TouchableOpacity style={styles.billContainer} onPress={() => bill && navigation.navigate('LawDetail', { law: bill })}>
                     <View style={styles.billTextContainer}>
                         <Typography style={styles.billText}>관련 법안</Typography>
                         <Typography style={styles.billTitle}>{bill?.TITLE}</Typography>
                     </View>
                     <BillStatusTag status={bill?.ACT_STATUS || ''} />
-                </View>
+                </TouchableOpacity>
             )}
             {item.vote && (
                 <View style={styles.voteContainer}>
