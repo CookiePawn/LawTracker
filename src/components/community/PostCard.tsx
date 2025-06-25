@@ -3,13 +3,14 @@ import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { BillStatusTag, Typography } from '@/components';
 import { useLayoutEffect, useState } from 'react';
 import { loadLawById } from '@/services';
-import { ChatIcon, HeartIcon, ShareIcon } from '@/assets';
+import { ChatIcon, HeartIcon, MoreIcon, ShareIcon } from '@/assets';
 import { CommunityPost, Law } from '@/models';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
 import { useNavigation } from '@react-navigation/native';
 import { useUserValue } from '@/lib';
 import { updateCommunityPostVote, updateCommunityPostLike } from '@/services';
+import { MoreBox } from '.';
 
 interface PostCardProps {
     item: CommunityPost;
@@ -19,6 +20,7 @@ interface PostCardProps {
 
 const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
     const [bill, setBill] = useState<Law | null>(null);
+    const [showMoreBox, setShowMoreBox] = useState(false);
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const user = useUserValue();
 
@@ -32,6 +34,10 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
         fetchBill();
     }, []);
 
+    const handleMoreIconPress = () => {
+        setShowMoreBox(!showMoreBox);
+    };
+
     const handleVote = async (voteIndex: number) => {
         if (!user?.id || !item.vote) return;
 
@@ -40,9 +46,9 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
 
         // 현재 사용자가 이미 투표했는지 확인
         const existingVoteIndex = currentVotes.findIndex(vote => vote.startsWith(user.id));
-        
+
         let updatedVotes: string[];
-        
+
         if (existingVoteIndex !== -1) {
             // 이미 투표한 경우: 기존 투표 제거 후 새로운 투표 추가
             const votesWithoutUser = currentVotes.filter(vote => !vote.startsWith(user.id));
@@ -51,10 +57,10 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
             // 처음 투표하는 경우: 새로운 투표 추가
             updatedVotes = [...currentVotes, voteKey];
         }
-        
+
         // Firebase 업데이트
         const success = await updateCommunityPostVote(item.uid, updatedVotes);
-        
+
         if (success && onVoteUpdate) {
             // 부모 컴포넌트에 업데이트 알림
             onVoteUpdate(item.uid, updatedVotes);
@@ -66,9 +72,9 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
 
         const currentLikes = item.likes || [];
         const hasLiked = currentLikes.includes(user.id);
-        
+
         let updatedLikes: string[];
-        
+
         if (hasLiked) {
             // 좋아요 취소
             updatedLikes = currentLikes.filter(like => like !== user.id);
@@ -76,10 +82,10 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
             // 좋아요 추가
             updatedLikes = [...currentLikes, user.id];
         }
-        
+
         // Firebase 업데이트
         const success = await updateCommunityPostLike(item.uid, updatedLikes);
-        
+
         if (success && onVoteUpdate) {
             // 부모 컴포넌트에 업데이트 알림 (좋아요도 같은 콜백 사용)
             onVoteUpdate(item.uid, updatedLikes);
@@ -92,6 +98,10 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
             disabled={!border}
             onPress={() => navigation.navigate('PostDetail', { post: item })}
         >
+            <TouchableOpacity style={styles.moreIconContainer} onPress={handleMoreIconPress} hitSlop={10}>
+                <MoreIcon width={20} height={20} color={colors.gray300} fill={colors.gray300} />
+            </TouchableOpacity>
+            {showMoreBox && <MoreBox isUser={user?.id === item.userUid} />}
             <View style={styles.header}>
                 <View style={styles.profileContainer}>
                     <Image source={{ uri: item.profileImage }} style={styles.profileImage} />
@@ -161,10 +171,10 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
             )}
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.footerItem} onPress={handleLike}>
-                    <HeartIcon 
-                        width={16} 
-                        height={16} 
-                        color={item.likes?.includes(user?.id || '') ? colors.red : colors.gray400} 
+                    <HeartIcon
+                        width={16}
+                        height={16}
+                        color={item.likes?.includes(user?.id || '') ? colors.red : colors.gray400}
                         fill={item.likes?.includes(user?.id || '') ? colors.red : colors.white}
                     />
                     <Typography style={styles.footerText}>{item.likes ? item.likes.length : 0}</Typography>
@@ -189,6 +199,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.gray100,
         gap: 10,
+    },
+    moreIconContainer: {
+        position: 'absolute',
+        top: 16,
+        right: 16,
     },
     header: {
         flexDirection: 'row',

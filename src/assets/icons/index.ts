@@ -16,3 +16,4 @@ export { default as SplashLogoIcon } from './splash_logo.svg';
 export { default as BookmarkIcon } from './bookmark.svg';
 export { default as ChatIcon } from './chat.svg';
 export { default as PenIcon } from './pen.svg';
+export { default as MoreIcon } from './more.svg';
