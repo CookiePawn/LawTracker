@@ -31,6 +31,8 @@ const PostWrite = () => {
             searchQuery: relatedLaw,
         });
 
+        console.log(JSON.stringify(response, null, 2));
+
         // 중복 제거 (BILL_ID 기준)
         const uniqueLaws = response.filter((law, index, self) =>
             index === self.findIndex(l => l.TITLE === law.TITLE)

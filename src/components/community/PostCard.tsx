@@ -153,16 +153,20 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
 
                             return (
                                 <TouchableOpacity
-                                    key={index}
+                                    key={`vote-${item.uid}-${index}`}
                                     style={[
                                         styles.voteItemContainer,
                                         userVotedForThis && styles.voteItemSelected
                                     ]}
                                     onPress={() => handleVote(index)}
                                 >
-                                    <View style={[styles.voteItemPercentBar, { width: `${parseFloat(percentage)}%` }]} />
-                                    <Typography style={styles.voteItemText}>{voteItem}</Typography>
-                                    <Typography style={styles.voteItemPercent}>{percentage}%</Typography>
+                                    <View style={styles.voteItemBackground}>
+                                        <View style={[styles.voteItemPercentBar, { width: `${parseFloat(percentage)}%` }]} />
+                                    </View>
+                                    <View style={styles.voteItemContent}>
+                                        <Typography style={styles.voteItemText}>{voteItem}</Typography>
+                                        <Typography style={styles.voteItemPercent}>{percentage}%</Typography>
+                                    </View>
                                 </TouchableOpacity>
                             );
                         })}
@@ -289,13 +293,13 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     voteItemContainer: {
+        position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 3,
         backgroundColor: colors.gray150,
         borderRadius: 10,
-        justifyContent: 'space-between',
         overflow: 'hidden',
+        minHeight: 40,
     },
     voteItemSelected: {
         backgroundColor: colors.skyblue,
@@ -308,22 +312,40 @@ const styles = StyleSheet.create({
     voteItemText: {
         fontSize: 12,
         color: colors.black,
-        marginVertical: 5,
-        marginLeft: 10,
+        flex: 1,
+        paddingLeft: 10,
+        paddingVertical: 10,
+        zIndex: 1,
     },
-    voteItemPercentBar: {
+    voteItemBackground: {
         position: 'absolute',
         top: 0,
         left: 0,
+        right: 0,
         height: '100%',
-        backgroundColor: colors.skyblue,
-        borderRadius: 0,
+        backgroundColor: colors.gray150,
+        borderRadius: 10,
+    },
+    voteItemPercentBar: {
+        height: '100%',
+        backgroundColor: colors.primary,
+        opacity: 0.3,
+        borderRadius: 10,
     },
     voteItemPercent: {
         fontSize: 12,
         color: colors.primary,
         fontWeight: 'bold',
-        marginRight: 10,
+        paddingRight: 10,
+        paddingVertical: 10,
+        zIndex: 1,
+    },
+    voteItemContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flex: 1,
+        zIndex: 1,
     },
     voteCount: {
         fontSize: 10,
