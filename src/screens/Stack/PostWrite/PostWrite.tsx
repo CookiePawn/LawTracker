@@ -65,11 +65,24 @@ const PostWrite = () => {
         }
         
         if (isVote && voteQuestion.length > 0 && voteOptions[0].length > 0 && voteOptions[1].length > 0) {
-            post.vote = {
+            const voteData: any = {
                 title: voteQuestion,
                 item1: voteOptions[0],
                 item2: voteOptions[1]
             };
+            
+            // 선택지 3, 4, 5는 입력된 경우에만 추가
+            if (voteOptions[2] && voteOptions[2].trim() !== '') {
+                voteData.item3 = voteOptions[2];
+            }
+            if (voteOptions[3] && voteOptions[3].trim() !== '') {
+                voteData.item4 = voteOptions[3];
+            }
+            if (voteOptions[4] && voteOptions[4].trim() !== '') {
+                voteData.item5 = voteOptions[4];
+            }
+            
+            post.vote = voteData;
         }
 
         const result = await createCommunityPost(post);
