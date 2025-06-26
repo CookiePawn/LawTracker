@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "294240214642",
+    "project_id": "lawtracker-6e97d",
+    "storage_bucket": "lawtracker-6e97d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294240214642:android:8cfabc83f46847fb78aceb",
+        "android_client_info": {
+          "package_name": "com.lawtracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJSvOx8H6OEs_IoaO1t5nME7hLDQSX6oA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,7 @@
 import { COLLECTIONS } from "@/constants";
 import { Law } from "@/models";
 import { db } from ".";
-import { collection, doc, getDoc, getDocs, query, where, updateDoc, arrayUnion, arrayRemove, orderBy, startAfter, limit, increment } from "firebase/firestore";
-
-
-
+import { collection, doc, getDoc, getDocs, query, where, updateDoc, orderBy, startAfter, limit, increment, arrayUnion, arrayRemove } from '@react-native-firebase/firestore';
 
 // 달력 법안 유무 표시 로드
 export const loadCalendarLaws = async () => {
@@ -13,7 +10,7 @@ export const loadCalendarLaws = async () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        return docSnap.data().DATE as string[];
+        return docSnap.data()?.DATE as string[];
     }
     return [];
 };
@@ -98,13 +95,11 @@ export const increaseViewCount = async (billId: string) => {
     await updateDoc(docRef, { VIEW_COUNT: increment(1) });
 };
 
-
 // 의안 검색 및 필터링
 export const searchLaws = async (params: {
     searchQuery?: string;
 }) => {
     const dataRef = collection(db, COLLECTIONS.LAWS);
-    let queryConstraints = [];
 
     if (params.searchQuery === '') {
         return [];
@@ -113,19 +108,20 @@ export const searchLaws = async (params: {
     // 검색어 필터링
     if (params.searchQuery) {
         const searchLower = params.searchQuery.toLowerCase();
-        queryConstraints.push(
+        const queryRef = query(
+            dataRef,
             where('TITLE', '>=', searchLower),
             where('TITLE', '<=', searchLower + '\uf8ff')
         );
+        const snapshot = await getDocs(queryRef);
+        const laws = snapshot.docs.map((doc) => doc.data());
+        return laws as Law[];
     }
 
-    const queryRef = query(dataRef, ...queryConstraints);
-    const snapshot = await getDocs(queryRef);
+    const snapshot = await getDocs(dataRef);
     const laws = snapshot.docs.map((doc) => doc.data());
     return laws as Law[];
 };
-
-
 
 // 법안 즐겨찾기 토글 (추가/삭제)
 export const toggleFavoriteLaw = async (userId: string, billId: string) => {

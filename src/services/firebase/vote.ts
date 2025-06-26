@@ -1,6 +1,6 @@
 import { COLLECTIONS } from "@/constants";
 import { db } from ".";
-import { doc, getDoc, updateDoc, arrayUnion, increment } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion, increment } from '@react-native-firebase/firestore';
 
 // 의안 찬/반 투표 체크 후 증가
 export const increaseVoteCount = async (userUid: string, billId: string, voteType: 'VOTE_TRUE' | 'VOTE_FALSE') => {
@@ -63,7 +63,7 @@ export const toggleVoteLaw = async (userUid: string, billId: string, voteType: '
     }
 
     const userData = userDoc.data();
-    const voteList = userData.voteList || [];
+    const voteList = userData?.voteList || [];
     
     // 기존 투표 데이터 변환
     const newVoteList = voteList.map((vote: string) => {

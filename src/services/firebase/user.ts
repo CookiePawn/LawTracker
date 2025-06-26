@@ -1,9 +1,9 @@
 import Config from 'react-native-config';
 import { db } from ".";
 import CryptoJS from 'react-native-crypto-js';
-import { collection, deleteDoc, doc, getDoc, query, where, getDocs, setDoc } from "firebase/firestore";
 import { COLLECTIONS } from "@/constants";
 import { User } from "@/models";
+import { collection, doc, getDoc, getDocs, setDoc, deleteDoc, query, where } from '@react-native-firebase/firestore';
 
 // 데이터 해시 함수
 const hashData = (data: string): string => {

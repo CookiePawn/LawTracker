@@ -1,7 +1,7 @@
 import { db } from ".";
-import { arrayRemove, arrayUnion, collection, doc, getDocs, updateDoc, getDoc, setDoc } from "firebase/firestore";
 import { COLLECTIONS } from "@/constants";
 import { CommunityPost } from "@/models";
+import { collection, doc, getDocs, getDoc, setDoc, updateDoc } from '@react-native-firebase/firestore';
 
 // 커뮤니티 게시글 조회
 export const getCommunityPosts = async (userUid?: string, postUid?: string) => {
@@ -69,7 +69,7 @@ export const likeComment = async (postUid: string, commentUid: string, userUid: 
     }
     
     const postData = postDoc.data();
-    const comments = postData.comments || {};
+    const comments = postData?.comments || {};
     
     // 해당 댓글의 좋아요 배열 업데이트
     if (!comments[commentUid]) {
