@@ -31,7 +31,7 @@ const Profile = () => {
           <View style={styles.profileNameContainer}>
             <Typography style={styles.profileName}>{user?.nickname}</Typography>
             <Typography style={styles.profilePhone}>@{user?.phone}</Typography>
-            <Typography style={styles.profileSNS}>{user?.SNS === 'NAVER' ? '네이버' : '카카오'} 로그인</Typography>
+            <Typography style={styles.profileSNS}>{user?.SNS === 'naver' ? '네이버' : '카카오'} 로그인</Typography>
           </View>
         </View>
       </View>
