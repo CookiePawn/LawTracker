@@ -4,7 +4,7 @@ import React, { ReactElement, useEffect, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, ToastAndroid, BackHandler } from 'react-native';
 import Config from 'react-native-config';
 import { SplashLogoIcon } from '@/assets';
-import { signIn } from '@/services';
+import { signIn, signInWithSNS } from '@/services';
 import { User } from '@/models';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -12,9 +12,7 @@ import { RootStackParamList } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSetUser, useSetAlert } from '@/lib';
 import RNExitApp from 'react-native-exit-app';
-import { login, KakaoOAuthToken, KakaoProfile, getProfile } from '@react-native-seoul/kakao-login';
 import { Typography } from '@/components';
-import { createUid } from '@/utils';
 
 
 const SignIn = (): ReactElement => {
@@ -69,44 +67,11 @@ const SignIn = (): ReactElement => {
         }, [])
     );
 
-    const naverLogin = async () => {
-        if (!Config.NAVER_CLIENT_ID || !Config.NAVER_CLIENT_SECRET || !Config.NAVER_APP_NAME) {
-            console.error('네이버 로그인 환경 변수가 설정되지 않았습니다.');
-            return;
-        }
+    const onSignIn = async (sns: string) => {
+        const user = await signInWithSNS(sns);
 
         try {
-            const token = await NaverLogin.login();
-            getUserProfile(token.successResponse?.accessToken ?? '');
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-    };
-
-    const getUserProfile = async (accessToken: string) => {
-        const profileResult = await NaverLogin.getProfile(accessToken);
-        if (profileResult.resultcode === "024") {
-            Alert.alert("로그인 실패", profileResult.message);
-            return;
-        }
-
-        // 새로운 사용자인 경우
-        const userId = `userUid_${createUid()}`;
-
-        const user: User = {
-            id: userId,
-            nickname: profileResult.response.nickname ?? '사용자',
-            email: profileResult.response.email ?? '',
-            age: profileResult.response.age?.slice(0, 2) ?? '',
-            gender: profileResult.response.gender ?? '',
-            profileImage: profileResult.response.profile_image ?? '',
-            createdAt: new Date().toISOString(),
-            SNS: 'naver',
-            phone: profileResult.response.mobile ?? '',
-        }
-        try {
-            const result = await signIn(user);
+            const result = await signIn(user as User);
 
             if (result.result === -2) {
                 setAlert({
@@ -129,7 +94,7 @@ const SignIn = (): ReactElement => {
                 ],
             });
             await AsyncStorage.setItem(STORAGE_KEY.USER_ID, result.userId ?? '');
-            setUser({ ...user, id: result.userId ?? '' });
+            setUser({ ...user as User, id: result.userId ?? '' });
             navigation.navigate('Tab', {
                 screen: 'Home',
             });
@@ -137,64 +102,7 @@ const SignIn = (): ReactElement => {
             console.error(error);
             Alert.alert("로그인 실패", "다시 시도해주세요.");
         }
-    };
-
-    const signInWithKakao = async (): Promise<void> => {
-        try {
-            const token: KakaoOAuthToken = await login();
-            if (token.accessToken) {
-                const profile: KakaoProfile = await getProfile();
-
-                // 새로운 사용자인 경우
-                const userId = `userUid_${createUid()}`;
-
-                const user: User = {
-                    id: userId,
-                    nickname: profile.nickname ?? '사용자',
-                    email: profile.email ?? '',
-                    profileImage: profile.profileImageUrl ?? '',
-                    createdAt: new Date().toISOString(),
-                    age: profile.ageRange.slice(4, 6) ?? '',
-                    gender: profile.gender === 'MALE' ? 'M' : 'F',
-                    phone: profile.phoneNumber.replace(/^(\+82 |0)/g, '0') ?? '',
-                    SNS: 'kakao',
-                }
-                try {
-                    const result = await signIn(user);
-
-                    if (result.result === -2) {
-                        setAlert({
-                            visible: true,
-                            title: "알림",
-                            message: "이미 다른 SNS로 가입된 계정입니다.",
-                            buttons: [
-                                { text: '확인', style: 'default' },
-                            ],
-                        });
-                        return;
-                    }
-
-                    setAlert({
-                        visible: true,
-                        title: result.result === 0 ? "회원가입" : "로그인",
-                        message: result.result === 0 ? "회원가입이 완료되었습니다." : "로그인이 완료되었습니다.",
-                        buttons: [
-                            { text: '확인', style: 'default' },
-                        ],
-                    });
-                    await AsyncStorage.setItem(STORAGE_KEY.USER_ID, result.userId ?? '');
-                    setUser({ ...user, id: result.userId ?? '' });
-                    navigation.navigate('Tab', {
-                        screen: 'Home',
-                    });
-                } catch {
-                    Alert.alert("로그인 실패", "다시 시도해주세요.");
-                }
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    }
 
     return (
         <View style={styles.container}>
@@ -203,11 +111,11 @@ const SignIn = (): ReactElement => {
             </View>
 
             <View style={styles.loginContainer}>
-                <TouchableOpacity onPress={naverLogin} style={styles.naverLoginButton}>
+                <TouchableOpacity onPress={() => onSignIn('naver')} style={styles.naverLoginButton}>
                     <Typography style={styles.naverLoginButtonText}>네이버 로그인</Typography>
                 </TouchableOpacity>
                 {__DEV__ &&
-                    <TouchableOpacity onPress={signInWithKakao} style={styles.kakaoLoginButton}>
+                    <TouchableOpacity onPress={() => onSignIn('kakao')} style={styles.kakaoLoginButton}>
                         <Typography style={styles.kakaoLoginButtonText}>카카오 로그인</Typography>
                     </TouchableOpacity>
                 }
