@@ -1,2 +1,2 @@
-export { default as naver } from './icon_naver.png';
-export { default as kakao } from './icon_kakao.png';
+export { default as NaverIcon } from './icon_naver.png';
+export { default as KakaoIcon } from './icon_kakao.png';

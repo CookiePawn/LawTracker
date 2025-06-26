@@ -1,7 +1,7 @@
 import { colors, STORAGE_KEY } from '@/constants';
 import NaverLogin from '@react-native-seoul/naver-login';
 import React, { ReactElement, useEffect, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Alert, ToastAndroid, BackHandler } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert, ToastAndroid, BackHandler, Image } from 'react-native';
 import Config from 'react-native-config';
 import { SplashLogoIcon } from '@/assets';
 import { signIn, signInWithSNS } from '@/services';
@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSetUser, useSetAlert } from '@/lib';
 import RNExitApp from 'react-native-exit-app';
 import { Typography } from '@/components';
+import { NaverIcon, KakaoIcon } from '@/assets';
 
 
 const SignIn = (): ReactElement => {
@@ -112,14 +113,16 @@ const SignIn = (): ReactElement => {
 
             <View style={styles.loginContainer}>
                 <TouchableOpacity onPress={() => onSignIn('naver')} style={styles.naverLoginButton}>
+                    <Image source={NaverIcon} style={styles.loginButtonIcon} tintColor={colors.white} />
                     <Typography style={styles.naverLoginButtonText}>네이버 로그인</Typography>
                 </TouchableOpacity>
                 {__DEV__ &&
                     <TouchableOpacity onPress={() => onSignIn('kakao')} style={styles.kakaoLoginButton}>
+                        <Image source={KakaoIcon} style={styles.loginButtonIcon} />
                         <Typography style={styles.kakaoLoginButtonText}>카카오 로그인</Typography>
                     </TouchableOpacity>
                 }
-            </View>
+            </View> 
         </View>
     );
 };
@@ -157,10 +160,12 @@ const styles = StyleSheet.create({
     },
     naverLoginButton: {
         width: '100%',
+        flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         gap: 10,
         backgroundColor: colors.naver,
-        padding: 15,
+        padding: 12,
         borderRadius: 16,
     },
     naverLoginButtonText: {
@@ -170,9 +175,11 @@ const styles = StyleSheet.create({
     },
     kakaoLoginButton: {
         width: '100%',
+        flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         gap: 10,
-        padding: 15,
+        padding: 12,
         borderRadius: 16,
         backgroundColor: colors.kakao,
     },
@@ -180,6 +187,10 @@ const styles = StyleSheet.create({
         color: colors.gray600,
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    loginButtonIcon: {
+        width: 24,
+        height: 24,
     },
 });
 
