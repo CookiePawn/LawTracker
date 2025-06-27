@@ -156,3 +156,77 @@ export const addCommentToPost = async (postUid: string, comment: any) => {
         return false;
     }
 }
+
+// 댓글 좋아요 업데이트
+export const updateCommentLike = async (postUid: string, commentUid: string, likes: string[]) => {
+    try {
+        const postRef = doc(db, COLLECTIONS.COMMUNITY, postUid);
+        const postSnap = await getDoc(postRef);
+        if (!postSnap.exists()) throw new Error('게시글이 존재하지 않습니다.');
+        const postData = postSnap.data();
+        if (!postData) throw new Error('게시글 데이터가 없습니다.');
+        
+        const comments = postData.comments || {};
+        if (!comments[commentUid]) throw new Error('댓글이 존재하지 않습니다.');
+        
+        comments[commentUid] = {
+            ...comments[commentUid],
+            likes: likes,
+            likeCount: likes.length
+        };
+        
+        await updateDoc(postRef, { comments });
+        return true;
+    } catch (error) {
+        console.error('댓글 좋아요 업데이트 오류:', error);
+        return false;
+    }
+}
+
+// 댓글 페이지네이션 조회
+export const getComments = async (
+    postUid: string, 
+    pageSize: number = 10, 
+    lastCommentUid?: string
+) => {
+    try {
+        const postRef = doc(db, COLLECTIONS.COMMUNITY, postUid);
+        const postSnap = await getDoc(postRef);
+        if (!postSnap.exists()) throw new Error('게시글이 존재하지 않습니다.');
+        const postData = postSnap.data();
+        if (!postData) throw new Error('게시글 데이터가 없습니다.');
+        
+        const comments = postData.comments || {};
+        const commentArray = Object.values(comments) as any[];
+        
+        // 최신순으로 정렬
+        const sortedComments = commentArray.sort((a, b) => 
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+        
+        // 페이지네이션 적용
+        let startIndex = 0;
+        if (lastCommentUid) {
+            const lastIndex = sortedComments.findIndex(comment => comment.uid === lastCommentUid);
+            startIndex = lastIndex + 1;
+        }
+        
+        const endIndex = startIndex + pageSize;
+        const paginatedComments = sortedComments.slice(startIndex, endIndex);
+        
+        return {
+            comments: paginatedComments,
+            lastCommentUid: paginatedComments[paginatedComments.length - 1]?.uid || null,
+            hasMore: endIndex < sortedComments.length,
+            totalCount: sortedComments.length
+        };
+    } catch (error) {
+        console.error('댓글 조회 오류:', error);
+        return {
+            comments: [],
+            lastCommentUid: null,
+            hasMore: false,
+            totalCount: 0
+        };
+    }
+}

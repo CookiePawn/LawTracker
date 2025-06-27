@@ -2,27 +2,47 @@ import { HeartIcon, UserIcon } from "@/assets";
 import { Typography } from "@/components";
 import { colors } from "@/constants";
 import { Comment } from "@/models";
-import { likeComment } from "@/services";
-import { useState } from "react";
+import { updateCommentLike } from "@/services";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useUserValue } from "@/lib";
 
 interface CommentCardProps {
     item: Comment;
     postUid: string;
+    onCommentUpdate?: () => void;
 }
 
-const CommentCard = ({ item, postUid }: CommentCardProps) => {
+const CommentCard = ({ item, postUid, onCommentUpdate }: CommentCardProps) => {
     const user = useUserValue();
-    const [isLiked, setIsLiked] = useState(item.likes?.includes(user?.id || ''));
-    const [likeCount, setLikeCount] = useState(item.likes?.length || 0);
 
     const handleLikeComment = async () => {
         if (!user?.id) return;
-        await likeComment(postUid, item.uid, user.id, !isLiked);  
-        setIsLiked(!isLiked);
-        setLikeCount(prev => isLiked ? prev - 1 : prev + 1);
+        
+        const currentLikes = item.likes || [];
+        const hasLiked = currentLikes.includes(user.id);
+        
+        let updatedLikes: string[];
+        
+        if (hasLiked) {
+            // 좋아요 취소
+            updatedLikes = currentLikes.filter(like => like !== user.id);
+        } else {
+            // 좋아요 추가
+            updatedLikes = [...currentLikes, user.id];
+        }
+        
+        const success = await updateCommentLike(postUid, item.uid, updatedLikes);
+        
+        if (success) {
+            // 부모 컴포넌트에 업데이트 알림
+            if (onCommentUpdate) {
+                onCommentUpdate();
+            }
+        }
     }
+
+    const isLiked = item.likes?.includes(user?.id || '');
+    const likeCount = item.likes?.length || 0;
 
     return (
         <View style={styles.container}>

@@ -1,8 +1,8 @@
-import { FlatList, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { FlatList, RefreshControl, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "@/types";
 import { PostCard, Typography } from "@/components";
-import { getCommunityPosts } from "@/services";
+import { getCommunityPosts, getComments } from "@/services";
 import { useEffect, useState } from "react";
 import { Comment, CommunityPost } from "@/models";
 import { colors } from "@/constants";
@@ -23,21 +23,65 @@ const PostDetail = ({ route }: PostDetailProps) => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const [commentInput, setCommentInput] = useState('');
     const [commentLoading, setCommentLoading] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
+    const [comments, setComments] = useState<Comment[]>([]);
+    const [lastCommentUid, setLastCommentUid] = useState<string | null>(null);
+    const [hasMoreComments, setHasMoreComments] = useState(true);
+    const [totalCommentCount, setTotalCommentCount] = useState(0);
     const user = useUserValue();
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                const fetchedPost = await getCommunityPosts(undefined, routePost.uid);
-                if (fetchedPost) {
-                    setPost(fetchedPost as CommunityPost);
-                }
-            } catch (error) {
-                console.error('게시글을 불러오는데 실패했습니다:', error);
+    const fetchPost = async () => {
+        try {
+            const fetchedPost = await getCommunityPosts(undefined, routePost.uid);
+            if (fetchedPost) {
+                setPost(fetchedPost as CommunityPost);
             }
-        };
+        } catch (error) {
+            console.error('게시글을 불러오는데 실패했습니다:', error);
+        }
+    };
+
+    const fetchComments = async (isRefresh: boolean = false) => {
+        if (commentLoading) return;
+        
+        setCommentLoading(true);
+        try {
+            const result = await getComments(post.uid, 10, isRefresh ? undefined : lastCommentUid || undefined);
+            
+            if (isRefresh) {
+                setComments(result.comments);
+                setLastCommentUid(result.lastCommentUid);
+                setHasMoreComments(result.hasMore);
+                setTotalCommentCount(result.totalCount);
+            } else {
+                setComments(prev => [...prev, ...result.comments]);
+                setLastCommentUid(result.lastCommentUid);
+                setHasMoreComments(result.hasMore);
+            }
+        } catch (error) {
+            console.error('댓글을 불러오는데 실패했습니다:', error);
+        } finally {
+            setCommentLoading(false);
+        }
+    };
+
+    useEffect(() => {
         fetchPost();
+        fetchComments(true);
     }, [routePost.uid]);
+
+    const onRefresh = async () => {
+        setRefreshing(true);
+        await fetchPost();
+        await fetchComments(true);
+        setRefreshing(false);
+    };
+
+    const onCommentEndReached = () => {
+        if (hasMoreComments && !commentLoading) {
+            fetchComments();
+        }
+    };
 
     const handleVoteUpdate = async (postUid: string, updatedVotes: string[]) => {
         // 게시글 새로 패치
@@ -49,6 +93,11 @@ const PostDetail = ({ route }: PostDetailProps) => {
         } catch (error) {
             console.error('게시글을 불러오는데 실패했습니다:', error);
         }
+    };
+
+    const handleCommentUpdate = async () => {
+        // 댓글 업데이트 시 댓글 목록 새로고침
+        await fetchComments(true);
     };
 
     const handleAddComment = async () => {
@@ -67,9 +116,9 @@ const PostDetail = ({ route }: PostDetailProps) => {
         const result = await addCommentToPost(post.uid, comment);
         if (result) {
             setCommentInput('');
-            // 댓글 새로고침
-            const fetchedPost = await getCommunityPosts(undefined, post.uid);
-            if (fetchedPost) setPost(fetchedPost as CommunityPost);
+            // 전체 화면 새로고침
+            await fetchPost();
+            await fetchComments(true);
         }
         setCommentLoading(false);
     };
@@ -82,11 +131,18 @@ const PostDetail = ({ route }: PostDetailProps) => {
                 </TouchableOpacity>
                 <Typography style={styles.headerText}>뒤로가기</Typography>
             </View>
-            <ScrollView>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
+            >
                 <PostCard item={post} border={false} onVoteUpdate={handleVoteUpdate} />
                 <View style={styles.commentContainer}>
                     <View style={styles.commentHeader}>
-                        <Typography style={styles.commentHeaderText}>댓글 {post.comments ? Object.keys(post.comments).length : 0}개</Typography>
+                        <Typography style={styles.commentHeaderText}>댓글 {totalCommentCount}개</Typography>
                         <TouchableOpacity style={styles.commentHeaderSortContainer}>
                             <Typography style={styles.commentHeaderSort}>최신순</Typography>
                             <ChevronLeftIcon width={16} height={16} color={colors.primary} style={{ transform: [{ rotate: '270deg' }] }} />
@@ -107,13 +163,13 @@ const PostDetail = ({ route }: PostDetailProps) => {
                     </View>
                     <FlatList
                         scrollEnabled={false}
-                        data={post.comments ? 
-                            Object.values(post.comments).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) : 
-                            []
-                        }
-                        renderItem={({ item }: { item: Comment }) => <CommentCard item={item} postUid={post.uid} />}
+                        data={comments}
+                        renderItem={({ item }: { item: Comment }) => <CommentCard item={item} postUid={post.uid} onCommentUpdate={handleCommentUpdate} />}
                         keyExtractor={(_, index) => index.toString()}
                         ListEmptyComponent={<Typography style={styles.commentEmptyText}>댓글이 없습니다.</Typography>}
+                        ListFooterComponent={commentLoading && hasMoreComments ? <Typography style={styles.commentLoadingText}>로딩 중...</Typography> : null}
+                        onEndReached={onCommentEndReached}
+                        onEndReachedThreshold={0.5}
                     />
                 </View>
             </ScrollView>
@@ -188,6 +244,12 @@ const styles = StyleSheet.create({
         color: colors.gray400,
         textAlign: 'center',
         marginTop: 150,
+    },
+    commentLoadingText: {
+        fontSize: 12,
+        color: colors.primary,
+        textAlign: 'center',
+        marginTop: 10,
     },
 });
 
