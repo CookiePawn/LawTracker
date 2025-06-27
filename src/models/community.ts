@@ -11,6 +11,7 @@ export interface CommunityPost {
     tags?: string[];
     viewCount?: string[];
     likes?: string[];
+    likeCount?: number;
     comments?: Comment[];
     vote?: Vote;
 }

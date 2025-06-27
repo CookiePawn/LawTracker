@@ -27,14 +27,14 @@ export const getCommunityPosts = async (
         return posts.find((post) => post.uid === postUid);
     }
     
-    // 페이지네이션과 정렬을 위한 쿼리 구성
+    // 정렬 기준에 따른 쿼리 구성
     let q = query(postsRef);
     
-    // 정렬 기준 설정
     if (orderByField === 'createdAt') {
         q = query(postsRef, orderBy('createdAt', 'desc'));
     } else if (orderByField === 'likes') {
-        q = query(postsRef, orderBy('likes', 'desc'));
+        // likeCount 필드로 정렬 (없으면 0으로 처리)
+        q = query(postsRef, orderBy('likeCount', 'desc'));
     }
     
     // 페이지네이션 적용
@@ -85,7 +85,8 @@ export const updateCommunityPostLike = async (postUid: string, likes: string[]) 
     try {
         const postRef = doc(db, COLLECTIONS.COMMUNITY, postUid);
         await updateDoc(postRef, {
-            'likes': likes
+            'likes': likes,
+            'likeCount': likes.length
         });
         return true;
     } catch (error) {
@@ -129,4 +130,30 @@ export const likeComment = async (postUid: string, commentUid: string, userUid: 
     
     // 전체 문서 업데이트
     await setDoc(postRef, { ...postData, comments }, { merge: true });
+}
+
+// 기존 게시글들의 likeCount 필드 마이그레이션
+export const migrateLikeCount = async () => {
+    try {
+        const postsRef = collection(db, COLLECTIONS.COMMUNITY);
+        const snapshot = await getDocs(postsRef);
+        
+        const batch = db.batch();
+        
+        snapshot.docs.forEach((doc) => {
+            const data = doc.data();
+            const likeCount = data.likes?.length || 0;
+            
+            if (data.likeCount === undefined) {
+                batch.update(doc.ref, { likeCount });
+            }
+        });
+        
+        await batch.commit();
+        console.log('likeCount 마이그레이션 완료');
+        return true;
+    } catch (error) {
+        console.error('likeCount 마이그레이션 오류:', error);
+        return false;
+    }
 }
