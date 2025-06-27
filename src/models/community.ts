@@ -23,6 +23,7 @@ export interface Comment {
     content: string;
     createdAt: string;
     likes?: string[];
+    likeCount?: number;
 }
 
 export interface Vote {

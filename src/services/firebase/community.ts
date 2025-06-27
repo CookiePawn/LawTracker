@@ -138,3 +138,21 @@ export const likeComment = async (postUid: string, commentUid: string, userUid: 
     // 전체 문서 업데이트
     await setDoc(postRef, { ...postData, comments }, { merge: true });
 }
+
+// 게시글에 댓글 추가
+export const addCommentToPost = async (postUid: string, comment: any) => {
+    try {
+        const postRef = doc(db, COLLECTIONS.COMMUNITY, postUid);
+        const postSnap = await getDoc(postRef);
+        if (!postSnap.exists()) throw new Error('게시글이 존재하지 않습니다.');
+        const postData = postSnap.data();
+        if (!postData) throw new Error('게시글 데이터가 없습니다.');
+        const comments = postData.comments || {};
+        comments[comment.uid] = comment;
+        await updateDoc(postRef, { comments });
+        return true;
+    } catch (error) {
+        console.error('댓글 추가 오류:', error);
+        return false;
+    }
+}

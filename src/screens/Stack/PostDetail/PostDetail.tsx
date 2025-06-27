@@ -9,6 +9,9 @@ import { colors } from "@/constants";
 import { ArrowLeftIcon, ChevronLeftIcon } from "@/assets";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { CommentCard } from "./components";
+import { addCommentToPost } from '@/services';
+import { createUid, getTime } from '@/utils';
+import { useUserValue } from '@/lib';
 
 interface PostDetailProps {
     route: RouteProp<RootStackParamList, 'PostDetail'>;
@@ -18,6 +21,9 @@ const PostDetail = ({ route }: PostDetailProps) => {
     const { post: routePost } = route.params;
     const [post, setPost] = useState<CommunityPost>(routePost);
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    const [commentInput, setCommentInput] = useState('');
+    const [commentLoading, setCommentLoading] = useState(false);
+    const user = useUserValue();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -45,6 +51,29 @@ const PostDetail = ({ route }: PostDetailProps) => {
         }
     };
 
+    const handleAddComment = async () => {
+        if (!commentInput.trim()) return;
+        if (!user) return;
+        setCommentLoading(true);
+        const comment: Comment = {
+            uid: `commentUid_${createUid()}`,
+            nickname: user.nickname,
+            profileImage: user.profileImage,
+            content: commentInput.trim(),
+            createdAt: getTime(),
+            likes: [],
+            likeCount: 0,
+        };
+        const result = await addCommentToPost(post.uid, comment);
+        if (result) {
+            setCommentInput('');
+            // 댓글 새로고침
+            const fetchedPost = await getCommunityPosts(undefined, post.uid);
+            if (fetchedPost) setPost(fetchedPost as CommunityPost);
+        }
+        setCommentLoading(false);
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -68,8 +97,11 @@ const PostDetail = ({ route }: PostDetailProps) => {
                             style={styles.commentInput}
                             placeholder="댓글을 입력하세요"
                             placeholderTextColor={colors.gray400}
+                            value={commentInput}
+                            onChangeText={setCommentInput}
+                            editable={!commentLoading}
                         />
-                        <TouchableOpacity style={styles.commentInputButton}>
+                        <TouchableOpacity style={styles.commentInputButton} onPress={handleAddComment} disabled={commentLoading || !commentInput.trim()}>
                             <Typography style={styles.commentInputButtonText}>등록</Typography>
                         </TouchableOpacity>
                     </View>
