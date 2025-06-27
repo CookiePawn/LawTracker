@@ -2,10 +2,10 @@ import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 're
 import { Typography, PostCard } from '@/components';
 import { colors } from '@/constants';
 import { PenIcon } from '@/assets';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getCommunityPosts } from '@/services';
 import { CommunityPost } from '@/models';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '@/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -14,26 +14,61 @@ const Community = () => {
     const [selectedCategory, setSelectedCategory] = useState('최신순');
     const [data, setData] = useState<CommunityPost[]>([]);
     const [refreshing, setRefreshing] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [lastDoc, setLastDoc] = useState<any>(null);
+    const [hasMore, setHasMore] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await getCommunityPosts();
-            setData(data as CommunityPost[]);
+    const fetchData = async (isRefresh: boolean = false) => {
+        if (loading) return;
+        
+        setLoading(true);
+        try {
+            const orderByField = selectedCategory === '최신순' ? 'createdAt' : 'likes';
+            const result = await getCommunityPosts(undefined, undefined, 10, isRefresh ? null : lastDoc, orderByField);
+            
+            if (result && 'posts' in result && 'lastDoc' in result && 'hasMore' in result) {
+                if (isRefresh) {
+                    setData(result.posts);
+                    setLastDoc(result.lastDoc);
+                    setHasMore(result.hasMore);
+                } else {
+                    setData(prev => [...prev, ...result.posts]);
+                    setLastDoc(result.lastDoc);
+                    setHasMore(result.hasMore);
+                }
+            }
+        } catch (error) {
+            console.error('데이터 로드 오류:', error);
+        } finally {
+            setLoading(false);
         }
-        fetchData();
-    }, []);
+    };
+
+    useFocusEffect(
+        useCallback(() => {
+            fetchData(true);
+        }, [selectedCategory])
+    );
 
     const onRefresh = async () => {
         setRefreshing(true);
-        const data = await getCommunityPosts();
-        setData(data as CommunityPost[]);
+        await fetchData(true);
         setRefreshing(false);
-    }
+    };
+
+    const onEndReached = () => {
+        if (hasMore && !loading) {
+            fetchData();
+        }
+    };
 
     const handleVoteUpdate = async (postUid: string, updatedVotes: string[]) => {
         // 데이터 새로 패치
-        const data = await getCommunityPosts();
-        setData(data as CommunityPost[]);
+        await fetchData(true);
+    };
+
+    const handleCategoryChange = (category: string) => {
+        setSelectedCategory(category);
     };
 
     return (
@@ -46,10 +81,10 @@ const Community = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.categoryContainer}>
-                <TouchableOpacity style={[styles.categoryItem, selectedCategory === '최신순' && styles.selectedCategoryItem]} onPress={() => setSelectedCategory('최신순')}>
+                <TouchableOpacity style={[styles.categoryItem, selectedCategory === '최신순' && styles.selectedCategoryItem]} onPress={() => handleCategoryChange('최신순')}>
                     <Typography style={[styles.categoryItemText, selectedCategory === '최신순' && styles.selectedCategoryItemText]}>최신순</Typography>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.categoryItem, selectedCategory === '인기순' && styles.selectedCategoryItem]} onPress={() => setSelectedCategory('인기순')}>
+                <TouchableOpacity style={[styles.categoryItem, selectedCategory === '인기순' && styles.selectedCategoryItem]} onPress={() => handleCategoryChange('인기순')}>
                     <Typography style={[styles.categoryItemText, selectedCategory === '인기순' && styles.selectedCategoryItemText]}>인기순</Typography>
                 </TouchableOpacity>
             </View>
@@ -59,8 +94,11 @@ const Community = () => {
                 keyExtractor={item => item.uid}
                 renderItem={({ item }) => <PostCard item={item} onVoteUpdate={handleVoteUpdate} />}
                 ListEmptyComponent={<Typography style={styles.emptyText}>게시글이 없습니다.</Typography>}
+                ListFooterComponent={loading && hasMore ? <Typography style={styles.loadingText}>로딩 중...</Typography> : null}
                 contentContainerStyle={styles.postContainer}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                onEndReached={onEndReached}
+                onEndReachedThreshold={0.5}
             />
         </View>
     )
@@ -128,6 +166,11 @@ const styles = StyleSheet.create({
     },
     list: {
         marginBottom: 20,
+    },
+    loadingText: {
+        textAlign: 'center',
+        color: colors.gray500,
+        marginTop: 10,
     },
 });
 

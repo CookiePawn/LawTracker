@@ -1,20 +1,57 @@
 import { db } from ".";
 import { COLLECTIONS } from "@/constants";
 import { CommunityPost } from "@/models";
-import { collection, doc, getDocs, getDoc, setDoc, updateDoc } from '@react-native-firebase/firestore';
+import { collection, doc, getDocs, getDoc, setDoc, updateDoc, query, orderBy, limit, startAfter } from '@react-native-firebase/firestore';
 
 // 커뮤니티 게시글 조회
-export const getCommunityPosts = async (userUid?: string, postUid?: string) => {
+export const getCommunityPosts = async (
+    userUid?: string, 
+    postUid?: string, 
+    pageSize: number = 10, 
+    lastDoc?: any,
+    orderByField: 'createdAt' | 'likes' = 'createdAt'
+) => {
     const postsRef = collection(db, COLLECTIONS.COMMUNITY);
-    const snapshot = await getDocs(postsRef);
-    const posts = snapshot.docs.map((doc) => doc.data()) as CommunityPost[];
+    
     if (userUid) {
+        // 특정 사용자의 게시글 조회
+        const snapshot = await getDocs(postsRef);
+        const posts = snapshot.docs.map((doc) => doc.data()) as CommunityPost[];
         return posts.filter((post) => post.userUid === userUid);
     }
+    
     if (postUid) {
+        // 특정 게시글 조회
+        const snapshot = await getDocs(postsRef);
+        const posts = snapshot.docs.map((doc) => doc.data()) as CommunityPost[];
         return posts.find((post) => post.uid === postUid);
     }
-    return posts;
+    
+    // 페이지네이션과 정렬을 위한 쿼리 구성
+    let q = query(postsRef);
+    
+    // 정렬 기준 설정
+    if (orderByField === 'createdAt') {
+        q = query(postsRef, orderBy('createdAt', 'desc'));
+    } else if (orderByField === 'likes') {
+        q = query(postsRef, orderBy('likes', 'desc'));
+    }
+    
+    // 페이지네이션 적용
+    if (lastDoc) {
+        q = query(q, startAfter(lastDoc), limit(pageSize));
+    } else {
+        q = query(q, limit(pageSize));
+    }
+    
+    const snapshot = await getDocs(q);
+    const posts = snapshot.docs.map((doc) => doc.data()) as CommunityPost[];
+    
+    return {
+        posts,
+        lastDoc: snapshot.docs[snapshot.docs.length - 1] || null,
+        hasMore: snapshot.docs.length === pageSize
+    };
 }
 
 // 커뮤니티 게시글 작성
