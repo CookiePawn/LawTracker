@@ -1,13 +1,13 @@
 import { colors } from '@/constants';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { BillStatusTag, Typography } from '@/components';
-import { useLayoutEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 import { loadLawById } from '@/services';
 import { ChatIcon, HeartIcon, MoreIcon, ShareIcon } from '@/assets';
 import { CommunityPost, Law } from '@/models';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useUserValue } from '@/lib';
 import { updateCommunityPostVote, updateCommunityPostLike } from '@/services';
 import { MoreBox } from '.';
@@ -33,6 +33,12 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
         }
         fetchBill();
     }, []);
+
+    useFocusEffect(
+        useCallback(() => {
+            setShowMoreBox(false);
+        }, [])
+    );
 
     const handleMoreIconPress = () => {
         setShowMoreBox(!showMoreBox);
