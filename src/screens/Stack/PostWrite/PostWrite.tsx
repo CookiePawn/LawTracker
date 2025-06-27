@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { BillStatusTag, Typography } from '@/components';
 import { colors } from '@/constants';
 import { useState } from 'react';
@@ -25,6 +25,7 @@ const PostWrite = () => {
     const [isVote, setIsVote] = useState(false);
     const [voteQuestion, setVoteQuestion] = useState('');
     const [voteOptions, setVoteOptions] = useState(['', '']); // 최소 2개 선택지
+    const [voteError, setVoteError] = useState('');
 
     const searchBill = async () => {
         const response = await searchLaws({
@@ -44,6 +45,30 @@ const PostWrite = () => {
     }
 
     const handleSubmit = async () => {
+        // 투표 유효성 검사
+        if (isVote && voteQuestion.length > 0) {
+            // 투표가 활성화되어 있고 질문이 입력된 경우
+            const filledOptions = voteOptions.filter(option => option.trim() !== '');
+            
+            // 최소 2개 선택지가 필요
+            if (filledOptions.length < 2) {
+                setVoteError('투표는 최소 2개의 선택지가 필요합니다.');
+                return;
+            }
+            
+            // 중간에 빈 선택지가 있는지 확인
+            for (let i = 0; i < voteOptions.length; i++) {
+                if (voteOptions[i].trim() === '' && i < voteOptions.length - 1) {
+                    // 마지막 선택지가 아닌데 빈 선택지가 있으면 중간에 빈 선택지가 있는 것
+                    setVoteError('투표 선택지는 순서대로 입력해주세요. 중간에 빈 선택지가 있습니다.');
+                    return;
+                }
+            }
+        }
+
+        // 에러가 없으면 초기화
+        setVoteError('');
+
         const formattedDate = getTime();
 
         const post: any = {
@@ -190,6 +215,7 @@ const PostWrite = () => {
                             setIsVote(!isVote);
                             setVoteQuestion('');
                             setVoteOptions(['', '']);
+                            setVoteError('');
                         }}>
                             <Typography style={styles.voteRemoveText}>투표 제거</Typography>
                         </TouchableOpacity>
@@ -228,6 +254,7 @@ const PostWrite = () => {
                         <Typography style={styles.voteAddText}>+</Typography>
                     </TouchableOpacity>
                 )}
+                {voteError.length > 0 && <Typography style={styles.errorText}>{voteError}</Typography>}
                 <View style={styles.submitContainer}>
                     <TouchableOpacity style={[styles.submitButton, { opacity: title.length === 0 || content.length === 0 ? 0.5 : 1 }]} onPress={handleSubmit} disabled={title.length === 0 || content.length === 0}>
                         <Typography style={styles.submitText}>등록</Typography>
