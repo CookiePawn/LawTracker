@@ -2,8 +2,8 @@ import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 're
 import { Typography, PostCard } from '@/components';
 import { colors } from '@/constants';
 import { PenIcon } from '@/assets';
-import { useCallback, useEffect, useState } from 'react';
-import { getCommunityPosts, migrateLikeCount } from '@/services';
+import { useCallback, useState } from 'react';
+import { getCommunityPosts } from '@/services';
 import { CommunityPost } from '@/models';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '@/types';
@@ -70,11 +70,6 @@ const Community = () => {
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
     };
-
-    // 마이그레이션 실행 (한 번만)
-    useEffect(() => {
-        migrateLikeCount();
-    }, []);
 
     return (
         <View style={styles.container}>

@@ -45,7 +45,14 @@ export const getCommunityPosts = async (
     }
     
     const snapshot = await getDocs(q);
-    const posts = snapshot.docs.map((doc) => doc.data()) as CommunityPost[];
+    const posts = snapshot.docs.map((doc) => {
+        const data = doc.data() as CommunityPost;
+        // likeCount가 없는 경우 likes 배열 길이로 계산
+        if (data.likeCount === undefined) {
+            data.likeCount = data.likes?.length || 0;
+        }
+        return data;
+    }) as CommunityPost[];
     
     return {
         posts,
@@ -130,30 +137,4 @@ export const likeComment = async (postUid: string, commentUid: string, userUid: 
     
     // 전체 문서 업데이트
     await setDoc(postRef, { ...postData, comments }, { merge: true });
-}
-
-// 기존 게시글들의 likeCount 필드 마이그레이션
-export const migrateLikeCount = async () => {
-    try {
-        const postsRef = collection(db, COLLECTIONS.COMMUNITY);
-        const snapshot = await getDocs(postsRef);
-        
-        const batch = db.batch();
-        
-        snapshot.docs.forEach((doc) => {
-            const data = doc.data();
-            const likeCount = data.likes?.length || 0;
-            
-            if (data.likeCount === undefined) {
-                batch.update(doc.ref, { likeCount });
-            }
-        });
-        
-        await batch.commit();
-        console.log('likeCount 마이그레이션 완료');
-        return true;
-    } catch (error) {
-        console.error('likeCount 마이그레이션 오류:', error);
-        return false;
-    }
 }
