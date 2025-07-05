@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, FlatList } from 'react-native';
 import { BillScheduleList, Calendar, FullCalendar, Typography } from '@/components';
 import { CalendarIcon } from '@/assets';
 
@@ -30,7 +30,7 @@ const LawCalendar = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Typography style={styles.headerText}>오늘의 법안 현황</Typography>
         <TouchableOpacity onPress={() => setIsFullCalendar(!isFullCalendar)}>
@@ -48,7 +48,7 @@ const LawCalendar = () => {
           />
         }
       />
-    </SafeAreaView>
+    </View>
   );
 };
 

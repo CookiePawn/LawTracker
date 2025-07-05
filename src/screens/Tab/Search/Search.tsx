@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import { colors } from '@/constants';
 import { ChevronLeftIcon, SearchIcon } from '@/assets';
 import { DateFilterBottomSheet, BillTypeBottomSheet, BillStatusBottomSheet, SortBottomSheet } from '@/components';
@@ -198,7 +198,7 @@ const Search = ({ route }: SearchProps) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.header}>
                 <Typography style={styles.headerText}>법안 검색</Typography>
             </View>
@@ -335,7 +335,7 @@ const Search = ({ route }: SearchProps) => {
                 onApply={setSelectedFilter}
                 currentSort={selectedFilter}
             />
-        </SafeAreaView>
+        </View>
     );
 };
 
@@ -419,7 +419,6 @@ const styles = StyleSheet.create({
     billList: {
         flex: 1,
         padding: 16,
-        marginBottom: 10,
     },
     billItem: {
         padding: 16,

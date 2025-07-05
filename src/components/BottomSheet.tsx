@@ -6,7 +6,6 @@ import {
     Animated,
     TouchableWithoutFeedback,
     Dimensions,
-    PanResponder,
 } from 'react-native';
 import { colors } from '@/constants';
 
@@ -22,29 +21,6 @@ interface BottomSheetProps {
 const BottomSheet = ({ visible, onClose, children, height = SCREEN_HEIGHT * 0.7 }: BottomSheetProps) => {
     const [isOverlayVisible, setIsOverlayVisible] = useState(false);
     const translateY = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
-    const panResponder = useRef(
-        PanResponder.create({
-            onStartShouldSetPanResponder: () => false,
-            onMoveShouldSetPanResponder: (_, gestureState) => {
-                // 수직 방향으로의 움직임이 더 클 때만 패닝 처리
-                const isVerticalSwipe = Math.abs(gestureState.dy) > Math.abs(gestureState.dx);
-                const isDownSwipe = gestureState.dy > 0;
-                return isVerticalSwipe && isDownSwipe;
-            },
-            onPanResponderMove: (_, gestureState) => {
-                if (gestureState.dy > 0) {
-                    translateY.setValue(gestureState.dy);
-                }
-            },
-            onPanResponderRelease: (_, gestureState) => {
-                if (gestureState.dy > height * 0.3) {
-                    closeBottomSheet();
-                } else {
-                    resetPosition();
-                }
-            },
-        })
-    ).current;
 
     const openBottomSheet = useCallback(() => {
         setIsOverlayVisible(true);
@@ -98,9 +74,7 @@ const BottomSheet = ({ visible, onClose, children, height = SCREEN_HEIGHT * 0.7 
                                     transform: [{ translateY }],
                                 },
                             ]}
-                            {...panResponder.panHandlers}
                         >
-                            <View style={styles.handle} />
                             {children}
                         </Animated.View>
                     </TouchableWithoutFeedback>

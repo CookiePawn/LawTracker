@@ -165,7 +165,6 @@ const styles = StyleSheet.create({
         marginTop: 150,
     },
     list: {
-        marginBottom: 20,
     },
     loadingText: {
         textAlign: 'center',

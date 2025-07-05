@@ -1,7 +1,6 @@
 import { ArrowLeftIcon } from '@/assets';
 import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types';
@@ -13,7 +12,7 @@ const PrivacyPolicy = () => {
   const navigation = useNavigation<NavigationProp>();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>  
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <ArrowLeftIcon width={20} height={20} color='#333'/>
@@ -77,7 +76,7 @@ const PrivacyPolicy = () => {
           본 개인정보 처리방침은 법률 및 서비스의 변경사항을 반영하기 위해 수정될 수 있습니다. 개인정보 처리방침이 변경되는 경우, 변경사항을 서비스 내 공지사항을 통해 고지할 것입니다.
         </Typography>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

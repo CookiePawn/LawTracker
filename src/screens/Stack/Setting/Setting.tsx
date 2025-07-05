@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { colors, STORAGE_KEY } from '@/constants';
 import { ChevronLeftIcon } from '@/assets';
@@ -49,7 +49,7 @@ const Setting = () => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.header}>
                 <Typography style={styles.headerText}>설정</Typography>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerIcon}>
@@ -100,7 +100,7 @@ const Setting = () => {
                     </View>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 };
 

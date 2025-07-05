@@ -156,6 +156,8 @@ const PostDetail = ({ route }: PostDetailProps) => {
                             value={commentInput}
                             onChangeText={setCommentInput}
                             editable={!commentLoading}
+                            maxLength={100}
+                            multiline={true}
                         />
                         <TouchableOpacity style={styles.commentInputButton} onPress={handleAddComment} disabled={commentLoading || !commentInput.trim()}>
                             <Typography style={styles.commentInputButtonText}>등록</Typography>
@@ -196,7 +198,7 @@ const styles = StyleSheet.create({
     },
     commentInputContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         gap: 10,
         borderWidth: 1,
         borderColor: colors.gray200,
@@ -216,6 +218,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 4,
     },
     commentInputButtonText: {
         color: colors.white,

@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/types/navigate';
@@ -18,7 +17,7 @@ const Profile = () => {
   
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Typography style={styles.headerText}>프로필</Typography>
         <TouchableOpacity onPress={() => navigation.navigate('Setting')} style={styles.headerIcon}>
@@ -36,7 +35,7 @@ const Profile = () => {
         </View>
       </View>
       <TabViewComponent />
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/types';
 import { ArrowLeftIcon, ChevronLeftIcon, HeartIcon, ShareIcon } from '@/assets/icons';
@@ -56,7 +56,7 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <ArrowLeftIcon width={24} height={24} color={colors.black} />
@@ -116,7 +116,7 @@ const LawDetail = ({ route }: { route: RouteProp<RootStackParamList, 'LawDetail'
                 <LawStatus law={law} />
                 <LawVote law={law} />
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }
 

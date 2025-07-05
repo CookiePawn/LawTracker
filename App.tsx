@@ -8,6 +8,7 @@ import { STORAGE_KEY } from './src/constants';
 import { Provider } from 'jotai';
 import { useAlert } from './src/lib/jotai';
 import CustomAlert from './src/components/CustomAlert';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const AppContent = () => {
   const [alert] = useAlert();
@@ -21,7 +22,7 @@ const AppContent = () => {
   }, []);
 
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <AppNavigator />
       <CustomAlert
         visible={alert.visible}
@@ -29,16 +30,18 @@ const AppContent = () => {
         message={alert.message}
         buttons={alert.buttons}
       />
-    </>
+    </SafeAreaView>
   );
 };
 
 export default function App() {
   return (
     <Provider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <AppContent />
-      </GestureHandlerRootView>
+      <SafeAreaProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <AppContent />
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
     </Provider>
   );
 }

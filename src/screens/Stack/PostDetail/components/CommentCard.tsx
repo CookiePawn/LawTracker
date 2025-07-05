@@ -80,17 +80,15 @@ const styles = StyleSheet.create({
         gap: 10,
     },
     commentHeaderLeft: {
-        padding: 5,
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 10,
-        borderRadius: 100,
-        backgroundColor: colors.gray150,
     },
     commentHeaderImage: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
+        width: 35,
+        height: 35,
+        borderRadius: 100,
+        borderWidth: 1,
+        borderColor: colors.gray150,
     },
     commentNicknameText: {
         fontSize: 14,

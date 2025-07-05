@@ -29,6 +29,7 @@ const MyPost = () => {
         <View style={styles.container}>
             <FlatList
                 data={posts}
+                ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
                 renderItem={({ item }: { item: CommunityPost }) => <PostCard item={item} onVoteUpdate={handleVoteUpdate} />}
                 keyExtractor={(item) => item.uid}
                 ListEmptyComponent={<Typography style={styles.emptyText}>게시글이 없습니다.</Typography>}

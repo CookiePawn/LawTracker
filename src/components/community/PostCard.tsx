@@ -119,7 +119,7 @@ const PostCard = ({ item, border = true, onVoteUpdate }: PostCardProps) => {
             </View>
             <View style={styles.contentContainer}>
                 <Typography style={styles.title}>{item.title}</Typography>
-                <Typography style={styles.content} numberOfLines={2}>{item.content}</Typography>
+                <Typography style={styles.content} numberOfLines={border ? 2 : 0}>{item.content}</Typography>
                 <View style={styles.tagsContainer}>
                     {item.tags && item.tags.map((tag: string, index: number) => (
                         <View key={index} style={styles.tag}>

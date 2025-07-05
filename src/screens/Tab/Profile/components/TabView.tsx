@@ -33,6 +33,9 @@ const TabViewComponent = () => {
             activeColor={colors.primary}
             inactiveColor="#666666"
             indicatorContainerStyle={styles.indicatorContainer}
+            scrollEnabled={false}
+            pressColor="transparent"
+            pressOpacity={1}
         />
     );
 
@@ -43,6 +46,10 @@ const TabViewComponent = () => {
             renderTabBar={renderTabBar}
             onIndexChange={setIndex}
             initialLayout={{ width: layout.width }}
+            swipeEnabled={false}
+            lazy={false}
+            animationEnabled={false}
+            renderLazyPlaceholder={() => null}
         />
     );
 };

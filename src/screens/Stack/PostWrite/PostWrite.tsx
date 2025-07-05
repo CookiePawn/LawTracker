@@ -132,6 +132,7 @@ const PostWrite = () => {
                     placeholder="제목을 입력하세요"
                     placeholderTextColor={colors.gray400}
                     multiline={false}
+                    maxLength={50}
                 />
                 {title.length === 0 && <Typography style={styles.errorText}>제목이 입력되지 않았습니다.</Typography>}   
                 <Typography style={styles.title}>내용</Typography>
@@ -142,6 +143,7 @@ const PostWrite = () => {
                     placeholder="내용을 입력하세요"
                     placeholderTextColor={colors.gray400}
                     multiline={true}
+                    maxLength={5000}
                 />
                 {content.length === 0 && <Typography style={styles.errorText}>내용이 입력되지 않았습니다.</Typography>}   
                 <Typography style={styles.title}>태그 선택</Typography>
@@ -159,6 +161,7 @@ const PostWrite = () => {
                             setTagInput('');
                         }
                     }}
+                    maxLength={10}
                 />
                 <View style={styles.tagContainer}>
                     {tag.map((t, index) => (
@@ -225,6 +228,7 @@ const PostWrite = () => {
                             onChangeText={setVoteQuestion}
                             placeholder="투표 질문"
                             placeholderTextColor={colors.gray500}
+                            maxLength={50}
                         />
                         {voteOptions.map((option, index) => (
                             <TextInput
@@ -238,6 +242,7 @@ const PostWrite = () => {
                                 }}
                                 placeholder={`선택지 ${index + 1}`}
                                 placeholderTextColor={colors.gray500}
+                                maxLength={30}
                             />
                         ))}
                         {voteOptions.length < 5 && (
