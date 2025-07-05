@@ -1,6 +1,6 @@
 {
   "name": "lawtracker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "start": "react-native start --port=8083",
